@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">CocoVendor</string>
+    <string name="machine_id">123456</string>
+    <string name="label_machine_id">机器编号：</string>
+    <string name="label_machine_version">版本：</string>
+    <string name="machine_version">1.0.0</string>
+    <string name="label_ip">IP地址：</string>
+    <string name="ip">172.22.115.114</string>
 </resources>
