@@ -33,42 +33,48 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
                 android:text="@string/label_machine_id"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textColor="#ffffff" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="6"
                 android:text="@string/machine_id"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textColor="#ffffff" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:text="@string/label_machine_version"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textColor="#ffffff" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
                 android:text="@string/machine_version"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textColor="#ffffff" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
                 android:text="@string/label_ip"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textColor="#ffffff" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="10"
                 android:text="@string/ip"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textColor="#ffffff" />
         </LinearLayout>
     </FrameLayout>
 
