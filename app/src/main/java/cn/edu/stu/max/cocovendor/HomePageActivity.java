@@ -1,9 +1,11 @@
 package cn.edu.stu.max.cocovendor;
 
+import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 public class HomePageActivity extends AppCompatActivity {
 
@@ -11,6 +13,15 @@ public class HomePageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        TextView textViewHomepageTestlogin = (TextView) findViewById(R.id.tv_homepage_testlogin);
+        textViewHomepageTestlogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomePageActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     //活动转换之间都调用沉浸模式全屏
