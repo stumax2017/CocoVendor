@@ -6,4 +6,22 @@
     <string name="machine_version">1.0.0</string>
     <string name="label_ip">IP地址：</string>
     <string name="ip">172.22.115.114</string>
+    <string name="label_pwsd_hints">请输入密码</string>
+    <string name="btn_return">返回</string>
+    <string name="btn_login_1">1</string>
+    <string name="btn_login_2">2</string>
+    <string name="btn_login_3">3</string>
+    <string name="btn_login_4">4</string>
+    <string name="btn_login_5">5</string>
+    <string name="btn_login_6">6</string>
+    <string name="btn_login_7">7</string>
+    <string name="btn_login_8">8</string>
+    <string name="btn_login_9">9</string>
+    <string name="btn_login_0">0</string>
+    <string name="btn_login_star">*</string>
+    <string name="btn_login_well">#</string>
+    <string name="btn_login_del">删除</string>
+    <string name="btn_login_clear">清除</string>
+    <string name="btn_login_enter">确定</string>
+    <string name="btn_login_look">可见</string>
 </resources>
