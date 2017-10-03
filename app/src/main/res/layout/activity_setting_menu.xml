@@ -146,13 +146,13 @@
                     android:textSize="30sp"/>
 
                 <Button
-                    android:id="@+id/btn_sell_setting"
+                    android:id="@+id/btn_sales_setting"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
                     android:background="#B8860B"
                     android:gravity="center"
-                    android:text="@string/label_sell_setting"
+                    android:text="@string/label_sales_setting"
                     android:textColor="@color/colorWhite"
                     android:textSize="30sp"/>
             </TableRow>
