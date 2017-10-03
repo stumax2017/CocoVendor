@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CocoVendor</string>
+    <string name="app_name">椰青售货机</string>
     <string name="machine_id">123456</string>
     <string name="label_machine_id">机器编号：</string>
     <string name="label_machine_version">版本：</string>
