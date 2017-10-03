@@ -1,4 +1,4 @@
-package cn.edu.stu.max.cocovendor;
+package cn.edu.stu.max.cocovendor.JavaClass;
 
 
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import cn.edu.stu.max.cocovendor.R;
 import cn.edu.stu.max.cocovendor.databaseClass.Goods;
 
 public class SalesSettingAdapter extends RecyclerView.Adapter {
