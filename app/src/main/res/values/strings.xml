@@ -25,4 +25,14 @@
     <string name="btn_login_enter">确定</string>
     <string name="btn_login_look">可见</string>
     <string name="label_welcome">程序启动中</string>
+    <string name="label_system_setting">系统设置</string>
+    <string name="label_sheet">三张信息表</string>
+    <string name="label_goods_test">货道测试</string>
+    <string name="label_ad_setting">广告设置</string>
+    <string name="label_money_setting">找零设置</string>
+    <string name="label_help">帮助工具</string>
+    <string name="label_return_sales">返回销售</string>
+    <string name="label_reboot">重新启动</string>
+    <string name="label_sell_setting">销售设计</string>
+    <string name="label_sales_analyze">统计分析</string>
 </resources>

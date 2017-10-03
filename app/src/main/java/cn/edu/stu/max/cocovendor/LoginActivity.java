@@ -1,5 +1,6 @@
 package cn.edu.stu.max.cocovendor;
 
+import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -123,6 +124,8 @@ public class LoginActivity extends AppCompatActivity {
                 case R.id.btn_login_enter:
                     if (passwordTemper.toString().trim().equals(DataSupport.find(LocalInfo.class, 1).getLogin_password())) {
                         Toast.makeText(LoginActivity.this, "密码正确", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(LoginActivity.this, SettingMenuActivity.class);
+                        startActivity(intent);
                     } else {
                         Toast.makeText(LoginActivity.this, "密码错误", Toast.LENGTH_SHORT).show();
                     }
