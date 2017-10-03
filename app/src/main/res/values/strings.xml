@@ -24,4 +24,5 @@
     <string name="btn_login_clear">清除</string>
     <string name="btn_login_enter">确定</string>
     <string name="btn_login_look">可见</string>
+    <string name="label_welcome">程序启动中</string>
 </resources>
