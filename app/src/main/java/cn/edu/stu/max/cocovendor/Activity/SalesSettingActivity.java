@@ -1,8 +1,8 @@
-package cn.edu.stu.max.cocovendor;
+package cn.edu.stu.max.cocovendor.Activity;
 
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +12,8 @@ import org.litepal.crud.DataSupport;
 
 import java.util.List;
 
+import cn.edu.stu.max.cocovendor.R;
+import cn.edu.stu.max.cocovendor.JavaClass.SalesSettingAdapter;
 import cn.edu.stu.max.cocovendor.databaseClass.Goods;
 
 public class SalesSettingActivity extends AppCompatActivity {
