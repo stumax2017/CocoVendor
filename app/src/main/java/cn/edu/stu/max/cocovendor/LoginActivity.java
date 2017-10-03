@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -115,6 +116,11 @@ public class LoginActivity extends AppCompatActivity {
                     isPasswordVisible = invertBoolean(isPasswordVisible);
                     break;
                 case R.id.btn_login_enter:
+                    if (passwordTemper.toString().trim().equals("123")) {
+                        Toast.makeText(LoginActivity.this, "密码正确", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(LoginActivity.this, "密码错误", Toast.LENGTH_SHORT).show();
+                    }
                     break;
                 case R.id.btn_login_return:
                     finish();
@@ -152,6 +158,12 @@ public class LoginActivity extends AppCompatActivity {
 
     //填充●个数方法
     private String fillPassword(String Plaintext) {
-        return Plaintext.replaceAll(".*", "* ");
+        //想用正则表达式简化程序，没有实现出来
+        //return Plaintext.replaceAll("[0-9]*", "* ");
+        String Ciphertext = "";
+        for (int i = 0; i < Plaintext.length(); i ++) {
+            Ciphertext += "*";
+        }
+        return Ciphertext;
     }
 }
