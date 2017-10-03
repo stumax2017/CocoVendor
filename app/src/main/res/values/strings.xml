@@ -35,4 +35,9 @@
     <string name="label_reboot">重新启动</string>
     <string name="label_sell_setting">销售设计</string>
     <string name="label_sales_analyze">统计分析</string>
+    <string name="label_goods_id">货物编号</string>
+    <string name="label_goods_name">名称</string>
+    <string name="label_goods_price">价格</string>
+    <string name="label_goods_quanlity">库存</string>
+    <string name="label_price_change">价格修改</string>
 </resources>
