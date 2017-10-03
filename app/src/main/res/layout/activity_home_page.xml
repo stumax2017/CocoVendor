@@ -38,6 +38,7 @@
                 android:textColor="@color/colorWhite" />
 
             <TextView
+                android:id="@+id/tv_machine_id"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="6"
@@ -54,6 +55,7 @@
                 android:textColor="@color/colorWhite" />
 
             <TextView
+                android:id="@+id/tv_machine_version"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
@@ -70,6 +72,7 @@
                 android:textColor="@color/colorWhite" />
 
             <TextView
+                android:id="@+id/tv_ip"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="10"

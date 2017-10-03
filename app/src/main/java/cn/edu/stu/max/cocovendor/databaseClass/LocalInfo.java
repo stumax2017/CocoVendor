@@ -2,24 +2,46 @@ package cn.edu.stu.max.cocovendor.databaseClass;
 
 import android.net.wifi.ScanResult;
 
+import org.litepal.annotation.Column;
 import org.litepal.annotation.Encrypt;
 import org.litepal.crud.DataSupport;
 import org.litepal.util.cipher.AESCrypt;
 
 public class LocalInfo extends DataSupport{
+    private int id;
+    //机器识别号
     private long machine_id;
+    //机器ip地址
     private String ip;
+    //机器mac地址
     private String mac_address;
+    //服务器ip地址
     private String server_ip;
+    //机器语言
+    @Column(defaultValue = "Chinese")
     private String language;
+    //机器所在位置
     private String local_address;
+    //机器默认密码
     @Encrypt(algorithm = AES)
     private String default_password;
+    //机器登陆密码，初始为默认密码
     @Encrypt(algorithm = AES)
     private String login_password;
+    //机器程序版本
     private int version;
+    //客服电话
     private String tel_number;
+    //广告规则
     private int ad_rules;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public long getMachine_id() {
         return machine_id;

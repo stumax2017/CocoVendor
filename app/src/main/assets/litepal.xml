@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
     <dbname value="coco_vender" />
-    <version value="1" />
+    <version value="4" />
     <list>
         <mapping class="cn.edu.stu.max.cocovendor.databaseClass.Goods" />
         <mapping class="cn.edu.stu.max.cocovendor.databaseClass.LocalInfo" />

@@ -4,12 +4,17 @@ import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.litepal.crud.DataSupport;
+
 import java.util.List;
+
+import cn.edu.stu.max.cocovendor.databaseClass.LocalInfo;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -116,7 +121,7 @@ public class LoginActivity extends AppCompatActivity {
                     isPasswordVisible = invertBoolean(isPasswordVisible);
                     break;
                 case R.id.btn_login_enter:
-                    if (passwordTemper.toString().trim().equals("123")) {
+                    if (passwordTemper.toString().trim().equals(DataSupport.find(LocalInfo.class, 1).getLogin_password())) {
                         Toast.makeText(LoginActivity.this, "密码正确", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(LoginActivity.this, "密码错误", Toast.LENGTH_SHORT).show();
