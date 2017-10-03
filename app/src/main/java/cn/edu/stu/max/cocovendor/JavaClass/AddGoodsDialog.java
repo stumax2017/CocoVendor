@@ -1,4 +1,4 @@
-package cn.edu.stu.max.cocovendor;
+package cn.edu.stu.max.cocovendor.JavaClass;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
 import android.view.View;
+
+import cn.edu.stu.max.cocovendor.R;
 
 public class AddGoodsDialog extends Dialog{
     public Context context;
