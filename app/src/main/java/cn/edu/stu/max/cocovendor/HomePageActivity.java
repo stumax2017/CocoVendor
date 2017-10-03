@@ -7,11 +7,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import org.litepal.LitePal;
+
 public class HomePageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //初始化数据库
+        LitePal.initialize(this);
         setContentView(R.layout.activity_home_page);
 
         TextView textViewHomepageTestlogin = (TextView) findViewById(R.id.tv_homepage_testlogin);
