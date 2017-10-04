@@ -54,93 +54,125 @@
     </LinearLayout>
 
 
-        <FrameLayout
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" >
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <VideoView
-                    android:id="@+id/vv_setting"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_gravity="center" />
-            </RelativeLayout>
-
-            <ImageView
-                android:id="@+id/iv_setting"
+            android:layout_height="match_parent">
+            <VideoView
+                android:id="@+id/vv_ad"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@mipmap/ic_launcher" />
-        </FrameLayout>
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_ad"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:gravity="center"
+            android:text="U盘广告存储"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:gravity="center"
+            android:text="本机广告存储"
+            android:textSize="20sp" />
+    </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_marginTop="50dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" >
 
             <ListView
-                android:id="@+id/lv_usb"
+                android:id="@+id/lv_ad_usb"
                 android:layout_width="0dp"
                 android:layout_height="400dp"
                 android:layout_weight="1"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp"
                 android:divider="#ccc"
                 android:dividerHeight="1dp"
                 android:headerDividersEnabled="false" />
 
             <ListView
-                android:id="@+id/lv_internal"
+                android:id="@+id/lv_ad_internal"
                 android:layout_width="0dp"
                 android:layout_height="400dp"
                 android:layout_weight="1"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp"
                 android:divider="#ccc"
                 android:dividerHeight="1dp"
                 android:headerDividersEnabled="false" />
-
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button_add"
+                android:id="@+id/btn_ad_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="15dp"
                 android:text="添加" />
 
             <Button
-                android:id="@+id/button_delete"
+                android:id="@+id/btn_ad_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="15dp"
                 android:text="删除" />
 
             <Button
-                android:id="@+id/button_fetch"
+                android:id="@+id/btn_ad_fetch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="15dp"
                 android:text="取回" />
 
             <Button
-                android:id="@+id/button_restore"
+                android:id="@+id/button_ad_setting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="恢复" />
+                android:layout_margin="15dp"
+                android:text="设置" />
         </LinearLayout>
 
 
