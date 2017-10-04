@@ -1,13 +1,15 @@
 package cn.edu.stu.max.cocovendor.Activity;
 
+import android.app.Activity;
+import android.media.MediaPlayer;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import java.io.File;
@@ -17,11 +19,12 @@ import java.util.List;
 import java.util.Map;
 
 import cn.edu.stu.max.cocovendor.JavaClass.FileService;
+import cn.edu.stu.max.cocovendor.JavaClass.MyInternalListAdapter;
 import cn.edu.stu.max.cocovendor.JavaClass.MyUSBListAdapter;
 import cn.edu.stu.max.cocovendor.R;
 
 
-public class AdSettingActivity extends AppCompatActivity {
+public class AdSettingActivity extends Activity {
 
     private final static String FROMPATH = "/mnt/usb_storage/USB_DISK2/udisk0/advertisement/";   // U盘广告存储路径
     private final static String TOPATH = "/storage/sdcard0/tencent/QQfile_recv/b/";               // 本机广告存储路径
@@ -33,7 +36,8 @@ public class AdSettingActivity extends AppCompatActivity {
     private ListView listViewAdUSB;         // U盘广告列表
     private ListView listViewAdInternal;   // 本机广告列表
 
-    private MyUSBListAdapter myUSBListAdapter;    // U盘内容适配器
+    private MyUSBListAdapter myUSBListAdapter;    // U盘广告内容适配器
+    private MyInternalListAdapter myInternalListAdapter;    // 本机广告内容适配器
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +64,8 @@ public class AdSettingActivity extends AppCompatActivity {
         myUSBListAdapter = new MyUSBListAdapter(this, getList(FROMPATH));
         listViewAdUSB.setAdapter(myUSBListAdapter);
         listViewAdUSB.setOnItemClickListener(new ListView.OnItemClickListener() {
-
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 File[] files = FileService.getFiles(FROMPATH);
                 playVideo(files[position].getPath());
                 videoViewAd.setVisibility(View.VISIBLE);
@@ -71,13 +73,91 @@ public class AdSettingActivity extends AppCompatActivity {
             }
         });
 
+        myInternalListAdapter = new MyInternalListAdapter(this, getList(TOPATH));
+        listViewAdInternal.setAdapter(myInternalListAdapter);
+        listViewAdInternal.setOnItemClickListener(new ListView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                File[] files = FileService.getFiles(TOPATH);
+                playVideo(files[position].getPath());
+                videoViewAd.setVisibility(View.VISIBLE);
+                imageViewAd.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        videoViewAd.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                videoViewAd.start();
+            }
+        });
+
+        buttonAdAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                File[] currentFiles = FileService.getFiles(FROMPATH);
+                for (int i = 0; i < MyUSBListAdapter.isFileAdded.length; i++) {
+                    if (MyUSBListAdapter.isFileAdded[i]) {
+                        FileService.copyFile(currentFiles[i].getPath(), TOPATH + currentFiles[i].getName());
+                    }
+                }
+
+                MyInternalListAdapter.setList(getList(TOPATH));
+                MyInternalListAdapter.setIsSelectedAndIsFileAdded(getList(TOPATH));
+                myInternalListAdapter.notifyDataSetChanged();
+                //MyUSBListAdapter.setList(getList(FROMPATH));
+                MyUSBListAdapter.setIsSelectedAndIsFileAdded(getList(FROMPATH));
+                myUSBListAdapter.notifyDataSetChanged();
+            }
+        });
+
+        buttonAdFetch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                File[] currentFiles = FileService.getFiles(TOPATH);
+                for (int i = 0; i < MyInternalListAdapter.isFileAdded.length; i++) {
+                    if (MyInternalListAdapter.isFileAdded[i]) {
+                        FileService.copyFile(currentFiles[i].getPath(), FROMPATH + currentFiles[i].getName());
+                    }
+                }
+
+                MyUSBListAdapter.setList(getList(FROMPATH));
+                MyUSBListAdapter.setIsSelectedAndIsFileAdded(getList(FROMPATH));
+                myUSBListAdapter.notifyDataSetChanged();
+                //MyInternalListAdapter.setList(getList(FROMPATH));
+                MyInternalListAdapter.setIsSelectedAndIsFileAdded(getList(TOPATH));
+                myInternalListAdapter.notifyDataSetChanged();
+            }
+        });
+
+        buttonAdDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FileService.deleteFile(FROMPATH, MyUSBListAdapter.isFileAdded);
+                FileService.deleteFile(TOPATH, MyInternalListAdapter.isFileAdded);
+
+                MyInternalListAdapter.setList(getList(TOPATH));
+                MyInternalListAdapter.setIsSelectedAndIsFileAdded(getList(TOPATH));
+                myInternalListAdapter.notifyDataSetChanged();
+                MyUSBListAdapter.setList(getList(FROMPATH));
+                MyUSBListAdapter.setIsSelectedAndIsFileAdded(getList(FROMPATH));
+                myUSBListAdapter.notifyDataSetChanged();
+            }
+        });
 
     }
 
     public void playVideo(String filePath) {
         File file = new File(filePath);
-        videoViewAd.setVideoPath(file.getPath());
-        videoViewAd.start();
+        if (file.exists()) {
+            videoViewAd.setVideoPath(file.getPath());
+            videoViewAd.start();
+        } else {
+            imageViewAd.setVisibility(View.VISIBLE);
+            videoViewAd.setVisibility(View.INVISIBLE);
+        }
+
     }
 
     private List<Map<String, Object>> getList(String filePath)

@@ -1,10 +1,14 @@
 package cn.edu.stu.max.cocovendor.JavaClass;
 
+import android.widget.Toast;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+
+import cn.edu.stu.max.cocovendor.Activity.AdSettingActivity;
 
 /**
  * Created by 0 on 2017/10/4.
@@ -53,4 +57,29 @@ public class FileService {
         }
     }
 
+
+
+
+
+    /**
+     * 删除文件
+     * @param filePath  文件路径
+     * @param isFileAdded
+     */
+    public static void deleteFile(String filePath, boolean[] isFileAdded) {
+        File[] currentFiles = FileService.getFiles(filePath);
+        for (int i = 0; i < isFileAdded.length; i++) {
+            if (isFileAdded[i]) {
+                if (currentFiles[i].exists()) {
+                    if (currentFiles[i].isFile()) {
+                        currentFiles[i].delete();
+                    } else if (currentFiles[i].isDirectory()) {
+                        // TODO
+                    }
+                } else {
+                    // TODO
+                }
+            }
+        }
+    }
 }

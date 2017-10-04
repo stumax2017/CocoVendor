@@ -20,7 +20,7 @@ import cn.edu.stu.max.cocovendor.R;
  * Created by 0 on 2017/10/4.
  */
 
-public class MyUSBListAdapter extends BaseAdapter {
+public class MyInternalListAdapter extends BaseAdapter {
 
     private static List<Map<String, Object>> list;   // 填充数据的List
 
@@ -31,16 +31,16 @@ public class MyUSBListAdapter extends BaseAdapter {
 
     private LayoutInflater inflater = null;   // 用来导入布局
 
-    public MyUSBListAdapter(Context context, List<Map<String, Object>> list) {
+    public MyInternalListAdapter(Context context, List<Map<String, Object>> list) {
         this.context = context;
-        MyUSBListAdapter.list = list;
+        MyInternalListAdapter.list = list;
         inflater = LayoutInflater.from(context);
         isSelected = new HashMap<Integer, Boolean>();
         isFileAdded = new boolean[list.size()];
         initIsSelectedAndIsFileAdded();
     }
 
-    public static void initIsSelectedAndIsFileAdded() {
+    public void initIsSelectedAndIsFileAdded() {
         for (int i = 0; i < list.size(); i++) {
             getIsSelected().put(i, false);
             isFileAdded[i] = false;
@@ -54,12 +54,12 @@ public class MyUSBListAdapter extends BaseAdapter {
             tempIsSelected.put(i, false);
             tempIsFileAdded[i] = false;
         }
-        MyUSBListAdapter.isSelected = tempIsSelected;
-        MyUSBListAdapter.isFileAdded = tempIsFileAdded;
+        MyInternalListAdapter.isSelected = tempIsSelected;
+        MyInternalListAdapter.isFileAdded = tempIsFileAdded;
     }
 
     public static void setList(List<Map<String, Object>> list) {
-        MyUSBListAdapter.list = list;
+        MyInternalListAdapter.list = list;
     }
 
     public static HashMap<Integer, Boolean> getIsSelected() { return isSelected; }
