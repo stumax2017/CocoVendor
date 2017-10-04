@@ -46,14 +46,16 @@ public class SettingMenuActivity extends AppCompatActivity {
                 case R.id.btn_goods_test:
                     break;
                 case R.id.btn_ad_setting:
+                    Intent intent_ad_setting = new Intent(SettingMenuActivity.this, AdSettingActivity.class);
+                    startActivity(intent_ad_setting);
                     break;
                 case R.id.btn_money_setting:
                     break;
                 case R.id.btn_help:
                     break;
                 case R.id.btn_sales_setting:
-                    Intent intent = new Intent(SettingMenuActivity.this, SalesSettingActivity.class);
-                    startActivity(intent);
+                    Intent intent_sales_setting = new Intent(SettingMenuActivity.this, SalesSettingActivity.class);
+                    startActivity(intent_sales_setting);
                     break;
                 case R.id.btn_sales_analyze:
                     break;

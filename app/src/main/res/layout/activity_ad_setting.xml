@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorTransparencyBlack" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:text="@string/label_machine_id"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:text="@string/machine_id"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="@string/label_machine_version"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:text="@string/machine_version"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:text="@string/label_ip"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:text="@string/ip"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <VideoView
+                    android:id="@+id/vv_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="center" />
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/iv_setting"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_launcher" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" >
+
+            <ListView
+                android:id="@+id/lv_usb"
+                android:layout_width="0dp"
+                android:layout_height="400dp"
+                android:layout_weight="1"
+                android:divider="#ccc"
+                android:dividerHeight="1dp"
+                android:headerDividersEnabled="false" />
+
+            <ListView
+                android:id="@+id/lv_internal"
+                android:layout_width="0dp"
+                android:layout_height="400dp"
+                android:layout_weight="1"
+                android:divider="#ccc"
+                android:dividerHeight="1dp"
+                android:headerDividersEnabled="false" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="添加" />
+
+            <Button
+                android:id="@+id/button_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="删除" />
+
+            <Button
+                android:id="@+id/button_fetch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="取回" />
+
+            <Button
+                android:id="@+id/button_restore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="恢复" />
+        </LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/btn_ad_return"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="250dp"
+        android:layout_marginRight="250dp"
+        android:layout_marginBottom="100dp"
+        android:text="@string/btn_return"
+        android:textSize="50sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorTransparencyWhite" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:text="@string/label_machine_id"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:text="@string/machine_id"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="@string/label_machine_version"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:text="@string/machine_version"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:text="@string/label_ip"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:text="@string/ip"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+</LinearLayout>
