@@ -82,4 +82,15 @@ public class FileService {
             }
         }
     }
+
+    public static boolean isFileAdded(String filePath1, boolean[] isFileAdded) {
+        boolean isFileAddedFlag = false;
+        File[] currentFiles = FileService.getFiles(filePath1);
+        for (int i = 0; i < isFileAdded.length; i++) {
+            if (isFileAdded[i]) {
+                isFileAddedFlag = true;
+            }
+        }
+        return isFileAddedFlag;
+    }
 }

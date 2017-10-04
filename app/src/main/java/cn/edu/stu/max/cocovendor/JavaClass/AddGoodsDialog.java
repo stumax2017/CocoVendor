@@ -31,7 +31,7 @@ public class AddGoodsDialog extends Dialog{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View view = View.inflate(context, R.layout.add_goods_dialog_layout, null);
+        View view = View.inflate(context, R.layout.add_goods_dialog, null);
         setContentView(view);
     }
 }

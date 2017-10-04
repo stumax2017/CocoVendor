@@ -1,6 +1,8 @@
 package cn.edu.stu.max.cocovendor.Activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
@@ -38,6 +40,9 @@ public class AdSettingActivity extends Activity {
 
     private MyUSBListAdapter myUSBListAdapter;    // U盘广告内容适配器
     private MyInternalListAdapter myInternalListAdapter;    // 本机广告内容适配器
+
+    private boolean hasAddedFlag = false;             // 用来判断有无文件添加
+    private boolean hasFetchedFlag = false;           // 用来判断有无文件取回
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,15 +105,19 @@ public class AdSettingActivity extends Activity {
                 for (int i = 0; i < MyUSBListAdapter.isFileAdded.length; i++) {
                     if (MyUSBListAdapter.isFileAdded[i]) {
                         FileService.copyFile(currentFiles[i].getPath(), TOPATH + currentFiles[i].getName());
+                        hasAddedFlag = true;
                     }
                 }
 
-                MyInternalListAdapter.setList(getList(TOPATH));
-                MyInternalListAdapter.setIsSelectedAndIsFileAdded(getList(TOPATH));
-                myInternalListAdapter.notifyDataSetChanged();
-                //MyUSBListAdapter.setList(getList(FROMPATH));
-                MyUSBListAdapter.setIsSelectedAndIsFileAdded(getList(FROMPATH));
-                myUSBListAdapter.notifyDataSetChanged();
+                if (hasAddedFlag) {
+                    MyInternalListAdapter.setList(getList(TOPATH));
+                    MyInternalListAdapter.setIsSelectedAndIsFileAdded(getList(TOPATH));
+                    myInternalListAdapter.notifyDataSetChanged();
+                    //MyUSBListAdapter.setList(getList(FROMPATH));
+                    MyUSBListAdapter.setIsSelectedAndIsFileAdded(getList(FROMPATH));
+                    myUSBListAdapter.notifyDataSetChanged();
+                    hasAddedFlag = false;
+                }
             }
         });
 
@@ -119,33 +128,55 @@ public class AdSettingActivity extends Activity {
                 for (int i = 0; i < MyInternalListAdapter.isFileAdded.length; i++) {
                     if (MyInternalListAdapter.isFileAdded[i]) {
                         FileService.copyFile(currentFiles[i].getPath(), FROMPATH + currentFiles[i].getName());
+                        hasFetchedFlag = true;
                     }
                 }
 
-                MyUSBListAdapter.setList(getList(FROMPATH));
-                MyUSBListAdapter.setIsSelectedAndIsFileAdded(getList(FROMPATH));
-                myUSBListAdapter.notifyDataSetChanged();
-                //MyInternalListAdapter.setList(getList(FROMPATH));
-                MyInternalListAdapter.setIsSelectedAndIsFileAdded(getList(TOPATH));
-                myInternalListAdapter.notifyDataSetChanged();
+                if (hasFetchedFlag) {
+                    MyUSBListAdapter.setList(getList(FROMPATH));
+                    MyUSBListAdapter.setIsSelectedAndIsFileAdded(getList(FROMPATH));
+                    myUSBListAdapter.notifyDataSetChanged();
+                    //MyInternalListAdapter.setList(getList(FROMPATH));
+                    MyInternalListAdapter.setIsSelectedAndIsFileAdded(getList(TOPATH));
+                    myInternalListAdapter.notifyDataSetChanged();
+                    hasFetchedFlag = false;
+                }
             }
         });
 
         buttonAdDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FileService.deleteFile(FROMPATH, MyUSBListAdapter.isFileAdded);
-                FileService.deleteFile(TOPATH, MyInternalListAdapter.isFileAdded);
+                if (FileService.isFileAdded(FROMPATH, MyUSBListAdapter.isFileAdded)
+                        || FileService.isFileAdded(TOPATH, MyInternalListAdapter.isFileAdded)) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(AdSettingActivity.this);
+                    builder.setMessage("确认删除吗？");
+                    builder.setTitle("提示");
+                    builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            FileService.deleteFile(FROMPATH, MyUSBListAdapter.isFileAdded);
+                            FileService.deleteFile(TOPATH, MyInternalListAdapter.isFileAdded);
 
-                MyInternalListAdapter.setList(getList(TOPATH));
-                MyInternalListAdapter.setIsSelectedAndIsFileAdded(getList(TOPATH));
-                myInternalListAdapter.notifyDataSetChanged();
-                MyUSBListAdapter.setList(getList(FROMPATH));
-                MyUSBListAdapter.setIsSelectedAndIsFileAdded(getList(FROMPATH));
-                myUSBListAdapter.notifyDataSetChanged();
+                            MyInternalListAdapter.setList(getList(TOPATH));
+                            MyInternalListAdapter.setIsSelectedAndIsFileAdded(getList(TOPATH));
+                            myInternalListAdapter.notifyDataSetChanged();
+                            MyUSBListAdapter.setList(getList(FROMPATH));
+                            MyUSBListAdapter.setIsSelectedAndIsFileAdded(getList(FROMPATH));
+                            myUSBListAdapter.notifyDataSetChanged();
+                        }
+                    });
+                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    builder.create().show();
+                }
             }
         });
-
     }
 
     public void playVideo(String filePath) {
