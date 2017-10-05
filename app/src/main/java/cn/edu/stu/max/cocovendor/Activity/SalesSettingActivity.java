@@ -101,6 +101,13 @@ public class SalesSettingActivity extends AppCompatActivity {
                 builder.create().show();
             }
         });
+        Button buttonSalesSettingReturn = (Button) findViewById(R.id.btn_sales_setting_return);
+        buttonSalesSettingReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     //活动转换之间都调用沉浸模式全屏
