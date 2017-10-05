@@ -36,7 +36,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <service android:name="com.amap.api.location.APSService" />
 
         <meta-data
@@ -55,6 +54,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.AdSettingActivity" />
+        <activity android:name=".Activity.SystemSettingActivity"></activity>
     </application>
 
 </manifest>
