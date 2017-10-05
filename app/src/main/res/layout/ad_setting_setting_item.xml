@@ -4,17 +4,31 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/ad_setting_setting_item_et_order"
+    <TextView
+        android:id="@+id/ad_setting_setting_item_tv_order"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minWidth="30dp" />
+        android:text="1." />
 
-    <EditText
-        android:id="@+id/ad_setting_setting_item_et_frequency"
+    <Button
+        android:id="@+id/ad_setting_setting_item_btn_minus"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="—"
+        android:focusable="false" />
+
+    <TextView
+        android:id="@+id/ad_setting_setting_item_tv_frequency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minWidth="30dp" />
+        android:text="1" />
+
+    <Button
+        android:id="@+id/ad_setting_setting_item_btn_plus"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="+"
+        android:focusable="false" />
 
     <ImageView
         android:id="@+id/ad_setting_setting_item_img"

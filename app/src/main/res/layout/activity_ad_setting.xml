@@ -85,21 +85,36 @@
         android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center" >
+        android:layout_gravity="center"
+        android:gravity="center">
 
-        <Button
-            android:id="@+id/btn_ad_load_ad"
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="加载U盘广告"
-            android:textSize="20sp" />
+            android:layout_margin="20dp">
+
+            <Button
+                android:id="@+id/btn_ad_load_ad"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="加载U盘广告"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_ad_setting_hint"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="请依次点击右边本机广告以确定播放顺序！"
+                android:textSize="20sp" />
+        </FrameLayout>
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_margin="20dp"
             android:gravity="center"
             android:text="本机广告存储"
             android:textSize="20sp" />
@@ -111,18 +126,32 @@
             android:layout_height="0dp"
             android:layout_weight="1" >
 
-            <ListView
-                android:id="@+id/lv_ad_usb"
+            <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="400dp"
                 android:layout_weight="1"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="30dp"
-                android:divider="#ccc"
-                android:dividerHeight="1dp"
-                android:headerDividersEnabled="false" />
+                android:layout_marginBottom="30dp" >
+
+                <ListView
+                    android:id="@+id/lv_ad_usb"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="#ccc"
+                    android:dividerHeight="1dp"
+                    android:headerDividersEnabled="false" />
+
+                <ListView
+                    android:id="@+id/lv_ad_usb_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="#ccc"
+                    android:dividerHeight="1dp"
+                    android:headerDividersEnabled="false" />
+
+            </FrameLayout>
 
             <FrameLayout
                 android:layout_width="0dp"
@@ -142,27 +171,15 @@
                     android:headerDividersEnabled="false" />
 
                 <ListView
-                    android:id="@+id/lv_ad_setting"
+                    android:id="@+id/lv_ad_internal_setting"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:divider="#ccc"
                     android:dividerHeight="1dp"
                     android:headerDividersEnabled="false" />
 
-                </FrameLayout>
+            </FrameLayout>
 
-            <!--<ListView-->
-                <!--android:id="@+id/lv_ad_internal"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="400dp"-->
-                <!--android:layout_weight="1"-->
-                <!--android:layout_marginLeft="30dp"-->
-                <!--android:layout_marginRight="30dp"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:layout_marginBottom="30dp"-->
-                <!--android:divider="#ccc"-->
-                <!--android:dividerHeight="1dp"-->
-                <!--android:headerDividersEnabled="false" />-->
         </LinearLayout>
 
         <LinearLayout
