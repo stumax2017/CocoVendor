@@ -47,7 +47,8 @@ public class SalesSettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AddGoodsDialog addGoodsDialog = new AddGoodsDialog(SalesSettingActivity.this);
-                addGoodsDialog.setTitle("添加商品");
+                addGoodsDialog.setTitle(R.string.label_add_goods);
+                addGoodsDialog.show();
             }
         });
     }
