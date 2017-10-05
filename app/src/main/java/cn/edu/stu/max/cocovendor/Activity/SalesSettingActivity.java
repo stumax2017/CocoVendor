@@ -13,6 +13,7 @@ import org.litepal.crud.DataSupport;
 
 import java.util.List;
 
+import cn.edu.stu.max.cocovendor.JavaClass.AddGoodsDialog;
 import cn.edu.stu.max.cocovendor.R;
 import cn.edu.stu.max.cocovendor.JavaClass.SalesSettingAdapter;
 import cn.edu.stu.max.cocovendor.databaseClass.Goods;
@@ -40,6 +41,15 @@ public class SalesSettingActivity extends AppCompatActivity {
         salesSettingAdapter = new SalesSettingAdapter(allGoods);
         //recyclerView显示适配器内容
         recyclerViewSalesSetting.setAdapter(salesSettingAdapter);
+
+        Button buttonSalesSettingAdd = (Button) findViewById(R.id.btn_sales_setting_add);
+        buttonSalesSettingAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddGoodsDialog addGoodsDialog = new AddGoodsDialog(SalesSettingActivity.this);
+                addGoodsDialog.setTitle("添加商品");
+            }
+        });
     }
 
     //活动转换之间都调用沉浸模式全屏
