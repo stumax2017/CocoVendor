@@ -86,10 +86,10 @@ public class MyInternalListAdapter extends BaseAdapter {
             // 获得ViewHolder对象
             holder = new ViewHolder();
             // 导入布局并赋值给convertView
-            convertView = inflater.inflate(R.layout.ad_setting_item, null);
-            holder.img = (ImageView) convertView.findViewById(R.id.item_img);
-            holder.title = (TextView) convertView.findViewById(R.id.item_title);
-            holder.cb = (CheckBox) convertView.findViewById(R.id.item_cb);
+            convertView = inflater.inflate(R.layout.ad_setting_display_item, null);
+            holder.img = (ImageView) convertView.findViewById(R.id.ad_setting_display_item_img);
+            holder.title = (TextView) convertView.findViewById(R.id.ad_setting_display_item_title);
+            holder.cb = (CheckBox) convertView.findViewById(R.id.ad_setting_display_item_cb);
             // 为view设置标签
             convertView.setTag(holder);
         } else {

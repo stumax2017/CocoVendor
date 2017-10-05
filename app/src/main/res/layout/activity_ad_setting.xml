@@ -87,20 +87,19 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center" >
 
-        <TextView
+        <Button
+            android:id="@+id/btn_ad_load_ad"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-
             android:gravity="center"
-            android:text="U盘广告存储"
+            android:text="加载U盘广告"
             android:textSize="20sp" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-
             android:gravity="center"
             android:text="本机广告存储"
             android:textSize="20sp" />
@@ -125,18 +124,45 @@
                 android:dividerHeight="1dp"
                 android:headerDividersEnabled="false" />
 
-            <ListView
-                android:id="@+id/lv_ad_internal"
+            <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="400dp"
                 android:layout_weight="1"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="30dp"
-                android:divider="#ccc"
-                android:dividerHeight="1dp"
-                android:headerDividersEnabled="false" />
+                android:layout_marginBottom="30dp" >
+
+                <ListView
+                    android:id="@+id/lv_ad_internal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="#ccc"
+                    android:dividerHeight="1dp"
+                    android:headerDividersEnabled="false" />
+
+                <ListView
+                    android:id="@+id/lv_ad_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="#ccc"
+                    android:dividerHeight="1dp"
+                    android:headerDividersEnabled="false" />
+
+                </FrameLayout>
+
+            <!--<ListView-->
+                <!--android:id="@+id/lv_ad_internal"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="400dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_marginLeft="30dp"-->
+                <!--android:layout_marginRight="30dp"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_marginBottom="30dp"-->
+                <!--android:divider="#ccc"-->
+                <!--android:dividerHeight="1dp"-->
+                <!--android:headerDividersEnabled="false" />-->
         </LinearLayout>
 
         <LinearLayout
@@ -168,7 +194,7 @@
                 android:text="取回" />
 
             <Button
-                android:id="@+id/button_ad_setting"
+                android:id="@+id/btn_ad_setting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
