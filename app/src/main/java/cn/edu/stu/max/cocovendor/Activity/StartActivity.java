@@ -6,8 +6,15 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
 
 import org.litepal.LitePal;
 
@@ -35,6 +42,16 @@ public class StartActivity extends AppCompatActivity {
             fillLocalInfo(localInfo);
         }
 
+        //尝试定位操作
+        AMapLocationClient mLocationClient = new AMapLocationClient(this);
+        mLocationClient.setLocationListener(mLocationListener);
+        AMapLocationClientOption mLocationOption = new AMapLocationClientOption();
+        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+        mLocationOption.setOnceLocation(false);
+        mLocationOption.setInterval(3000);
+        mLocationClient.setLocationOption(mLocationOption);
+        mLocationClient.startLocation();
+
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -45,6 +62,19 @@ public class StartActivity extends AppCompatActivity {
             }
         }, 2000);
     }
+
+    private AMapLocationListener mLocationListener = new AMapLocationListener() {
+        @Override
+        public void onLocationChanged(AMapLocation aMapLocation) {
+            if (aMapLocation != null) {
+                if (aMapLocation.getErrorCode() == 0) {
+                    TextView textView = (TextView) findViewById(R.id.tv_homepage_testlogin);
+                    textView.setText(aMapLocation.getAddress());
+                } else {
+                }
+            }
+        }
+    };
 
     private void fillLocalInfo(LocalInfo localInfo) {
         localInfo.setMachine_id(1);

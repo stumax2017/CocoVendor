@@ -160,6 +160,7 @@
     <TextView
         android:id="@+id/tv_homepage_testlogin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="定位信息" />
 
 </LinearLayout>

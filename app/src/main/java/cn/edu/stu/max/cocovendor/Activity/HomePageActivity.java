@@ -7,7 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import org.litepal.crud.DataSupport;
+
 import cn.edu.stu.max.cocovendor.R;
+import cn.edu.stu.max.cocovendor.databaseClass.LocalInfo;
 
 public class HomePageActivity extends AppCompatActivity {
 
