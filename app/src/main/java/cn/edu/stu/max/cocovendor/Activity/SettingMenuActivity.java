@@ -40,6 +40,8 @@ public class SettingMenuActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.btn_system_setting:
+                    Intent intent_sys_setting = new Intent(SettingMenuActivity.this, SystemSettingActivity.class);
+                    startActivity(intent_sys_setting);
                     break;
                 case R.id.btn_sheet_setting:
                     break;

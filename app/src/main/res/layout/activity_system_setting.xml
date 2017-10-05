@@ -235,7 +235,7 @@
         android:gravity="center"
         android:orientation="vertical">
         <Button
-            android:id="@+id/system_setting_back_button"
+            android:id="@+id/btn_sys_setting_back"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="250dp"
