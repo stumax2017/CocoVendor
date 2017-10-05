@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="goods_array">
+        <item>可乐</item>
+        <item>雪碧</item>
+        <item>橙汁</item>
+        <item>椰汁</item>
+        <item>奶茶</item>
+    </string-array>
+</resources>

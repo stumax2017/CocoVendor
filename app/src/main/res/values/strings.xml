@@ -44,5 +44,7 @@
     <string name="label_del_goods">删除商品</string>
     <string name="label_fix_goods">修改商品</string>
     <string name="label_save">保存</string>
+    <string name="label_fire">确定</string>
+    <string name="label_cancel">取消</string>
     <string name="title_activity_base">BaseActivity</string>
 </resources>
