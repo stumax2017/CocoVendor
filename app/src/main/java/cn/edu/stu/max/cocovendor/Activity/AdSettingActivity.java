@@ -112,18 +112,19 @@ public class AdSettingActivity extends Activity {
                 if (!adSettingFlag) {
 
                 } else {
+                    usbFileNameList[usbFileNameListIndex++] = internalFileNameList[position];
 
-                    usbFileNameList[usbFileNameListIndex++] = fileToGetName[position].getName();
                     for (int i = position; i < internalFileNameList.length - 1; i++) {
-                        internalFileNameList[position] = internalFileNameList[position + 1];
+                        internalFileNameList[i] = internalFileNameList[i + 1];
                     }
                     internalFileNameList = Arrays.copyOf(internalFileNameList, internalFileNameList.length - 1);
                     MyInternalSettingListAdapter.setList(getNameList(internalFileNameList));
-                    MyInternalSettingListAdapter.setIsSelectedAndIsFileAdded(getNameList(internalFileNameList));
+                    //MyInternalSettingListAdapter.setIsSelectedAndIsFileAdded(getNameList(internalFileNameList));
                     myInternalSettingListAdapter.notifyDataSetChanged();
                     MyUSBSettingListAdapter.setIsSetting(true);
+                    MyUSBSettingListAdapter.saveMap.put(usbFileNameListIndex - 1, "1");
                     MyUSBSettingListAdapter.setList(getSettingList(usbFileNameList, usbFileNameListIndex));
-                    MyUSBSettingListAdapter.setIsSelectedAndIsFileAdded(getSettingList(usbFileNameList, usbFileNameListIndex));
+                    //MyUSBSettingListAdapter.setIsSelectedAndIsFileAdded(getSettingList(usbFileNameList, usbFileNameListIndex));
                     myUSBSettingListAdapter.notifyDataSetChanged();
                 }
             }
@@ -139,25 +140,26 @@ public class AdSettingActivity extends Activity {
                 if (!adSettingFlag) {
 
                 } else {
-                    for (int i = position; i < usbFileNameListIndex; i++) {
-                        usbFileNameList[position] = usbFileNameList[position + 1];
+
+                    MyUSBSettingListAdapter.setIsSetting(true);
+                    for (int i = position; i < usbFileNameListIndex - 1; i++) {
+                        usbFileNameList[i] = usbFileNameList[i + 1];
+                        MyUSBSettingListAdapter.saveMap.put(i, MyUSBSettingListAdapter.saveMap.get(i + 1));
                     }
-                    usbFileNameListIndex --;
 
 
-
-                    usbFileNameList = Arrays.copyOf(usbFileNameList, usbFileNameListIndex + 2);
 
 
                     internalFileNameList = Arrays.copyOf(internalFileNameList, internalFileNameList.length + 1);
-                    internalFileNameList[internalFileNameList.length - 1] = internalFileNameList[position];
-
+                    internalFileNameList[internalFileNameList.length - 1] = usbFileNameList[position];
+                    usbFileNameList[usbFileNameListIndex - 1] = "";
+                    usbFileNameListIndex --;
                     MyInternalSettingListAdapter.setList(getNameList(internalFileNameList));
-                    MyInternalSettingListAdapter.setIsSelectedAndIsFileAdded(getNameList(internalFileNameList));
+                    //MyInternalSettingListAdapter.setIsSelectedAndIsFileAdded(getNameList(internalFileNameList));
                     myInternalSettingListAdapter.notifyDataSetChanged();
-                    MyUSBSettingListAdapter.setIsSetting(true);
+
                     MyUSBSettingListAdapter.setList(getSettingList(usbFileNameList, usbFileNameListIndex));
-                    MyUSBSettingListAdapter.setIsSelectedAndIsFileAdded(getSettingList(usbFileNameList, usbFileNameListIndex));
+                    //MyUSBSettingListAdapter.setIsSelectedAndIsFileAdded(getSettingList(usbFileNameList, usbFileNameListIndex));
                     myUSBSettingListAdapter.notifyDataSetChanged();
                 }
             }
@@ -336,7 +338,7 @@ public class AdSettingActivity extends Activity {
                     }
 
                     MyInternalSettingListAdapter.setList(getNameList(internalFileNameList));
-                    MyInternalSettingListAdapter.setIsSelectedAndIsFileAdded(getNameList(internalFileNameList));
+                    //MyInternalSettingListAdapter.setIsSelectedAndIsFileAdded(getNameList(internalFileNameList));
                     myInternalSettingListAdapter.notifyDataSetChanged();
 
                     textViewAdSettingHint.setVisibility(View.VISIBLE);
