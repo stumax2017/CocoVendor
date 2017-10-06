@@ -9,8 +9,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,9 +26,12 @@ import cn.edu.stu.max.cocovendor.R;
 public class MyUSBSettingListAdapter extends BaseAdapter {
 
     private static List<Map<String, Object>> list;   // 填充数据的List
+    //private static
 
     public static HashMap<Integer, Boolean> isSelected;   // 用来判断CheckBox的选中情况
     public static boolean[] isFileAdded;                 // 用来判断广告添加的情况
+    public static HashMap<Integer, String> saveMap;                  // 用来存储对应位置上TextView中的文本内容
+    private static int curCount = 1;
 
     private Context context;   // 上下文
 
@@ -46,6 +51,11 @@ public class MyUSBSettingListAdapter extends BaseAdapter {
         isSelected = new HashMap<Integer, Boolean>();
         isFileAdded = new boolean[list.size()];
         initIsSelectedAndIsFileAdded();
+        saveMap = new HashMap<Integer, String>();
+
+        for (int i = 0; i < 100; i++) {
+            saveMap.put(i, "1");
+        }
     }
 
     public void initIsSelectedAndIsFileAdded() {
@@ -126,15 +136,36 @@ public class MyUSBSettingListAdapter extends BaseAdapter {
             holder.img.setBackgroundResource((Integer)list.get(position).get("img"));
             holder.title.setText((String)list.get(position).get("title"));
             holder.tv_order.setText((String)list.get(position).get("tv_order"));
-            holder.tv_frequency.setText((String)list.get(position).get("tv_frequency"));
-            //holder.btn_minus.setTag(position);
+
+//            holder.tv_frequency.setTag(position);
+ //           holder.tv_frequency.clearFocus();
+
+//            final TextView tempTextView = holder.tv_frequency;
+//            holder.tv_frequency.addTextChangedListener(new TextWatcher() {
+//                @Override
+//                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//                }
+//
+//                @Override
+//                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+//
+//                }
+//
+//                @Override
+//                public void afterTextChanged(Editable editable) {
+//
+//                    Integer tag = (Integer) tempTextView.getTag();
+//                    saveMap.put(tag, editable.toString());
+//
+//                }
+//            });
+
+            holder.tv_frequency.setText(saveMap.get(position));
             holder.btn_minus.setOnClickListener(new CustomClickListener(position));
             holder.btn_plus.setOnClickListener(new CustomClickListener(position));
-            //holder.tv_frequency.setTag(position);
-            //holder.tv_frequency.setText(usbTvFrequency[tvFrequency]);
-        }
 
-        //notifyDataSetChanged();
+        }
         return convertView;
     }
 
@@ -145,13 +176,15 @@ public class MyUSBSettingListAdapter extends BaseAdapter {
         }
         @Override
         public void onClick(View view) {
-            int curCount = Integer.parseInt((String)list.get(position).get("tv_frequency"));
+            curCount = Integer.parseInt(saveMap.get(position));
             if (view.getId() == R.id.ad_setting_setting_item_btn_plus) {
                 list.get(position).put("tv_frequency", "" + (curCount + 1));
+                saveMap.put(position, (String)list.get(position).get("tv_frequency"));
                 notifyDataSetChanged();
             } else if (view.getId() == R.id.ad_setting_setting_item_btn_minus) {
                 if (curCount > 1) {
                     list.get(position).put("tv_frequency", "" + (curCount - 1));
+                    saveMap.put(position, (String)list.get(position).get("tv_frequency"));
                     notifyDataSetChanged();
                 }
             }
