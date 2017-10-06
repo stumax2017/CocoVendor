@@ -133,6 +133,35 @@ public class AdSettingActivity extends Activity {
         myUSBSettingListAdapter = new MyUSBSettingListAdapter(this, getVoidList());
         listViewAdUSBSetting.setAdapter(myUSBSettingListAdapter);
         listViewAdUSBSetting.setVisibility(View.INVISIBLE);
+        listViewAdUSBSetting.setOnItemClickListener(new ListView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (!adSettingFlag) {
+
+                } else {
+                    for (int i = position; i < usbFileNameListIndex; i++) {
+                        usbFileNameList[position] = usbFileNameList[position + 1];
+                    }
+                    usbFileNameListIndex --;
+
+
+
+                    usbFileNameList = Arrays.copyOf(usbFileNameList, usbFileNameListIndex + 2);
+
+
+                    internalFileNameList = Arrays.copyOf(internalFileNameList, internalFileNameList.length + 1);
+                    internalFileNameList[internalFileNameList.length - 1] = internalFileNameList[position];
+
+                    MyInternalSettingListAdapter.setList(getNameList(internalFileNameList));
+                    MyInternalSettingListAdapter.setIsSelectedAndIsFileAdded(getNameList(internalFileNameList));
+                    myInternalSettingListAdapter.notifyDataSetChanged();
+                    MyUSBSettingListAdapter.setIsSetting(true);
+                    MyUSBSettingListAdapter.setList(getSettingList(usbFileNameList, usbFileNameListIndex));
+                    MyUSBSettingListAdapter.setIsSelectedAndIsFileAdded(getSettingList(usbFileNameList, usbFileNameListIndex));
+                    myUSBSettingListAdapter.notifyDataSetChanged();
+                }
+            }
+        });
 
         myUSBListAdapter = new MyUSBListAdapter(this, getList(FROMPATH));
         listViewAdUSB.setAdapter(myUSBListAdapter);
