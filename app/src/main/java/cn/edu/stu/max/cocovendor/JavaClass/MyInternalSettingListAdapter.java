@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,10 +17,10 @@ import java.util.Map;
 import cn.edu.stu.max.cocovendor.R;
 
 /**
- * Created by 0 on 2017/10/5.
+ * Created by 0 on 2017/10/6.
  */
 
-public class MySettingListAdapter extends BaseAdapter {
+public class MyInternalSettingListAdapter extends BaseAdapter {
 
     private static List<Map<String, Object>> list;   // 填充数据的List
 
@@ -32,9 +31,9 @@ public class MySettingListAdapter extends BaseAdapter {
 
     private LayoutInflater inflater = null;   // 用来导入布局
 
-    public MySettingListAdapter(Context context, List<Map<String, Object>> list) {
+    public MyInternalSettingListAdapter(Context context, List<Map<String, Object>> list) {
         this.context = context;
-        MySettingListAdapter.list = list;
+        MyInternalSettingListAdapter.list = list;
         inflater = LayoutInflater.from(context);
         isSelected = new HashMap<Integer, Boolean>();
         isFileAdded = new boolean[list.size()];
@@ -55,12 +54,12 @@ public class MySettingListAdapter extends BaseAdapter {
             tempIsSelected.put(i, false);
             tempIsFileAdded[i] = false;
         }
-        MySettingListAdapter.isSelected = tempIsSelected;
-        MySettingListAdapter.isFileAdded = tempIsFileAdded;
+        MyInternalSettingListAdapter.isSelected = tempIsSelected;
+        MyInternalSettingListAdapter.isFileAdded = tempIsFileAdded;
     }
 
     public static void setList(List<Map<String, Object>> list) {
-        MySettingListAdapter.list = list;
+        MyInternalSettingListAdapter.list = list;
     }
 
     public static HashMap<Integer, Boolean> getIsSelected() { return isSelected; }
@@ -87,11 +86,9 @@ public class MySettingListAdapter extends BaseAdapter {
             // 获得ViewHolder对象
             holder = new ViewHolder();
             // 导入布局并赋值给convertView
-            convertView = inflater.inflate(R.layout.ad_setting_setting_item, null);
-            holder.img = (ImageView) convertView.findViewById(R.id.ad_setting_setting_item_img);
-            holder.title = (TextView) convertView.findViewById(R.id.ad_setting_setting_item_title);
-            holder.etOrder = (EditText) convertView.findViewById(R.id.ad_setting_setting_item_et_order);
-            holder.etFrequency = (EditText) convertView.findViewById(R.id.ad_setting_setting_item_et_frequency);
+            convertView = inflater.inflate(R.layout.ad_setting_display_no_cb_item, null);
+            holder.img = (ImageView) convertView.findViewById(R.id.ad_setting_display_no_cb_item_img);
+            holder.title = (TextView) convertView.findViewById(R.id.ad_setting_display_no_cb_item_title);
             // 为view设置标签
             convertView.setTag(holder);
         } else {

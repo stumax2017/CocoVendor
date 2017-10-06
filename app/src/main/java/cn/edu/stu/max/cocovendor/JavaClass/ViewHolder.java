@@ -1,5 +1,6 @@
 package cn.edu.stu.max.cocovendor.JavaClass;
 
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -13,6 +14,8 @@ public class ViewHolder {
     public ImageView img;
     public TextView title;
     public CheckBox cb;
-    public EditText etOrder;
-    public EditText etFrequency;
+    public TextView tv_order;
+    public Button btn_minus;
+    public TextView tv_frequency;
+    public Button btn_plus;
 }
