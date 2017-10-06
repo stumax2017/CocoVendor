@@ -27,7 +27,7 @@
             android:id="@+id/iv_hp_ad"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/not_found_0" />
 
         <LinearLayout
             android:layout_width="match_parent"
