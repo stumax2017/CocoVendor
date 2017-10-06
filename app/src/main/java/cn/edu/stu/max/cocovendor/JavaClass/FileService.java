@@ -1,5 +1,6 @@
 package cn.edu.stu.max.cocovendor.JavaClass;
 
+import android.content.Context;
 import android.widget.Toast;
 
 import java.io.File;
@@ -57,10 +58,6 @@ public class FileService {
         }
     }
 
-
-
-
-
     /**
      * 删除文件
      * @param filePath  文件路径
@@ -83,9 +80,14 @@ public class FileService {
         }
     }
 
-    public static boolean isFileAdded(String filePath1, boolean[] isFileAdded) {
+    /**
+     * 判断文件是否添加
+     * @param filePath  文件路径
+     * @param isFileAdded
+     */
+    public static boolean isFileAdded(String filePath, boolean[] isFileAdded) {
         boolean isFileAddedFlag = false;
-        File[] currentFiles = FileService.getFiles(filePath1);
+        File[] currentFiles = FileService.getFiles(filePath);
         for (int i = 0; i < isFileAdded.length; i++) {
             if (isFileAdded[i]) {
                 isFileAddedFlag = true;
