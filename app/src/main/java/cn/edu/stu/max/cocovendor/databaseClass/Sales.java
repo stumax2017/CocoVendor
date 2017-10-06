@@ -1,8 +1,10 @@
 package cn.edu.stu.max.cocovendor.databaseClass;
 
-import java.sql.Date;
+import org.litepal.crud.DataSupport;
 
-public class Sales {
+import java.util.Date;
+
+public class Sales extends DataSupport{
     //销售物品对应货物的id
     private Goods goods_id;
     //销售日期

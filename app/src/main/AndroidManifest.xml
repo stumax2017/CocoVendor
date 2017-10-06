@@ -54,7 +54,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.AdSettingActivity" />
-        <activity android:name=".Activity.SystemSettingActivity"></activity>
+        <activity android:name=".Activity.SystemSettingActivity" />
+        <activity android:name=".Activity.SheetActivity" />
+        <activity android:name=".Activity.SheetSalesActivity"></activity>
     </application>
 
 </manifest>

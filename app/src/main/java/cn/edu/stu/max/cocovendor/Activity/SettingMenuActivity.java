@@ -48,6 +48,8 @@ public class SettingMenuActivity extends AppCompatActivity {
                     startActivity(intent_sys_setting);
                     break;
                 case R.id.btn_sheet_setting:
+                    Intent intent_sheet_setting = new Intent(SettingMenuActivity.this, SheetActivity.class);
+                    startActivity(intent_sheet_setting);
                     break;
                 case R.id.btn_goods_test:
                     break;

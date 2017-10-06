@@ -5,12 +5,16 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.litepal.crud.DataSupport;
 
+import java.util.Date;
+
 import cn.edu.stu.max.cocovendor.R;
 import cn.edu.stu.max.cocovendor.databaseClass.LocalInfo;
+import cn.edu.stu.max.cocovendor.databaseClass.Sales;
 
 public class HomePageActivity extends AppCompatActivity {
 
@@ -26,6 +30,67 @@ public class HomePageActivity extends AppCompatActivity {
                 Intent intent = new Intent(HomePageActivity.this, LoginActivity.class);
                 intent.putExtra("IsLogin", true);
                 startActivity(intent);
+            }
+        });
+
+        ImageView imageViewGoods1 = (ImageView) findViewById(R.id.iv_goods_1);
+        imageViewGoods1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Sales sales = new Sales();
+                sales.setSales_date(new Date());
+                sales.setMachine_floor(1);
+                sales.save();
+            }
+        });
+        ImageView imageViewGoods2 = (ImageView) findViewById(R.id.iv_goods_2);
+        imageViewGoods2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Sales sales = new Sales();
+                sales.setSales_date(new Date());
+                sales.setMachine_floor(2);
+                sales.save();
+            }
+        });
+        ImageView imageViewGoods3 = (ImageView) findViewById(R.id.iv_goods_3);
+        imageViewGoods3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Sales sales = new Sales();
+                sales.setSales_date(new Date());
+                sales.setMachine_floor(3);
+                sales.save();
+            }
+        });
+        ImageView imageViewGoods4 = (ImageView) findViewById(R.id.iv_goods_4);
+        imageViewGoods4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Sales sales = new Sales();
+                sales.setSales_date(new Date());
+                sales.setMachine_floor(4);
+                sales.save();
+            }
+        });
+        ImageView imageViewGoods5 = (ImageView) findViewById(R.id.iv_goods_5);
+        imageViewGoods5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Sales sales = new Sales();
+                sales.setSales_date(new Date());
+                sales.setMachine_floor(5);
+                sales.save();
+            }
+        });
+        ImageView imageViewGoods6 = (ImageView) findViewById(R.id.iv_goods_6);
+        imageViewGoods6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Sales sales = new Sales();
+                sales.setSales_date(new Date());
+                sales.setMachine_floor(6);
+                sales.save();
             }
         });
     }
