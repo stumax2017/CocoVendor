@@ -1,11 +1,13 @@
 package cn.edu.stu.max.cocovendor.databaseClass;
 
+import org.litepal.annotation.Column;
 import org.litepal.crud.DataSupport;
 
 public class Goods extends DataSupport{
     //商品id
     private int id;
     //商品名称
+    @Column(unique = true)
     private String name;
     //商品成本价
     private float cost_price;
