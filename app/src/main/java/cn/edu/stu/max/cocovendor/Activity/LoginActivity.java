@@ -129,6 +129,8 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     break;
                 case R.id.btn_login_return:
+                    Intent intent_return = new Intent();
+                    setResult(RESULT_OK, intent_return);
                     finish();
                     break;
             }

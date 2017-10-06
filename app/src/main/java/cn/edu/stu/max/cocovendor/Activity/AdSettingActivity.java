@@ -3,6 +3,8 @@ package cn.edu.stu.max.cocovendor.Activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,6 +34,8 @@ import cn.edu.stu.max.cocovendor.R;
 
 
 public class AdSettingActivity extends Activity {
+
+    private static final String adSettingDataFileName = "sharedfile";     // 定义保存的文件的名称
 
     private final static String FROMPATH = "/mnt/usb_storage/USB_DISK2/udisk0/advertisement/";   // U盘广告存储路径
     private final static String TOPATH = "/storage/sdcard0/tencent/QQfile_recv/b/";               // 本机广告存储路径
@@ -85,6 +89,15 @@ public class AdSettingActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ad_setting);
 
+        SharedPreferences share = super.getSharedPreferences(adSettingDataFileName, MODE_PRIVATE);  // 实例化
+        final SharedPreferences.Editor editor = share.edit();   // 使处于可编辑状态
+
+//        editor.putString("name", "hulu");
+//        editor.putString("sex", "man");
+//        editor.putInt("age", getSomething());     // 设置保存的数据
+
+
+
         Button buttonAdReturn = (Button) findViewById(R.id.btn_ad_return);
         final Button buttonAdAdd = (Button) findViewById(R.id.btn_ad_add);
         final Button buttonAdDelete = (Button) findViewById(R.id.btn_ad_delete);
@@ -113,7 +126,12 @@ public class AdSettingActivity extends Activity {
         buttonAdReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                editor.putBoolean("isAdSettingChanged", true);
+                for (int i = 0; i < usbFileNameListIndex; i++) {
+                    editor.putString("Ad_" + i, usbFileNameList[i]);
+                    editor.putString("Frequency_" + i, MyUSBSettingListAdapter.saveMap.get(i));
+                }
+                editor.apply();
             }
         });
 
@@ -368,19 +386,9 @@ public class AdSettingActivity extends Activity {
                     isInternalPathChanged = false;
                 } else {
 
-                    if (isInternalPathChanged) {
-                        MyUSBSettingListAdapter.setIsSetting(true);
-                        MyUSBSettingListAdapter.setList(getSettingList(usbFileNameList, 0));
-                        myUSBSettingListAdapter.notifyDataSetChanged();
-                    }
+                    if (!getOnceFlag) {
 
-                    usbFileNameListIndex = 0;
-
-                    buttonAdAdd.setVisibility(View.INVISIBLE);
-                    buttonAdDelete.setVisibility(View.INVISIBLE);
-                    buttonAdFetch.setVisibility(View.INVISIBLE);
-                    //buttonAdClear.setVisibility(View.VISIBLE);
-
+                        usbFileNameListIndex = 0;
 
                         fileToGetName = FileService.getFiles(TOPATH);
                         internalFileNameListIndex = new int[fileToGetName.length + 1];
@@ -392,7 +400,39 @@ public class AdSettingActivity extends Activity {
                             tempInternalFileNameList[i] = fileToGetName[i].getName();
                             internalPositionFlag[i] = true;
                             internalFileNameListIndex[i] = 0;
+                        }
+                        getOnceFlag = true;
                     }
+
+                    if (isInternalPathChanged) {
+                        MyUSBSettingListAdapter.setIsSetting(true);
+                        MyUSBSettingListAdapter.setList(getSettingList(usbFileNameList, 0));
+                        myUSBSettingListAdapter.notifyDataSetChanged();
+
+                        usbFileNameListIndex = 0;
+
+                        fileToGetName = FileService.getFiles(TOPATH);
+                        internalFileNameListIndex = new int[fileToGetName.length + 1];
+                        internalFileNameList = new String[fileToGetName.length];
+                        tempInternalFileNameList = new String[fileToGetName.length];
+                        internalPositionFlag = new boolean[fileToGetName.length];
+                        for (int i = 0; i < fileToGetName.length; i++) {
+                            internalFileNameList[i] = fileToGetName[i].getName();
+                            tempInternalFileNameList[i] = fileToGetName[i].getName();
+                            internalPositionFlag[i] = true;
+                            internalFileNameListIndex[i] = 0;
+                        }
+                    }
+
+
+
+                    buttonAdAdd.setVisibility(View.INVISIBLE);
+                    buttonAdDelete.setVisibility(View.INVISIBLE);
+                    buttonAdFetch.setVisibility(View.INVISIBLE);
+                    //buttonAdClear.setVisibility(View.VISIBLE);
+
+
+
 
                     MyInternalSettingListAdapter.setList(getNameList(internalFileNameList));
                     //MyInternalSettingListAdapter.setIsSelectedAndIsFileAdded(getNameList(internalFileNameList));
@@ -539,6 +579,30 @@ public class AdSettingActivity extends Activity {
         }
     }
 
+
+    public AdSettingDataType getAdSettingData() {
+
+        AdSettingDataType adSettingDataType = new AdSettingDataType();
+        adSettingDataType.list = new ArrayList<Map<String, Object>>();
+        adSettingDataType.list = MyUSBSettingListAdapter.getList();
+        adSettingDataType.saveMap = new HashMap<Integer, String>();
+        adSettingDataType.saveMap = MyUSBSettingListAdapter.saveMap;
+
+        return adSettingDataType;
+    }
+
+    public class AdSettingDataType {
+        List<Map<String, Object>> list;
+        HashMap<Integer, String> saveMap;
+    }
+
+    public int getSomething() {
+        return usbFileNameListIndex;
+    }
+
+    public String[] getAdSettingList() {
+        return usbFileNameList;
+    }
 
 
 

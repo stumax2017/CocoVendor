@@ -27,7 +27,7 @@ public class FileService {
         File root = new File(filePath);
         // 判断文件是否存在
         if (!root.exists()) {
-            //Toast.makeText(MainActivity.this, "fail", Toast.LENGTH_LONG).show();
+
             return null;
         }
         // 如果存在则获取当前目录下的全部文件 填充数组
