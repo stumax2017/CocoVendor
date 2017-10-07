@@ -18,6 +18,7 @@ import java.io.File;
 
 import cn.edu.stu.max.cocovendor.JavaClass.FileService;
 import cn.edu.stu.max.cocovendor.R;
+import cn.edu.stu.max.cocovendor.Service.VideoService;
 import cn.edu.stu.max.cocovendor.databaseClass.LocalInfo;
 
 public class HomePageActivity extends AppCompatActivity {
@@ -46,8 +47,6 @@ public class HomePageActivity extends AppCompatActivity {
         videoViewHomePageAd = (VideoView) findViewById(R.id.vv_hp_ad);
         imageViewHomePageAd = (ImageView) findViewById(R.id.iv_hp_ad);
         imageViewHomePageAd.setVisibility(View.INVISIBLE);
-
-
 
         share = super.getSharedPreferences(adSettingDataFileName, MODE_PRIVATE);
         if (share.getBoolean("isAdSettingChanged", false)) {

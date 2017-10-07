@@ -11,7 +11,7 @@ import cn.edu.stu.max.cocovendor.R;
 
 public class SystemSettingActivity extends AppCompatActivity {
 
-    private ButtonListener buttonListener;
+    private ButtonListener buttonListener = new ButtonListener();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +35,8 @@ public class SystemSettingActivity extends AppCompatActivity {
         buttonDownloadAd.setOnClickListener(buttonListener);
         Button buttonSysSettingBack = (Button) findViewById(R.id.btn_sys_setting_back);
         buttonSysSettingBack.setOnClickListener(buttonListener);
+        Button buttonCameraSpy = (Button) findViewById(R.id.btn_camera_spy);
+        buttonCameraSpy.setOnClickListener(buttonListener);
     }
 
     private class ButtonListener implements View.OnClickListener {
@@ -56,6 +58,10 @@ public class SystemSettingActivity extends AppCompatActivity {
                 case R.id.btn_sales_setting:
                     break;
                 case R.id.btn_sales_analyze:
+                    break;
+                case R.id.btn_camera_spy:
+                    Intent intent_camera_setting = new Intent(SystemSettingActivity.this, CameraSettingActivity.class);
+                    startActivity(intent_camera_setting);
                     break;
                 case R.id.btn_sys_setting_back:
                     finish();
