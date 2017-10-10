@@ -11,6 +11,9 @@ import cn.edu.stu.max.cocovendor.R;
 
 public class SettingMenuActivity extends AppCompatActivity {
 
+
+    // wurui乌瑞释放
+
     private ButtonListener buttonListener = new ButtonListener();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
