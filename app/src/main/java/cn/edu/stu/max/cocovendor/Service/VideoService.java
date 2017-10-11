@@ -21,7 +21,7 @@ import cn.edu.stu.max.cocovendor.JavaClass.CameraThread;
 
 public class VideoService extends Service implements SurfaceHolder.Callback {
 
-    private static final int VALUE_OF_MINUTES = 1;
+    private static final int VALUE_OF_MINUTES = 30;
     private SurfaceView surfaceView; // 视频预览控件
     private LinearLayout lay; // 愿揽控件
     private SurfaceHolder surfaceHolder;

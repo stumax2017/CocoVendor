@@ -1,5 +1,6 @@
 package cn.edu.stu.max.cocovendor.JavaClass;
 
+import android.content.Context;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
@@ -7,20 +8,29 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import cn.edu.stu.max.cocovendor.Activity.AdSettingActivity;
 
 /**
  * Created by 0 on 2017/10/7.
  */
 
 public class CameraThread extends Thread {
+
+    private static int oldestVideo = 0;
+    private static int cameraFileNum = 0;
 
     private MediaRecorder mMediaRecorder;
     private SurfaceHolder mSurfaceHolder;
@@ -33,6 +43,7 @@ public class CameraThread extends Thread {
     private static final String TAG = "SEDs508EG";
     public static int numOfVideo = 0;
     //public static int minuteOfVideo = 1;
+    private Context context;
     public static final int MEDIA_TYPE_IMAGE = 1;
     public static final int MEDIA_TYPE_VIDEO = 2;
 
@@ -124,13 +135,18 @@ public class CameraThread extends Thread {
             try {
 //                stopRecord();
 //                this.cancel();
-                numOfVideo = numOfVideo + 1;
-                if (numOfVideo > 3) {
-                    stopRecord();
-                    this.cancel();
-                } else {
+//                numOfVideo = numOfVideo + 1;
+//                if (numOfVideo > 3) {
+//                    stopRecord();
+//                    this.cancel();
+//                } else {
+
+
                     startRecord();
-                }
+
+
+
+//                }
             } catch (Exception e) {
                 map.clear();
                 map.put("recordingFlag", "false");
@@ -138,9 +154,6 @@ public class CameraThread extends Thread {
                 map.put("recordTime", ac_time);
                 //sendMsgToHandle(m_msgHandler, iType, map);
             }
-
-
-
         }
     }
     // 计算当前已录像时间，默认值返回0
@@ -161,15 +174,19 @@ public class CameraThread extends Thread {
             return null;
         }
 
+
+
         File mediaStorageDir = new File(
-                Environment.getExternalStorageDirectory() + File.separator
-                        + "/MyYeQingCamera/");
+                "/mnt/external_sd" + File.separator
+                        + "/MyCocoCamera/");
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdir()) {
                 Log.d(TAG, "failed to create directory");
                 return null;
             }
         }
+
+
 
         // 创建媒体文件名
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss")
@@ -179,13 +196,27 @@ public class CameraThread extends Thread {
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + "IMG_" + timestamp + ".jpg");
         } else if (type == MEDIA_TYPE_VIDEO) {
+           // cameraFileNum = cameraFileNum + 1;
             // mediaStorageDir.getPath()
-            mediaFile = new File("/mnt/external_sd" + File.separator
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator
                     + "VID_" + timestamp + ".3gp");
         } else {
             Log.d(TAG, "文件类型有误");
             return null;
         }
+
+        FileService fileService = new FileService();
+        File[] files = FileService.getFiles("/mnt/external_sd/MyCocoCamera/");
+        if (fileService.getSDAvailableSize().compareTo("2.00GB") < 0) {
+            Arrays.sort(files, new Comparator<File>() {
+                @Override
+                public int compare(File f1, File f2) {
+                    return Long.valueOf(f1.lastModified()).compareTo(f2.lastModified());
+                }
+            });
+            files[0].delete();
+        }
+
 
         return mediaFile;
     }
