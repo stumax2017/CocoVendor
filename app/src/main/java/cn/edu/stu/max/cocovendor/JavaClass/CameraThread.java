@@ -5,6 +5,8 @@ import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
 import android.os.Environment;
+import android.os.StatFs;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -31,6 +33,7 @@ public class CameraThread extends Thread {
 
     private static int oldestVideo = 0;
     private static int cameraFileNum = 0;
+
 
     private MediaRecorder mMediaRecorder;
     private SurfaceHolder mSurfaceHolder;
@@ -205,9 +208,17 @@ public class CameraThread extends Thread {
             return null;
         }
 
+
         FileService fileService = new FileService();
         File[] files = FileService.getFiles("/mnt/external_sd/MyCocoCamera/");
-        if (fileService.getSDAvailableSize().compareTo("2.00GB") < 0) {
+        File path = new File("/mnt/external_sd/");
+        StatFs stat = new StatFs(path.getPath());   // 创建StatFs对象，用来获取文件系统的状态
+        long blockSize = stat.getBlockSize();
+        long availableBlocks = stat.getAvailableBlocks();
+        //String availableSize = Formatter.formatFileSize(availableBlocks * blockSize);   // 获得SD卡可用容量
+        //Log.d("my", availableSize);
+        //long a = 60 * 1024 * 1024 *1024;
+        if ((availableBlocks * blockSize)/1024/1024/1024 < 59) {
             Arrays.sort(files, new Comparator<File>() {
                 @Override
                 public int compare(File f1, File f2) {
@@ -216,6 +227,9 @@ public class CameraThread extends Thread {
             });
             files[0].delete();
         }
+//        if ((fileService.getSDAvailableSize()).compareTo("2.00GB") > 0) {
+//
+//        }
 
 
         return mediaFile;

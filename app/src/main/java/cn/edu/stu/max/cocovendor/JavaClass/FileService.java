@@ -107,12 +107,12 @@ public class FileService {
      * @return
      */
      public String getSDAvailableSize() {
-         File path = new File("/mnt/external_sd");
+         File path = new File("/mnt/external_sd/MyCocoCamera/");
          StatFs stat = new StatFs(path.getPath());
          long blockSize = stat.getBlockSize();
          long availableBlocks = stat.getAvailableBlocks();
-         String totalSize = Formatter.formatFileSize(context, availableBlocks * blockSize);   // 获得SD卡总容量
-         return totalSize;
+         String availableSize = Formatter.formatFileSize(context, availableBlocks * blockSize);   // 获得SD卡总容量
+         return availableSize;
      }
 
     /**
@@ -121,11 +121,11 @@ public class FileService {
      * @return
      */
      public String getSDTotalSize() {
-         File path = new File("/mnt/external_sd");
+         File path = new File("/mnt/external_sd/MyCocoCamera/");
          StatFs stat = new StatFs(path.getPath());
          long blockSize = stat.getBlockSize();
          long totalBlocks = stat.getBlockCount();
-         String availableSize = Formatter.formatFileSize(context, totalBlocks * blockSize);   // 获得SD卡总容量
-         return availableSize;
+         String totalSize = Formatter.formatFileSize(context, totalBlocks * blockSize);   // 获得SD卡总容量
+         return totalSize;
      }
 }
