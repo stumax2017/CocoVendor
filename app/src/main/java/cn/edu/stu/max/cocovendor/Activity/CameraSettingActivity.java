@@ -1,5 +1,6 @@
 package cn.edu.stu.max.cocovendor.Activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
@@ -41,15 +42,20 @@ public class CameraSettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera_setting);
 
+
+
+
         SharedPreferences share = super.getSharedPreferences(cameraSettingDataFileName, MODE_PRIVATE);  // 实例化
         editor = share.edit();   // 使处于可编辑状态
-        editor.putBoolean("isOpen", isOpen);
+        editor.putBoolean("isOpen", false);
         editor.putInt("resolutionSelection", resolutionSelection);
         editor.putInt("spyMethodSelection", spyMethodSelection);
+
 
         radioGroupIsSpy = (RadioGroup) findViewById(R.id.rg_is_spy);
         radioButtonYes = (RadioButton) findViewById(R.id.rb_yes);
         radioButtonNo = (RadioButton) findViewById(R.id.rb_no);
+
 
         radioGroupResolutionSelect = (RadioGroup) findViewById(R.id.rg_resolution_select);
         radioButtonCIF = (RadioButton) findViewById(R.id.rb_cif);
@@ -63,6 +69,32 @@ public class CameraSettingActivity extends AppCompatActivity {
 
         buttonReturn = (Button) findViewById(R.id.btn_camera_setting_return);
 
+//        radioButtonYes.setChecked(share.getBoolean("isOpen", true));
+//        radioButtonNo.setChecked(!share.getBoolean("isOpen", true));
+//        switch (share.getInt("resolutionSelection", 0)) {
+//            case 0:
+//                radioButtonCIF.setChecked(true);
+//                break;
+//            case 1:
+//                radioButton480P.setChecked(true);
+//                break;
+//            case 2:
+//                radioButton720P.setChecked(true);
+//                break;
+//        }
+//        switch (share.getInt("spyMethodSelection", 0)) {
+//            case 0:
+//                radioButton24hours.setChecked(true);
+//                break;
+//            case 1:
+//                radioButtonATime.setChecked(true);
+//                break;
+//            case 2:
+//                radioButtonCustom.setChecked(true);
+//                break;
+//        }
+
+
         radioGroupIsSpy.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
@@ -70,6 +102,7 @@ public class CameraSettingActivity extends AppCompatActivity {
                     isOpen = true;
                 } else if (i == radioButtonNo.getId()) {
                     isOpen = false;
+                    buttonReturn.setText("hhhhhh");
                 }
             }
         });
@@ -90,12 +123,12 @@ public class CameraSettingActivity extends AppCompatActivity {
         radioGroupSpyMethod.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
-                if (i == radioButtonCIF.getId()) {
+                if (i == radioButton24hours.getId()) {
                     spyMethodSelection = 0;
-                } else if (i == radioButton480P.getId()) {
+                } else if (i == radioButtonATime.getId()) {
                     spyMethodSelection = 1;
-                } else if (i == radioButton720P.getId()) {
-                    spyMethodSelection = 2;
+                } else if (i == radioButton24hours.getId()) {
+                    spyMethodSelection = 0;
                 }
             }
         });
@@ -106,6 +139,8 @@ public class CameraSettingActivity extends AppCompatActivity {
                 editor.putBoolean("isOpen", isOpen);
                 editor.putInt("resolutionSelection", resolutionSelection);
                 editor.putInt("spyMethodSelection", spyMethodSelection);
+                Intent intent = new Intent(CameraSettingActivity.this, SystemSettingActivity.class);
+                startActivity(intent);
             }
         });
     }

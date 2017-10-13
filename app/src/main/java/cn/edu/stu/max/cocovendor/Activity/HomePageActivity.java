@@ -1,12 +1,16 @@
 package cn.edu.stu.max.cocovendor.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,10 +43,19 @@ public class HomePageActivity extends AppCompatActivity {
 
     private static final String adSettingDataFileName = "sharedfile";     // 定义保存的文件的名称
 
+    private Context context;
+    Handler handler = new Handler();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getSupportActionBar().hide();
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_home_page);
+
+        context = this;
 
         videoViewHomePageAd = (VideoView) findViewById(R.id.vv_hp_ad);
         imageViewHomePageAd = (ImageView) findViewById(R.id.iv_hp_ad);
@@ -221,4 +234,50 @@ public class HomePageActivity extends AppCompatActivity {
                 }
         }
     }
+
+    @Override
+    protected void onResume() {
+        // TODO Auto-generated method stub
+        super.onResume();
+
+        handler.postDelayed(runnable, 1000 * 5);
+    }
+
+    @Override
+    protected void onPause() {
+        // TODO Auto-generated method stub
+        super.onPause();
+
+        handler.removeCallbacks(runnable);
+    }
+
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            // 用户5秒没操作了
+
+            Intent i = new Intent();
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            i.setClass(context, ScreenSaverActivity.class);
+            context.startActivity(i);
+
+        }
+    };
+
+    public boolean onTouchEvent(android.view.MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN: { // 手指下来的时候,取消之前绑定的Runnable
+
+                handler.removeCallbacks(runnable);
+                break;
+            }
+            case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
+
+                handler.postDelayed(runnable, 1000 * 5);
+
+                break;
+            }
+        }
+        return super.onTouchEvent(event);
+    };
 }

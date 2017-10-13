@@ -1,6 +1,7 @@
 package cn.edu.stu.max.cocovendor.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,11 +12,16 @@ import cn.edu.stu.max.cocovendor.R;
 
 public class SystemSettingActivity extends AppCompatActivity {
 
+    private static final String cameraSettingDataFileName = "cameraSettingDataFile";     // 定义保存的文件的名称
+    private SharedPreferences share;
+
     private ButtonListener buttonListener = new ButtonListener();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_system_setting);
+
+        share = super.getSharedPreferences(cameraSettingDataFileName, MODE_PRIVATE);  // 实例化
 
         Button buttonSysParmSetting = (Button) findViewById(R.id.btn_sys_parm_setting);
         buttonSysParmSetting.setOnClickListener(buttonListener);
@@ -60,7 +66,10 @@ public class SystemSettingActivity extends AppCompatActivity {
                 case R.id.btn_sales_analyze:
                     break;
                 case R.id.btn_camera_spy:
+                    boolean data = share.getBoolean("isOpen", false);
+                    //String data = "true";
                     Intent intent_camera_setting = new Intent(SystemSettingActivity.this, CameraSettingActivity.class);
+                    intent_camera_setting.putExtra("isOpen", data);
                     startActivity(intent_camera_setting);
                     break;
                 case R.id.btn_sys_setting_back:

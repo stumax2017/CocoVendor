@@ -487,6 +487,8 @@ public class AdSettingActivity extends Activity {
     public void playVideo(String filePath) {
         File file = new File(filePath);
         if (file.exists()) {
+            imageViewAd.setVisibility(View.INVISIBLE);
+            videoViewAd.setVisibility(View.VISIBLE);
             videoViewAd.setVideoPath(file.getPath());
             videoViewAd.start();
         } else {
