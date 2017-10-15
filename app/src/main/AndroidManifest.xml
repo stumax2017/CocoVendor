@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.edu.stu.max.cocovendor">
+    <!-- 开机自启权限 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"></uses-permission>
+
+    <!-- 录制视频/音频权限 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"></uses-permission>
+    <!-- 调用摄像头权限 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- sd卡读写权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+    <!-- 挂载sd卡 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <!-- 悬浮窗口权限 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <!-- 关闭应用程序的权限 -->
+    <uses-permission android:name="android.permission.RESTART_PACKAGES" />
 
     <!-- 在SDCard中创建与删除文件权限 -->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
@@ -46,7 +65,7 @@
         <activity android:name=".Activity.LoginActivity" />
         <activity android:name=".Activity.SalesSettingActivity" />
         <activity android:name=".Activity.SettingMenuActivity" />
-        <activity android:name=".Activity.ScreenSaverActivity">
+        <activity android:name=".Activity.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -67,7 +86,7 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".Activity.StartActivity" />
+        <activity android:name=".Activity.ScreenSaverActivity" />
         <activity android:name=".Activity.SheetActivity" />
         <activity android:name=".Activity.SheetSalesActivity" />
         <activity android:name=".Activity.SheetGoodsActivity"></activity>
