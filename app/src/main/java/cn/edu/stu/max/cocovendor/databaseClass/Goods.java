@@ -3,6 +3,8 @@ package cn.edu.stu.max.cocovendor.databaseClass;
 import org.litepal.annotation.Column;
 import org.litepal.crud.DataSupport;
 
+import java.util.List;
+
 public class Goods extends DataSupport{
     //商品id
     private int id;
@@ -19,6 +21,8 @@ public class Goods extends DataSupport{
     private int quanlity;
     //商品条形码
     private String barcode;
+    //销售记录id
+    private List<Sales> sales_id;
 
     public int getId() {
         return id;
@@ -74,5 +78,13 @@ public class Goods extends DataSupport{
 
     public void setBarcode(String barcode) {
         this.barcode = barcode;
+    }
+
+    public List<Sales> getSales_id() {
+        return DataSupport.where("goods_id = ?", String.valueOf(id)).find(Sales.class);
+    }
+
+    public void setSales_id(List<Sales> sales_id) {
+        this.sales_id = sales_id;
     }
 }

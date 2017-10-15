@@ -7,12 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.litepal.crud.DataSupport;
 
 import java.util.Date;
 
 import cn.edu.stu.max.cocovendor.R;
+import cn.edu.stu.max.cocovendor.databaseClass.Goods;
 import cn.edu.stu.max.cocovendor.databaseClass.LocalInfo;
 import cn.edu.stu.max.cocovendor.databaseClass.Sales;
 
@@ -39,7 +41,10 @@ public class HomePageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Sales sales = new Sales();
                 sales.setSales_date(new Date());
+                sales.setGoods_id(DataSupport.find(Goods.class,1).getId());
+                sales.setGoods_name(DataSupport.find(Goods.class,1).getName());
                 sales.setMachine_floor(1);
+                sales.setPay_way("支付宝");
                 sales.save();
             }
         });
@@ -49,7 +54,10 @@ public class HomePageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Sales sales = new Sales();
                 sales.setSales_date(new Date());
+                sales.setGoods_id(DataSupport.find(Goods.class,2).getId());
+                sales.setGoods_name(DataSupport.find(Goods.class,2).getName());
                 sales.setMachine_floor(2);
+                sales.setPay_way("支付宝");
                 sales.save();
             }
         });
@@ -59,7 +67,10 @@ public class HomePageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Sales sales = new Sales();
                 sales.setSales_date(new Date());
+                sales.setGoods_id(DataSupport.find(Goods.class,3).getId());
+                sales.setGoods_name(DataSupport.find(Goods.class,3).getName());
                 sales.setMachine_floor(3);
+                sales.setPay_way("微信");
                 sales.save();
             }
         });
@@ -69,7 +80,10 @@ public class HomePageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Sales sales = new Sales();
                 sales.setSales_date(new Date());
+                sales.setGoods_id(DataSupport.find(Goods.class,4).getId());
+                sales.setGoods_name(DataSupport.find(Goods.class,4).getName());
                 sales.setMachine_floor(4);
+                sales.setPay_way("微信");
                 sales.save();
             }
         });
@@ -79,7 +93,10 @@ public class HomePageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Sales sales = new Sales();
                 sales.setSales_date(new Date());
+                sales.setGoods_id(DataSupport.find(Goods.class,5).getId());
+                sales.setGoods_name(DataSupport.find(Goods.class,5).getName());
                 sales.setMachine_floor(5);
+                sales.setPay_way("现金");
                 sales.save();
             }
         });
@@ -89,7 +106,10 @@ public class HomePageActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Sales sales = new Sales();
                 sales.setSales_date(new Date());
+                sales.setGoods_id(DataSupport.find(Goods.class,1).getId());
+                sales.setGoods_name(DataSupport.find(Goods.class,1).getName());
                 sales.setMachine_floor(6);
+                sales.setPay_way("现金");
                 sales.save();
             }
         });

@@ -7,6 +7,85 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/colorTransparencyBlack">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:text="@string/label_machine_id"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:text="@string/machine_id"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:text="@string/label_machine_version"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:text="@string/machine_version"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:text="@string/label_ip"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="10"
+                android:text="@string/ip"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorBlack"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_settings_black_24dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="设置"
+                android:textSize="30sp"
+                android:textColor="@color/colorPrimary"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="50dp"
@@ -38,7 +117,7 @@
             android:maxLines="1"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
-            android:text="@string/label_goods_name"
+            android:text="销售日期"
             android:textColor="#000000"
             android:textSize="15sp" />
 
@@ -55,7 +134,7 @@
             android:maxLines="1"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
-            android:text="@string/label_goods_price"
+            android:text="货物名称"
             android:textColor="#000000"
             android:textSize="15sp" />
 
@@ -72,7 +151,7 @@
             android:maxLines="1"
             android:paddingBottom="10dp"
             android:paddingTop="10dip"
-            android:text="@string/label_goods_quanlity"
+            android:text="商品出售层"
             android:textColor="#000000"
             android:textSize="15sp" />
 
@@ -89,7 +168,7 @@
             android:maxLines="1"
             android:paddingBottom="10dp"
             android:paddingTop="10dip"
-            android:text="@string/label_price_change"
+            android:text="销售方式"
             android:textColor="#000000"
             android:textSize="15sp" />
     </LinearLayout>
@@ -101,8 +180,17 @@
         android:layout_marginBottom="50dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
-        android:layout_weight="6"
-        android:overScrollMode="never"></android.support.v7.widget.RecyclerView>
+        android:layout_weight="6"></android.support.v7.widget.RecyclerView>
 
+    <Button
+        android:id="@+id/btn_sales__return"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="250dp"
+        android:layout_marginRight="250dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="100dp"
+        android:text="@string/btn_return"
+        android:textSize="50sp"/>
 
 </LinearLayout>

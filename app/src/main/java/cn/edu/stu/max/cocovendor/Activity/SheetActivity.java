@@ -24,5 +24,13 @@ public class SheetActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button buttonSheetSettingBack = (Button) findViewById(R.id.btn_sheet_setting_back);
+        buttonSheetSettingBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }
