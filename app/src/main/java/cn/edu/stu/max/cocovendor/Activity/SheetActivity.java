@@ -14,6 +14,7 @@ public class SheetActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_sheet);
 
         Button buttonSheetSales = (Button) findViewById(R.id.btn_sheet_sales);
@@ -21,6 +22,15 @@ public class SheetActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SheetActivity.this, SheetSalesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button buttonSheetGoods = (Button) findViewById(R.id.btn_sheet_goods);
+        buttonSheetGoods.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SheetActivity.this, SheetGoodsActivity.class);
                 startActivity(intent);
             }
         });
