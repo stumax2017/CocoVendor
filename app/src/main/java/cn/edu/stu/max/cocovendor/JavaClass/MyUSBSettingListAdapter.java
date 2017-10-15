@@ -84,6 +84,8 @@ public class MyUSBSettingListAdapter extends BaseAdapter {
         MyUSBSettingListAdapter.isSetting = isSetting;
     }
 
+    public static List<Map<String, Object>> getList() { return list; }
+
     public static boolean getIsSetting() {
         return isSetting;
     }

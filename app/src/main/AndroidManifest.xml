@@ -46,7 +46,7 @@
         <activity android:name=".Activity.LoginActivity" />
         <activity android:name=".Activity.SalesSettingActivity" />
         <activity android:name=".Activity.SettingMenuActivity" />
-        <activity android:name=".Activity.StartActivity">
+        <activity android:name=".Activity.ScreenSaverActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -55,6 +55,19 @@
         </activity>
         <activity android:name=".Activity.AdSettingActivity" />
         <activity android:name=".Activity.SystemSettingActivity" />
+        <activity android:name=".Activity.CameraSettingActivity" />
+
+        <service android:name=".Service.VideoService" />
+
+        <receiver android:name=".JavaClass.BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".Activity.StartActivity"></activity>
         <activity android:name=".Activity.SheetActivity" />
         <activity android:name=".Activity.SheetSalesActivity"></activity>
     </application>

@@ -19,6 +19,7 @@ import com.amap.api.location.AMapLocationListener;
 import org.litepal.LitePal;
 
 import cn.edu.stu.max.cocovendor.R;
+import cn.edu.stu.max.cocovendor.Service.VideoService;
 import cn.edu.stu.max.cocovendor.databaseClass.LocalInfo;
 
 public class StartActivity extends AppCompatActivity {
@@ -29,6 +30,8 @@ public class StartActivity extends AppCompatActivity {
         //初始化数据库
         LitePal.initialize(this);
         setContentView(R.layout.activity_start);
+
+        startService(new Intent(StartActivity.this, VideoService.class));
 
         //判断程序是否首次启动，配置默认设置
         SharedPreferences preferences = getSharedPreferences("default_setting", MODE_PRIVATE);

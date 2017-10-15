@@ -216,12 +216,13 @@
                     android:textSize="30sp" />
 
                 <Button
+                    android:id="@+id/btn_camera_spy"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
                     android:background="#ff0099cc"
                     android:gravity="center"
-                    android:text="@string/label_null"
+                    android:text="监控设置"
                     android:textColor="@color/colorWhite"
                     android:textSize="30sp" />
             </TableRow>
