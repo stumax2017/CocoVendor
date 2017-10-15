@@ -71,14 +71,21 @@ public class SalesSettingActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 AlertDialog.Builder builderIn = new AlertDialog.Builder(SalesSettingActivity.this);
+                                if (view.getParent() != null) {
+                                    ((ViewGroup) view.getParent()).removeView(view);
+                                }
+                                builderIn.setView(view);
                                 builderIn.setTitle("价格设置")
-                                        .setView(view)
                                         .setPositiveButton(R.string.label_save, new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int id) {
                                                 // FIRE ZE MISSILES!
                                                 EditText editTextPrice = (EditText) view.findViewById(R.id.ed_goods_price);
-                                                goodsPrice[0] = Float.valueOf(editTextPrice.getText().toString().trim());
+                                                try {
+                                                    goodsPrice[0] = Float.valueOf(editTextPrice.getText().toString().trim());
+                                                } catch (NumberFormatException e) {
+                                                    Toast.makeText(SalesSettingActivity.this, "没有输入价钱", Toast.LENGTH_SHORT).show();
+                                                }
                                             }
                                         })
                                         .setNegativeButton(R.string.label_cancel, new DialogInterface.OnClickListener() {
@@ -94,27 +101,18 @@ public class SalesSettingActivity extends AppCompatActivity {
                                 builderIn.create().show();
                             }
                         })
-//                        .setView(R.layout.add_goods_dialog)
-//                        .setMultiChoiceItems(R.array.goods_array, null, new DialogInterface.OnMultiChoiceClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-//                                if (isChecked) {
-//                                    // If the user checked the item, add it to the selected items
-//                                    goodsSelectedItems.add(which);
-//                                } else if (goodsSelectedItems.contains(which)) {
-//                                    // Else, if the item is already in the array, remove it
-//                                    goodsSelectedItems.remove(Integer.valueOf(which));
-//                                }
-//                            }
-//                        })
                         .setPositiveButton(R.string.label_save, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
                                 // FIRE ZE MISSILES!
-                                Goods goods = new Goods();
-                                goods.setName(getResources().getStringArray(R.array.goods_array)[index[0]]);
-                                goods.setSales_price(goodsPrice[0]);
-                                goods.save();
+                                try {
+                                    Goods goods = new Goods();
+                                    goods.setName(getResources().getStringArray(R.array.goods_array)[index[0]]);
+                                    goods.setSales_price(goodsPrice[0]);
+                                    goods.save();
+                                } catch (IllegalStateException e) {
+                                    Toast.makeText(SalesSettingActivity.this, "已经存在这种商品了", Toast.LENGTH_SHORT).show();
+                                }
                                 DataSupport.findAllAsync(Goods.class).listen(new FindMultiCallback() {
                                     @Override
                                     public <T> void onFinish(List<T> t) {

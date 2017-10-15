@@ -137,78 +137,102 @@ public class HomePageActivity extends AppCompatActivity {
         imageViewGoods1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Sales sales = new Sales();
-                sales.setSales_date(new Date());
-                sales.setGoods_id(DataSupport.find(Goods.class,1).getId());
-                sales.setGoods_name(DataSupport.find(Goods.class,1).getName());
-                sales.setMachine_floor(1);
-                sales.setPay_way("支付宝");
-                sales.save();
+                try {
+                    Sales sales = new Sales();
+                    sales.setSales_date(new Date());
+                    sales.setGoods_id(DataSupport.find(Goods.class,1).getId());
+                    sales.setGoods_name(DataSupport.find(Goods.class,1).getName());
+                    sales.setMachine_floor(1);
+                    sales.setPay_way("支付宝");
+                    sales.save();
+                } catch (NullPointerException e) {
+                    Toast.makeText(HomePageActivity.this, "目前没有商品", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         ImageView imageViewGoods2 = (ImageView) findViewById(R.id.iv_goods_2);
         imageViewGoods2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Sales sales = new Sales();
-                sales.setSales_date(new Date());
-                sales.setGoods_id(DataSupport.find(Goods.class,2).getId());
-                sales.setGoods_name(DataSupport.find(Goods.class,2).getName());
-                sales.setMachine_floor(2);
-                sales.setPay_way("支付宝");
-                sales.save();
+                try {
+                    Sales sales = new Sales();
+                    sales.setSales_date(new Date());
+                    sales.setGoods_id(DataSupport.find(Goods.class,2).getId());
+                    sales.setGoods_name(DataSupport.find(Goods.class,2).getName());
+                    sales.setMachine_floor(2);
+                    sales.setPay_way("支付宝");
+                    sales.save();
+                } catch (NullPointerException e) {
+                    Toast.makeText(HomePageActivity.this, "目前没有商品", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         ImageView imageViewGoods3 = (ImageView) findViewById(R.id.iv_goods_3);
         imageViewGoods3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Sales sales = new Sales();
-                sales.setSales_date(new Date());
-                sales.setGoods_id(DataSupport.find(Goods.class,3).getId());
-                sales.setGoods_name(DataSupport.find(Goods.class,3).getName());
-                sales.setMachine_floor(3);
-                sales.setPay_way("微信");
-                sales.save();
+                try {
+                    Sales sales = new Sales();
+                    sales.setSales_date(new Date());
+                    sales.setGoods_id(DataSupport.find(Goods.class, 3).getId());
+                    sales.setGoods_name(DataSupport.find(Goods.class, 3).getName());
+                    sales.setMachine_floor(3);
+                    sales.setPay_way("微信");
+                    sales.save();
+                } catch (NullPointerException e) {
+                    Toast.makeText(HomePageActivity.this, "目前没有商品", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         ImageView imageViewGoods4 = (ImageView) findViewById(R.id.iv_goods_4);
         imageViewGoods4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Sales sales = new Sales();
-                sales.setSales_date(new Date());
-                sales.setGoods_id(DataSupport.find(Goods.class,4).getId());
-                sales.setGoods_name(DataSupport.find(Goods.class,4).getName());
-                sales.setMachine_floor(4);
-                sales.setPay_way("微信");
-                sales.save();
+                try {
+                    Sales sales = new Sales();
+                    sales.setSales_date(new Date());
+                    sales.setGoods_id(DataSupport.find(Goods.class,4).getId());
+                    sales.setGoods_name(DataSupport.find(Goods.class,4).getName());
+                    sales.setMachine_floor(4);
+                    sales.setPay_way("微信");
+                    sales.save();
+                } catch (NullPointerException e) {
+                    Toast.makeText(HomePageActivity.this, "目前没有商品", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         ImageView imageViewGoods5 = (ImageView) findViewById(R.id.iv_goods_5);
         imageViewGoods5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Sales sales = new Sales();
-                sales.setSales_date(new Date());
-                sales.setGoods_id(DataSupport.find(Goods.class,5).getId());
-                sales.setGoods_name(DataSupport.find(Goods.class,5).getName());
-                sales.setMachine_floor(5);
-                sales.setPay_way("现金");
-                sales.save();
+                try {
+                    Sales sales = new Sales();
+                    sales.setSales_date(new Date());
+                    sales.setGoods_id(DataSupport.find(Goods.class,5).getId());
+                    sales.setGoods_name(DataSupport.find(Goods.class,5).getName());
+                    sales.setMachine_floor(5);
+                    sales.setPay_way("现金");
+                    sales.save();
+                } catch (NullPointerException e) {
+                    Toast.makeText(HomePageActivity.this, "目前没有商品", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         ImageView imageViewGoods6 = (ImageView) findViewById(R.id.iv_goods_6);
         imageViewGoods6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Sales sales = new Sales();
-                sales.setSales_date(new Date());
-                sales.setGoods_id(DataSupport.find(Goods.class,1).getId());
-                sales.setGoods_name(DataSupport.find(Goods.class,1).getName());
-                sales.setMachine_floor(6);
-                sales.setPay_way("现金");
-                sales.save();
+                try {
+                    Sales sales = new Sales();
+                    sales.setSales_date(new Date());
+                    sales.setGoods_id(DataSupport.find(Goods.class,6).getId());
+                    sales.setGoods_name(DataSupport.find(Goods.class,6).getName());
+                    sales.setMachine_floor(6);
+                    sales.setPay_way("现金");
+                    sales.save();
+                } catch (NullPointerException e) {
+                    Toast.makeText(HomePageActivity.this, "目前没有商品", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
