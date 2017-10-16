@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String passwordNewHints = "请输入新密码";
     private boolean isLogin;
     private boolean isOldPswdCurrent = false;
+    private ImageButton imageButtonLook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,20 +62,32 @@ public class LoginActivity extends AppCompatActivity {
         buttonLogin9.setOnClickListener(buttonListener);
         Button buttonLogin0 = (Button) findViewById(R.id.btn_login_0);
         buttonLogin0.setOnClickListener(buttonListener);
-        Button buttonLoginStar = (Button) findViewById(R.id.btn_login_star);
-        buttonLoginStar.setOnClickListener(buttonListener);
-        Button buttonLoginWell = (Button) findViewById(R.id.btn_login_well);
-        buttonLoginWell.setOnClickListener(buttonListener);
-        Button buttonLoginDel = (Button) findViewById(R.id.btn_login_del);
-        buttonLoginDel.setOnClickListener(buttonListener);
-        Button buttonLoginClear = (Button) findViewById(R.id.btn_login_clear);
-        buttonLoginClear.setOnClickListener(buttonListener);
-        Button buttonLoginLook = (Button) findViewById(R.id.btn_login_look);
-        buttonLoginLook.setOnClickListener(buttonListener);
         Button buttonLoginEnter = (Button) findViewById(R.id.btn_login_enter);
         buttonLoginEnter.setOnClickListener(buttonListener);
         Button buttonLoginReturn = (Button) findViewById(R.id.btn_login_return);
         buttonLoginReturn.setOnClickListener(buttonListener);
+        ImageButton imageButtonDel = (ImageButton) findViewById(R.id.imgbtn_login_del);
+        imageButtonDel.setOnClickListener(buttonListener);
+        imageButtonDel.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                passwordTemper.delete(0, passwordTemper.length());
+                if (TextUtils.isEmpty(passwordTemper)) {
+                    if (isLogin) {
+                        textViewLoginPassword.setText(passwordHintsLogin);
+                    } else {
+                        if (!isOldPswdCurrent) {
+                            textViewLoginPassword.setText(passwordOldHints);
+                        } else {
+                            textViewLoginPassword.setText(passwordNewHints);
+                        }
+                    }
+                }
+                return false;
+            }
+        });
+        imageButtonLook = (ImageButton) findViewById(R.id.imgbtn_login_look);
+        imageButtonLook.setOnClickListener(buttonListener);
     }
 
     //自定义ButtonListener类，一个监听多个按钮
@@ -112,21 +126,12 @@ public class LoginActivity extends AppCompatActivity {
                 case R.id.btn_login_0:
                     passwordTemper.append("0");
                     break;
-                case R.id.btn_login_star:
-                    passwordTemper.append("*");
-                    break;
-                case R.id.btn_login_well:
-                    passwordTemper.append("#");
-                    break;
-                case R.id.btn_login_del:
+                case R.id.imgbtn_login_del:
                     if (!TextUtils.isEmpty(passwordTemper)) {
                         passwordTemper.deleteCharAt(passwordTemper.length() - 1);
                     }
                     break;
-                case R.id.btn_login_clear:
-                    passwordTemper.delete(0, passwordTemper.length());
-                    break;
-                case R.id.btn_login_look:
+                case R.id.imgbtn_login_look:
                     isPasswordVisible = invertBoolean(isPasswordVisible);
                     break;
                 case R.id.btn_login_enter:
@@ -165,10 +170,16 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                     break;
             }
+            if (passwordTemper.length() > 6) {
+                passwordTemper.deleteCharAt(passwordTemper.length() - 1);
+                Toast.makeText(LoginActivity.this, "密码长度最多6位", Toast.LENGTH_SHORT).show();
+            }
             if (isPasswordVisible) {
                 textViewLoginPassword.setText(passwordTemper.toString().trim());
+                imageButtonLook.setImageResource(R.drawable.ic_visibility_off_black_50dp);
             } else {
                 textViewLoginPassword.setText(fillPassword(passwordTemper.toString().trim()));
+                imageButtonLook.setImageResource(R.drawable.ic_visibility_black_50dp);
             }
             if (TextUtils.isEmpty(passwordTemper)) {
                 if (isLogin) {
@@ -180,7 +191,6 @@ public class LoginActivity extends AppCompatActivity {
                         textViewLoginPassword.setText(passwordNewHints);
                     }
                 }
-
             }
         }
     }
