@@ -25,6 +25,7 @@ import java.util.Date;
 import java.io.File;
 
 import cn.edu.stu.max.cocovendor.JavaClass.FileService;
+import cn.edu.stu.max.cocovendor.JavaClass.ToastFactory;
 import cn.edu.stu.max.cocovendor.R;
 import cn.edu.stu.max.cocovendor.databaseClass.Goods;
 import cn.edu.stu.max.cocovendor.Service.VideoService;
@@ -50,6 +51,8 @@ public class HomePageActivity extends AppCompatActivity {
     private static final String adSettingDataFileName = "sharedfile";     // 定义保存的文件的名称
 
     private Context context;
+    private Toast toast;
+    private int i = 0;
     Handler handler = new Handler();
 
     @Override
@@ -146,7 +149,7 @@ public class HomePageActivity extends AppCompatActivity {
                     sales.setPay_way("支付宝");
                     sales.save();
                 } catch (NullPointerException e) {
-                    Toast.makeText(HomePageActivity.this, "目前没有商品", Toast.LENGTH_SHORT).show();
+                    ToastFactory.makeText(HomePageActivity.this, "目前没有商品1", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -163,7 +166,7 @@ public class HomePageActivity extends AppCompatActivity {
                     sales.setPay_way("支付宝");
                     sales.save();
                 } catch (NullPointerException e) {
-                    Toast.makeText(HomePageActivity.this, "目前没有商品", Toast.LENGTH_SHORT).show();
+                    ToastFactory.makeText(HomePageActivity.this, "目前没有商品2", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -180,7 +183,7 @@ public class HomePageActivity extends AppCompatActivity {
                     sales.setPay_way("微信");
                     sales.save();
                 } catch (NullPointerException e) {
-                    Toast.makeText(HomePageActivity.this, "目前没有商品", Toast.LENGTH_SHORT).show();
+                    ToastFactory.makeText(HomePageActivity.this, "目前没有商品3", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -197,7 +200,7 @@ public class HomePageActivity extends AppCompatActivity {
                     sales.setPay_way("微信");
                     sales.save();
                 } catch (NullPointerException e) {
-                    Toast.makeText(HomePageActivity.this, "目前没有商品", Toast.LENGTH_SHORT).show();
+                    ToastFactory.makeText(HomePageActivity.this, "目前没有商品4", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -214,7 +217,7 @@ public class HomePageActivity extends AppCompatActivity {
                     sales.setPay_way("现金");
                     sales.save();
                 } catch (NullPointerException e) {
-                    Toast.makeText(HomePageActivity.this, "目前没有商品", Toast.LENGTH_SHORT).show();
+                    ToastFactory.makeText(HomePageActivity.this, "目前没有商品5", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -231,7 +234,7 @@ public class HomePageActivity extends AppCompatActivity {
                     sales.setPay_way("现金");
                     sales.save();
                 } catch (NullPointerException e) {
-                    Toast.makeText(HomePageActivity.this, "目前没有商品", Toast.LENGTH_SHORT).show();
+                    ToastFactory.makeText(HomePageActivity.this, "目前没有商品6", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -263,30 +266,33 @@ public class HomePageActivity extends AppCompatActivity {
 
     private void initVideoPath() {
         videoFileIndex = 0;
-        File[] currentFiles = FileService.getFiles(TOPATH);
-        if (currentFiles.length != 0) {
-            if (share.getBoolean("isAdSettingChanged", false)) {
-                videoListOrder = new int[currentFiles.length];
-                videoListFrequency = new int[currentFiles.length];
-                for (int i = 0; i < currentFiles.length; i++) {
-                    videoListFrequency[i] = Integer.parseInt(share.getString("Frequency_" + i, "0"));
-                    for (int j = 0; j < currentFiles.length; j++) {
-                        if (share.getString("Ad_" + i, "null").equals(currentFiles[j].getName())) {
-                            videoListOrder[i] = j;
-                            break;
+        try {
+            File[] currentFiles = FileService.getFiles(TOPATH);
+            if (currentFiles.length != 0) {
+                if (share.getBoolean("isAdSettingChanged", false)) {
+                    videoListOrder = new int[currentFiles.length];
+                    videoListFrequency = new int[currentFiles.length];
+                    for (int i = 0; i < currentFiles.length; i++) {
+                        videoListFrequency[i] = Integer.parseInt(share.getString("Frequency_" + i, "0"));
+                        for (int j = 0; j < currentFiles.length; j++) {
+                            if (share.getString("Ad_" + i, "null").equals(currentFiles[j].getName())) {
+                                videoListOrder[i] = j;
+                                break;
+                            }
                         }
                     }
+                    playVideo(currentFiles[videoListOrder[videoFileIndex]].getPath());
                 }
-                playVideo(currentFiles[videoListOrder[videoFileIndex]].getPath());
+                else {
+                    playVideo(currentFiles[videoFileIndex].getPath());
+                }
+            } else {
+                imageViewHomePageAd.setVisibility(View.VISIBLE);
+                videoViewHomePageAd.setVisibility(View.INVISIBLE);
             }
-            else {
-                playVideo(currentFiles[videoFileIndex].getPath());
-            }
-        } else {
-            imageViewHomePageAd.setVisibility(View.VISIBLE);
-            videoViewHomePageAd.setVisibility(View.INVISIBLE);
+        } catch (NullPointerException e) {
+            ToastFactory.makeText(HomePageActivity.this, "找不到文件路径", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     public void playVideo(String filePath) {
@@ -364,12 +370,14 @@ public class HomePageActivity extends AppCompatActivity {
         @Override
         public void run() {
             // 用户5秒没操作了
-
-            Intent i = new Intent();
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            i.setClass(context, ScreenSaverActivity.class);
-            context.startActivity(i);
-
+//            try {
+//                Intent i = new Intent();
+//                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                i.setClass(context, ScreenSaverActivity.class);
+//                context.startActivity(i);
+//            } catch (NullPointerException e) {
+//                Toast.makeText(HomePageActivity.this, "暂无广告视频", Toast.LENGTH_SHORT).show();
+//            }
         }
     };
 

@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import org.litepal.crud.DataSupport;
 
+import cn.edu.stu.max.cocovendor.JavaClass.ToastFactory;
 import cn.edu.stu.max.cocovendor.R;
 import cn.edu.stu.max.cocovendor.databaseClass.LocalInfo;
 
@@ -137,20 +138,20 @@ public class LoginActivity extends AppCompatActivity {
                 case R.id.btn_login_enter:
                     if (isLogin) {
                         if (passwordTemper.toString().trim().equals(DataSupport.find(LocalInfo.class, 1).getLogin_password())) {
-                            Toast.makeText(LoginActivity.this, "密码正确", Toast.LENGTH_SHORT).show();
+                            ToastFactory.makeText(LoginActivity.this, "密码正确", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(LoginActivity.this, SettingMenuActivity.class);
                             startActivity(intent);
                         } else {
-                            Toast.makeText(LoginActivity.this, "密码错误", Toast.LENGTH_SHORT).show();
+                            ToastFactory.makeText(LoginActivity.this, "密码错误", Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         if(!isOldPswdCurrent) {
                             if (passwordTemper.toString().trim().equals(DataSupport.find(LocalInfo.class, 1).getLogin_password())) {
                                 passwordTemper.delete(0, passwordTemper.length());
-                                Toast.makeText(LoginActivity.this, "旧密码正确", Toast.LENGTH_SHORT).show();
+                                ToastFactory.makeText(LoginActivity.this, "旧密码正确", Toast.LENGTH_SHORT).show();
                                 isOldPswdCurrent = true;
                             } else {
-                                Toast.makeText(LoginActivity.this, "旧密码错误", Toast.LENGTH_SHORT).show();
+                                ToastFactory.makeText(LoginActivity.this, "旧密码错误", Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             //DataSupport.find(LocalInfo.class, 1).setLogin_password(passwordTemper.toString().trim());
@@ -158,7 +159,7 @@ public class LoginActivity extends AppCompatActivity {
                             localInfoToChange.setLogin_password(passwordTemper.toString().trim());
                             localInfoToChange.update(1);
                             passwordTemper.delete(0, passwordTemper.length());
-                            Toast.makeText(LoginActivity.this, String.valueOf(DataSupport.find(LocalInfo.class, 1).getLogin_password()), Toast.LENGTH_SHORT).show();
+                            ToastFactory.makeText(LoginActivity.this, String.valueOf(DataSupport.find(LocalInfo.class, 1).getLogin_password()), Toast.LENGTH_SHORT).show();
                             finish();
                         }
 
@@ -172,7 +173,7 @@ public class LoginActivity extends AppCompatActivity {
             }
             if (passwordTemper.length() > 6) {
                 passwordTemper.deleteCharAt(passwordTemper.length() - 1);
-                Toast.makeText(LoginActivity.this, "密码长度最多6位", Toast.LENGTH_SHORT).show();
+                ToastFactory.makeText(LoginActivity.this, "密码长度最多6位", Toast.LENGTH_SHORT).show();
             }
             if (isPasswordVisible) {
                 textViewLoginPassword.setText(passwordTemper.toString().trim());
