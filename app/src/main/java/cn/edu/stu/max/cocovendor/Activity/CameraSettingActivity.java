@@ -139,8 +139,7 @@ public class CameraSettingActivity extends AppCompatActivity {
                 editor.putBoolean("isOpen", isOpen);
                 editor.putInt("resolutionSelection", resolutionSelection);
                 editor.putInt("spyMethodSelection", spyMethodSelection);
-                Intent intent = new Intent(CameraSettingActivity.this, SystemSettingActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
     }

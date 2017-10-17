@@ -21,15 +21,25 @@ public class LoginActivity extends AppCompatActivity {
     private StringBuffer passwordTemper = new StringBuffer();//缓存输入的密码字符串
     private ButtonListener buttonListener = new ButtonListener();
     private boolean isPasswordVisible = false;
-    private static final String passwordHints = "请输入密码";
+    private static final String passwordHintsLogin = "请输入密码";
+    private static final String passwordOldHints = "请输入旧密码";
+    private static final String passwordNewHints = "请输入新密码";
+    private boolean isLogin;
+    private boolean isOldPswdCurrent = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
-
+        Intent intent = getIntent();
+        isLogin = intent.getBooleanExtra("IsLogin", true);
         textViewLoginPassword = (TextView) findViewById(R.id.tv_login_password);
+        if (isLogin) {
+            textViewLoginPassword.setText(passwordHintsLogin);
+        } else {
+            textViewLoginPassword.setText(passwordOldHints);
+        }
 
         Button buttonLogin1 = (Button) findViewById(R.id.btn_login_1);
         buttonLogin1.setOnClickListener(buttonListener);
@@ -121,12 +131,33 @@ public class LoginActivity extends AppCompatActivity {
                     isPasswordVisible = invertBoolean(isPasswordVisible);
                     break;
                 case R.id.btn_login_enter:
-                    if (passwordTemper.toString().trim().equals(DataSupport.find(LocalInfo.class, 1).getLogin_password())) {
-                        Toast.makeText(LoginActivity.this, "密码正确", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this, SettingMenuActivity.class);
-                        startActivity(intent);
+                    if (isLogin) {
+                        if (passwordTemper.toString().trim().equals(DataSupport.find(LocalInfo.class, 1).getLogin_password())) {
+                            Toast.makeText(LoginActivity.this, "密码正确", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LoginActivity.this, SettingMenuActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(LoginActivity.this, "密码错误", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
-                        Toast.makeText(LoginActivity.this, "密码错误", Toast.LENGTH_SHORT).show();
+                        if(!isOldPswdCurrent) {
+                            if (passwordTemper.toString().trim().equals(DataSupport.find(LocalInfo.class, 1).getLogin_password())) {
+                                passwordTemper.delete(0, passwordTemper.length());
+                                Toast.makeText(LoginActivity.this, "旧密码正确", Toast.LENGTH_SHORT).show();
+                                isOldPswdCurrent = true;
+                            } else {
+                                Toast.makeText(LoginActivity.this, "旧密码错误", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            //DataSupport.find(LocalInfo.class, 1).setLogin_password(passwordTemper.toString().trim());
+                            LocalInfo localInfoToChange = new LocalInfo();
+                            localInfoToChange.setLogin_password(passwordTemper.toString().trim());
+                            localInfoToChange.update(1);
+                            passwordTemper.delete(0, passwordTemper.length());
+                            Toast.makeText(LoginActivity.this, String.valueOf(DataSupport.find(LocalInfo.class, 1).getLogin_password()), Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+
                     }
                     break;
                 case R.id.btn_login_return:
@@ -141,7 +172,16 @@ public class LoginActivity extends AppCompatActivity {
                 textViewLoginPassword.setText(fillPassword(passwordTemper.toString().trim()));
             }
             if (TextUtils.isEmpty(passwordTemper)) {
-                textViewLoginPassword.setText(passwordHints);
+                if (isLogin) {
+                    textViewLoginPassword.setText(passwordHintsLogin);
+                } else {
+                    if (!isOldPswdCurrent) {
+                        textViewLoginPassword.setText(passwordOldHints);
+                    } else {
+                        textViewLoginPassword.setText(passwordNewHints);
+                    }
+                }
+
             }
         }
     }

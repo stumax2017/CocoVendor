@@ -36,6 +36,10 @@ public class SettingMenuActivity extends AppCompatActivity {
         buttonSalesSetting.setOnClickListener(buttonListener);
         Button buttonSalesAnalyze = (Button) findViewById(R.id.btn_sales_analyze);
         buttonSalesAnalyze.setOnClickListener(buttonListener);
+        Button buttonReturnSales = (Button) findViewById(R.id.btn_setting_return_sales);
+        buttonReturnSales.setOnClickListener(buttonListener);
+        Button buttonReboot = (Button) findViewById(R.id.btn_reboot);
+        buttonReboot.setOnClickListener(buttonListener);
     }
 
     private class ButtonListener implements View.OnClickListener {
@@ -47,6 +51,8 @@ public class SettingMenuActivity extends AppCompatActivity {
                     startActivity(intent_sys_setting);
                     break;
                 case R.id.btn_sheet_setting:
+                    Intent intent_sheet_setting = new Intent(SettingMenuActivity.this, SheetActivity.class);
+                    startActivity(intent_sheet_setting);
                     break;
                 case R.id.btn_goods_test:
                     break;
@@ -63,6 +69,12 @@ public class SettingMenuActivity extends AppCompatActivity {
                     startActivity(intent_sales_setting);
                     break;
                 case R.id.btn_sales_analyze:
+                    break;
+                case R.id.btn_setting_return_sales:
+                    Intent intent_homepage = new Intent(SettingMenuActivity.this, HomePageActivity.class);
+                    startActivity(intent_homepage);
+                    break;
+                case R.id.btn_reboot:
                     break;
             }
         }

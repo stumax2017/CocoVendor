@@ -1,10 +1,15 @@
 package cn.edu.stu.max.cocovendor.databaseClass;
 
-import java.sql.Date;
+import org.litepal.crud.DataSupport;
 
-public class Sales {
+import java.util.Date;
+
+public class Sales extends DataSupport{
+    private int id;
     //销售物品对应货物的id
-    private Goods goods_id;
+    private int goods_id;
+    //销售物品名字
+    private String goods_name;
     //销售日期
     private Date sales_date;
     //销售货物的层数
@@ -18,12 +23,28 @@ public class Sales {
     //销售机器编号
     private long sales_machine_id;
 
-    public Goods getGoods_id() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getGoods_id() {
         return goods_id;
     }
 
-    public void setGoods_id(Goods goods_id) {
+    public void setGoods_id(int goods_id) {
         this.goods_id = goods_id;
+    }
+
+    public String getGoods_name() {
+        return goods_name;
+    }
+
+    public void setGoods_name(String goods_name) {
+        this.goods_name = goods_name;
     }
 
     public Date getSales_date() {

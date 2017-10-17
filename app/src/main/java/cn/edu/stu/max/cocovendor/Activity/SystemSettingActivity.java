@@ -49,20 +49,24 @@ public class SystemSettingActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.btn_system_setting:
+                case R.id.btn_sys_parm_setting:
                     break;
-                case R.id.btn_sheet_setting:
+                case R.id.btn_network_setting:
                     break;
-                case R.id.btn_goods_test:
+                case R.id.btn_update_goods:
                     break;
-                case R.id.btn_ad_setting:
+                case R.id.btn_change_pswd:
+                    Intent intentChangePswd = new Intent(SystemSettingActivity.this, LoginActivity.class);
+                    intentChangePswd.putExtra("IsLogin", false);
+                    startActivity(intentChangePswd);
                     break;
-                case R.id.btn_money_setting:
+                case R.id.btn_download_pic:
                     break;
-                case R.id.btn_help:
+                case R.id.btn_change_tel:
                     break;
-                case R.id.btn_sales_setting:
+                case R.id.update_basic_data:
                     break;
+                case R.id.btn_download_ad:
                 case R.id.btn_sales_analyze:
                     break;
                 case R.id.btn_camera_spy:

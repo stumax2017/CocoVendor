@@ -31,9 +31,9 @@ public class SalesSettingAdapter extends RecyclerView.Adapter {
 
         vh.getTv_sheetRow1().setText(String.valueOf(list.get(position).getId()));
         vh.getTv_sheetRow2().setText(list.get(position).getName());
-        vh.getTv_sheetRow3().setText(String.valueOf(list.get(position).getCost_price()));
-        vh.getTv_sheetRow4().setText(String.valueOf(list.get(position).getSales_price()));
-        vh.getTv_sheetRow5().setText(String.valueOf(list.get(position).getQuanlity()));
+        vh.getTv_sheetRow3().setText(String.valueOf(list.get(position).getSales_price()));
+        vh.getTv_sheetRow4().setText(String.valueOf(list.get(position).getQuanlity()));
+        vh.getTv_sheetRow5().setText(String.valueOf(list.get(position).getSales_price()));
     }
 
     @Override
