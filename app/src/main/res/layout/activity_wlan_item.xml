@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/btn_wlan_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_chevron_left" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.05"
+            android:gravity="center"
+            android:text="返回"
+            android:textColor="#8B8378"
+            android:textSize="36sp" />
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="680dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="center_vertical"
+                android:text="开启WLAN"
+                android:textColor="@android:color/black"
+                android:textSize="36sp" />
+
+            <Switch
+                android:id="@+id/switch_wlan_state"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="20dp"
+                android:switchMinWidth="70dp"
+                android:textOff="Off"
+                android:textOn="On" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="center_vertical"
+                android:text="已连接的WLAN"
+                android:textSize="24sp" />
+        </TableRow>
+        <TableRow>
+
+            <Button
+                android:id="@+id/btn_connected_wlan"
+                android:layout_width="650dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="20dp"
+                android:background="#ffffff"
+                android:drawableLeft="@drawable/ic_signal_wifi_4_bar"
+                android:drawablePadding="15dp"
+                android:gravity="center_vertical"
+                android:text="STU"
+                android:textSize="36sp" />
+            <Button
+                android:id="@+id/btn_connected_wlan_detail"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/ic_keyboard_arrow_right"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="center_vertical"
+                android:text="选取附近可连接的WLAN"
+                android:textSize="24sp" />
+        </TableRow>
+
+        <TableRow>
+            <Button
+                android:id="@+id/btn_wlan_choice1"
+                android:layout_width="650dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="20dp"
+                android:background="#ffffff"
+                android:drawableLeft="@drawable/ic_wifi_lock"
+                android:drawablePadding="15dp"
+                android:gravity="center_vertical"
+                android:text="大雷哥"
+                android:textSize="36sp" />
+            <Button
+                android:id="@+id/btn_wlan_choice1_detail"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/ic_keyboard_arrow_right"/>
+        </TableRow>
+
+        <TableRow>
+            <Button
+                android:id="@+id/btn_add_wlan_by_user"
+                android:layout_height="100dp"
+                android:background="#ffffff"
+                android:text="手动添加网络"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                android:textSize="36sp"/>
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>

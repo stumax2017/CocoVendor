@@ -65,7 +65,7 @@
                 android:textSize="36sp"
                 android:layout_weight="1.00" />
             <TextView
-                android:id="@+id/btn_data_state"
+                android:id="@+id/tv_data_state"
                 android:layout_width="82dp"
                 android:layout_height="match_parent"
                 android:text="Off"
@@ -85,6 +85,7 @@
                 android:textSize="36sp"
                 android:layout_weight="1.00" />
             <TextView
+                android:id="@+id/tv_ethernet_state"
                 android:layout_width="82dp"
                 android:layout_height="match_parent"
                 android:text="Off"

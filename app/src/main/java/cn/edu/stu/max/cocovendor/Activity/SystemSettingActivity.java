@@ -45,6 +45,10 @@ public class SystemSettingActivity extends AppCompatActivity {
             switch (v.getId()) {
                 case R.id.btn_system_setting:
                     break;
+                case R.id.btn_network_setting:
+                    Intent intent_network_setting = new Intent(SystemSettingActivity.this,NetworkSettingActivity.class);
+                    startActivity(intent_network_setting);
+                    break;
                 case R.id.btn_sheet_setting:
                     break;
                 case R.id.btn_goods_test:
