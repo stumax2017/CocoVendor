@@ -55,6 +55,13 @@ public class HomePageActivity extends AppCompatActivity {
     private int i = 0;
     Handler handler = new Handler();
 
+    private ImageView imageViewGoods1;
+    private ImageView imageViewGoods2;
+    private ImageView imageViewGoods3;
+    private ImageView imageViewGoods4;
+    private ImageView imageViewGoods5;
+    private ImageView imageViewGoods6;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +72,133 @@ public class HomePageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
 
         context = this;
+
+        imageViewGoods1 = (ImageView) findViewById(R.id.iv_goods_1);
+        imageViewGoods2 = (ImageView) findViewById(R.id.iv_goods_2);
+        imageViewGoods3 = (ImageView) findViewById(R.id.iv_goods_3);
+        imageViewGoods4 = (ImageView) findViewById(R.id.iv_goods_4);
+        imageViewGoods5 = (ImageView) findViewById(R.id.iv_goods_5);
+        imageViewGoods6 = (ImageView) findViewById(R.id.iv_goods_6);
+
+        imageViewGoods1.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN: { // 手指下来的时候,取消之前绑定的Runnable
+
+                        handler.removeCallbacks(runnable);
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
+
+                        handler.postDelayed(runnable, 1000 * 5);
+
+                        break;
+                    }
+                }
+                return false;
+            }
+        });
+
+        imageViewGoods2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN: { // 手指下来的时候,取消之前绑定的Runnable
+
+                        handler.removeCallbacks(runnable);
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
+
+                        handler.postDelayed(runnable, 1000 * 5);
+
+                        break;
+                    }
+                }
+                return false;
+            }
+        });
+
+        imageViewGoods3.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN: { // 手指下来的时候,取消之前绑定的Runnable
+
+                        handler.removeCallbacks(runnable);
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
+
+                        handler.postDelayed(runnable, 1000 * 5);
+
+                        break;
+                    }
+                }
+                return false;
+            }
+        });
+
+        imageViewGoods4.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN: { // 手指下来的时候,取消之前绑定的Runnable
+
+                        handler.removeCallbacks(runnable);
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
+
+                        handler.postDelayed(runnable, 1000 * 5);
+
+                        break;
+                    }
+                }
+                return false;
+            }
+        });
+
+        imageViewGoods5.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN: { // 手指下来的时候,取消之前绑定的Runnable
+
+                        handler.removeCallbacks(runnable);
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
+
+                        handler.postDelayed(runnable, 1000 * 5);
+
+                        break;
+                    }
+                }
+                return false;
+            }
+        });
+
+        imageViewGoods6.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN: { // 手指下来的时候,取消之前绑定的Runnable
+
+                        handler.removeCallbacks(runnable);
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
+
+                        handler.postDelayed(runnable, 1000 * 5);
+
+                        break;
+                    }
+                }
+                return false;
+            }
+        });
 
         videoViewHomePageAd = (VideoView) findViewById(R.id.vv_hp_ad);
         imageViewHomePageAd = (ImageView) findViewById(R.id.iv_hp_ad);
