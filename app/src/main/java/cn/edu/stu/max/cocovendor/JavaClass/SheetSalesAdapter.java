@@ -1,6 +1,5 @@
 package cn.edu.stu.max.cocovendor.JavaClass;
 
-
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,30 +9,30 @@ import android.widget.TextView;
 import java.util.List;
 
 import cn.edu.stu.max.cocovendor.R;
-import cn.edu.stu.max.cocovendor.databaseClass.Goods;
+import cn.edu.stu.max.cocovendor.databaseClass.Sales;
 
-public class SalesSettingAdapter extends RecyclerView.Adapter {
-    private List<Goods> list;
+public class SheetSalesAdapter extends RecyclerView.Adapter{
+    private List<Sales> list;
 
-    public SalesSettingAdapter(List<Goods> list) {
+    public SheetSalesAdapter(List<Sales> list) {
         this.list = list;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.sales_setting_item, parent, false);
-        return new sheetViewHolder(view);
+        return new SheetSalesAdapter.sheetViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        sheetViewHolder vh = (sheetViewHolder) holder;
+        SheetSalesAdapter.sheetViewHolder vh = (SheetSalesAdapter.sheetViewHolder) holder;
 
-        vh.getTv_sheetRow1().setText(String.valueOf(list.get(position).getId()));
-        vh.getTv_sheetRow2().setText(list.get(position).getName());
-        vh.getTv_sheetRow3().setText(String.valueOf(list.get(position).getSales_price()));
-        vh.getTv_sheetRow4().setText(String.valueOf(list.get(position).getQuanlity()));
-        vh.getTv_sheetRow5().setText(String.valueOf(list.get(position).getSales_price()));
+        vh.getTv_sheetRow1().setText(String.valueOf(list.get(position).getMachine_floor()));
+        vh.getTv_sheetRow2().setText(String.valueOf(list.get(position).getSales_date()));
+        vh.getTv_sheetRow3().setText(String.valueOf(list.get(position).getMachine_floor()));
+        vh.getTv_sheetRow4().setText(String.valueOf(list.get(position).getMachine_floor()));
+        vh.getTv_sheetRow5().setText(String.valueOf(list.get(position).getMachine_floor()));
     }
 
     @Override

@@ -1,6 +1,7 @@
 package cn.edu.stu.max.cocovendor.Activity;
 
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.SlidingPaneLayout;
@@ -10,8 +11,13 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,9 +61,89 @@ public class SalesSettingActivity extends AppCompatActivity {
         buttonSalesSettingAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ArrayList goodsSelectedItems = new ArrayList();
+                LayoutInflater inflater = getLayoutInflater();
+                final View view = inflater.inflate(R.layout.add_goods_dialog, (ViewGroup) findViewById(R.id.ll_add_goods));
+                final int[] index = new int[1];
+                final float[] goodsPrice = new float[1];
                 AlertDialog.Builder builder = new AlertDialog.Builder(SalesSettingActivity.this);
                 builder.setTitle(R.string.label_add_goods)
+                        .setSingleChoiceItems(R.array.goods_array, -1, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                AlertDialog.Builder builderIn = new AlertDialog.Builder(SalesSettingActivity.this);
+                                builderIn.setTitle("价格设置")
+                                        .setView(view)
+                                        .setPositiveButton(R.string.label_save, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                // FIRE ZE MISSILES!
+                                                EditText editTextPrice = (EditText) view.findViewById(R.id.ed_goods_price);
+                                                goodsPrice[0] = Float.valueOf(editTextPrice.getText().toString().trim());
+                                            }
+                                        })
+                                        .setNegativeButton(R.string.label_cancel, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                // User cancelled the dialog
+                                            }
+                                        });
+                                builderIn.setCancelable(false);
+                                TextView textView = (TextView) view.findViewById(R.id.label_goods_name);
+                                textView.setText(getResources().getStringArray(R.array.goods_array)[which]);
+                                index[0] = which;
+                                builderIn.create().show();
+                            }
+                        })
+//                        .setView(R.layout.add_goods_dialog)
+//                        .setMultiChoiceItems(R.array.goods_array, null, new DialogInterface.OnMultiChoiceClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+//                                if (isChecked) {
+//                                    // If the user checked the item, add it to the selected items
+//                                    goodsSelectedItems.add(which);
+//                                } else if (goodsSelectedItems.contains(which)) {
+//                                    // Else, if the item is already in the array, remove it
+//                                    goodsSelectedItems.remove(Integer.valueOf(which));
+//                                }
+//                            }
+//                        })
+                        .setPositiveButton(R.string.label_save, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                // FIRE ZE MISSILES!
+                                Goods goods = new Goods();
+                                goods.setName(getResources().getStringArray(R.array.goods_array)[index[0]]);
+                                goods.setSales_price(goodsPrice[0]);
+                                goods.save();
+                                DataSupport.findAllAsync(Goods.class).listen(new FindMultiCallback() {
+                                    @Override
+                                    public <T> void onFinish(List<T> t) {
+                                        List<Goods> allGoods = (List<Goods>) t;
+                                        salesSettingAdapter = new SalesSettingAdapter(allGoods);
+                                        //recyclerView显示适配器内容
+                                        recyclerViewSalesSetting.setAdapter(salesSettingAdapter);
+                                    }
+                                });
+                            }
+                        })
+                        .setNegativeButton(R.string.label_cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                // User cancelled the dialog
+                            }
+                        });
+                // Create the AlertDialog object and return it
+                builder.setCancelable(false);
+                builder.create().show();
+            }
+        });
+        Button buttonSalesSettingFix = (Button) findViewById(R.id.btn_sales_setting_fix);
+        buttonSalesSettingFix.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final ArrayList goodsSelectedItems = new ArrayList();
+                AlertDialog.Builder builder = new AlertDialog.Builder(SalesSettingActivity.this);
+                builder.setTitle("补充商品库存")
                         .setMultiChoiceItems(R.array.goods_array, null, new DialogInterface.OnMultiChoiceClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
@@ -75,9 +161,9 @@ public class SalesSettingActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int id) {
                                 // FIRE ZE MISSILES!
                                 for (int i = 0; i < goodsSelectedItems.size(); i ++) {
-                                    Goods goods = new Goods();
-                                    goods.setName(getResources().getStringArray(R.array.goods_array)[i]);
-                                    goods.save();
+                                    Goods toChangeGoods = new Goods();
+                                    toChangeGoods.setQuanlity(10);
+                                    toChangeGoods.updateAll("name = ?", getResources().getStringArray(R.array.goods_array)[i]);
                                 }
                                 DataSupport.findAllAsync(Goods.class).listen(new FindMultiCallback() {
                                     @Override

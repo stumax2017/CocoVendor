@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="switch_preference_1"
+        android:summaryOff="关闭"
+        android:summaryOn="开启"
+        android:switchTextOff="关闭"
+        android:switchTextOn="开启"
+        android:title="WLAN" />
+</PreferenceScreen>

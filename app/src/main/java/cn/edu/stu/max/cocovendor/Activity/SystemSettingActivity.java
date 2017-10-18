@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import cn.edu.stu.max.cocovendor.R;
 
@@ -43,7 +44,7 @@ public class SystemSettingActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.btn_system_setting:
+                case R.id.btn_sys_parm_setting:
                     break;
                 case R.id.btn_network_setting:
                     Intent intent_network_setting = new Intent(SystemSettingActivity.this,NetworkSettingActivity.class);
@@ -51,21 +52,26 @@ public class SystemSettingActivity extends AppCompatActivity {
                     break;
                 case R.id.btn_sheet_setting:
                     break;
-                case R.id.btn_goods_test:
+                case R.id.btn_update_goods:
                     break;
-                case R.id.btn_ad_setting:
+                case R.id.btn_change_pswd:
+                    Intent intentChangePswd = new Intent(SystemSettingActivity.this, LoginActivity.class);
+                    intentChangePswd.putExtra("IsLogin", false);
+                    startActivity(intentChangePswd);
                     break;
-                case R.id.btn_money_setting:
+                case R.id.btn_download_pic:
                     break;
-                case R.id.btn_help:
+                case R.id.btn_change_tel:
                     break;
-                case R.id.btn_sales_setting:
+                case R.id.update_basic_data:
                     break;
                 case R.id.btn_sales_analyze:
                     break;
                 case R.id.btn_camera_spy:
                     Intent intent_camera_setting = new Intent(SystemSettingActivity.this, CameraSettingActivity.class);
                     startActivity(intent_camera_setting);
+                    break;
+                case R.id.btn_download_ad:
                     break;
                 case R.id.btn_sys_setting_back:
                     finish();
