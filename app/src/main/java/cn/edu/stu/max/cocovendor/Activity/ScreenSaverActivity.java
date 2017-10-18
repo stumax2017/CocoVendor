@@ -11,11 +11,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import java.io.File;
 
 import cn.edu.stu.max.cocovendor.JavaClass.FileService;
+import cn.edu.stu.max.cocovendor.JavaClass.ToastFactory;
 import cn.edu.stu.max.cocovendor.R;
 
 public class ScreenSaverActivity extends AppCompatActivity {
@@ -38,21 +40,24 @@ public class ScreenSaverActivity extends AppCompatActivity {
         videoViewScreenSaver = (VideoView) findViewById(R.id.vv_screen_saver);
         imageViewScreenSaver = (ImageView) findViewById(R.id.iv_screen_saver);
 
-        final File[] currentFiles = FileService.getFiles(TOPATH);
+        try {
+            final File[] currentFiles = FileService.getFiles(TOPATH);
 
-        playVideo(currentFiles[0].getPath());
+            playVideo(currentFiles[0].getPath());
 
-        videoViewScreenSaver.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
-                videoIndex = videoIndex + 1;
-                if (videoIndex >= currentFiles.length) {
-                    videoIndex = 0;
+            videoViewScreenSaver.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    videoIndex = videoIndex + 1;
+                    if (videoIndex >= currentFiles.length) {
+                        videoIndex = 0;
+                    }
+                    playVideo(currentFiles[videoIndex].getPath());
                 }
-                playVideo(currentFiles[videoIndex].getPath());
-            }
-        });
-
+            });
+        } catch (NullPointerException e) {
+            ToastFactory.makeText(ScreenSaverActivity.this, "找不到文件路径", Toast.LENGTH_SHORT).show();
+        }
         videoViewScreenSaver.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {

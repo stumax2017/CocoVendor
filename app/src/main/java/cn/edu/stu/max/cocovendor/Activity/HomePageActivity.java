@@ -370,14 +370,10 @@ public class HomePageActivity extends AppCompatActivity {
         @Override
         public void run() {
             // 用户5秒没操作了
-//            try {
-//                Intent i = new Intent();
-//                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                i.setClass(context, ScreenSaverActivity.class);
-//                context.startActivity(i);
-//            } catch (NullPointerException e) {
-//                Toast.makeText(HomePageActivity.this, "暂无广告视频", Toast.LENGTH_SHORT).show();
-//            }
+            Intent i = new Intent();
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            i.setClass(context, ScreenSaverActivity.class);
+            context.startActivity(i);
         }
     };
 
