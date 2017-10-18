@@ -1,14 +1,20 @@
 package cn.edu.stu.max.cocovendor.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toast;
 import android.widget.VideoView;
 
@@ -19,7 +25,9 @@ import java.util.Date;
 import java.io.File;
 
 import cn.edu.stu.max.cocovendor.JavaClass.FileService;
+import cn.edu.stu.max.cocovendor.JavaClass.ToastFactory;
 import cn.edu.stu.max.cocovendor.R;
+import cn.edu.stu.max.cocovendor.databaseClass.Goods;
 import cn.edu.stu.max.cocovendor.Service.VideoService;
 import cn.edu.stu.max.cocovendor.databaseClass.LocalInfo;
 import cn.edu.stu.max.cocovendor.databaseClass.Sales;
@@ -42,10 +50,19 @@ public class HomePageActivity extends AppCompatActivity {
 
     private static final String adSettingDataFileName = "sharedfile";     // 定义保存的文件的名称
 
+    private Context context;
+    Handler handler = new Handler();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getSupportActionBar().hide();
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_home_page);
+
+        context = this;
 
         videoViewHomePageAd = (VideoView) findViewById(R.id.vv_hp_ad);
         imageViewHomePageAd = (ImageView) findViewById(R.id.iv_hp_ad);
@@ -121,60 +138,102 @@ public class HomePageActivity extends AppCompatActivity {
         imageViewGoods1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Sales sales = new Sales();
-                sales.setSales_date(new Date());
-                sales.setMachine_floor(1);
-                sales.save();
+                try {
+                    Sales sales = new Sales();
+                    sales.setSales_date(new Date());
+                    sales.setGoods_id(DataSupport.find(Goods.class,1).getId());
+                    sales.setGoods_name(DataSupport.find(Goods.class,1).getName());
+                    sales.setMachine_floor(1);
+                    sales.setPay_way("支付宝");
+                    sales.save();
+                } catch (NullPointerException e) {
+                    ToastFactory.makeText(HomePageActivity.this, "目前没有商品1", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         ImageView imageViewGoods2 = (ImageView) findViewById(R.id.iv_goods_2);
         imageViewGoods2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Sales sales = new Sales();
-                sales.setSales_date(new Date());
-                sales.setMachine_floor(2);
-                sales.save();
+                try {
+                    Sales sales = new Sales();
+                    sales.setSales_date(new Date());
+                    sales.setGoods_id(DataSupport.find(Goods.class,2).getId());
+                    sales.setGoods_name(DataSupport.find(Goods.class,2).getName());
+                    sales.setMachine_floor(2);
+                    sales.setPay_way("支付宝");
+                    sales.save();
+                } catch (NullPointerException e) {
+                    ToastFactory.makeText(HomePageActivity.this, "目前没有商品2", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         ImageView imageViewGoods3 = (ImageView) findViewById(R.id.iv_goods_3);
         imageViewGoods3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Sales sales = new Sales();
-                sales.setSales_date(new Date());
-                sales.setMachine_floor(3);
-                sales.save();
+                try {
+                    Sales sales = new Sales();
+                    sales.setSales_date(new Date());
+                    sales.setGoods_id(DataSupport.find(Goods.class, 3).getId());
+                    sales.setGoods_name(DataSupport.find(Goods.class, 3).getName());
+                    sales.setMachine_floor(3);
+                    sales.setPay_way("微信");
+                    sales.save();
+                } catch (NullPointerException e) {
+                    ToastFactory.makeText(HomePageActivity.this, "目前没有商品3", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         ImageView imageViewGoods4 = (ImageView) findViewById(R.id.iv_goods_4);
         imageViewGoods4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Sales sales = new Sales();
-                sales.setSales_date(new Date());
-                sales.setMachine_floor(4);
-                sales.save();
+                try {
+                    Sales sales = new Sales();
+                    sales.setSales_date(new Date());
+                    sales.setGoods_id(DataSupport.find(Goods.class,4).getId());
+                    sales.setGoods_name(DataSupport.find(Goods.class,4).getName());
+                    sales.setMachine_floor(4);
+                    sales.setPay_way("微信");
+                    sales.save();
+                } catch (NullPointerException e) {
+                    ToastFactory.makeText(HomePageActivity.this, "目前没有商品4", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         ImageView imageViewGoods5 = (ImageView) findViewById(R.id.iv_goods_5);
         imageViewGoods5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Sales sales = new Sales();
-                sales.setSales_date(new Date());
-                sales.setMachine_floor(5);
-                sales.save();
+                try {
+                    Sales sales = new Sales();
+                    sales.setSales_date(new Date());
+                    sales.setGoods_id(DataSupport.find(Goods.class,5).getId());
+                    sales.setGoods_name(DataSupport.find(Goods.class,5).getName());
+                    sales.setMachine_floor(5);
+                    sales.setPay_way("现金");
+                    sales.save();
+                } catch (NullPointerException e) {
+                    ToastFactory.makeText(HomePageActivity.this, "目前没有商品5", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         ImageView imageViewGoods6 = (ImageView) findViewById(R.id.iv_goods_6);
         imageViewGoods6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Sales sales = new Sales();
-                sales.setSales_date(new Date());
-                sales.setMachine_floor(6);
-                sales.save();
+                try {
+                    Sales sales = new Sales();
+                    sales.setSales_date(new Date());
+                    sales.setGoods_id(DataSupport.find(Goods.class,6).getId());
+                    sales.setGoods_name(DataSupport.find(Goods.class,6).getName());
+                    sales.setMachine_floor(6);
+                    sales.setPay_way("现金");
+                    sales.save();
+                } catch (NullPointerException e) {
+                    ToastFactory.makeText(HomePageActivity.this, "目前没有商品6", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -205,30 +264,33 @@ public class HomePageActivity extends AppCompatActivity {
 
     private void initVideoPath() {
         videoFileIndex = 0;
-        File[] currentFiles = FileService.getFiles(TOPATH);
-        if (currentFiles.length != 0) {
-            if (share.getBoolean("isAdSettingChanged", false)) {
-                videoListOrder = new int[currentFiles.length];
-                videoListFrequency = new int[currentFiles.length];
-                for (int i = 0; i < currentFiles.length; i++) {
-                    videoListFrequency[i] = Integer.parseInt(share.getString("Frequency_" + i, "0"));
-                    for (int j = 0; j < currentFiles.length; j++) {
-                        if (share.getString("Ad_" + i, "null").equals(currentFiles[j].getName())) {
-                            videoListOrder[i] = j;
-                            break;
+        try {
+            File[] currentFiles = FileService.getFiles(TOPATH);
+            if (currentFiles.length != 0) {
+                if (share.getBoolean("isAdSettingChanged", false)) {
+                    videoListOrder = new int[currentFiles.length];
+                    videoListFrequency = new int[currentFiles.length];
+                    for (int i = 0; i < currentFiles.length; i++) {
+                        videoListFrequency[i] = Integer.parseInt(share.getString("Frequency_" + i, "0"));
+                        for (int j = 0; j < currentFiles.length; j++) {
+                            if (share.getString("Ad_" + i, "null").equals(currentFiles[j].getName())) {
+                                videoListOrder[i] = j;
+                                break;
+                            }
                         }
                     }
+                    playVideo(currentFiles[videoListOrder[videoFileIndex]].getPath());
                 }
-                playVideo(currentFiles[videoListOrder[videoFileIndex]].getPath());
+                else {
+                    playVideo(currentFiles[videoFileIndex].getPath());
+                }
+            } else {
+                imageViewHomePageAd.setVisibility(View.VISIBLE);
+                videoViewHomePageAd.setVisibility(View.INVISIBLE);
             }
-            else {
-                playVideo(currentFiles[videoFileIndex].getPath());
-            }
-        } else {
-            imageViewHomePageAd.setVisibility(View.VISIBLE);
-            videoViewHomePageAd.setVisibility(View.INVISIBLE);
+        } catch (NullPointerException e) {
+            ToastFactory.makeText(HomePageActivity.this, "找不到文件路径", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     public void playVideo(String filePath) {
@@ -285,4 +347,48 @@ public class HomePageActivity extends AppCompatActivity {
                 }
         }
     }
+
+    @Override
+    protected void onResume() {
+        // TODO Auto-generated method stub
+        super.onResume();
+
+        handler.postDelayed(runnable, 1000 * 5);
+    }
+
+    @Override
+    protected void onPause() {
+        // TODO Auto-generated method stub
+        super.onPause();
+
+        handler.removeCallbacks(runnable);
+    }
+
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            // 用户5秒没操作了
+            Intent i = new Intent();
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            i.setClass(context, ScreenSaverActivity.class);
+            context.startActivity(i);
+        }
+    };
+
+    public boolean onTouchEvent(android.view.MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN: { // 手指下来的时候,取消之前绑定的Runnable
+
+                handler.removeCallbacks(runnable);
+                break;
+            }
+            case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
+
+                handler.postDelayed(runnable, 1000 * 5);
+
+                break;
+            }
+        }
+        return super.onTouchEvent(event);
+    };
 }

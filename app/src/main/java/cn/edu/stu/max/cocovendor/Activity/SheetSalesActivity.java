@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 
 import org.litepal.crud.DataSupport;
 
@@ -32,6 +34,14 @@ public class SheetSalesActivity extends AppCompatActivity {
         SheetSalesAdapter sheetSalesAdapter = new SheetSalesAdapter(allSales);
         //recyclerView显示适配器内容
         recyclerViewSheetSales.setAdapter(sheetSalesAdapter);
+
+        Button buttonSalesReturn = (Button) findViewById(R.id.btn_sales__return);
+        buttonSalesReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 

@@ -79,7 +79,7 @@ public class AdSettingActivity extends Activity {
 
     private File[] fileToGetName;
     private String[] usbTvOrder = {"1.", "2.", "3.", "4.", "5.", "6.", "7.", "8.", "9.", "10.", "11.",
-            "12.", "13.", "14.", "15.", "16.", "17.", "18.", "19.", "20."};
+            "12.", "13.", "14.", "15.", "16.", "17.", "18.", "19.", "20.", "21.", "22.", "23.", "24.", "25.", "26.", "27.", "28.", "29.", "30."};
 
     private boolean[] internalPositionFlag;
 
@@ -487,6 +487,8 @@ public class AdSettingActivity extends Activity {
     public void playVideo(String filePath) {
         File file = new File(filePath);
         if (file.exists()) {
+            imageViewAd.setVisibility(View.INVISIBLE);
+            videoViewAd.setVisibility(View.VISIBLE);
             videoViewAd.setVideoPath(file.getPath());
             videoViewAd.start();
         } else {

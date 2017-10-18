@@ -25,10 +25,12 @@ import org.litepal.crud.DataSupport;
 import org.litepal.crud.callback.FindMultiCallback;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 import cn.edu.stu.max.cocovendor.JavaClass.AddGoodsDialog;
+import cn.edu.stu.max.cocovendor.JavaClass.ToastFactory;
 import cn.edu.stu.max.cocovendor.R;
 import cn.edu.stu.max.cocovendor.JavaClass.SalesSettingAdapter;
 import cn.edu.stu.max.cocovendor.databaseClass.Goods;
@@ -71,14 +73,21 @@ public class SalesSettingActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 AlertDialog.Builder builderIn = new AlertDialog.Builder(SalesSettingActivity.this);
+                                if (view.getParent() != null) {
+                                    ((ViewGroup) view.getParent()).removeView(view);
+                                }
+                                builderIn.setView(view);
                                 builderIn.setTitle("价格设置")
-                                        .setView(view)
                                         .setPositiveButton(R.string.label_save, new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int id) {
                                                 // FIRE ZE MISSILES!
                                                 EditText editTextPrice = (EditText) view.findViewById(R.id.ed_goods_price);
-                                                goodsPrice[0] = Float.valueOf(editTextPrice.getText().toString().trim());
+                                                try {
+                                                    goodsPrice[0] = Float.valueOf(editTextPrice.getText().toString().trim());
+                                                } catch (NumberFormatException e) {
+                                                    ToastFactory.makeText(SalesSettingActivity.this, "没有输入价钱", Toast.LENGTH_SHORT).show();
+                                                }
                                             }
                                         })
                                         .setNegativeButton(R.string.label_cancel, new DialogInterface.OnClickListener() {
@@ -94,27 +103,18 @@ public class SalesSettingActivity extends AppCompatActivity {
                                 builderIn.create().show();
                             }
                         })
-//                        .setView(R.layout.add_goods_dialog)
-//                        .setMultiChoiceItems(R.array.goods_array, null, new DialogInterface.OnMultiChoiceClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-//                                if (isChecked) {
-//                                    // If the user checked the item, add it to the selected items
-//                                    goodsSelectedItems.add(which);
-//                                } else if (goodsSelectedItems.contains(which)) {
-//                                    // Else, if the item is already in the array, remove it
-//                                    goodsSelectedItems.remove(Integer.valueOf(which));
-//                                }
-//                            }
-//                        })
                         .setPositiveButton(R.string.label_save, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
                                 // FIRE ZE MISSILES!
-                                Goods goods = new Goods();
-                                goods.setName(getResources().getStringArray(R.array.goods_array)[index[0]]);
-                                goods.setSales_price(goodsPrice[0]);
-                                goods.save();
+                                try {
+                                    Goods goods = new Goods();
+                                    goods.setName(getResources().getStringArray(R.array.goods_array)[index[0]]);
+                                    goods.setSales_price(goodsPrice[0]);
+                                    goods.save();
+                                } catch (IllegalStateException e) {
+                                    ToastFactory.makeText(SalesSettingActivity.this, "已经存在这种商品了", Toast.LENGTH_SHORT).show();
+                                }
                                 DataSupport.findAllAsync(Goods.class).listen(new FindMultiCallback() {
                                     @Override
                                     public <T> void onFinish(List<T> t) {
@@ -137,11 +137,30 @@ public class SalesSettingActivity extends AppCompatActivity {
                 builder.create().show();
             }
         });
+        Button buttonSalesSettingDel = (Button) findViewById(R.id.btn_sales_setting_del);
+        buttonSalesSettingDel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastFactory.makeText(SalesSettingActivity.this, "按下删除", Toast.LENGTH_SHORT).show();
+                Goods toChangeGoods = new Goods();
+                toChangeGoods.setToDefault("quanlity");
+                toChangeGoods.updateAll();
+                DataSupport.findAllAsync(Goods.class).listen(new FindMultiCallback() {
+                    @Override
+                    public <T> void onFinish(List<T> t) {
+                        List<Goods> allGoods = (List<Goods>) t;
+                        salesSettingAdapter = new SalesSettingAdapter(allGoods);
+                        //recyclerView显示适配器内容
+                        recyclerViewSalesSetting.setAdapter(salesSettingAdapter);
+                    }
+                });
+            }
+        });
         Button buttonSalesSettingFix = (Button) findViewById(R.id.btn_sales_setting_fix);
         buttonSalesSettingFix.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ArrayList goodsSelectedItems = new ArrayList();
+                final ArrayList<Long> goodsSelectedItems = new ArrayList<>();
                 AlertDialog.Builder builder = new AlertDialog.Builder(SalesSettingActivity.this);
                 builder.setTitle("补充商品库存")
                         .setMultiChoiceItems(R.array.goods_array, null, new DialogInterface.OnMultiChoiceClickListener() {
@@ -149,10 +168,10 @@ public class SalesSettingActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                                 if (isChecked) {
                                     // If the user checked the item, add it to the selected items
-                                    goodsSelectedItems.add(which);
-                                } else if (goodsSelectedItems.contains(which)) {
+                                    goodsSelectedItems.add((long)which);
+                                } else if (goodsSelectedItems.contains((long)which)) {
                                     // Else, if the item is already in the array, remove it
-                                    goodsSelectedItems.remove(Integer.valueOf(which));
+                                    goodsSelectedItems.remove(Long.valueOf((long)which));
                                 }
                             }
                         })
@@ -161,9 +180,10 @@ public class SalesSettingActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int id) {
                                 // FIRE ZE MISSILES!
                                 for (int i = 0; i < goodsSelectedItems.size(); i ++) {
-                                    Goods toChangeGoods = new Goods();
+                                    //Goods toChangeGoods = new Goods();
+                                    Goods toChangeGoods = DataSupport.find(Goods.class, goodsSelectedItems.get(i));
                                     toChangeGoods.setQuanlity(10);
-                                    toChangeGoods.updateAll("name = ?", getResources().getStringArray(R.array.goods_array)[i]);
+                                    toChangeGoods.save();
                                 }
                                 DataSupport.findAllAsync(Goods.class).listen(new FindMultiCallback() {
                                     @Override

@@ -7,71 +7,133 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/colorTransparencyWhite" >
-
-        <TextView
-            android:layout_width="0dp"
+        android:orientation="vertical"
+        android:background="@color/colorTransparencyBlack">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:text="@string/label_machine_id"
-            android:textSize="24sp" />
+            android:orientation="horizontal"
+            android:layout_margin="10dp">
 
-        <TextView
-            android:layout_width="0dp"
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:text="@string/label_machine_id"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:text="@string/machine_id"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:text="@string/label_machine_version"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:text="@string/machine_version"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:text="@string/label_ip"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="10"
+                android:text="@string/ip"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorBlack"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="6"
-            android:text="@string/machine_id"
-            android:textSize="24sp" />
+            android:orientation="horizontal"
+            android:layout_margin="10dp">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:text="@string/label_machine_version"
-            android:textSize="24sp" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:text="@string/machine_version"
-            android:textSize="24sp" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5"
-            android:text="@string/label_ip"
-            android:textSize="24sp" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="10"
-            android:text="@string/ip"
-            android:textSize="24sp" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_settings_black_24dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="设置"
+                android:textSize="30sp"
+                android:textColor="@color/colorPrimary"/>
+        </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_login_password"
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorGray" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:layout_marginBottom="50dp"
-        android:gravity="center"
-        android:text="@string/label_pwsd_hints"
-        android:textSize="50sp"/>
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_login_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:maxLines="1"
+            android:maxLength="6"
+            android:letterSpacing="0.7"
+            android:text="@string/label_pwsd_hints"
+            android:textSize="50sp"/>
+        <ImageButton
+            android:id="@+id/imgbtn_login_del"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="30dp"
+            android:background="@color/colorTransparency"
+            android:src="@drawable/ic_keyboard_backspace_black_50dp"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorGray"
+        android:elevation="2dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="3"
         android:orientation="vertical"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="300dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp">
+        android:gravity="bottom"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="100dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -83,7 +145,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
+                android:background="@color/colorTransparency"
+                android:textColor="@color/colorBlue"
                 android:text="@string/btn_login_1"
                 android:textSize="50sp"/>
             <Button
@@ -91,7 +154,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
+                android:background="@color/colorTransparency"
+                android:textColor="@color/colorBlue"
                 android:text="@string/btn_login_2"
                 android:textSize="50sp"/>
             <Button
@@ -99,16 +163,9 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
+                android:background="@color/colorTransparency"
+                android:textColor="@color/colorBlue"
                 android:text="@string/btn_login_3"
-                android:textSize="50sp"/>
-            <Button
-                android:id="@+id/btn_login_del"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:text="@string/btn_login_del"
                 android:textSize="50sp"/>
         </LinearLayout>
 
@@ -122,7 +179,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
+                android:background="@color/colorTransparency"
+                android:textColor="@color/colorBlue"
                 android:text="@string/btn_login_4"
                 android:textSize="50sp"/>
             <Button
@@ -130,7 +188,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
+                android:background="@color/colorTransparency"
+                android:textColor="@color/colorBlue"
                 android:text="@string/btn_login_5"
                 android:textSize="50sp"/>
             <Button
@@ -138,16 +197,9 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
+                android:background="@color/colorTransparency"
+                android:textColor="@color/colorBlue"
                 android:text="@string/btn_login_6"
-                android:textSize="50sp"/>
-            <Button
-                android:id="@+id/btn_login_clear"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="10dp"
-                android:text="@string/btn_login_clear"
                 android:textSize="50sp"/>
         </LinearLayout>
 
@@ -161,7 +213,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
+                android:background="@color/colorTransparency"
+                android:textColor="@color/colorBlue"
                 android:text="@string/btn_login_7"
                 android:textSize="50sp"/>
             <Button
@@ -169,7 +222,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
+                android:background="@color/colorTransparency"
+                android:textColor="@color/colorBlue"
                 android:text="@string/btn_login_8"
                 android:textSize="50sp"/>
             <Button
@@ -177,16 +231,9 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
+                android:background="@color/colorTransparency"
+                android:textColor="@color/colorBlue"
                 android:text="@string/btn_login_9"
-                android:textSize="50sp"/>
-            <Button
-                android:id="@+id/btn_login_look"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:text="@string/btn_login_look"
                 android:textSize="50sp"/>
         </LinearLayout>
 
@@ -195,36 +242,29 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
-            <Button
-                android:id="@+id/btn_login_star"
+            <ImageButton
+                android:id="@+id/imgbtn_login_look"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:text="@string/btn_login_star"
-                android:textSize="50sp"/>
+                android:background="@color/colorTransparency"
+                android:src="@drawable/ic_visibility_black_50dp"/>
             <Button
                 android:id="@+id/btn_login_0"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
+                android:background="@color/colorTransparency"
+                android:textColor="@color/colorBlue"
                 android:text="@string/btn_login_0"
-                android:textSize="50sp"/>
-            <Button
-                android:id="@+id/btn_login_well"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:text="@string/btn_login_well"
                 android:textSize="50sp"/>
             <Button
                 android:id="@+id/btn_login_enter"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
+                android:background="@color/colorTransparency"
+                android:textColor="@color/colorGray"
                 android:text="@string/btn_login_enter"
                 android:textSize="50sp"/>
         </LinearLayout>
@@ -237,55 +277,9 @@
         android:layout_marginLeft="250dp"
         android:layout_marginRight="250dp"
         android:layout_marginBottom="100dp"
+        android:background="@color/colorBlue"
+        android:textColor="@color/colorWhite"
         android:text="@string/btn_return"
         android:textSize="50sp"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/colorTransparencyWhite" >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:text="@string/label_machine_id"
-            android:textSize="24sp" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="6"
-            android:text="@string/machine_id"
-            android:textSize="24sp" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:text="@string/label_machine_version"
-            android:textSize="24sp" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:text="@string/machine_version"
-            android:textSize="24sp" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5"
-            android:text="@string/label_ip"
-            android:textSize="24sp" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="10"
-            android:text="@string/ip"
-            android:textSize="24sp" />
-    </LinearLayout>
 </LinearLayout>

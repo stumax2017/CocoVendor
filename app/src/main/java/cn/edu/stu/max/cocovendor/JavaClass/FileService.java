@@ -1,6 +1,9 @@
 package cn.edu.stu.max.cocovendor.JavaClass;
 
 import android.content.Context;
+import android.os.Environment;
+import android.os.StatFs;
+import android.text.format.Formatter;
 import android.widget.Toast;
 
 import java.io.File;
@@ -16,6 +19,8 @@ import cn.edu.stu.max.cocovendor.Activity.AdSettingActivity;
  */
 
 public class FileService {
+
+    public Context context;
 
     /**
      * 将一个目录下的所有文件存进一个数组里面
@@ -95,4 +100,32 @@ public class FileService {
         }
         return isFileAddedFlag;
     }
+
+    /**
+     * 获得sd卡剩余容量，即可用大小
+     *
+     * @return
+     */
+     public String getSDAvailableSize() {
+         File path = new File("/mnt/external_sd/MyCocoCamera/");
+         StatFs stat = new StatFs(path.getPath());
+         long blockSize = stat.getBlockSize();
+         long availableBlocks = stat.getAvailableBlocks();
+         String availableSize = Formatter.formatFileSize(context, availableBlocks * blockSize);   // 获得SD卡总容量
+         return availableSize;
+     }
+
+    /**
+     * 获得sd卡总大小
+     *
+     * @return
+     */
+     public String getSDTotalSize() {
+         File path = new File("/mnt/external_sd/MyCocoCamera/");
+         StatFs stat = new StatFs(path.getPath());
+         long blockSize = stat.getBlockSize();
+         long totalBlocks = stat.getBlockCount();
+         String totalSize = Formatter.formatFileSize(context, totalBlocks * blockSize);   // 获得SD卡总容量
+         return totalSize;
+     }
 }

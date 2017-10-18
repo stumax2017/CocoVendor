@@ -18,6 +18,7 @@ import com.amap.api.location.AMapLocationListener;
 
 import org.litepal.LitePal;
 
+import cn.edu.stu.max.cocovendor.JavaClass.ToastFactory;
 import cn.edu.stu.max.cocovendor.R;
 import cn.edu.stu.max.cocovendor.Service.VideoService;
 import cn.edu.stu.max.cocovendor.databaseClass.LocalInfo;
@@ -39,7 +40,7 @@ public class StartActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = preferences.edit();
             editor.putBoolean("firstRun", false);
             editor.apply();
-            Toast.makeText(StartActivity.this, "第一次启动", Toast.LENGTH_SHORT).show();
+            ToastFactory.makeText(StartActivity.this, "第一次启动", Toast.LENGTH_SHORT).show();
 
             LocalInfo localInfo = new LocalInfo();
             fillLocalInfo(localInfo);
