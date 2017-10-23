@@ -70,10 +70,8 @@ public class SystemSettingActivity extends AppCompatActivity {
                 case R.id.btn_sales_analyze:
                     break;
                 case R.id.btn_camera_spy:
-                    boolean data = share.getBoolean("isOpen", false);
                     //String data = "true";
                     Intent intent_camera_setting = new Intent(SystemSettingActivity.this, CameraSettingActivity.class);
-                    intent_camera_setting.putExtra("isOpen", data);
                     startActivity(intent_camera_setting);
                     break;
                 case R.id.btn_sys_setting_back:

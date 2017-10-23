@@ -57,29 +57,61 @@
     <string name="label_download_ad">下载广告</string>
     <string name="label_null">无</string>
     <string name="about_msg">
-Serial Port API sample v1.1\n
-\n
-This program is the sample application provided with project android-serialport-api.\n
-\n
-More information and bug report on [http://code.google.com/p/android-serialport-api]\n
-\n
-Copyright 2010-2011 Cedric Priscal\n
-\n
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at\n
-\n
-http://www.apache.org/licenses/LICENSE-2.0\n
-\n
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.\n
+        Serial Port API sample v1.1\n
+        \n
+        This program is the sample application provided with project android-serialport-api.\n
+        \n
+        More information and bug report on [http://code.google.com/p/android-serialport-api]\n
+        \n
+        Copyright 2010-2011 Cedric Priscal\n
+        \n
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at\n
+        \n
+        http://www.apache.org/licenses/LICENSE-2.0\n
+        \n
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.\n
 	</string>
     <string name="error_configuration">Please configure your serial port first.</string>
     <string name="error_security">You do not have read/write permission to the serial
 		port.</string>
     <string name="error_unknown">The serial port can not be opened for an unknown
 		reason.</string>
+
+    <string name="revolution_title_str">分辨率设置</string>
+    <string name="revolution_title_listpreference">选择分辨率</string>
+    <string-array name="revolution_entries_str">
+        <item >CIF(352×288像素)</item>
+        <item >480P(高清)</item>
+        <item >720P(超清)</item>
+    </string-array>
+    <string-array name="revolution_entries_values_str">
+        <item >cif</item>
+        <item >480p</item>
+        <item >720p</item>
+    </string-array>
+    <string name="revolution_default_str">cif</string>
+    <string name="revolution_dialog_title">请选择你要设定的分辨率</string>
+    <string name="revolution_summary_str">CIF(352×288像素)</string>
+
+    <string name="spytime_title_str">监控时间设置</string>
+    <string name="spytime_title_listpreference">选择监控时间</string>
+    <string-array name="spytime_entries_str">
+        <item >24小时监控</item>
+        <item >8:00~22:00</item>
+        <item >6:00~24:00</item>
+    </string-array>
+    <string-array name="spytime_entries_values_str">
+        <item >24hours</item>
+        <item >8002200</item>
+        <item >6002400</item>
+    </string-array>
+    <string name="spytime_default_str">24hours</string>
+    <string name="spytime_dialog_title">请选择你要设定的时间段</string>
+    <string name="spytime_summary_str">24小时监控</string>
 </resources>
