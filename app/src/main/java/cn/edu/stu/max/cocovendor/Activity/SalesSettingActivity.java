@@ -2,6 +2,7 @@ package cn.edu.stu.max.cocovendor.Activity;
 
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.SlidingPaneLayout;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 import org.litepal.crud.DataSupport;
 import org.litepal.crud.callback.FindMultiCallback;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -180,10 +182,13 @@ public class SalesSettingActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int id) {
                                 // FIRE ZE MISSILES!
                                 for (int i = 0; i < goodsSelectedItems.size(); i ++) {
-                                    //Goods toChangeGoods = new Goods();
-                                    Goods toChangeGoods = DataSupport.find(Goods.class, goodsSelectedItems.get(i));
-                                    toChangeGoods.setQuanlity(10);
-                                    toChangeGoods.save();
+                                    try {
+                                        Goods toChangeGoods = DataSupport.find(Goods.class, goodsSelectedItems.get(i).longValue() + 1);
+                                        toChangeGoods.setQuanlity(10);
+                                        toChangeGoods.save();
+                                    } catch (NullPointerException e) {
+                                        ToastFactory.makeText(SalesSettingActivity.this, "所需商品并未上架", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                                 DataSupport.findAllAsync(Goods.class).listen(new FindMultiCallback() {
                                     @Override
