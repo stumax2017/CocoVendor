@@ -48,11 +48,14 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
-    <!--申请WiFi访问网络的权限-->
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <!-- 申请WiFi访问网络的权限 -->
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <!-- 网络访问权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".JavaClass.Application"
@@ -72,7 +75,7 @@
         <activity android:name=".Activity.LoginActivity" />
         <activity android:name=".Activity.SalesSettingActivity" />
         <activity android:name=".Activity.NetworkSettingActivity" />
-        <activity android:name=".Activity.WlanItemActivity"/>
+        <activity android:name=".Activity.WlanItemActivity" />
         <activity android:name=".Activity.SettingMenuActivity" />
         <activity android:name=".Activity.StartActivity">
             <intent-filter>
@@ -99,7 +102,6 @@
         <activity android:name=".Activity.ScreenSaverActivity" />
         <activity android:name=".Activity.SheetActivity" />
         <activity android:name=".Activity.SheetSalesActivity" />
-        <activity android:name=".Activity.SheetGoodsActivity"></activity>
         <!--<activity android:name=".MainMenu">-->
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
@@ -111,6 +113,9 @@
         <activity android:name=".Activity.ConsoleActivity"></activity>
         <activity android:name=".Activity.LoopbackActivity"></activity>
         <activity android:name=".Activity.Sending01010101Activity"></activity>
+        <activity android:name=".Activity.SheetGoodsActivity" />
+        <activity android:name=".Activity.SalesAnalyzeActivity" />
+        <activity android:name=".Activity.PayActivity"></activity>
     </application>
 
 </manifest>

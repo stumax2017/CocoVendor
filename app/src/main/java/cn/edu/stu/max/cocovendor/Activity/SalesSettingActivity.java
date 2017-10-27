@@ -181,7 +181,7 @@ public class SalesSettingActivity extends AppCompatActivity {
                                 // FIRE ZE MISSILES!
                                 for (int i = 0; i < goodsSelectedItems.size(); i ++) {
                                     //Goods toChangeGoods = new Goods();
-                                    Goods toChangeGoods = DataSupport.find(Goods.class, goodsSelectedItems.get(i));
+                                    Goods toChangeGoods = DataSupport.find(Goods.class, goodsSelectedItems.get(i) + 1);
                                     toChangeGoods.setQuanlity(10);
                                     toChangeGoods.save();
                                 }

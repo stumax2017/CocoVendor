@@ -69,6 +69,8 @@ public class SettingMenuActivity extends AppCompatActivity {
                     startActivity(intent_sales_setting);
                     break;
                 case R.id.btn_sales_analyze:
+                    Intent intent_sales_analyze = new Intent(SettingMenuActivity.this, SalesAnalyzeActivity.class);
+                    startActivity(intent_sales_analyze);
                     break;
                 case R.id.btn_setting_return_sales:
                     Intent intent_homepage = new Intent(SettingMenuActivity.this, HomePageActivity.class);
