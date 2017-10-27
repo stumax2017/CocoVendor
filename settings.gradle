@@ -1,1 +1,1 @@
-include ':app', ':serialport', ':serialport_bin', ':sample'
+include ':app', ':serialport', ':serialport_bin'
