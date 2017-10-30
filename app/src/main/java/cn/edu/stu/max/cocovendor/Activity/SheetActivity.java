@@ -35,6 +35,15 @@ public class SheetActivity extends AppCompatActivity {
             }
         });
 
+        Button buttonSheetInfo = (Button) findViewById(R.id.btn_sheet_loaclinfo);
+        buttonSheetInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SheetActivity.this, SheetInfoActivity.class);
+                startActivity(intent);
+            }
+        });
+
         Button buttonSheetSettingBack = (Button) findViewById(R.id.btn_sheet_setting_back);
         buttonSheetSettingBack.setOnClickListener(new View.OnClickListener() {
             @Override
