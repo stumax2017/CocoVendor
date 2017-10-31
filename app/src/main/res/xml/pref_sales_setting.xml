@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="信息">
+        <Preference
+            android:title="货物信息">
+            <intent
+                android:targetPackage="cn.edu.stu.max.cocovendor"
+                android:targetClass="cn.edu.stu.max.cocovendor.Activity.SheetGoodsActivity"/>
+        </Preference>
+
+        <Preference
+            android:title="销售信息">
+            <intent
+                android:targetPackage="cn.edu.stu.max.cocovendor"
+                android:targetClass="cn.edu.stu.max.cocovendor.Activity.SheetSalesActivity"/>
+        </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="设置">
+        <Preference
+            android:title="销售设置">
+            <intent
+                android:targetPackage="cn.edu.stu.max.cocovendor"
+                android:targetClass="cn.edu.stu.max.cocovendor.Activity.SalesSettingActivity"/>
+        </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="测试">
+        <Preference
+            android:title="找零设置"/>
+        <Preference
+            android:title="货道测试"/>
+    </PreferenceCategory>
+</PreferenceScreen>

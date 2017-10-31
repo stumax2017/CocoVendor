@@ -96,7 +96,6 @@
         </receiver>
 
         <activity android:name=".Activity.ScreenSaverActivity" />
-        <activity android:name=".Activity.SheetActivity" />
         <activity android:name=".Activity.SheetSalesActivity" />
         <activity android:name=".Activity.SheetGoodsActivity" />
         <activity android:name=".Activity.SheetInfoActivity"></activity>
