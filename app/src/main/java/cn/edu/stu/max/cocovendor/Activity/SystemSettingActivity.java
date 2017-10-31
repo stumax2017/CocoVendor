@@ -52,8 +52,6 @@ public class SystemSettingActivity extends AppCompatActivity {
                 case R.id.btn_sys_parm_setting:
                     break;
                 case R.id.btn_network_setting:
-                    Intent intent_network_setting = new Intent(SystemSettingActivity.this,NetworkSettingActivity.class);
-                    startActivity(intent_network_setting);
                     break;
                 case R.id.btn_sheet_setting:
                     break;

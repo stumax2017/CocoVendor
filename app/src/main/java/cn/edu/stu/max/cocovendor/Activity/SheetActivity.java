@@ -1,55 +1,48 @@
 package cn.edu.stu.max.cocovendor.Activity;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.preference.PreferenceFragment;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.support.v7.app.ActionBar;
+import android.view.MenuItem;
 
-import cn.edu.stu.max.cocovendor.JavaClass.SheetSalesAdapter;
 import cn.edu.stu.max.cocovendor.R;
 
-public class SheetActivity extends AppCompatActivity {
+public class SheetActivity extends AppCompatPreferenceActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
-        setContentView(R.layout.activity_sheet);
+        getFragmentManager().beginTransaction().replace(android.R.id.content, new SheetFragment()).commit();
+        setupActionBar();
+    }
 
-        Button buttonSheetSales = (Button) findViewById(R.id.btn_sheet_sales);
-        buttonSheetSales.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SheetActivity.this, SheetSalesActivity.class);
-                startActivity(intent);
-            }
-        });
+    public static class SheetFragment extends PreferenceFragment {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            addPreferencesFromResource(R.xml.pref_sheet);
+        }
+    }
 
-        Button buttonSheetGoods = (Button) findViewById(R.id.btn_sheet_goods);
-        buttonSheetGoods.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SheetActivity.this, SheetGoodsActivity.class);
-                startActivity(intent);
-            }
-        });
+    /**
+     * Set up the {@link android.app.ActionBar}, if the API is available.
+     */
+    private void setupActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            // Show the Up button in the action bar.
+            actionBar.setTitle("信息");
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
 
-        Button buttonSheetInfo = (Button) findViewById(R.id.btn_sheet_loaclinfo);
-        buttonSheetInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SheetActivity.this, SheetInfoActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        Button buttonSheetSettingBack = (Button) findViewById(R.id.btn_sheet_setting_back);
-        buttonSheetSettingBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
