@@ -77,9 +77,9 @@
         <activity android:name=".Activity.NetworkSettingActivity"
             android:label="网络设置"/>
         <activity android:name=".Activity.WlanItemActivity"
-            android:label="设置"/>
+            android:label="WLAN设置"/>
         <activity android:name=".Activity.SettingMenuActivity"
-            android:label="设置菜单"/>
+            android:label="设置"/>
         <activity android:name=".Activity.StartActivity"
             android:label="启动页">
             <intent-filter>
