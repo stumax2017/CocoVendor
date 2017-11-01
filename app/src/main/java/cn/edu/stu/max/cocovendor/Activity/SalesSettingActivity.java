@@ -2,6 +2,7 @@ package cn.edu.stu.max.cocovendor.Activity;
 
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.SlidingPaneLayout;
@@ -12,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -24,6 +26,7 @@ import android.widget.Toast;
 import org.litepal.crud.DataSupport;
 import org.litepal.crud.callback.FindMultiCallback;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -46,6 +49,11 @@ public class SalesSettingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales_setting);
+
+
+        //加入返回箭头
+        //noinspection ConstantConditions
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         List<Goods> allGoods = DataSupport.findAll(Goods.class);
 
@@ -180,10 +188,13 @@ public class SalesSettingActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int id) {
                                 // FIRE ZE MISSILES!
                                 for (int i = 0; i < goodsSelectedItems.size(); i ++) {
-                                    //Goods toChangeGoods = new Goods();
-                                    Goods toChangeGoods = DataSupport.find(Goods.class, goodsSelectedItems.get(i));
-                                    toChangeGoods.setQuanlity(10);
-                                    toChangeGoods.save();
+                                    try {
+                                        Goods toChangeGoods = DataSupport.find(Goods.class, goodsSelectedItems.get(i).longValue() + 1);
+                                        toChangeGoods.setQuanlity(10);
+                                        toChangeGoods.save();
+                                    } catch (NullPointerException e) {
+                                        ToastFactory.makeText(SalesSettingActivity.this, "所需商品并未上架", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                                 DataSupport.findAllAsync(Goods.class).listen(new FindMultiCallback() {
                                     @Override
@@ -216,17 +227,14 @@ public class SalesSettingActivity extends AppCompatActivity {
         });
     }
 
-    //活动转换之间都调用沉浸模式全屏
+    //实现返回功能
     @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus && Build.VERSION.SDK_INT >= 19) {
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            finish();
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 }

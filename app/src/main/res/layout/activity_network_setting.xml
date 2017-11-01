@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/btn_network_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_chevron_left" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="返回"
+            android:textSize="36sp"
+            android:textColor="#8B8378"
+            android:gravity="center"
+            android:layout_weight="0.05" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/bg_body">
+
+            <Button
+                android:id="@+id/btn_wlan_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.14"
+                android:background="#ffffff"
+                android:drawableLeft="@drawable/wifi_no_lock"
+                android:gravity="center_vertical"
+                android:text="WLAN"
+                android:textSize="36sp" />
+
+            <TextView
+                android:id="@+id/tv_wlan_state"
+                android:layout_width="82dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Off"
+                android:textSize="36sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:weightSum="1">
+            <Button
+                android:id="@+id/btn_data_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="#ffffff"
+                android:text="Mobile Data"
+                android:textSize="36sp"
+                android:layout_weight="1.00" />
+            <TextView
+                android:id="@+id/tv_data_state"
+                android:layout_width="82dp"
+                android:layout_height="match_parent"
+                android:text="Off"
+                android:textSize="36sp"
+                android:gravity="center"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:weightSum="1">
+            <Button
+                android:id="@+id/btn_ethernet_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="#ffffff"
+                android:text="Ethernet"
+                android:textSize="36sp"
+                android:layout_weight="1.00" />
+            <TextView
+                android:id="@+id/tv_ethernet_state"
+                android:layout_width="82dp"
+                android:layout_height="match_parent"
+                android:text="Off"
+                android:textSize="36sp"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

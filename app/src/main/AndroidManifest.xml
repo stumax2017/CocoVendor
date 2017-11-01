@@ -48,6 +48,12 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
+    <!-- 申请WiFi访问网络的权限 -->
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
     <application
         android:name="org.litepal.LitePalApplication"
         android:allowBackup="true"
@@ -60,22 +66,34 @@
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="934e8d19d768774390d77aea267f0ab2" />
+            android:value="d47a4f292183bbe8a69fff44e38dbfee" />
 
-        <activity android:name=".Activity.HomePageActivity" />
-        <activity android:name=".Activity.LoginActivity" />
-        <activity android:name=".Activity.SalesSettingActivity" />
-        <activity android:name=".Activity.SettingMenuActivity" />
-        <activity android:name=".Activity.StartActivity">
+        <activity android:name=".Activity.HomePageActivity"
+            android:label="主页"/>
+        <activity android:name=".Activity.LoginActivity"
+            android:label="设置"/>
+        <activity android:name=".Activity.SalesSettingActivity"
+            android:label="销售设置"/>
+        <activity android:name=".Activity.NetworkSettingActivity"
+            android:label="网络设置"/>
+        <activity android:name=".Activity.WlanItemActivity"
+            android:label="WLAN设置"/>
+        <activity android:name=".Activity.SettingMenuActivity"
+            android:label="设置"/>
+        <activity android:name=".Activity.StartActivity"
+            android:label="启动页">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.AdSettingActivity" />
-        <activity android:name=".Activity.SystemSettingActivity" />
-        <activity android:name=".Activity.CameraSettingActivity" />
+        <activity android:name=".Activity.AdSettingActivity"
+            android:label="广告设置"/>
+        <activity android:name=".Activity.SystemSettingActivity"
+            android:label="系统设置"/>
+        <activity android:name=".Activity.CameraSettingActivity"
+            android:label="监控设置"/>
 
         <service android:name=".Service.VideoService" />
 
@@ -88,9 +106,12 @@
         </receiver>
 
         <activity android:name=".Activity.ScreenSaverActivity" />
-        <activity android:name=".Activity.SheetActivity" />
-        <activity android:name=".Activity.SheetSalesActivity" />
-        <activity android:name=".Activity.SheetGoodsActivity"></activity>
+        <activity android:name=".Activity.SheetSalesActivity"
+            android:label="销售信息"/>
+        <activity android:name=".Activity.SheetGoodsActivity"
+            android:label="货物信息"/>
+        <activity android:name=".Activity.SheetInfoActivity"
+            android:label="本机信息"></activity>
     </application>
 
 </manifest>

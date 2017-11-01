@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="设置">
+        <Preference
+            android:title="广告设置">
+            <intent
+                android:targetPackage="cn.edu.stu.max.cocovendor"
+                android:targetClass="cn.edu.stu.max.cocovendor.Activity.AdSettingActivity"/>
+        </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="在线更新">
+        <Preference
+            android:title="下载商品信息"/>
+        <Preference
+            android:title="下载产品图片"/>
+        <Preference
+            android:title="下载广告"/>
+    </PreferenceCategory>
+</PreferenceScreen>

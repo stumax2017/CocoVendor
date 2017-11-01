@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <Preference
+        android:key="key_machine_id"
+        android:title="机器识别号"/>
+    <Preference
+        android:key="key_ip"
+        android:title="IP地址"/>
+    <Preference
+        android:key="key_mac_address"
+        android:title="MAC地址"/>
+    <Preference
+        android:key="key_server_ip"
+        android:title="已连接服务器IP"/>
+    <Preference
+        android:key="key_language"
+        android:title="系统语言"/>
+    <Preference
+        android:key="key_local_address"
+        android:title="机器地理位置"/>
+    <Preference
+        android:key="key_version"
+        android:title="机器版本号"/>
+    <Preference
+        android:key="key_tel_number"
+        android:title="客服电话"/>
+    <Preference
+        android:key="key_ad_rules"
+        android:title="当前广告规则"/>
+</PreferenceScreen>
