@@ -6,14 +6,14 @@
             android:title="货物信息">
             <intent
                 android:targetPackage="cn.edu.stu.max.cocovendor"
-                android:targetClass="cn.edu.stu.max.cocovendor.Activity.SheetGoodsActivity"/>
+                android:targetClass="cn.edu.stu.max.cocovendor.activities.SheetGoodsActivity"/>
         </Preference>
 
         <Preference
             android:title="销售信息">
             <intent
                 android:targetPackage="cn.edu.stu.max.cocovendor"
-                android:targetClass="cn.edu.stu.max.cocovendor.Activity.SheetSalesActivity"/>
+                android:targetClass="cn.edu.stu.max.cocovendor.activities.SheetSalesActivity"/>
         </Preference>
     </PreferenceCategory>
 
@@ -23,7 +23,7 @@
             android:title="销售设置">
             <intent
                 android:targetPackage="cn.edu.stu.max.cocovendor"
-                android:targetClass="cn.edu.stu.max.cocovendor.Activity.SalesSettingActivity"/>
+                android:targetClass="cn.edu.stu.max.cocovendor.activities.SalesSettingActivity"/>
         </Preference>
     </PreferenceCategory>
 

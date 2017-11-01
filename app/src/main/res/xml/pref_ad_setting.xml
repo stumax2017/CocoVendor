@@ -6,7 +6,7 @@
             android:title="广告设置">
             <intent
                 android:targetPackage="cn.edu.stu.max.cocovendor"
-                android:targetClass="cn.edu.stu.max.cocovendor.Activity.AdSettingActivity"/>
+                android:targetClass="cn.edu.stu.max.cocovendor.activities.AdSettingActivity"/>
         </Preference>
     </PreferenceCategory>
 

@@ -3,9 +3,12 @@ package cn.edu.stu.max.cocovendor.activities;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -29,7 +32,7 @@ import cn.edu.stu.max.cocovendor.javaClass.MyUSBListAdapter;
 import cn.edu.stu.max.cocovendor.R;
 
 
-public class AdSettingActivity extends Activity {
+public class AdSettingActivity extends AppCompatActivity {
 
     private static final String adSettingDataFileName = "sharedfile";     // 定义保存的文件的名称
 
@@ -84,6 +87,7 @@ public class AdSettingActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ad_setting);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         SharedPreferences share = super.getSharedPreferences(adSettingDataFileName, MODE_PRIVATE);  // 实例化
         final SharedPreferences.Editor editor = share.edit();   // 使处于可编辑状态
@@ -602,4 +606,14 @@ public class AdSettingActivity extends Activity {
         return usbFileNameList;
     }
 
+    //实现返回功能
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

@@ -286,13 +286,13 @@ public class HomePageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    Sales sales = new Sales();
-                    sales.setSales_date(new Date());
-                    sales.setGoods_id(DataSupport.find(Goods.class,1).getId());
-                    sales.setGoods_name(DataSupport.find(Goods.class,1).getName());
-                    sales.setMachine_floor(1);
-                    sales.setPay_way("支付宝");
-                    sales.save();
+//                    Sales sales = new Sales();
+//                    sales.setSales_date(new Date());
+//                    sales.setGoods_id(DataSupport.find(Goods.class,1).getId());
+//                    sales.setGoods_name(DataSupport.find(Goods.class,1).getName());
+//                    sales.setMachine_floor(1);
+//                    sales.setPay_way("支付宝");
+//                    sales.save();
                 } catch (NullPointerException e) {
                     ToastFactory.makeText(HomePageActivity.this, "目前没有商品1", Toast.LENGTH_SHORT).show();
                 }
