@@ -25,6 +25,7 @@
                 android:targetClass="cn.edu.stu.max.cocovendor.Activity.LoginActivity"/>
         </Preference>
         <Preference
+            android:key="key_cam_setting"
             android:title="监控设置">
             <intent
                 android:targetPackage="cn.edu.stu.max.cocovendor"

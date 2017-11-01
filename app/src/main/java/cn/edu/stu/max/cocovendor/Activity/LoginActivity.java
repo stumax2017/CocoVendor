@@ -3,8 +3,10 @@ package cn.edu.stu.max.cocovendor.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -34,6 +36,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //加入返回箭头
+        //noinspection ConstantConditions
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         Intent intent = getIntent();
         isLogin = intent.getBooleanExtra("IsLogin", true);
         textViewLoginPassword = (TextView) findViewById(R.id.tv_login_password);
@@ -154,7 +161,6 @@ public class LoginActivity extends AppCompatActivity {
                                 ToastFactory.makeText(LoginActivity.this, "旧密码错误", Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            //DataSupport.find(LocalInfo.class, 1).setLogin_password(passwordTemper.toString().trim());
                             LocalInfo localInfoToChange = new LocalInfo();
                             localInfoToChange.setLogin_password(passwordTemper.toString().trim());
                             localInfoToChange.update(1);
@@ -196,18 +202,15 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    //活动转换之间都调用沉浸模式全屏
+    //实现返回功能
     @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus && Build.VERSION.SDK_INT >= 19) {
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            finish();
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     //取反布尔值方法
@@ -217,12 +220,6 @@ public class LoginActivity extends AppCompatActivity {
 
     //填充●个数方法
     private String fillPassword(String Plaintext) {
-        //想用正则表达式简化程序，没有实现出来
-        //return Plaintext.replaceAll("[0-9]*", "* ");
-        String Ciphertext = "";
-        for (int i = 0; i < Plaintext.length(); i ++) {
-            Ciphertext += "*";
-        }
-        return Ciphertext;
+        return Plaintext.replaceAll("[0-9]", "*");
     }
 }

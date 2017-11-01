@@ -20,18 +20,16 @@ import cn.edu.stu.max.cocovendor.R;
 
 public class SystemSettingActivity extends AppCompatPreferenceActivity {
 
-//    private static final String cameraSettingDataFileName = "cameraSettingDataFile";     // 定义保存的文件的名称
-//    private SharedPreferences share;
+    private static final String cameraSettingDataFileName = "cameraSettingDataFile";     // 定义保存的文件的名称
+    private SharedPreferences share;
 //
 //    private ButtonListener buttonListener = new ButtonListener();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //getFragmentManager().beginTransaction().replace(android.R.id.content, new SystemSettingFragment()).commit();
-        setupActionBar();
-//        setContentView(R.layout.activity_system_setting);
-//
-//        share = super.getSharedPreferences(cameraSettingDataFileName, MODE_PRIVATE);  // 实例化
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        share = super.getSharedPreferences(cameraSettingDataFileName, MODE_PRIVATE);  // 实例化
 //
 //        Button buttonSysParmSetting = (Button) findViewById(R.id.btn_sys_parm_setting);
 //        buttonSysParmSetting.setOnClickListener(buttonListener);
@@ -95,40 +93,6 @@ public class SystemSettingActivity extends AppCompatPreferenceActivity {
 //            }
 //        }
 //    }
-
-    public static class SystemSettingFragment extends PreferenceFragment {
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.pref_sys_setting);
-            Preference preference = findPreference("key_change_pswd");
-            Intent intentChangePswd = preference.getIntent();
-            intentChangePswd.putExtra("IsLogin", false);
-        }
-    }
-
-    @Override
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public void onBuildHeaders(List<Header> target) {
-        loadHeadersFromResource(R.xml.pref_headers, target);
-    }
-
-    @Override
-    protected boolean isValidFragment(String fragmentName) {
-        return PreferenceFragment.class.getName().equals(fragmentName);
-    }
-
-    /**
-     * Set up the {@link android.app.ActionBar}, if the API is available.
-     */
-    private void setupActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            // Show the Up button in the action bar.
-            actionBar.setTitle("系统设置");
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -30,8 +30,7 @@ public class SheetInfoActivity extends AppCompatPreferenceActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getFragmentManager().beginTransaction().replace(android.R.id.content, new SheetInfoFragment()).commit();
-        setupActionBar();
-        //PreferenceManager.setDefaultValues(this, R.xml.pref_sheet_info, false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public static class SheetInfoFragment extends PreferenceFragment {
@@ -62,17 +61,6 @@ public class SheetInfoActivity extends AppCompatPreferenceActivity {
         }
     }
 
-    /**
-     * Set up the {@link android.app.ActionBar}, if the API is available.
-     */
-    private void setupActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            // Show the Up button in the action bar.
-            actionBar.setTitle("本机信息");
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
