@@ -97,6 +97,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
+            android:layout_marginLeft="20dp"
             android:text="投币金额："
             android:textSize="24sp" />
 
@@ -117,11 +118,16 @@
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:background="@color/colorBlue"
-            android:shadowColor="@color/colorTransparency"
             android:textColor="@color/colorWhite"
             android:text="退币"
             android:textSize="24sp" />
         </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorGray"
+        android:elevation="2dp"/>
 
     <TableLayout
         android:layout_marginTop="60dp"
@@ -140,7 +146,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_margin="20dp"
-                android:elevation="15dp"/>
+                android:background="@color/colorWhite"
+                android:elevation="3dp"/>
 
             <ImageView
                 android:id="@+id/iv_goods_2"
@@ -148,7 +155,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_margin="20dp" />
+                android:layout_margin="20dp"
+                android:background="@color/colorWhite"
+                android:elevation="3dp"/>
 
             <ImageView
                 android:id="@+id/iv_goods_3"
@@ -156,7 +165,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_margin="20dp" />
+                android:layout_margin="20dp"
+                android:background="@color/colorWhite"
+                android:elevation="3dp"/>
         </TableRow>
 
         <TableRow
@@ -167,7 +178,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_margin="20dp" />
+                android:layout_margin="20dp"
+                android:background="@color/colorWhite"
+                android:elevation="3dp"/>
 
             <ImageView
                 android:id="@+id/iv_goods_5"
@@ -175,7 +188,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_margin="20dp" />
+                android:layout_margin="20dp"
+                android:background="@color/colorWhite"
+                android:elevation="3dp"/>
 
             <ImageView
                 android:id="@+id/iv_goods_6"
@@ -183,7 +198,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_margin="20dp" />
+                android:layout_margin="20dp"
+                android:background="@color/colorWhite"
+                android:elevation="3dp"/>
         </TableRow>
     </TableLayout>
 
