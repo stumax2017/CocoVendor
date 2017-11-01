@@ -18,6 +18,11 @@ import android.widget.Toast;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
+
 import org.litepal.crud.DataSupport;
 
 import java.util.Date;
@@ -61,6 +66,16 @@ public class HomePageActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_home_page);
+
+        //尝试定位操作
+        AMapLocationClient mLocationClient = new AMapLocationClient(this);
+        mLocationClient.setLocationListener(mLocationListener);
+        AMapLocationClientOption mLocationOption = new AMapLocationClientOption();
+        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+        mLocationOption.setOnceLocation(false);
+        mLocationOption.setInterval(3000);
+        mLocationClient.setLocationOption(mLocationOption);
+        mLocationClient.startLocation();
 
         context = this;
 
@@ -238,6 +253,18 @@ public class HomePageActivity extends AppCompatActivity {
         });
     }
 
+    private AMapLocationListener mLocationListener = new AMapLocationListener() {
+        @Override
+        public void onLocationChanged(AMapLocation aMapLocation) {
+            if (aMapLocation != null) {
+                if (aMapLocation.getErrorCode() == 0) {
+                    TextView textView = (TextView) findViewById(R.id.tv_homepage_testlogin);
+                    textView.setText(aMapLocation.getAddress());
+                } else {
+                }
+            }
+        }
+    };
     //活动转换之间都调用沉浸模式全屏
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {

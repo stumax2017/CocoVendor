@@ -1,7 +1,10 @@
 package cn.edu.stu.max.cocovendor.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,6 +20,10 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 
 import org.litepal.LitePal;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Locale;
 
 import cn.edu.stu.max.cocovendor.JavaClass.ToastFactory;
 import cn.edu.stu.max.cocovendor.R;
@@ -45,16 +52,7 @@ public class StartActivity extends AppCompatActivity {
             LocalInfo localInfo = new LocalInfo();
             fillLocalInfo(localInfo);
         }
-
-        //尝试定位操作
-        AMapLocationClient mLocationClient = new AMapLocationClient(this);
-        mLocationClient.setLocationListener(mLocationListener);
-        AMapLocationClientOption mLocationOption = new AMapLocationClientOption();
-        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
-        mLocationOption.setOnceLocation(false);
-        mLocationOption.setInterval(3000);
-        mLocationClient.setLocationOption(mLocationOption);
-        mLocationClient.startLocation();
+        Log.d("SHA1:", sHA1(this));
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -67,18 +65,31 @@ public class StartActivity extends AppCompatActivity {
         }, 2000);
     }
 
-    private AMapLocationListener mLocationListener = new AMapLocationListener() {
-        @Override
-        public void onLocationChanged(AMapLocation aMapLocation) {
-            if (aMapLocation != null) {
-                if (aMapLocation.getErrorCode() == 0) {
-                    TextView textView = (TextView) findViewById(R.id.tv_homepage_testlogin);
-                    textView.setText(aMapLocation.getAddress());
-                } else {
-                }
+    public static String sHA1(Context context) {
+        try {
+            PackageInfo info = context.getPackageManager().getPackageInfo(
+                    context.getPackageName(), PackageManager.GET_SIGNATURES);
+            byte[] cert = info.signatures[0].toByteArray();
+            MessageDigest md = MessageDigest.getInstance("SHA1");
+            byte[] publicKey = md.digest(cert);
+            StringBuffer hexString = new StringBuffer();
+            for (int i = 0; i < publicKey.length; i++) {
+                String appendString = Integer.toHexString(0xFF & publicKey[i])
+                        .toUpperCase(Locale.US);
+                if (appendString.length() == 1)
+                    hexString.append("0");
+                hexString.append(appendString);
+                hexString.append(":");
             }
+            String result = hexString.toString();
+            return result.substring(0, result.length()-1);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
-    };
+        return null;
+    }
 
     private void fillLocalInfo(LocalInfo localInfo) {
         localInfo.setMachine_id(1);
