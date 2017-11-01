@@ -2,19 +2,19 @@
 
     <!-- These settings headers are only used on tablets. -->
     <header
-        android:fragment="cn.edu.stu.max.cocovendor.Activity.SettingMenuActivity$SystemSettingFragment"
+        android:fragment="cn.edu.stu.max.cocovendor.activities.SettingMenuActivity$SystemSettingFragment"
         android:title="系统" />
 
     <header
-        android:fragment="cn.edu.stu.max.cocovendor.Activity.SettingMenuActivity$AdSettingFragment"
+        android:fragment="cn.edu.stu.max.cocovendor.activities.SettingMenuActivity$AdSettingFragment"
         android:title="广告" />
 
     <header
-        android:fragment="cn.edu.stu.max.cocovendor.Activity.SettingMenuActivity$SalesSettingFragment"
+        android:fragment="cn.edu.stu.max.cocovendor.activities.SettingMenuActivity$SalesSettingFragment"
         android:title="销售" />
 
     <header
-        android:fragment="cn.edu.stu.max.cocovendor.Activity.SettingMenuActivity$HelpFragment"
+        android:fragment="cn.edu.stu.max.cocovendor.activities.SettingMenuActivity$HelpFragment"
         android:title="帮助" />
 
 </preference-headers>

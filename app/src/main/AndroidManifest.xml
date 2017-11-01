@@ -68,19 +68,19 @@
             android:name="com.amap.api.v2.apikey"
             android:value="d47a4f292183bbe8a69fff44e38dbfee" />
 
-        <activity android:name=".Activity.HomePageActivity"
+        <activity android:name=".activities.HomePageActivity"
             android:label="主页"/>
-        <activity android:name=".Activity.LoginActivity"
+        <activity android:name=".activities.LoginActivity"
             android:label="设置"/>
-        <activity android:name=".Activity.SalesSettingActivity"
+        <activity android:name=".activities.SalesSettingActivity"
             android:label="销售设置"/>
-        <activity android:name=".Activity.NetworkSettingActivity"
+        <activity android:name=".activities.NetworkSettingActivity"
             android:label="网络设置"/>
-        <activity android:name=".Activity.WlanItemActivity"
+        <activity android:name=".activities.WlanItemActivity"
             android:label="WLAN设置"/>
-        <activity android:name=".Activity.SettingMenuActivity"
+        <activity android:name=".activities.SettingMenuActivity"
             android:label="设置"/>
-        <activity android:name=".Activity.StartActivity"
+        <activity android:name=".activities.StartActivity"
             android:label="启动页">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -88,16 +88,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.AdSettingActivity"
+        <activity android:name=".activities.AdSettingActivity"
             android:label="广告设置"/>
-        <activity android:name=".Activity.SystemSettingActivity"
+        <activity android:name=".activities.SystemSettingActivity"
             android:label="系统设置"/>
-        <activity android:name=".Activity.CameraSettingActivity"
+        <activity android:name=".activities.CameraSettingActivity"
             android:label="监控设置"/>
 
-        <service android:name=".Service.VideoService" />
+        <service android:name=".services.VideoService" />
 
-        <receiver android:name=".JavaClass.BootReceiver">
+        <receiver android:name=".javaClass.BootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
 
@@ -105,12 +105,12 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".Activity.ScreenSaverActivity" />
-        <activity android:name=".Activity.SheetSalesActivity"
+        <activity android:name=".activities.ScreenSaverActivity" />
+        <activity android:name=".activities.SheetSalesActivity"
             android:label="销售信息"/>
-        <activity android:name=".Activity.SheetGoodsActivity"
+        <activity android:name=".activities.SheetGoodsActivity"
             android:label="货物信息"/>
-        <activity android:name=".Activity.SheetInfoActivity"
+        <activity android:name=".activities.SheetInfoActivity"
             android:label="本机信息"></activity>
     </application>
 
