@@ -19,6 +19,7 @@ package cn.edu.stu.max.cocovendor.activities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.os.Bundle;
 import android.serialport.SerialPort;
 import android.support.v7.app.AppCompatActivity;
@@ -90,6 +91,8 @@ public abstract class SerialPortActivity extends AppCompatActivity {
         } catch (IOException e) {
             DisplayError(R.string.error_unknown);
         } catch (InvalidParameterException e) {
+            Intent intent = new Intent(SerialPortActivity.this, MainMenu.class);
+            startActivity(intent);
             DisplayError(R.string.error_configuration);
         }
     }
