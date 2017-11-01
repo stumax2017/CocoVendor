@@ -14,7 +14,7 @@
  * limitations under the License. 
  */
 
-package cn.edu.stu.max.cocovendor.JavaClass;
+package cn.edu.stu.max.cocovendor.javaClass;
 
 import android.content.SharedPreferences;
 import android.serialport.SerialPort;

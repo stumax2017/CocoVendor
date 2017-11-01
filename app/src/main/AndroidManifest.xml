@@ -55,7 +55,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
-        android:name=".JavaClass.Application"
+        android:name=".javaClass.Application"
         android:allowBackup="true"
         android:icon="@drawable/ic_vendor"
         android:label="@string/app_name"
@@ -105,11 +105,11 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".Activity.MainMenu" />
-        <activity android:name=".Activity.SerialPortPreferences"/>
-        <activity android:name=".Activity.ConsoleActivity"/>
-        <activity android:name=".Activity.LoopbackActivity"/>
-        <activity android:name=".Activity.Sending01010101Activity"/>
+        <activity android:name=".activities.MainMenu" />
+        <activity android:name=".activities.SerialPortPreferences"/>
+        <activity android:name=".activities.ConsoleActivity"/>
+        <activity android:name=".activities.LoopbackActivity"/>
+        <activity android:name=".activities.Sending01010101Activity"/>
         <activity android:name=".activities.ScreenSaverActivity" />
         <activity android:name=".activities.SheetSalesActivity"
             android:label="销售信息"/>

@@ -307,6 +307,13 @@ public class HomePageActivity extends SerialPortActivity {
                 }
 
                 try {
+                    mOutputStream.write(text.getBytes());
+                    mOutputStream.write('\n');
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                try {
 //                    Sales sales = new Sales();
 //                    sales.setSales_date(new Date());
 //                    sales.setGoods_id(DataSupport.find(Goods.class,1).getId());

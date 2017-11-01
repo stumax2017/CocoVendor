@@ -14,7 +14,7 @@
  * limitations under the License. 
  */
 
-package cn.edu.stu.max.cocovendor.Activity;
+package cn.edu.stu.max.cocovendor.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -28,7 +28,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.InvalidParameterException;
 
-import cn.edu.stu.max.cocovendor.JavaClass.Application;
+import cn.edu.stu.max.cocovendor.javaClass.Application;
 import cn.edu.stu.max.cocovendor.R;
 
 public abstract class SerialPortActivity extends AppCompatActivity {

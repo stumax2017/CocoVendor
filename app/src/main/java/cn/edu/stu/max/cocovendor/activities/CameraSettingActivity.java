@@ -1,4 +1,4 @@
-package cn.edu.stu.max.cocovendor.Activity;
+package cn.edu.stu.max.cocovendor.activities;
 
 
 import android.content.SharedPreferences;

@@ -14,7 +14,7 @@
  * limitations under the License. 
  */
 
-package cn.edu.stu.max.cocovendor.Activity;
+package cn.edu.stu.max.cocovendor.activities;
 
 import android.os.Bundle;
 

@@ -14,7 +14,7 @@
  * limitations under the License. 
  */
 
-package cn.edu.stu.max.cocovendor.Activity;
+package cn.edu.stu.max.cocovendor.activities;
 
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -23,8 +23,8 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
 import android.serialport.SerialPortFinder;
 
-import cn.edu.stu.max.cocovendor.JavaClass.Application;
 import cn.edu.stu.max.cocovendor.R;
+import cn.edu.stu.max.cocovendor.javaClass.Application;
 
 public class SerialPortPreferences extends PreferenceActivity {
 
