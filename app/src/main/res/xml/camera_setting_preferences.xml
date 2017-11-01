@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:title="监控设置"
+        android:summary="关于监控的设置">
+        <SwitchPreference
+            android:summaryOn="监控已开启"
+            android:summaryOff="监控已关闭"
+            android:title="开启监控"
+            android:key="SwitchPreference"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:title="@string/revolution_title_str">
+        <ListPreference
+            android:key="RevolutionListPreference"
+            android:title="@string/revolution_title_listpreference"
+            android:entries="@array/revolution_entries_str"
+            android:entryValues="@array/revolution_entries_values_str"
+            android:dialogTitle="@string/revolution_dialog_title"
+            android:defaultValue="@string/revolution_default_str"
+            android:summary="@string/revolution_summary_str" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:title="@string/spytime_title_str">
+        <ListPreference
+            android:key="SpyTimeListPreference"
+            android:title="@string/spytime_title_listpreference"
+            android:entries="@array/spytime_entries_str"
+            android:entryValues="@array/spytime_entries_values_str"
+            android:dialogTitle="@string/spytime_dialog_title"
+            android:defaultValue="@string/spytime_default_str"
+            android:summary="@string/spytime_summary_str" />
+    </PreferenceCategory>
+</PreferenceScreen>

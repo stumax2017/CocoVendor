@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +25,8 @@ import com.amap.api.location.AMapLocationListener;
 
 import org.litepal.crud.DataSupport;
 
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.Date;
 
 import java.io.File;
@@ -33,7 +37,7 @@ import cn.edu.stu.max.cocovendor.R;
 import cn.edu.stu.max.cocovendor.databaseClass.Goods;
 import cn.edu.stu.max.cocovendor.databaseClass.Sales;
 
-public class HomePageActivity extends AppCompatActivity {
+public class HomePageActivity extends SerialPortActivity {
 
     private final static String TOPATH = "/storage/sdcard0/tencent/QQfile_recv/b/";               // 本机广告存储路径
 
@@ -62,6 +66,8 @@ public class HomePageActivity extends AppCompatActivity {
     private ImageView imageViewGoods4;
     private ImageView imageViewGoods5;
     private ImageView imageViewGoods6;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +104,7 @@ public class HomePageActivity extends AppCompatActivity {
                     case MotionEvent.ACTION_DOWN: { // 手指下来的时候,取消之前绑定的Runnable
 
                         handler.removeCallbacks(runnable);
+
                         break;
                     }
                     case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
@@ -118,6 +125,7 @@ public class HomePageActivity extends AppCompatActivity {
                     case MotionEvent.ACTION_DOWN: { // 手指下来的时候,取消之前绑定的Runnable
 
                         handler.removeCallbacks(runnable);
+
                         break;
                     }
                     case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
@@ -138,6 +146,7 @@ public class HomePageActivity extends AppCompatActivity {
                     case MotionEvent.ACTION_DOWN: { // 手指下来的时候,取消之前绑定的Runnable
 
                         handler.removeCallbacks(runnable);
+
                         break;
                     }
                     case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
@@ -158,6 +167,7 @@ public class HomePageActivity extends AppCompatActivity {
                     case MotionEvent.ACTION_DOWN: { // 手指下来的时候,取消之前绑定的Runnable
 
                         handler.removeCallbacks(runnable);
+
                         break;
                     }
                     case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
@@ -178,6 +188,7 @@ public class HomePageActivity extends AppCompatActivity {
                     case MotionEvent.ACTION_DOWN: { // 手指下来的时候,取消之前绑定的Runnable
 
                         handler.removeCallbacks(runnable);
+
                         break;
                     }
                     case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
@@ -198,6 +209,7 @@ public class HomePageActivity extends AppCompatActivity {
                     case MotionEvent.ACTION_DOWN: { // 手指下来的时候,取消之前绑定的Runnable
 
                         handler.removeCallbacks(runnable);
+
                         break;
                     }
                     case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
@@ -285,6 +297,15 @@ public class HomePageActivity extends AppCompatActivity {
         imageViewGoods1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String text = "You clicked on item 1";
+                try {
+                    mOutputStream.write(text.getBytes());
+                    mOutputStream.write('\n');
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
                 try {
 //                    Sales sales = new Sales();
 //                    sales.setSales_date(new Date());
@@ -302,6 +323,16 @@ public class HomePageActivity extends AppCompatActivity {
         imageViewGoods2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String text = "You clicked on item 2";
+                try {
+                    mOutputStream.write(text.getBytes());
+                    mOutputStream.write('\n');
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
                 try {
                     Sales sales = new Sales();
                     sales.setSales_date(new Date());
@@ -319,6 +350,16 @@ public class HomePageActivity extends AppCompatActivity {
         imageViewGoods3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String text = "You clicked on item 3";
+                try {
+                    mOutputStream.write(text.getBytes());
+                    mOutputStream.write('\n');
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
                 try {
                     Sales sales = new Sales();
                     sales.setSales_date(new Date());
@@ -336,6 +377,16 @@ public class HomePageActivity extends AppCompatActivity {
         imageViewGoods4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String text = "You clicked on item 4";
+                try {
+                    mOutputStream.write(text.getBytes());
+                    mOutputStream.write('\n');
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
                 try {
                     Sales sales = new Sales();
                     sales.setSales_date(new Date());
@@ -353,6 +404,16 @@ public class HomePageActivity extends AppCompatActivity {
         imageViewGoods5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String text = "You clicked on item 5";
+                try {
+                    mOutputStream.write(text.getBytes());
+                    mOutputStream.write('\n');
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
                 try {
                     Sales sales = new Sales();
                     sales.setSales_date(new Date());
@@ -370,6 +431,16 @@ public class HomePageActivity extends AppCompatActivity {
         imageViewGoods6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String text = "You clicked on item 6";
+                try {
+                    mOutputStream.write(text.getBytes());
+                    mOutputStream.write('\n');
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
                 try {
                     Sales sales = new Sales();
                     sales.setSales_date(new Date());
@@ -550,4 +621,13 @@ public class HomePageActivity extends AppCompatActivity {
         }
         return super.onTouchEvent(event);
     };
+
+    @Override
+    protected void onDataReceived(final byte[] buffer, final int size) {
+        runOnUiThread(new Runnable() {
+            public void run() {
+                ToastFactory.makeText(HomePageActivity.this, new String (buffer, 0, size), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }

@@ -1,145 +1,75 @@
-package cn.edu.stu.max.cocovendor.activities;
+package cn.edu.stu.max.cocovendor.Activity;
+
 
 import android.content.SharedPreferences;
-import android.support.annotation.IdRes;
+import android.preference.CheckBoxPreference;
+import android.preference.ListPreference;
+import android.preference.Preference;
+import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
+import android.preference.SwitchPreference;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import cn.edu.stu.max.cocovendor.R;
 
-public class CameraSettingActivity extends AppCompatActivity {
-
-    private static final String cameraSettingDataFileName = "cameraSettingDataFile";     // 定义保存的文件的名称
-    private SharedPreferences.Editor editor;
-
-    private Button buttonReturn;
-
-    private RadioGroup radioGroupIsSpy;
-    private RadioButton radioButtonYes;
-    private RadioButton radioButtonNo;
-
-    private RadioGroup radioGroupResolutionSelect;
-    private RadioButton radioButtonCIF;
-    private RadioButton radioButton480P;
-    private RadioButton radioButton720P;
-
-    private RadioGroup radioGroupSpyMethod;
-    private RadioButton radioButton24hours;
-    private RadioButton radioButtonATime;
-    private RadioButton radioButtonCustom;
-
-    private int resolutionSelection = 0;
-    private int spyMethodSelection = 0;
-    private boolean isOpen = true;
-
+public class CameraSettingActivity extends PreferenceActivity implements Preference.OnPreferenceChangeListener {
+    private ListPreference revolutionListPreference = null;
+    private ListPreference spyTimeListPreference = null;
+    private SwitchPreference switchPreference = null;
+    private final static String TAG = "MainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_camera_setting);
+        //setContentView(R.layout.activity_main);
+        //从xml文件中添加Preference项
+        addPreferencesFromResource(R.xml.camera_setting_preferences);
+        //findPreference函数通过key可以找到对应的设置项
+        switchPreference = (SwitchPreference)findPreference("SwitchPreference");
+        switchPreference.setOnPreferenceChangeListener(this);
+        revolutionListPreference = (ListPreference) findPreference("RevolutionListPreference");
+        revolutionListPreference.setOnPreferenceChangeListener(this);
+        revolutionListPreference.setSummary(revolutionListPreference.getEntry());
+        spyTimeListPreference = (ListPreference) findPreference("SpyTimeListPreference");
+        spyTimeListPreference.setOnPreferenceChangeListener(this);
+        spyTimeListPreference.setSummary(spyTimeListPreference.getEntry());
+    }
 
+    /*
+     * (non-Javadoc)
+     * @param preference
+     * @param newValue
+     * @return
+     * @see android.preference.Preference.OnPreferenceChangeListener#onPreferenceChange(android.preference.Preference, java.lang.Object)
+     */
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        // TODO Auto-generated method stub
+        //判断是哪个Preference改变了
+        if (preference.getKey().equals("RevolutionListPreference")) {
+//            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
 
+//            Boolean sw = settings.getBoolean("SwitchPreference", false);
 
-
-        SharedPreferences share = super.getSharedPreferences(cameraSettingDataFileName, MODE_PRIVATE);  // 实例化
-        editor = share.edit();   // 使处于可编辑状态
-        editor.putBoolean("isOpen", false);
-        editor.putInt("resolutionSelection", resolutionSelection);
-        editor.putInt("spyMethodSelection", spyMethodSelection);
-
-
-        radioGroupIsSpy = (RadioGroup) findViewById(R.id.rg_is_spy);
-        radioButtonYes = (RadioButton) findViewById(R.id.rb_yes);
-        radioButtonNo = (RadioButton) findViewById(R.id.rb_no);
-
-
-        radioGroupResolutionSelect = (RadioGroup) findViewById(R.id.rg_resolution_select);
-        radioButtonCIF = (RadioButton) findViewById(R.id.rb_cif);
-        radioButton480P = (RadioButton) findViewById(R.id.rb_480p);
-        radioButton720P = (RadioButton) findViewById(R.id.rb_720p);
-
-        radioGroupSpyMethod = (RadioGroup) findViewById(R.id.rg_spy_method);
-        radioButton24hours = (RadioButton) findViewById(R.id.rb_24hours);
-        radioButtonATime = (RadioButton) findViewById(R.id.rb_a_time);
-        radioButtonCustom = (RadioButton) findViewById(R.id.rb_custom);
-
-        buttonReturn = (Button) findViewById(R.id.btn_camera_setting_return);
-
-//        radioButtonYes.setChecked(share.getBoolean("isOpen", true));
-//        radioButtonNo.setChecked(!share.getBoolean("isOpen", true));
-//        switch (share.getInt("resolutionSelection", 0)) {
-//            case 0:
-//                radioButtonCIF.setChecked(true);
-//                break;
-//            case 1:
-//                radioButton480P.setChecked(true);
-//                break;
-//            case 2:
-//                radioButton720P.setChecked(true);
-//                break;
-//        }
-//        switch (share.getInt("spyMethodSelection", 0)) {
-//            case 0:
-//                radioButton24hours.setChecked(true);
-//                break;
-//            case 1:
-//                radioButtonATime.setChecked(true);
-//                break;
-//            case 2:
-//                radioButtonCustom.setChecked(true);
-//                break;
-//        }
-
-
-        radioGroupIsSpy.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
-                if (i == radioButtonYes.getId()) {
-                    isOpen = true;
-                } else if (i == radioButtonNo.getId()) {
-                    isOpen = false;
-                    buttonReturn.setText("hhhhhh");
-                }
-            }
-        });
-
-        radioGroupResolutionSelect.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
-                if (i == radioButtonCIF.getId()) {
-                    resolutionSelection = 0;
-                } else if (i == radioButton480P.getId()) {
-                    resolutionSelection = 1;
-                } else if (i == radioButton720P.getId()) {
-                    resolutionSelection = 2;
-                }
-            }
-        });
-
-        radioGroupSpyMethod.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
-                if (i == radioButton24hours.getId()) {
-                    spyMethodSelection = 0;
-                } else if (i == radioButtonATime.getId()) {
-                    spyMethodSelection = 1;
-                } else if (i == radioButton24hours.getId()) {
-                    spyMethodSelection = 0;
-                }
-            }
-        });
-
-        buttonReturn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                editor.putBoolean("isOpen", isOpen);
-                editor.putInt("resolutionSelection", resolutionSelection);
-                editor.putInt("spyMethodSelection", spyMethodSelection);
-                finish();
-            }
-        });
+            ListPreference listPreference = (ListPreference) preference;
+            CharSequence[] entries = listPreference.getEntries();
+            int index = listPreference.findIndexOfValue((String)newValue);
+            listPreference.setSummary(entries[index]);
+        } else if (preference.getKey().equals("SwitchPreference")){
+            //读取设置信息
+            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+            Boolean sw = settings.getBoolean("SwitchPreference", false);
+        } else if (preference.getKey().equals("SpyTimeListPreference")){
+            ListPreference listPreference = (ListPreference) preference;
+            CharSequence[] entries = listPreference.getEntries();
+            int index = listPreference.findIndexOfValue((String)newValue);
+            listPreference.setSummary(entries[index]);
+        }else{
+            //如果返回false表示不允许被改变
+            return false;
+        }
+        //返回true表示允许改变
+        return true;
     }
 }
