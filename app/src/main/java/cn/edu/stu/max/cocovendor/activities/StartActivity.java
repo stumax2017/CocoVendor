@@ -21,6 +21,7 @@ import java.util.Locale;
 
 import cn.edu.stu.max.cocovendor.javaClass.ToastFactory;
 import cn.edu.stu.max.cocovendor.R;
+import cn.edu.stu.max.cocovendor.javaClass.ViewHolder;
 import cn.edu.stu.max.cocovendor.services.VideoService;
 import cn.edu.stu.max.cocovendor.databaseClass.LocalInfo;
 
@@ -32,6 +33,15 @@ public class StartActivity extends AppCompatActivity {
         //初始化数据库
         LitePal.initialize(this);
         setContentView(R.layout.activity_start);
+
+        String packageName = getPackageName();
+        SharedPreferences settings = getSharedPreferences(packageName + "_preferences", MODE_PRIVATE);
+        boolean sw = settings.getBoolean("SwitchPreference", false);
+        String revolution = settings.getString("RevolutionListPreference", "cif");
+        String spyTime = settings.getString("SpyTimeListPreference", "24hours");
+        ViewHolder.revolution = revolution;
+        ViewHolder.sw = sw;
+        ViewHolder.spyTime = spyTime;
 
         startService(new Intent(StartActivity.this, VideoService.class));
 

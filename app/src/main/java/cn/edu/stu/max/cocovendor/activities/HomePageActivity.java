@@ -1,5 +1,7 @@
 package cn.edu.stu.max.cocovendor.activities;
 
+import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,7 +9,9 @@ import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -26,6 +30,7 @@ import com.amap.api.location.AMapLocationListener;
 import org.litepal.crud.DataSupport;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -36,6 +41,8 @@ import cn.edu.stu.max.cocovendor.javaClass.ToastFactory;
 import cn.edu.stu.max.cocovendor.R;
 import cn.edu.stu.max.cocovendor.databaseClass.Goods;
 import cn.edu.stu.max.cocovendor.databaseClass.Sales;
+import cn.edu.stu.max.cocovendor.javaClass.ViewHolder;
+import cn.edu.stu.max.cocovendor.services.VideoService;
 
 public class HomePageActivity extends SerialPortActivity {
 
@@ -78,6 +85,19 @@ public class HomePageActivity extends SerialPortActivity {
 
         setContentView(R.layout.activity_home_page);
 
+        final String packageName = getPackageName();
+        SharedPreferences settings = getSharedPreferences(packageName + "_preferences", MODE_PRIVATE);
+        boolean sw = settings.getBoolean("SwitchPreference", false);
+        ViewHolder.sw = sw;
+        // String packageName = "cn.edu.stu.max.cocovendor";
+        // SharedPreferences sp = getSharedPreferences(packageName + "_preferences", MODE_PRIVATE);
+        if (sw) {
+            Toast.makeText(HomePageActivity.this, "hhh" + packageName, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(HomePageActivity.this, "xxxxxxxxxxxx" + packageName, Toast.LENGTH_SHORT).show();
+        }
+
+
         //尝试定位操作
         AMapLocationClient mLocationClient = new AMapLocationClient(this);
         mLocationClient.setLocationListener(mLocationListener);
@@ -89,6 +109,30 @@ public class HomePageActivity extends SerialPortActivity {
         mLocationClient.startLocation();
 
         context = this;
+
+//        final Intent intent = new Intent("cn.edu.stu.max.cocovendor.services.VideoService");
+        //intent.setAction("cn.edu.stu.max.cocovendor.services.VideoService");
+        Button a = (Button) findViewById(R.id.a);
+        a.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+//                stopService(new Intent(HomePageActivity.this, VideoService.class));
+//}
+//               finish();
+//                android.os.Process.killProcess(android.os.Process.myPid());
+//                System.exit(0);
+//                startActivity(new Intent(HomePageActivity.this, StartActivity.class));
+//                ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+//                manager.killBackgroundProcesses(getPackageName());
+//                Intent i = getBaseContext().getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName());
+//                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                startActivity(i);
+//                ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+//                manager.restartPackage(getPackageName());
+                ToastFactory.makeText(HomePageActivity.this, "good job", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         imageViewGoods1 = (ImageView) findViewById(R.id.iv_goods_1);
         imageViewGoods2 = (ImageView) findViewById(R.id.iv_goods_2);
@@ -109,7 +153,7 @@ public class HomePageActivity extends SerialPortActivity {
                     }
                     case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
 
-                        handler.postDelayed(runnable, 1000 * 5);
+                        handler.postDelayed(runnable, 1000 * 20);
 
                         break;
                     }
@@ -130,7 +174,7 @@ public class HomePageActivity extends SerialPortActivity {
                     }
                     case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
 
-                        handler.postDelayed(runnable, 1000 * 5);
+                        handler.postDelayed(runnable, 1000 * 20);
 
                         break;
                     }
@@ -151,7 +195,7 @@ public class HomePageActivity extends SerialPortActivity {
                     }
                     case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
 
-                        handler.postDelayed(runnable, 1000 * 5);
+                        handler.postDelayed(runnable, 1000 * 20);
 
                         break;
                     }
@@ -172,7 +216,7 @@ public class HomePageActivity extends SerialPortActivity {
                     }
                     case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
 
-                        handler.postDelayed(runnable, 1000 * 5);
+                        handler.postDelayed(runnable, 1000 * 20);
 
                         break;
                     }
@@ -193,7 +237,7 @@ public class HomePageActivity extends SerialPortActivity {
                     }
                     case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
 
-                        handler.postDelayed(runnable, 1000 * 5);
+                        handler.postDelayed(runnable, 1000 * 20);
 
                         break;
                     }
@@ -214,7 +258,7 @@ public class HomePageActivity extends SerialPortActivity {
                     }
                     case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
 
-                        handler.postDelayed(runnable, 1000 * 5);
+                        handler.postDelayed(runnable, 1000 * 20);
 
                         break;
                     }
@@ -590,7 +634,7 @@ public class HomePageActivity extends SerialPortActivity {
         // TODO Auto-generated method stub
         super.onResume();
 
-        handler.postDelayed(runnable, 1000 * 5);
+        handler.postDelayed(runnable, 1000 * 20);
     }
 
     @Override
@@ -604,11 +648,11 @@ public class HomePageActivity extends SerialPortActivity {
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            // 用户5秒没操作了
-            Intent i = new Intent();
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            i.setClass(context, ScreenSaverActivity.class);
-            context.startActivity(i);
+        // 用户5秒没操作了
+        Intent i = new Intent();
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.setClass(context, ScreenSaverActivity.class);
+        context.startActivity(i);
         }
     };
 
@@ -621,7 +665,7 @@ public class HomePageActivity extends SerialPortActivity {
             }
             case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
 
-                handler.postDelayed(runnable, 1000 * 5);
+                handler.postDelayed(runnable, 1000 * 20);
 
                 break;
             }
