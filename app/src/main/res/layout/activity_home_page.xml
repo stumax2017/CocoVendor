@@ -130,80 +130,100 @@
         android:background="@color/colorGray"
         android:elevation="2dp"/>
 
-    <TableLayout
-        android:layout_marginTop="60dp"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:stretchColumns="0,1,2"
-        android:layout_gravity="center" >
+        android:layout_height="650dp"
+        android:background="#FFFFFF">
 
-        <TableRow
-            android:layout_weight="1">
-            <ImageView
-                android:id="@+id/iv_goods_1"
-                android:src="@drawable/goods_redtea"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="20dp"
-                android:background="@color/colorWhite"
-                android:elevation="3dp"/>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-            <ImageView
-                android:id="@+id/iv_goods_2"
-                android:src="@drawable/goods_wangwang"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="20dp"
-                android:background="@color/colorWhite"
-                android:elevation="3dp"/>
+        <LinearLayout
+            android:id="@+id/ll_dot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:orientation="horizontal" />
+    </RelativeLayout>
 
-            <ImageView
-                android:id="@+id/iv_goods_3"
-                android:src="@drawable/goods_redtea"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="20dp"
-                android:background="@color/colorWhite"
-                android:elevation="3dp"/>
-        </TableRow>
+    <!--<TableLayout-->
+        <!--android:layout_marginTop="60dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:stretchColumns="0,1,2"-->
+        <!--android:layout_gravity="center" >-->
 
-        <TableRow
-            android:layout_weight="1">
-            <ImageView
-                android:id="@+id/iv_goods_4"
-                android:src="@drawable/goods_cocacola"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="20dp"
-                android:background="@color/colorWhite"
-                android:elevation="3dp"/>
+        <!--<TableRow-->
+            <!--android:layout_weight="1">-->
+            <!--<ImageView-->
+                <!--android:id="@+id/iv_goods_1"-->
+                <!--android:src="@drawable/goods_redtea"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_margin="20dp"-->
+                <!--android:background="@color/colorWhite"-->
+                <!--android:elevation="3dp"/>-->
 
-            <ImageView
-                android:id="@+id/iv_goods_5"
-                android:src="@drawable/goods_sprite"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="20dp"
-                android:background="@color/colorWhite"
-                android:elevation="3dp"/>
+            <!--<ImageView-->
+                <!--android:id="@+id/iv_goods_2"-->
+                <!--android:src="@drawable/goods_wangwang"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_margin="20dp"-->
+                <!--android:background="@color/colorWhite"-->
+                <!--android:elevation="3dp"/>-->
 
-            <ImageView
-                android:id="@+id/iv_goods_6"
-                android:src="@drawable/goods_wangwangxiaoxiaosu"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="20dp"
-                android:background="@color/colorWhite"
-                android:elevation="3dp"/>
-        </TableRow>
-    </TableLayout>
+            <!--<ImageView-->
+                <!--android:id="@+id/iv_goods_3"-->
+                <!--android:src="@drawable/goods_redtea"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_margin="20dp"-->
+                <!--android:background="@color/colorWhite"-->
+                <!--android:elevation="3dp"/>-->
+        <!--</TableRow>-->
+
+        <!--<TableRow-->
+            <!--android:layout_weight="1">-->
+            <!--<ImageView-->
+                <!--android:id="@+id/iv_goods_4"-->
+                <!--android:src="@drawable/goods_cocacola"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_margin="20dp"-->
+                <!--android:background="@color/colorWhite"-->
+                <!--android:elevation="3dp"/>-->
+
+            <!--<ImageView-->
+                <!--android:id="@+id/iv_goods_5"-->
+                <!--android:src="@drawable/goods_sprite"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_margin="20dp"-->
+                <!--android:background="@color/colorWhite"-->
+                <!--android:elevation="3dp"/>-->
+
+            <!--<ImageView-->
+                <!--android:id="@+id/iv_goods_6"-->
+                <!--android:src="@drawable/goods_wangwangxiaoxiaosu"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_margin="20dp"-->
+                <!--android:background="@color/colorWhite"-->
+                <!--android:elevation="3dp"/>-->
+        <!--</TableRow>-->
+    <!--</TableLayout>-->
 
     <TextView
         android:id="@+id/tv_homepage_testlogin"
