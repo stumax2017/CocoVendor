@@ -37,6 +37,7 @@ public class Application extends LitePalApplication {
             /* Read serial port parameters */
 
             String packageName = getPackageName();
+            // String packageName = "cn.edu.stu.max.cocovendor";
             SharedPreferences sp = getSharedPreferences(packageName + "_preferences", MODE_PRIVATE);
             String path = sp.getString("DEVICE", "");
             int baudrate = Integer.decode(sp.getString("BAUDRATE", "-1"));

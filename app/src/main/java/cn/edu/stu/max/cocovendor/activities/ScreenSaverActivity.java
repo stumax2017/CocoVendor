@@ -17,6 +17,7 @@ import java.io.File;
 import cn.edu.stu.max.cocovendor.javaClass.FileService;
 import cn.edu.stu.max.cocovendor.javaClass.ToastFactory;
 import cn.edu.stu.max.cocovendor.R;
+import cn.edu.stu.max.cocovendor.javaClass.ViewHolder;
 
 public class ScreenSaverActivity extends AppCompatActivity {
 
@@ -34,6 +35,10 @@ public class ScreenSaverActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_screen_saver);
+
+        if (ViewHolder.sw) {
+            Toast.makeText(ScreenSaverActivity.this, "ggggggggggggggggg", Toast.LENGTH_SHORT).show();
+        }
 
         videoViewScreenSaver = (VideoView) findViewById(R.id.vv_screen_saver);
         imageViewScreenSaver = (ImageView) findViewById(R.id.iv_screen_saver);

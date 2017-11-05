@@ -1,11 +1,13 @@
 package cn.edu.stu.max.cocovendor.javaClass;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
 import android.os.Environment;
 import android.os.StatFs;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -19,6 +21,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
+import android.content.SharedPreferences;
+
+import cn.edu.stu.max.cocovendor.activities.CameraSettingActivity;
+
+import static android.content.Context.MODE_PRIVATE;
+
 
 /**
  * Created by 0 on 2017/10/7.
@@ -82,7 +90,15 @@ public class CameraThread extends Thread {
         mMediaRecorder.setCamera(mCamera); // 设置录制视频源为Camera
         mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
         mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
-        mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_480P)); // 设置分辨率为CIF
+
+        if (ViewHolder.revolution.equals("qcif")) {
+            mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_QCIF)); // 设置分辨率为CIF
+        } else if (ViewHolder.revolution.equals("cif")) {
+            mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_CIF)); // 设置分辨率为480P
+        } else if (ViewHolder.revolution.equals("480p")) {
+            mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_480P)); // 设置分辨率为720P
+        }
+
         mMediaRecorder.setPreviewDisplay(mSurfaceHolder.getSurface());
         //mMediaRecorder.setMaxDuration(1000);
         mMediaRecorder.setOutputFile(getOutputMediaFile(MEDIA_TYPE_VIDEO).toString()); // 设置文件输出路径
@@ -130,7 +146,10 @@ public class CameraThread extends Thread {
         // 停止录像
         @Override
         public void run() {
-            try {
+
+
+
+                try {
 //                stopRecord();
 //                this.cancel();
 //                numOfVideo = numOfVideo + 1;
@@ -138,20 +157,34 @@ public class CameraThread extends Thread {
 //                    stopRecord();
 //                    this.cancel();
 //                } else {
+                    if (ViewHolder.sw) {
+                        if (ViewHolder.spyTime.equals("24hours")) {
+                            startRecord();
+                        } else if (ViewHolder.spyTime.equals("8002200")) {
+                            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                            String date = sdf.format(new java.util.Date());
+                            if (date.compareTo("08:00:00") > 0 && date.compareTo("22:00:00") < 0)
+                                startRecord();
+                            else stopRecord();
+                        } else if (ViewHolder.spyTime.equals("6002400")) {
+                            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                            String date = sdf.format(new java.util.Date());
+                            if (date.compareTo("06:00:00") > 0 && date.compareTo("24:00:00") < 0)
+                                startRecord();
+                            else stopRecord();
+                        }
+                    } else {
 
-
-                    startRecord();
-
-
+                    }
 
 //                }
-            } catch (Exception e) {
-                map.clear();
-                map.put("recordingFlag", "false");
-                String ac_time = getVideoRecordTime();// 录像时间
-                map.put("recordTime", ac_time);
-                //sendMsgToHandle(m_msgHandler, iType, map);
-            }
+                } catch (Exception e) {
+                    map.clear();
+                    map.put("recordingFlag", "false");
+                    String ac_time = getVideoRecordTime();// 录像时间
+                    map.put("recordTime", ac_time);
+                    //sendMsgToHandle(m_msgHandler, iType, map);
+                }
         }
     }
     // 计算当前已录像时间，默认值返回0
@@ -196,8 +229,25 @@ public class CameraThread extends Thread {
         } else if (type == MEDIA_TYPE_VIDEO) {
            // cameraFileNum = cameraFileNum + 1;
             // mediaStorageDir.getPath()
+
+//            mediaFile = new File(mediaStorageDir.getPath() + File.separator
+//                    + "VID_" + timestamp + ".3gp");
+            String a = ".wmv";
+            if (ViewHolder.revolution.equals("cif")) {
+
+                a = ".3gp";
+                //mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_CIF)); // 设置分辨率为CIF
+            } else if (ViewHolder.revolution.equals("480p")) {
+                a = ".mp4";
+                //mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_480P)); // 设置分辨率为480P
+            } else if (ViewHolder.revolution.equals("qcif")) {
+                a = ".avi";
+                //mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_720P)); // 设置分辨率为720P
+            }
+
             mediaFile = new File(mediaStorageDir.getPath() + File.separator
-                    + "VID_" + timestamp + ".3gp");
+                    + "VID_" + timestamp + a);
+
         } else {
             Log.d(TAG, "文件类型有误");
             return null;

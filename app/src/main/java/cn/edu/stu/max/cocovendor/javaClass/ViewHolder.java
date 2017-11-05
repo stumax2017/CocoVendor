@@ -17,4 +17,7 @@ public class ViewHolder {
     public Button btn_minus;
     public TextView tv_frequency;
     public Button btn_plus;
+    public static boolean sw;
+    public static String revolution;
+    public static String spyTime;
 }

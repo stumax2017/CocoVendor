@@ -6,8 +6,8 @@ import android.view.MenuItem;
 
 public class SystemSettingActivity extends AppCompatPreferenceActivity {
 
-    private static final String cameraSettingDataFileName = "cameraSettingDataFile";     // 定义保存的文件的名称
-    private SharedPreferences share;
+//    private static final String cameraSettingDataFileName = "cameraSettingDataFile";     // 定义保存的文件的名称
+//    private SharedPreferences share;
 //
 //    private ButtonListener buttonListener = new ButtonListener();
     @Override
@@ -15,7 +15,7 @@ public class SystemSettingActivity extends AppCompatPreferenceActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        share = super.getSharedPreferences(cameraSettingDataFileName, MODE_PRIVATE);  // 实例化
+//        share = super.getSharedPreferences(cameraSettingDataFileName, MODE_PRIVATE);  // 实例化
 //
 //        Button buttonSysParmSetting = (Button) findViewById(R.id.btn_sys_parm_setting);
 //        buttonSysParmSetting.setOnClickListener(buttonListener);
