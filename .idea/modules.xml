@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/CocoVendor.iml" filepath="$PROJECT_DIR$/CocoVendor.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/serialport/serialport.iml" filepath="$PROJECT_DIR$/serialport/serialport.iml" />
-      <module fileurl="file://$PROJECT_DIR$/serialport_bin/serialport_bin.iml" filepath="$PROJECT_DIR$/serialport_bin/serialport_bin.iml" />
     </modules>
   </component>
 </project>

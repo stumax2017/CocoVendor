@@ -86,32 +86,35 @@
     <string name="revolution_title_str">分辨率设置</string>
     <string name="revolution_title_listpreference">选择分辨率</string>
     <string-array name="revolution_entries_str">
-        <item >CIF(352×288像素)</item>
-        <item >480P(高清)</item>
-        <item >720P(超清)</item>
+        <item>QCIF(176×144像素)</item>
+        <item>CIF(352×288像素)</item>
+        <item>480P(高清)</item>
     </string-array>
     <string-array name="revolution_entries_values_str">
-        <item >cif</item>
-        <item >480p</item>
-        <item >720p</item>
+        <item>qcif</item>
+        <item>cif</item>
+        <item>480p</item>
     </string-array>
-    <string name="revolution_default_str">cif</string>
+    <string name="revolution_default_str">qcif</string>
     <string name="revolution_dialog_title">请选择你要设定的分辨率</string>
-    <string name="revolution_summary_str">CIF(352×288像素)</string>
+    <string name="revolution_summary_str">QCIF(176×144像素)</string>
 
     <string name="spytime_title_str">监控时间设置</string>
     <string name="spytime_title_listpreference">选择监控时间</string>
     <string-array name="spytime_entries_str">
-        <item >24小时监控</item>
-        <item >8:00~22:00</item>
-        <item >6:00~24:00</item>
+        <item>24小时监控</item>
+        <item>8:00~22:00</item>
+        <item>6:00~24:00</item>
     </string-array>
     <string-array name="spytime_entries_values_str">
-        <item >24hours</item>
-        <item >8002200</item>
-        <item >6002400</item>
+        <item>24hours</item>
+        <item>8002200</item>
+        <item>6002400</item>
     </string-array>
     <string name="spytime_default_str">24hours</string>
     <string name="spytime_dialog_title">请选择你要设定的时间段</string>
     <string name="spytime_summary_str">24小时监控</string>
+    <string name="title_wepay">微信支付</string>
+    <string name="title_alipay">支付宝</string>
+    <string name="title_cash">现金支付</string>
 </resources>

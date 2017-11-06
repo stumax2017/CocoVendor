@@ -3,7 +3,7 @@ apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "26.0.1"
+    buildToolsVersion "26.0.0"
     defaultConfig {
         applicationId "cn.edu.stu.max.cocovendor"
         minSdkVersion 15
@@ -32,8 +32,8 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.jakewharton:butterknife:8.8.1'
+    compile 'com.android.support:support-v4:25.3.1'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    compile 'com.squareup.okhttp3:okhttp:3.9.0'
     compile project(':serialport')
 }

@@ -7,7 +7,8 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:layout_margin="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -97,6 +98,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
+            android:layout_marginLeft="20dp"
             android:text="投币金额："
             android:textSize="24sp" />
 
@@ -118,75 +120,37 @@
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:background="@color/colorBlue"
-            android:shadowColor="@color/colorTransparency"
             android:textColor="@color/colorWhite"
             android:text="退币"
             android:textSize="24sp" />
-        </LinearLayout>
+    </LinearLayout>
 
-    <TableLayout
-        android:layout_marginTop="60dp"
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorGray"
+        android:elevation="2dp"/>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:stretchColumns="0,1,2"
-        android:layout_gravity="center" >
+        android:background="#FFFFFF">
 
-        <TableRow
-            android:layout_weight="1">
-            <ImageView
-                android:id="@+id/iv_goods_1"
-                android:src="@drawable/goods_redtea"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="20dp"
-                android:elevation="15dp"/>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-            <ImageView
-                android:id="@+id/iv_goods_2"
-                android:src="@drawable/goods_wangwang"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="20dp" />
-
-            <ImageView
-                android:id="@+id/iv_goods_3"
-                android:src="@drawable/goods_redtea"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="20dp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_weight="1">
-            <ImageView
-                android:id="@+id/iv_goods_4"
-                android:src="@drawable/goods_cocacola"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="20dp" />
-
-            <ImageView
-                android:id="@+id/iv_goods_5"
-                android:src="@drawable/goods_sprite"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="20dp" />
-
-            <ImageView
-                android:id="@+id/iv_goods_6"
-                android:src="@drawable/goods_wangwangxiaoxiaosu"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="20dp" />
-        </TableRow>
-    </TableLayout>
+        <LinearLayout
+            android:id="@+id/ll_dot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:orientation="horizontal" />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/tv_homepage_testlogin"
