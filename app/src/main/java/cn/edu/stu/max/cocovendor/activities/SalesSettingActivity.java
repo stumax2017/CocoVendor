@@ -1,18 +1,24 @@
 package cn.edu.stu.max.cocovendor.activities;
 
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +26,9 @@ import org.litepal.crud.DataSupport;
 import org.litepal.crud.callback.FindMultiCallback;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import cn.edu.stu.max.cocovendor.javaClass.ToastFactory;
 import cn.edu.stu.max.cocovendor.R;
@@ -38,10 +46,6 @@ public class SalesSettingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales_setting);
-
-
-        //加入返回箭头
-        //noinspection ConstantConditions
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         List<Goods> allGoods = DataSupport.findAll(Goods.class);
@@ -216,7 +220,6 @@ public class SalesSettingActivity extends AppCompatActivity {
         });
     }
 
-    //实现返回功能
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

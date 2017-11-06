@@ -54,6 +54,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
+    <!-- 网络访问权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".javaClass.Application"
         android:allowBackup="true"
@@ -68,32 +71,40 @@
             android:name="com.amap.api.v2.apikey"
             android:value="d47a4f292183bbe8a69fff44e38dbfee" />
 
-        <activity android:name=".activities.HomePageActivity"
-            android:label="主页"/>
-        <activity android:name=".activities.LoginActivity"
-            android:label="设置"/>
-        <activity android:name=".activities.SalesSettingActivity"
-            android:label="销售设置"/>
-        <activity android:name=".activities.NetworkSettingActivity"
-            android:label="网络设置"/>
-        <activity android:name=".activities.WlanItemActivity"
-            android:label="WLAN设置"/>
-        <activity android:name=".activities.SettingMenuActivity"
-            android:label="设置"/>
-        <activity android:name=".activities.StartActivity"
-            android:label="启动页">
+        <activity
+            android:name=".activities.HomePageActivity"
+            android:label="主页" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:label="设置" />
+        <activity
+            android:name=".activities.SalesSettingActivity"
+            android:label="销售设置" />
+        <activity
+            android:name=".activities.NetworkSettingActivity"
+            android:label="网络设置" />
+        <activity
+            android:name=".activities.WlanItemActivity"
+            android:label="WLAN设置" />
+        <activity
+            android:name=".activities.SettingMenuActivity"
+            android:label="设置" />
+        <activity android:name=".activities.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.AdSettingActivity"
-            android:label="广告设置"/>
-        <activity android:name=".activities.SystemSettingActivity"
-            android:label="系统设置"/>
-        <activity android:name=".activities.CameraSettingActivity"
-            android:label="监控设置"/>
+        <activity
+            android:name=".activities.AdSettingActivity"
+            android:label="广告设置" />
+        <activity
+            android:name=".activities.SystemSettingActivity"
+            android:label="系统设置" />
+        <activity
+            android:name=".activities.CameraSettingActivity"
+            android:label="监控设置" />
 
         <service android:name=".services.VideoService" />
 
@@ -106,17 +117,29 @@
         </receiver>
 
         <activity android:name=".activities.MainMenu" />
-        <activity android:name=".activities.SerialPortPreferences"/>
-        <activity android:name=".activities.ConsoleActivity"/>
-        <activity android:name=".activities.LoopbackActivity"/>
-        <activity android:name=".activities.Sending01010101Activity"/>
+        <activity android:name=".activities.SerialPortPreferences" />
+        <activity android:name=".activities.ConsoleActivity" />
+        <activity android:name=".activities.LoopbackActivity" />
+        <activity android:name=".activities.Sending01010101Activity" />
         <activity android:name=".activities.ScreenSaverActivity" />
-        <activity android:name=".activities.SheetSalesActivity"
-            android:label="销售信息"/>
-        <activity android:name=".activities.SheetGoodsActivity"
-            android:label="货物信息"/>
-        <activity android:name=".activities.SheetInfoActivity"
-            android:label="本机信息"></activity>
+        <activity
+            android:name=".activities.SalesAnalyzeActivity"
+            android:label="销售统计" />
+        <activity
+            android:name=".activities.SheetSalesActivity"
+            android:label="销售信息" />
+        <activity
+            android:name=".activities.SheetGoodsActivity"
+            android:label="货物信息" />
+        <activity
+            android:name=".activities.SheetInfoActivity"
+            android:label="本机信息" />
+        <activity
+            android:name=".activities.PayActivity"
+            android:label="支付页" />
+        <activity
+            android:name=".activities.SheetActivity"
+            android:label="信息表"></activity>
     </application>
 
 </manifest>

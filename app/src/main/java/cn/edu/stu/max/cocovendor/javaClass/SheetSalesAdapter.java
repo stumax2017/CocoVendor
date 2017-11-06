@@ -28,7 +28,7 @@ public class SheetSalesAdapter extends RecyclerView.Adapter{
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         SheetSalesAdapter.sheetViewHolder vh = (SheetSalesAdapter.sheetViewHolder) holder;
 
-        vh.getTv_sheetRow1().setText(String.valueOf(list.get(position).getGoods_id()));
+        vh.getTv_sheetRow1().setText(String.valueOf(list.get(position).getId()));
         vh.getTv_sheetRow2().setText(String.valueOf(list.get(position).getSales_date()));
         vh.getTv_sheetRow3().setText(String.valueOf(list.get(position).getGoods_name()));
         vh.getTv_sheetRow4().setText(String.valueOf(list.get(position).getMachine_floor()));

@@ -61,6 +61,7 @@ public class HomePageActivity extends SerialPortActivity {
     private final static String TOPATH = "/storage/sdcard0/tencent/QQfile_recv/b/";               // 本机广告存储路径
 
     private static final int REQUEST_CODE_1 = 1;
+    private static final int REQUEST_PAY_RESULT_CODE = 2;
 
     private VideoView videoViewHomePageAd;
     private ImageView imageViewHomePageAd;
@@ -159,26 +160,31 @@ public class HomePageActivity extends SerialPortActivity {
         //总的页数=总数/每页数量，并取整
         pageCount = (int) Math.ceil(mDatas.size() * 1.0 / pageSize);
         mPagerList = new ArrayList<View>();
-        for (int i = 0; i < pageCount; i++) {
-            //每个页面都是inflate出一个新实例
-            GridView gridView = (GridView) inflater.inflate(R.layout.gridview, mPager, false);
-            gridView.setAdapter(new GridViewAdapter(this, mDatas, i, pageSize));
-            mPagerList.add(gridView);
+        try {
+            for (int i = 0; i < pageCount; i++) {
+                //每个页面都是inflate出一个新实例
+                GridView gridView = (GridView) inflater.inflate(R.layout.gridview, mPager, false);
+                gridView.setAdapter(new GridViewAdapter(this, mDatas, i, pageSize));
+                mPagerList.add(gridView);
 
-            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    int pos = position + curIndex * pageSize;
-                    ToastFactory.makeText(HomePageActivity.this, mDatas.get(pos).getName(), Toast.LENGTH_SHORT).show();
-                }
-            });
+                gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        int pos = position + curIndex * pageSize;
+                        ToastFactory.makeText(HomePageActivity.this, mDatas.get(pos).getName(), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(HomePageActivity.this, PayActivity.class);
+                        intent.putExtra("goods_id", pos + 1);
+                        startActivityForResult(intent, 1);
+                    }
+                });
+            }
+            //设置适配器
+            mPager.setAdapter(new ViewPagerAdapter(mPagerList));
+            //设置圆点
+            setOvalLayout();
+        } catch (NullPointerException e) {
+            ToastFactory.makeText(HomePageActivity.this, "当前没有商品", Toast.LENGTH_SHORT).show();
         }
-        //设置适配器
-        mPager.setAdapter(new ViewPagerAdapter(mPagerList));
-        //设置圆点
-        setOvalLayout();
-
-
 
         final String packageName = getPackageName();
         SharedPreferences settings = getSharedPreferences(packageName + "_preferences", MODE_PRIVATE);
@@ -721,6 +727,30 @@ public class HomePageActivity extends SerialPortActivity {
                         videoViewHomePageAd.setVisibility(View.INVISIBLE);
                     }
                 }
+                break;
+            case REQUEST_PAY_RESULT_CODE:
+                if (resultCode == RESULT_OK) {
+                    int goods_id = data.getIntExtra("goods_id", 0);
+                    String text = "You clicked on item" + String.valueOf(goods_id);
+                    try {
+                        mOutputStream.write(text.getBytes());
+                        mOutputStream.write('\n');
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        Sales sales = new Sales();
+                        sales.setSales_date(new Date());
+                        sales.setGoods_id(DataSupport.find(Goods.class, goods_id).getId());
+                        sales.setGoods_name(DataSupport.find(Goods.class, goods_id).getName());
+                        sales.setMachine_floor(goods_id);
+                        sales.setPay_way("现金");
+                        sales.save();
+                    } catch (NullPointerException e) {
+                        ToastFactory.makeText(HomePageActivity.this, "目前没有商品" + String.valueOf(goods_id), Toast.LENGTH_SHORT).show();
+                    }
+                }
         }
     }
 
@@ -782,7 +812,7 @@ public class HomePageActivity extends SerialPortActivity {
      */
     private void initDatas() {
         mDatas = new ArrayList<Model>();
-        for (int i = 0; i < titles.length; i++) {
+        for (int i = 0; i < DataSupport.count(Goods.class); i++) {
             //动态获取资源ID，第一个参数是资源名，第二个参数是资源类型例如drawable，string等，第三个参数包名
             int imageId = getResources().getIdentifier("ic_category_" + i, "drawable", getPackageName());
             mDatas.add(new Model(prices[i], titles[i], imageId));
