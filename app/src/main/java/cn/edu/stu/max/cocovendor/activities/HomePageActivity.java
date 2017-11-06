@@ -150,26 +150,30 @@ public class HomePageActivity extends SerialPortActivity {
         //总的页数=总数/每页数量，并取整
         pageCount = (int) Math.ceil(mDatas.size() * 1.0 / pageSize);
         mPagerList = new ArrayList<View>();
-        for (int i = 0; i < pageCount; i++) {
-            //每个页面都是inflate出一个新实例
-            GridView gridView = (GridView) inflater.inflate(R.layout.gridview, mPager, false);
-            gridView.setAdapter(new GridViewAdapter(this, mDatas, i, pageSize));
-            mPagerList.add(gridView);
+        try {
+            for (int i = 0; i < pageCount; i++) {
+                //每个页面都是inflate出一个新实例
+                GridView gridView = (GridView) inflater.inflate(R.layout.gridview, mPager, false);
+                gridView.setAdapter(new GridViewAdapter(this, mDatas, i, pageSize));
+                mPagerList.add(gridView);
 
-            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    int pos = position + curIndex * pageSize;
-                    ToastFactory.makeText(HomePageActivity.this, mDatas.get(pos).getName(), Toast.LENGTH_SHORT).show();
-                }
-            });
+                gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        int pos = position + curIndex * pageSize;
+                        ToastFactory.makeText(HomePageActivity.this, mDatas.get(pos).getName(), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(HomePageActivity.this, PayActivity.class);
+                        startActivity(intent);
+                    }
+                });
+            }
+            //设置适配器
+            mPager.setAdapter(new ViewPagerAdapter(mPagerList));
+            //设置圆点
+            setOvalLayout();
+        } catch (NullPointerException e) {
+            ToastFactory.makeText(HomePageActivity.this, "当前没有商品", Toast.LENGTH_SHORT).show();
         }
-        //设置适配器
-        mPager.setAdapter(new ViewPagerAdapter(mPagerList));
-        //设置圆点
-        setOvalLayout();
-
-
 
         final String packageName = getPackageName();
         SharedPreferences settings = getSharedPreferences(packageName + "_preferences", MODE_PRIVATE);
@@ -773,7 +777,7 @@ public class HomePageActivity extends SerialPortActivity {
      */
     private void initDatas() {
         mDatas = new ArrayList<Model>();
-        for (int i = 0; i < titles.length; i++) {
+        for (int i = 0; i < DataSupport.count(Goods.class); i++) {
             //动态获取资源ID，第一个参数是资源名，第二个参数是资源类型例如drawable，string等，第三个参数包名
             int imageId = getResources().getIdentifier("ic_category_" + i, "drawable", getPackageName());
             mDatas.add(new Model(titles[i], imageId));
