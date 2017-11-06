@@ -56,6 +56,8 @@ import cn.edu.stu.max.cocovendor.services.VideoService;
 
 public class HomePageActivity extends SerialPortActivity {
 
+    private static final int SECONDS_OF_AD = 60;    // 60秒无操作后自动进入全屏广告播放模式
+
     private final static String TOPATH = "/storage/sdcard0/tencent/QQfile_recv/b/";               // 本机广告存储路径
 
     private static final int REQUEST_CODE_1 = 1;
@@ -86,9 +88,16 @@ public class HomePageActivity extends SerialPortActivity {
 
 
 
-    private String[] titles = {"美食", "电影", "酒店住宿", "休闲娱乐", "外卖", "自助餐", "KTV", "机票/火车票", "周边游", "美甲美睫",
-            "火锅", "生日蛋糕", "甜品饮品", "水上乐园", "汽车服务", "美发", "丽人", "景点", "足疗按摩", "运动健身", "健身", "超市", "买菜",
+    private String[] titles = {"蜗牛一号", "蜗牛二号", "蜗牛三号", "蜗牛四号", "蜗牛五号", "蜗牛六号", "ipad(白)", "ipad(黑)", "可口可乐", "百事可乐",
+            "青苹果", "红苹果", "猕猴桃", "哈密瓜", "柠檬", "橙子", "辣椒", "南瓜", "番茄", "运动健身", "健身", "超市", "买菜",
             "今日新单", "小吃快餐", "面膜", "洗浴/汗蒸", "母婴亲子", "生活服务", "婚纱摄影", "学习培训", "家装", "结婚", "全部分配"};
+
+    private String[] prices = {"¥15.0", "¥25.0", "¥10.0", "¥12.0", "¥35.0", "¥50.0", "¥42.0",
+            "¥65.0", "¥85.0", "¥9.0", "¥2.0", "¥25.5", "¥13.0", "¥999.0",
+            "¥105.0", "¥215.0", "¥12.0", "¥12.0", "¥35.0", "¥1.0", "¥42.0",
+            "¥15.0", "¥25.0", "¥10.0", "¥12.0", "¥35.0", "¥50.0", "¥42.0",
+            "¥15.0", "¥25.0", "¥10.0", "¥12.0", "¥35.0", "¥50.0"};
+
     private ViewPager mPager;
     private List<View> mPagerList;
     private List<Model> mDatas;
@@ -135,7 +144,7 @@ public class HomePageActivity extends SerialPortActivity {
                     }
                     case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
 
-                        handler.postDelayed(runnable, 1000 * 20);
+                        handler.postDelayed(runnable, 1000 * SECONDS_OF_AD);
 
                         break;
                     }
@@ -720,7 +729,7 @@ public class HomePageActivity extends SerialPortActivity {
         // TODO Auto-generated method stub
         super.onResume();
 
-        handler.postDelayed(runnable, 1000 * 20);
+        handler.postDelayed(runnable, 1000 * SECONDS_OF_AD);
     }
 
     @Override
@@ -734,7 +743,7 @@ public class HomePageActivity extends SerialPortActivity {
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
-        // 用户5秒没操作了
+        // 用户SECONDS_OF_AD秒没操作了
         Intent i = new Intent();
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         i.setClass(context, ScreenSaverActivity.class);
@@ -751,7 +760,7 @@ public class HomePageActivity extends SerialPortActivity {
             }
             case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
 
-                handler.postDelayed(runnable, 1000 * 20);
+                handler.postDelayed(runnable, 1000 * SECONDS_OF_AD);
 
                 break;
             }
@@ -776,7 +785,7 @@ public class HomePageActivity extends SerialPortActivity {
         for (int i = 0; i < titles.length; i++) {
             //动态获取资源ID，第一个参数是资源名，第二个参数是资源类型例如drawable，string等，第三个参数包名
             int imageId = getResources().getIdentifier("ic_category_" + i, "drawable", getPackageName());
-            mDatas.add(new Model(titles[i], imageId));
+            mDatas.add(new Model(prices[i], titles[i], imageId));
         }
     }
 

@@ -62,6 +62,7 @@ public class GridViewAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.item_gridview, parent, false);
             viewHolder = new ViewHolder();
+            viewHolder.tv_price = (TextView) convertView.findViewById(R.id.textView_price);
             viewHolder.tv = (TextView) convertView.findViewById(R.id.textView);
             viewHolder.iv = (ImageView) convertView.findViewById(R.id.imageView);
             convertView.setTag(viewHolder);
@@ -72,6 +73,7 @@ public class GridViewAdapter extends BaseAdapter {
          * 在给View绑定显示的数据时，计算正确的position = position + curIndex * pageSize，
          */
         int pos = position + curIndex * pageSize;
+        viewHolder.tv_price.setText(mDatas.get(pos).price);
         viewHolder.tv.setText(mDatas.get(pos).name);
         viewHolder.iv.setImageResource(mDatas.get(pos).iconRes);
         return convertView;
@@ -79,6 +81,7 @@ public class GridViewAdapter extends BaseAdapter {
 
 
     class ViewHolder {
+        public TextView tv_price;
         public TextView tv;
         public ImageView iv;
     }
