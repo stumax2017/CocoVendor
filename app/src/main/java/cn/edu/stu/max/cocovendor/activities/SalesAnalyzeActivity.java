@@ -1,8 +1,9 @@
-package cn.edu.stu.max.cocovendor.Activity;
+package cn.edu.stu.max.cocovendor.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import org.litepal.crud.DataSupport;
@@ -17,6 +18,7 @@ public class SalesAnalyzeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales_analyze);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         TextView textViewAnalyze = (TextView) findViewById(R.id.tv_analyze);
         //textViewAnalyze.setText(Integer.valueOf(DataSupport.sum(Sales.class, "machine_floor", int.class)));
@@ -28,5 +30,15 @@ public class SalesAnalyzeActivity extends AppCompatActivity {
         } finally {
             Log.d("SalesAnalyzeActivity", String.valueOf(result));
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

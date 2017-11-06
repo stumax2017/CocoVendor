@@ -89,8 +89,7 @@
         <activity
             android:name=".activities.SettingMenuActivity"
             android:label="设置" />
-        <activity
-            android:name=".activities.StartActivity">
+        <activity android:name=".activities.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -124,6 +123,9 @@
         <activity android:name=".activities.Sending01010101Activity" />
         <activity android:name=".activities.ScreenSaverActivity" />
         <activity
+            android:name=".activities.SalesAnalyzeActivity"
+            android:label="销售统计" />
+        <activity
             android:name=".activities.SheetSalesActivity"
             android:label="销售信息" />
         <activity
@@ -132,8 +134,12 @@
         <activity
             android:name=".activities.SheetInfoActivity"
             android:label="本机信息" />
-        <activity android:name=".activities.PayActivity"
-            android:label="支付页"></activity>
+        <activity
+            android:name=".activities.PayActivity"
+            android:label="支付页" />
+        <activity
+            android:name=".activities.SheetActivity"
+            android:label="信息表"></activity>
     </application>
 
 </manifest>

@@ -59,6 +59,7 @@ public class HomePageActivity extends SerialPortActivity {
     private final static String TOPATH = "/storage/sdcard0/tencent/QQfile_recv/b/";               // 本机广告存储路径
 
     private static final int REQUEST_CODE_1 = 1;
+    private static final int REQUEST_PAY_RESULT_CODE = 2;
 
     private VideoView videoViewHomePageAd;
     private ImageView imageViewHomePageAd;
@@ -163,7 +164,8 @@ public class HomePageActivity extends SerialPortActivity {
                         int pos = position + curIndex * pageSize;
                         ToastFactory.makeText(HomePageActivity.this, mDatas.get(pos).getName(), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(HomePageActivity.this, PayActivity.class);
-                        startActivity(intent);
+                        intent.putExtra("goods_id", pos + 1);
+                        startActivityForResult(intent, 1);
                     }
                 });
             }
@@ -714,6 +716,30 @@ public class HomePageActivity extends SerialPortActivity {
                     } else {
                         imageViewHomePageAd.setVisibility(View.VISIBLE);
                         videoViewHomePageAd.setVisibility(View.INVISIBLE);
+                    }
+                }
+                break;
+            case REQUEST_PAY_RESULT_CODE:
+                if (resultCode == RESULT_OK) {
+                    int goods_id = data.getIntExtra("goods_id", 0);
+                    String text = "You clicked on item" + String.valueOf(goods_id);
+                    try {
+                        mOutputStream.write(text.getBytes());
+                        mOutputStream.write('\n');
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    try {
+                        Sales sales = new Sales();
+                        sales.setSales_date(new Date());
+                        sales.setGoods_id(DataSupport.find(Goods.class, goods_id).getId());
+                        sales.setGoods_name(DataSupport.find(Goods.class, goods_id).getName());
+                        sales.setMachine_floor(goods_id);
+                        sales.setPay_way("现金");
+                        sales.save();
+                    } catch (NullPointerException e) {
+                        ToastFactory.makeText(HomePageActivity.this, "目前没有商品" + String.valueOf(goods_id), Toast.LENGTH_SHORT).show();
                     }
                 }
         }
