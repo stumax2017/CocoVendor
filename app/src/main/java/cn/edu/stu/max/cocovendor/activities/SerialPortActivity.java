@@ -91,7 +91,7 @@ public abstract class SerialPortActivity extends AppCompatActivity {
         } catch (IOException e) {
             DisplayError(R.string.error_unknown);
         } catch (InvalidParameterException e) {
-            Intent intent = new Intent(SerialPortActivity.this, MainMenu.class);
+            Intent intent = new Intent(SerialPortActivity.this, SerialPortSettingMainMenu.class);
             startActivity(intent);
             DisplayError(R.string.error_configuration);
         }

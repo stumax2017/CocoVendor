@@ -5,12 +5,22 @@ package cn.edu.stu.max.cocovendor.javaClass;
  */
 
 public class Model {
+    public String price;
     public String name;
     public int iconRes;
 
-    public Model(String name, int iconRes) {
+    public Model(String price, String name, int iconRes) {
+        this.price = price;
         this.name = name;
         this.iconRes = iconRes;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String name) {
+        this.price = price;
     }
 
     public String getName() {

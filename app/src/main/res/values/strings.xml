@@ -117,4 +117,5 @@
     <string name="title_wepay">微信支付</string>
     <string name="title_alipay">支付宝</string>
     <string name="title_cash">现金支付</string>
+    <string name="title_return">返回</string>
 </resources>

@@ -56,6 +56,8 @@ import cn.edu.stu.max.cocovendor.services.VideoService;
 
 public class HomePageActivity extends SerialPortActivity {
 
+    private static final int SECONDS_OF_AD = 60;    // 60秒无操作后自动进入全屏广告播放模式
+
     private final static String TOPATH = "/storage/sdcard0/tencent/QQfile_recv/b/";               // 本机广告存储路径
 
     private static final int REQUEST_CODE_1 = 1;
@@ -85,11 +87,22 @@ public class HomePageActivity extends SerialPortActivity {
     private ImageView imageViewGoods5;
     private ImageView imageViewGoods6;
 
+    private TextView textViewCoinMoney;
+
+    private static final byte[] coinMoney = {0, 0, 0, '.', 0, 0};
 
 
-    private String[] titles = {"美食", "电影", "酒店住宿", "休闲娱乐", "外卖", "自助餐", "KTV", "机票/火车票", "周边游", "美甲美睫",
-            "火锅", "生日蛋糕", "甜品饮品", "水上乐园", "汽车服务", "美发", "丽人", "景点", "足疗按摩", "运动健身", "健身", "超市", "买菜",
+
+    private String[] titles = {"蜗牛一号", "蜗牛二号", "蜗牛三号", "蜗牛四号", "蜗牛五号", "蜗牛六号", "ipad(白)", "ipad(黑)", "可口可乐", "百事可乐",
+            "青苹果", "红苹果", "猕猴桃", "哈密瓜", "柠檬", "橙子", "辣椒", "南瓜", "番茄", "运动健身", "健身", "超市", "买菜",
             "今日新单", "小吃快餐", "面膜", "洗浴/汗蒸", "母婴亲子", "生活服务", "婚纱摄影", "学习培训", "家装", "结婚", "全部分配"};
+
+    private String[] prices = {"¥15.0", "¥25.0", "¥10.0", "¥12.0", "¥35.0", "¥50.0", "¥42.0",
+            "¥65.0", "¥85.0", "¥9.0", "¥2.0", "¥25.5", "¥13.0", "¥999.0",
+            "¥105.0", "¥215.0", "¥12.0", "¥12.0", "¥35.0", "¥1.0", "¥42.0",
+            "¥15.0", "¥25.0", "¥10.0", "¥12.0", "¥35.0", "¥50.0", "¥42.0",
+            "¥15.0", "¥25.0", "¥10.0", "¥12.0", "¥35.0", "¥50.0"};
+
     private ViewPager mPager;
     private List<View> mPagerList;
     private List<Model> mDatas;
@@ -120,7 +133,6 @@ public class HomePageActivity extends SerialPortActivity {
 
         setContentView(R.layout.activity_home_page);
 
-
         mPager = (ViewPager) findViewById(R.id.viewpager);
         mLlDot = (LinearLayout) findViewById(R.id.ll_dot);
 
@@ -136,7 +148,7 @@ public class HomePageActivity extends SerialPortActivity {
                     }
                     case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
 
-                        handler.postDelayed(runnable, 1000 * 20);
+                        handler.postDelayed(runnable, 1000 * SECONDS_OF_AD);
 
                         break;
                     }
@@ -163,8 +175,9 @@ public class HomePageActivity extends SerialPortActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         int pos = position + curIndex * pageSize;
                         ToastFactory.makeText(HomePageActivity.this, mDatas.get(pos).getName(), Toast.LENGTH_SHORT).show();
+                        ToastFactory.makeText(HomePageActivity.this, "good" + pos, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(HomePageActivity.this, PayActivity.class);
-                        intent.putExtra("goods_id", pos + 1);
+                        intent.putExtra("goods_id", pos);
                         startActivityForResult(intent, 1);
                     }
                 });
@@ -202,8 +215,7 @@ public class HomePageActivity extends SerialPortActivity {
 
         context = this;
 
-//        final Intent intent = new Intent("cn.edu.stu.max.cocovendor.services.VideoService");
-        //intent.setAction("cn.edu.stu.max.cocovendor.services.VideoService");
+        textViewCoinMoney = (TextView) findViewById(R.id.coin_money);
         Button a = (Button) findViewById(R.id.a);
         a.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -750,7 +762,7 @@ public class HomePageActivity extends SerialPortActivity {
         // TODO Auto-generated method stub
         super.onResume();
 
-        handler.postDelayed(runnable, 1000 * 20);
+        handler.postDelayed(runnable, 1000 * SECONDS_OF_AD);
     }
 
     @Override
@@ -764,7 +776,7 @@ public class HomePageActivity extends SerialPortActivity {
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
-        // 用户5秒没操作了
+        // 用户SECONDS_OF_AD秒没操作了
         Intent i = new Intent();
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         i.setClass(context, ScreenSaverActivity.class);
@@ -781,7 +793,7 @@ public class HomePageActivity extends SerialPortActivity {
             }
             case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
 
-                handler.postDelayed(runnable, 1000 * 20);
+                handler.postDelayed(runnable, 1000 * SECONDS_OF_AD);
 
                 break;
             }
@@ -789,11 +801,26 @@ public class HomePageActivity extends SerialPortActivity {
         return super.onTouchEvent(event);
     };
 
+
+    // 串口接收函数
     @Override
     protected void onDataReceived(final byte[] buffer, final int size) {
         runOnUiThread(new Runnable() {
             public void run() {
-                ToastFactory.makeText(HomePageActivity.this, new String (buffer, 0, size), Toast.LENGTH_SHORT).show();
+//                switch (new String (buffer, 0, size)) {
+//                    case "10000011":
+//                        coinMoney[0] = buffer[6];
+//                        coinMoney[1] = buffer[7];
+//                        coinMoney[2] = '.';
+//                        coinMoney[3] = 0;
+//                        coinMoney[4] = 0;
+//                        coinMoney[5] = 0;
+//                        textViewCoinMoney.setText(new String(coinMoney, 0, 6));
+//                        break;
+//                }
+////                ToastFactory.makeText(HomePageActivity.this, new String (buffer, 0, size), Toast.LENGTH_SHORT).show();
+////                ToastFactory.makeText(HomePageActivity.this, new String (buffer, 0, size) + "hh", Toast.LENGTH_SHORT).show();
+//                textViewCoinMoney.setText(new String (buffer, 0, size));
             }
         });
     }
@@ -806,7 +833,7 @@ public class HomePageActivity extends SerialPortActivity {
         for (int i = 0; i < DataSupport.count(Goods.class); i++) {
             //动态获取资源ID，第一个参数是资源名，第二个参数是资源类型例如drawable，string等，第三个参数包名
             int imageId = getResources().getIdentifier("ic_category_" + i, "drawable", getPackageName());
-            mDatas.add(new Model(titles[i], imageId));
+            mDatas.add(new Model(prices[i], titles[i], imageId));
         }
     }
 
