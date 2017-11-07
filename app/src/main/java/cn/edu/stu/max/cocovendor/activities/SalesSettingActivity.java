@@ -41,6 +41,7 @@ public class SalesSettingActivity extends AppCompatActivity {
     private SalesSettingAdapter salesSettingAdapter;
     private int pageOffset = 0;
     private int listRows = 10;
+    private List<Goods> list = new ArrayList<Goods>(10);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,8 @@ public class SalesSettingActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //查找数据库中全部货物
         List<Goods> allGoods = DataSupport.findAll(Goods.class);
-
+        list.addAll(allGoods);
+        //找到UI控件
         recyclerViewSalesSetting = (RecyclerView) findViewById(R.id.rv_sales_setting);
         //设置线性布局 Creates a vertical LinearLayoutManager
         recyclerViewSalesSetting.setLayoutManager(new LinearLayoutManager(this));
@@ -60,7 +62,7 @@ public class SalesSettingActivity extends AppCompatActivity {
         salesSettingAdapter = new SalesSettingAdapter(allGoods);
         //recyclerView显示适配器内容
         recyclerViewSalesSetting.setAdapter(salesSettingAdapter);
-
+        //找到按钮UI控件并设置添加按钮监听事件
         Button buttonSalesSettingAdd = (Button) findViewById(R.id.btn_sales_setting_add);
         buttonSalesSettingAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,6 +212,16 @@ public class SalesSettingActivity extends AppCompatActivity {
                 // Create the AlertDialog object and return it
                 builder.setCancelable(false);
                 builder.create().show();
+            }
+        });
+        Button buttonAddFloor = (Button) findViewById(R.id.btn_add_floor);
+        buttonAddFloor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                list.add(new Goods());
+                salesSettingAdapter = new SalesSettingAdapter(list);
+                //recyclerView显示适配器内容
+                recyclerViewSalesSetting.setAdapter(salesSettingAdapter);
             }
         });
         Button buttonSalesSettingReturn = (Button) findViewById(R.id.btn_sales_setting_return);

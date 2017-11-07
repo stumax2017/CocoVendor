@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -30,10 +32,11 @@ public class SalesSettingAdapter extends RecyclerView.Adapter {
         sheetViewHolder vh = (sheetViewHolder) holder;
 
         vh.getTv_sheetRow1().setText(String.valueOf(list.get(position).getId()));
+        vh.getIv_sheetRow2().setImageResource(R.drawable.ic_category_0);
         vh.getTv_sheetRow2().setText(list.get(position).getName());
         vh.getTv_sheetRow3().setText(String.valueOf(list.get(position).getSales_price()));
         vh.getTv_sheetRow4().setText(String.valueOf(list.get(position).getQuanlity()));
-        vh.getTv_sheetRow5().setText(String.valueOf(list.get(position).getSales_price()));
+        vh.getBtn_sheetRow5().setText(String.valueOf(list.get(position).getSales_price()));
     }
 
     @Override
@@ -44,23 +47,29 @@ public class SalesSettingAdapter extends RecyclerView.Adapter {
     private class sheetViewHolder extends RecyclerView.ViewHolder{
         private final View mView;
         private final TextView tv_sheetRow1;
+        private final ImageView iv_sheetRow2;
         private final TextView tv_sheetRow2;
         private final TextView tv_sheetRow3;
         private final TextView tv_sheetRow4;
-        private final TextView tv_sheetRow5;
+        private final Button btn_sheetRow5;
 
         private sheetViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
             tv_sheetRow1 = (TextView) itemView.findViewById(R.id.tv_sheetRow1);
+            iv_sheetRow2 = (ImageView) itemView.findViewById(R.id.iv_sheetRow2);
             tv_sheetRow2 = (TextView) itemView.findViewById(R.id.tv_sheetRow2);
             tv_sheetRow3 = (TextView) itemView.findViewById(R.id.tv_sheetRow3);
             tv_sheetRow4 = (TextView) itemView.findViewById(R.id.tv_sheetRow4);
-            tv_sheetRow5 = (TextView) itemView.findViewById(R.id.tv_sheetRow5);
+            btn_sheetRow5 = (Button) itemView.findViewById(R.id.btn_sheetRow5);
         }
 
         private TextView getTv_sheetRow1() {
             return tv_sheetRow1;
+        }
+
+        public ImageView getIv_sheetRow2() {
+            return iv_sheetRow2;
         }
 
         private TextView getTv_sheetRow2() {
@@ -75,8 +84,8 @@ public class SalesSettingAdapter extends RecyclerView.Adapter {
             return tv_sheetRow4;
         }
 
-        private TextView getTv_sheetRow5() {
-            return tv_sheetRow5;
+        public Button getBtn_sheetRow5() {
+            return btn_sheetRow5;
         }
     }
 }
