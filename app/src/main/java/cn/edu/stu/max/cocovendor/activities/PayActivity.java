@@ -23,6 +23,10 @@ public class PayActivity extends AppCompatActivity {
     private TextView moneyView;
     private ImageView logoView;
 
+    private ImageView goodsImageView;
+    private TextView goodsTextView;
+    private TextView priceTextView;
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -70,8 +74,18 @@ public class PayActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pay);
+
         getSupportActionBar().hide();
+
+        setContentView(R.layout.activity_pay);
+
+        Intent intent = getIntent();
+        int pos = intent.getIntExtra("goods_id", 0);
+
+        goodsImageView = (ImageView) findViewById(R.id.imageView_goods);
+        goodsTextView = (TextView) findViewById(R.id.textView_goods);
+        priceTextView = (TextView) findViewById(R.id.textView_price);
+
         numberView = (TextView) findViewById(R.id.number);
         moneyView = (TextView) findViewById(R.id.moneyView);
         BottomNavigationViewEx navigation = (BottomNavigationViewEx) findViewById(R.id.navigation);
@@ -83,5 +97,15 @@ public class PayActivity extends AppCompatActivity {
         navigation.setTextSize(20);
         logoView = (ImageView) findViewById(R.id.logo_view);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        switch (pos) {
+            case 0:
+                goodsImageView.setImageResource(R.drawable.ic_category_0);
+                //goodsTextView.setText();
+                break;
+            case 1:
+                goodsImageView.setImageResource(R.drawable.ic_category_1);
+                break;
+        }
     }
 }

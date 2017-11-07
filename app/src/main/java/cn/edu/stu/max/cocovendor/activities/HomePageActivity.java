@@ -175,8 +175,9 @@ public class HomePageActivity extends SerialPortActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         int pos = position + curIndex * pageSize;
                         ToastFactory.makeText(HomePageActivity.this, mDatas.get(pos).getName(), Toast.LENGTH_SHORT).show();
+                        ToastFactory.makeText(HomePageActivity.this, "good" + pos, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(HomePageActivity.this, PayActivity.class);
-                        intent.putExtra("goods_id", pos + 1);
+                        intent.putExtra("goods_id", pos);
                         startActivityForResult(intent, 1);
                     }
                 });
