@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -41,7 +42,7 @@ public class SalesSettingActivity extends AppCompatActivity {
     private SalesSettingAdapter salesSettingAdapter;
     private int pageOffset = 0;
     private int listRows = 10;
-    private List<Goods> list = new ArrayList<Goods>(10);
+    private List<Goods> list = new ArrayList<Goods>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,9 @@ public class SalesSettingActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //查找数据库中全部货物
         List<Goods> allGoods = DataSupport.findAll(Goods.class);
-        list.addAll(allGoods);
+        for (int i = 0; i < 10; i ++) {
+            list.add(new Goods());
+        }
         //找到UI控件
         recyclerViewSalesSetting = (RecyclerView) findViewById(R.id.rv_sales_setting);
         //设置线性布局 Creates a vertical LinearLayoutManager
@@ -59,7 +62,7 @@ public class SalesSettingActivity extends AppCompatActivity {
         //设置recyclerView每个item间的分割线
         recyclerViewSalesSetting.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         //创建recyclerView的实例，并将数据传输到适配器
-        salesSettingAdapter = new SalesSettingAdapter(allGoods);
+        salesSettingAdapter = new SalesSettingAdapter(list, this);
         //recyclerView显示适配器内容
         recyclerViewSalesSetting.setAdapter(salesSettingAdapter);
         //找到按钮UI控件并设置添加按钮监听事件
@@ -114,6 +117,8 @@ public class SalesSettingActivity extends AppCompatActivity {
                                 try {
                                     Goods goods = new Goods();
                                     goods.setName(getResources().getStringArray(R.array.goods_array)[index[0]]);
+                                    goods.setImage_path(getResources().getIdentifier("ic_category_" + index[0], "drawable", getPackageName()));
+                                    ToastFactory.makeText(SalesSettingActivity.this, String.valueOf(getResources().getIdentifier("ic_category_" + 0, "drawable", getPackageName())), Toast.LENGTH_SHORT).show();
                                     goods.setSales_price(goodsPrice[0]);
                                     goods.save();
                                 } catch (IllegalStateException e) {
@@ -123,7 +128,7 @@ public class SalesSettingActivity extends AppCompatActivity {
                                     @Override
                                     public <T> void onFinish(List<T> t) {
                                         List<Goods> allGoods = (List<Goods>) t;
-                                        salesSettingAdapter = new SalesSettingAdapter(allGoods);
+                                        salesSettingAdapter.notifyDataSetChanged();
                                         //recyclerView显示适配器内容
                                         recyclerViewSalesSetting.setAdapter(salesSettingAdapter);
                                     }
@@ -153,7 +158,7 @@ public class SalesSettingActivity extends AppCompatActivity {
                     @Override
                     public <T> void onFinish(List<T> t) {
                         List<Goods> allGoods = (List<Goods>) t;
-                        salesSettingAdapter = new SalesSettingAdapter(allGoods);
+                        salesSettingAdapter = new SalesSettingAdapter(allGoods, SalesSettingActivity.this);
                         //recyclerView显示适配器内容
                         recyclerViewSalesSetting.setAdapter(salesSettingAdapter);
                     }
@@ -196,7 +201,7 @@ public class SalesSettingActivity extends AppCompatActivity {
                                     @Override
                                     public <T> void onFinish(List<T> t) {
                                         List<Goods> allGoods = (List<Goods>) t;
-                                        salesSettingAdapter = new SalesSettingAdapter(allGoods);
+                                        salesSettingAdapter = new SalesSettingAdapter(allGoods,  SalesSettingActivity.this);
                                         //recyclerView显示适配器内容
                                         recyclerViewSalesSetting.setAdapter(salesSettingAdapter);
                                     }
@@ -214,14 +219,13 @@ public class SalesSettingActivity extends AppCompatActivity {
                 builder.create().show();
             }
         });
-        Button buttonAddFloor = (Button) findViewById(R.id.btn_add_floor);
+        Button buttonAddFloor = (Button) findViewById(R.id.btn_sales_setting_addfloor);
         buttonAddFloor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 list.add(new Goods());
-                salesSettingAdapter = new SalesSettingAdapter(list);
-                //recyclerView显示适配器内容
-                recyclerViewSalesSetting.setAdapter(salesSettingAdapter);
+                salesSettingAdapter.notifyDataSetChanged();
+                recyclerViewSalesSetting.smoothScrollToPosition(salesSettingAdapter.getItemCount() - 1);
             }
         });
         Button buttonSalesSettingReturn = (Button) findViewById(R.id.btn_sales_setting_return);

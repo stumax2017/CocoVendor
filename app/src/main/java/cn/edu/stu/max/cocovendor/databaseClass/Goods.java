@@ -16,7 +16,7 @@ public class Goods extends DataSupport{
     //商品销售价
     private float sales_price;
     //商品图片存放路径
-    private String image_path;
+    private int image_path;
     //商品库存数量
     private int quanlity;
     //商品条形码
@@ -59,11 +59,11 @@ public class Goods extends DataSupport{
         this.sales_price = sales_price;
     }
 
-    public String getImage_path() {
+    public int getImage_path() {
         return image_path;
     }
 
-    public void setImage_path(String image_path) {
+    public void setImage_path(int image_path) {
         this.image_path = image_path;
     }
 

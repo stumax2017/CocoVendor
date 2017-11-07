@@ -1,6 +1,7 @@
 package cn.edu.stu.max.cocovendor.javaClass;
 
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +17,11 @@ import cn.edu.stu.max.cocovendor.databaseClass.Goods;
 
 public class SalesSettingAdapter extends RecyclerView.Adapter {
     private List<Goods> list;
+    private Context context;
 
-    public SalesSettingAdapter(List<Goods> list) {
+    public SalesSettingAdapter(List<Goods> list, Context context) {
         this.list = list;
+        this.context = context;
     }
 
     @Override
@@ -31,12 +34,16 @@ public class SalesSettingAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         sheetViewHolder vh = (sheetViewHolder) holder;
 
-        vh.getTv_sheetRow1().setText(String.valueOf(list.get(position).getId()));
-        vh.getIv_sheetRow2().setImageResource(R.drawable.ic_category_0);
-        vh.getTv_sheetRow2().setText(list.get(position).getName());
-        vh.getTv_sheetRow3().setText(String.valueOf(list.get(position).getSales_price()));
-        vh.getTv_sheetRow4().setText(String.valueOf(list.get(position).getQuanlity()));
-        vh.getBtn_sheetRow5().setText(String.valueOf(list.get(position).getSales_price()));
+        vh.getTv_sheetRow1().setText(String.valueOf(position + 1));
+        if (list.get(position).getName() == null) {
+            vh.getIv_sheetRow2().setImageResource(R.color.colorTransparency);
+        } else {
+            vh.getIv_sheetRow2().setImageResource(list.get(position).getImage_path());
+            vh.getTv_sheetRow2().setText(list.get(position).getName());
+            vh.getTv_sheetRow3().setText(String.valueOf(list.get(position)));
+            vh.getTv_sheetRow4().setText(String.valueOf(list.get(position).getImage_path()));
+            vh.getBtn_sheetRow5().setText(String.valueOf(list.get(position).getSales_price()));
+        }
     }
 
     @Override
