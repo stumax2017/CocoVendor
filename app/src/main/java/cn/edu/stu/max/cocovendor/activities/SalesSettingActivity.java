@@ -46,8 +46,9 @@ public class SalesSettingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales_setting);
+        //设置标题栏返回箭头
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        //查找数据库中全部货物
         List<Goods> allGoods = DataSupport.findAll(Goods.class);
 
         recyclerViewSalesSetting = (RecyclerView) findViewById(R.id.rv_sales_setting);

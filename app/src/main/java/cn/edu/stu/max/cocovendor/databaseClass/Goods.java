@@ -23,6 +23,9 @@ public class Goods extends DataSupport{
     private String barcode;
     //销售记录id
     private List<Sales> sales_id;
+    //是否在售
+    @Column(defaultValue = "false")
+    private boolean isOnSale;
 
     public int getId() {
         return id;
@@ -86,5 +89,13 @@ public class Goods extends DataSupport{
 
     public void setSales_id(List<Sales> sales_id) {
         this.sales_id = sales_id;
+    }
+
+    public boolean isOnSale() {
+        return isOnSale;
+    }
+
+    public void setOnSale(boolean onSale) {
+        isOnSale = onSale;
     }
 }
