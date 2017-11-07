@@ -25,7 +25,7 @@ import android.widget.Button;
 
 import cn.edu.stu.max.cocovendor.R;
 
-public class MainMenu extends Activity {
+public class SerialPortSettingMainMenu extends Activity {
 
     /** Called when the activity is first created. */
     @Override
@@ -36,35 +36,35 @@ public class MainMenu extends Activity {
         final Button buttonSetup = (Button) findViewById(R.id.ButtonSetup);
         buttonSetup.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(MainMenu.this, SerialPortPreferences.class));
+                startActivity(new Intent(SerialPortSettingMainMenu.this, SerialPortPreferences.class));
             }
         });
 
         final Button buttonConsole = (Button) findViewById(R.id.ButtonConsole);
         buttonConsole.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(MainMenu.this, ConsoleActivity.class));
+                startActivity(new Intent(SerialPortSettingMainMenu.this, ConsoleActivity.class));
             }
         });
 
         final Button buttonLoopback = (Button) findViewById(R.id.ButtonLoopback);
         buttonLoopback.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(MainMenu.this, LoopbackActivity.class));
+                startActivity(new Intent(SerialPortSettingMainMenu.this, LoopbackActivity.class));
             }
         });
 
         final Button button01010101 = (Button) findViewById(R.id.Button01010101);
         button01010101.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(MainMenu.this, Sending01010101Activity.class));
+                startActivity(new Intent(SerialPortSettingMainMenu.this, Sending01010101Activity.class));
             }
         });
 
         final Button buttonAbout = (Button) findViewById(R.id.ButtonAbout);
         buttonAbout.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainMenu.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(SerialPortSettingMainMenu.this);
                 builder.setTitle("About");
                 builder.setMessage(R.string.about_msg);
                 builder.show();
@@ -74,8 +74,8 @@ public class MainMenu extends Activity {
         final Button buttonQuit = (Button) findViewById(R.id.ButtonQuit);
         buttonQuit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //MainMenu.this.finish();
-                startActivity(new Intent(MainMenu.this, StartActivity.class));
+                //SerialPortSettingMainMenu.this.finish();
+                startActivity(new Intent(SerialPortSettingMainMenu.this, StartActivity.class));
             }
         });
     }

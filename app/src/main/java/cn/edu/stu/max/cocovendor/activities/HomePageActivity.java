@@ -87,6 +87,10 @@ public class HomePageActivity extends SerialPortActivity {
     private ImageView imageViewGoods5;
     private ImageView imageViewGoods6;
 
+    private TextView textViewCoinMoney;
+
+    private static final byte[] coinMoney = {0, 0, 0, '.', 0, 0};
+
 
 
     private String[] titles = {"蜗牛一号", "蜗牛二号", "蜗牛三号", "蜗牛四号", "蜗牛五号", "蜗牛六号", "ipad(白)", "ipad(黑)", "可口可乐", "百事可乐",
@@ -128,7 +132,6 @@ public class HomePageActivity extends SerialPortActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_home_page);
-
 
         mPager = (ViewPager) findViewById(R.id.viewpager);
         mLlDot = (LinearLayout) findViewById(R.id.ll_dot);
@@ -211,8 +214,7 @@ public class HomePageActivity extends SerialPortActivity {
 
         context = this;
 
-//        final Intent intent = new Intent("cn.edu.stu.max.cocovendor.services.VideoService");
-        //intent.setAction("cn.edu.stu.max.cocovendor.services.VideoService");
+        textViewCoinMoney = (TextView) findViewById(R.id.coin_money);
         Button a = (Button) findViewById(R.id.a);
         a.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -798,11 +800,26 @@ public class HomePageActivity extends SerialPortActivity {
         return super.onTouchEvent(event);
     };
 
+
+    // 串口接收函数
     @Override
     protected void onDataReceived(final byte[] buffer, final int size) {
         runOnUiThread(new Runnable() {
             public void run() {
-                ToastFactory.makeText(HomePageActivity.this, new String (buffer, 0, size), Toast.LENGTH_SHORT).show();
+//                switch (new String (buffer, 0, size)) {
+//                    case "10000011":
+//                        coinMoney[0] = buffer[6];
+//                        coinMoney[1] = buffer[7];
+//                        coinMoney[2] = '.';
+//                        coinMoney[3] = 0;
+//                        coinMoney[4] = 0;
+//                        coinMoney[5] = 0;
+//                        textViewCoinMoney.setText(new String(coinMoney, 0, 6));
+//                        break;
+//                }
+////                ToastFactory.makeText(HomePageActivity.this, new String (buffer, 0, size), Toast.LENGTH_SHORT).show();
+////                ToastFactory.makeText(HomePageActivity.this, new String (buffer, 0, size) + "hh", Toast.LENGTH_SHORT).show();
+//                textViewCoinMoney.setText(new String (buffer, 0, size));
             }
         });
     }

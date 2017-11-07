@@ -11,7 +11,12 @@
         android:title="@string/title_alipay" />
 
     <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_alipay_logo_blue_24dp"
+        android:id="@+id/navigation_cash"
+        android:icon="@drawable/ic_notifications_black_24dp"
         android:title="@string/title_cash" />
+
+    <item
+        android:id="@+id/navigation_return"
+        android:icon="@drawable/ic_return_button"
+        android:title="@string/title_return" />
 </menu>
