@@ -39,7 +39,7 @@ public class SheetGoodsActivity extends AppCompatActivity {
         //设置recyclerView每个item间的分割线
         recyclerViewSalesSetting.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         //创建recyclerView的实例，并将数据传输到适配器
-        salesSettingAdapter = new SalesSettingAdapter(allGoods);
+        salesSettingAdapter = new SalesSettingAdapter(allGoods, SheetGoodsActivity.this);
         //recyclerView显示适配器内容
         recyclerViewSalesSetting.setAdapter(salesSettingAdapter);
 

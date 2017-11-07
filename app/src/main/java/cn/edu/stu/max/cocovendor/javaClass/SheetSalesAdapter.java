@@ -32,7 +32,7 @@ public class SheetSalesAdapter extends RecyclerView.Adapter{
         vh.getTv_sheetRow2().setText(String.valueOf(list.get(position).getSales_date()));
         vh.getTv_sheetRow3().setText(String.valueOf(list.get(position).getGoods_name()));
         vh.getTv_sheetRow4().setText(String.valueOf(list.get(position).getMachine_floor()));
-        vh.getTv_sheetRow5().setText(String.valueOf(list.get(position).getPay_way()));
+//        vh.getTv_sheetRow5().setText(String.valueOf(list.get(position).getPay_way()));
     }
 
     @Override
@@ -46,7 +46,7 @@ public class SheetSalesAdapter extends RecyclerView.Adapter{
         private final TextView tv_sheetRow2;
         private final TextView tv_sheetRow3;
         private final TextView tv_sheetRow4;
-        private final TextView tv_sheetRow5;
+//        private final TextView tv_sheetRow5;
 
         private sheetViewHolder(View itemView) {
             super(itemView);
@@ -55,7 +55,7 @@ public class SheetSalesAdapter extends RecyclerView.Adapter{
             tv_sheetRow2 = (TextView) itemView.findViewById(R.id.tv_sheetRow2);
             tv_sheetRow3 = (TextView) itemView.findViewById(R.id.tv_sheetRow3);
             tv_sheetRow4 = (TextView) itemView.findViewById(R.id.tv_sheetRow4);
-            tv_sheetRow5 = (TextView) itemView.findViewById(R.id.tv_sheetRow5);
+//            tv_sheetRow5 = (TextView) itemView.findViewById(R.id.tv_sheetRow5);
         }
 
         private TextView getTv_sheetRow1() {
@@ -74,8 +74,8 @@ public class SheetSalesAdapter extends RecyclerView.Adapter{
             return tv_sheetRow4;
         }
 
-        private TextView getTv_sheetRow5() {
-            return tv_sheetRow5;
-        }
+//        private TextView getTv_sheetRow5() {
+//            return tv_sheetRow5;
+//        }
     }
 }
