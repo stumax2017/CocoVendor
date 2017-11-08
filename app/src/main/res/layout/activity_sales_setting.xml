@@ -208,15 +208,15 @@
             android:layout_height="match_parent"
             android:text="添加货物层"/>
         <Button
+            android:id="@+id/btn_sales_setting_init"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/label_init_goods"/>
+        <Button
             android:id="@+id/btn_sales_setting_add"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/label_add_goods"/>
-        <Button
-            android:id="@+id/btn_sales_setting_del"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/label_del_goods"/>
         <Button
             android:id="@+id/btn_sales_setting_fix"
             android:layout_width="wrap_content"

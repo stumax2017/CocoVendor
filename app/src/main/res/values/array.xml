@@ -1,10 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="goods_array">
-        <item>可乐</item>
-        <item>雪碧</item>
-        <item>橙汁</item>
-        <item>椰汁</item>
-        <item>奶茶</item>
+    <string-array name="goods_name_array">
+        <item>火焰蜗牛</item>
+        <item>寒冰蜗牛</item>
+        <item>绿绅士蜗牛</item>
+        <item>赛车蜗牛</item>
+        <item>芝麻糊蜗牛</item>
+        <item>胖胖蜗牛</item>
+        <item>iPad(白)</item>
+        <item>iPad(黑)</item>
+        <item>可口可乐(罐)</item>
+        <item>百事可乐(罐)</item>
+        <item>青苹果</item>
+        <item>红苹果</item>
+        <item>奇异果</item>
+        <item>哈密瓜</item>
+        <item>柠檬</item>
+        <item>橙子</item>
+        <item>红椒</item>
+        <item>南瓜</item>
+        <item>番茄</item>
+        <item>黄色钻戒</item>
+        <item>剪刀</item>
+        <item>餐具</item>
+        <item>假发</item>
+        <item>紫色的山</item>
+        <item>两个爱心</item>
+        <item>一个爱心</item>
+        <item>橙色钻戒</item>
+        <item>钟</item>
+        <item>黄色话筒</item>
+        <item>蓝色话筒</item>
+        <item>蓝色的山</item>
+        <item>寺庙</item>
+        <item>波浪假发</item>
+        <item>中国联通</item>
     </string-array>
+    <integer-array name="goods_price_array">
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>20</item>
+        <item>23000</item>
+        <item>22000</item>
+        <item>30</item>
+        <item>30</item>
+        <item>25</item>
+        <item>25</item>
+        <item>80</item>
+        <item>60</item>
+        <item>40</item>
+        <item>40</item>
+        <item>30</item>
+        <item>70</item>
+        <item>30</item>
+        <item>9999</item>
+        <item>60</item>
+        <item>70</item>
+        <item>10</item>
+        <item>50</item>
+        <item>50</item>
+        <item>20</item>
+        <item>8888</item>
+        <item>200</item>
+        <item>200</item>
+        <item>200</item>
+        <item>400</item>
+        <item>350</item>
+        <item>180</item>
+        <item>200</item>
+    </integer-array>
 </resources>

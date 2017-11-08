@@ -51,7 +51,7 @@ public class SalesSettingActivity extends AppCompatActivity {
         //设置标题栏返回箭头
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //查找数据库中全部货物
-        List<Goods> allGoods = DataSupport.findAll(Goods.class);
+        List<Goods> onSaleGoods = DataSupport.where("isOnSale = ?", "true").find(Goods.class);
         for (int i = 0; i < 10; i ++) {
             list.add(new Goods());
         }
@@ -66,103 +66,113 @@ public class SalesSettingActivity extends AppCompatActivity {
         //recyclerView显示适配器内容
         recyclerViewSalesSetting.setAdapter(salesSettingAdapter);
         //找到按钮UI控件并设置添加按钮监听事件
+        final Button buttonSalesSettingInit = (Button) findViewById(R.id.btn_sales_setting_init);
+        buttonSalesSettingInit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                LayoutInflater inflater = getLayoutInflater();
+//                final View view = inflater.inflate(R.layout.add_goods_dialog, (ViewGroup) findViewById(R.id.ll_add_goods));
+//                final int[] index = new int[1];
+//                final float[] goodsPrice = new float[1];
+//                AlertDialog.Builder builder = new AlertDialog.Builder(SalesSettingActivity.this);
+//                builder.setTitle(R.string.label_add_goods)
+//                        .setSingleChoiceItems(R.array.goods_array, -1, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                AlertDialog.Builder builderIn = new AlertDialog.Builder(SalesSettingActivity.this);
+//                                if (view.getParent() != null) {
+//                                    ((ViewGroup) view.getParent()).removeView(view);
+//                                }
+//                                builderIn.setView(view);
+//                                builderIn.setTitle("价格设置")
+//                                        .setPositiveButton(R.string.label_save, new DialogInterface.OnClickListener() {
+//                                            @Override
+//                                            public void onClick(DialogInterface dialog, int id) {
+//                                                // FIRE ZE MISSILES!
+//                                                EditText editTextPrice = (EditText) view.findViewById(R.id.ed_goods_price);
+//                                                try {
+//                                                    goodsPrice[0] = Float.valueOf(editTextPrice.getText().toString().trim());
+//                                                } catch (NumberFormatException e) {
+//                                                    ToastFactory.makeText(SalesSettingActivity.this, "没有输入价钱", Toast.LENGTH_SHORT).show();
+//                                                }
+//                                            }
+//                                        })
+//                                        .setNegativeButton(R.string.label_cancel, new DialogInterface.OnClickListener() {
+//                                            @Override
+//                                            public void onClick(DialogInterface dialog, int id) {
+//                                                // User cancelled the dialog
+//                                            }
+//                                        });
+//                                builderIn.setCancelable(false);
+//                                TextView textView = (TextView) view.findViewById(R.id.label_goods_name);
+//                                textView.setText(getResources().getStringArray(R.array.goods_array)[which]);
+//                                index[0] = which;
+//                                builderIn.create().show();
+//                            }
+//                        })
+//                        .setPositiveButton(R.string.label_save, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int id) {
+//                                // FIRE ZE MISSILES!
+//                                try {
+//                                    Goods goods = new Goods();
+//                                    goods.setName(getResources().getStringArray(R.array.goods_array)[index[0]]);
+//                                    goods.setImage_path(getResources().getIdentifier("ic_category_" + index[0], "drawable", getPackageName()));
+//                                    ToastFactory.makeText(SalesSettingActivity.this, String.valueOf(getResources().getIdentifier("ic_category_" + 0, "drawable", getPackageName())), Toast.LENGTH_SHORT).show();
+//                                    goods.setSales_price(goodsPrice[0]);
+//                                    goods.save();
+//                                } catch (IllegalStateException e) {
+//                                    ToastFactory.makeText(SalesSettingActivity.this, "已经存在这种商品了", Toast.LENGTH_SHORT).show();
+//                                }
+//                                DataSupport.findAllAsync(Goods.class).listen(new FindMultiCallback() {
+//                                    @Override
+//                                    public <T> void onFinish(List<T> t) {
+//                                        List<Goods> allGoods = (List<Goods>) t;
+//                                        salesSettingAdapter.notifyDataSetChanged();
+//                                        //recyclerView显示适配器内容
+//                                        recyclerViewSalesSetting.setAdapter(salesSettingAdapter);
+//                                    }
+//                                });
+//                            }
+//                        })
+//                        .setNegativeButton(R.string.label_cancel, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int id) {
+//                                // User cancelled the dialog
+//                            }
+//                        });
+//                // Create the AlertDialog object and return it
+//                builder.setCancelable(false);
+//                builder.create().show();
+                for (int i = 0; i < 34; i ++) {
+                    Goods goods = new Goods();
+                    goods.setName(getResources().getStringArray(R.array.goods_name_array)[i]);
+                    goods.setCost_price(getResources().getIntArray(R.array.goods_price_array)[i] / 10);
+                    goods.setImage_path(getResources().getIdentifier("ic_category_" + i, "drawable", getPackageName()));
+                    goods.setQuanlity(5);
+                    goods.setBarcode("000000" + i);
+                    goods.setOnSale(false);
+                    goods.save();
+                }
+                buttonSalesSettingInit.setVisibility(View.INVISIBLE);
+            }
+        });
         Button buttonSalesSettingAdd = (Button) findViewById(R.id.btn_sales_setting_add);
         buttonSalesSettingAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LayoutInflater inflater = getLayoutInflater();
-                final View view = inflater.inflate(R.layout.add_goods_dialog, (ViewGroup) findViewById(R.id.ll_add_goods));
-                final int[] index = new int[1];
-                final float[] goodsPrice = new float[1];
-                AlertDialog.Builder builder = new AlertDialog.Builder(SalesSettingActivity.this);
-                builder.setTitle(R.string.label_add_goods)
-                        .setSingleChoiceItems(R.array.goods_array, -1, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                AlertDialog.Builder builderIn = new AlertDialog.Builder(SalesSettingActivity.this);
-                                if (view.getParent() != null) {
-                                    ((ViewGroup) view.getParent()).removeView(view);
-                                }
-                                builderIn.setView(view);
-                                builderIn.setTitle("价格设置")
-                                        .setPositiveButton(R.string.label_save, new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int id) {
-                                                // FIRE ZE MISSILES!
-                                                EditText editTextPrice = (EditText) view.findViewById(R.id.ed_goods_price);
-                                                try {
-                                                    goodsPrice[0] = Float.valueOf(editTextPrice.getText().toString().trim());
-                                                } catch (NumberFormatException e) {
-                                                    ToastFactory.makeText(SalesSettingActivity.this, "没有输入价钱", Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
-                                        })
-                                        .setNegativeButton(R.string.label_cancel, new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int id) {
-                                                // User cancelled the dialog
-                                            }
-                                        });
-                                builderIn.setCancelable(false);
-                                TextView textView = (TextView) view.findViewById(R.id.label_goods_name);
-                                textView.setText(getResources().getStringArray(R.array.goods_array)[which]);
-                                index[0] = which;
-                                builderIn.create().show();
-                            }
-                        })
-                        .setPositiveButton(R.string.label_save, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                // FIRE ZE MISSILES!
-                                try {
-                                    Goods goods = new Goods();
-                                    goods.setName(getResources().getStringArray(R.array.goods_array)[index[0]]);
-                                    goods.setImage_path(getResources().getIdentifier("ic_category_" + index[0], "drawable", getPackageName()));
-                                    ToastFactory.makeText(SalesSettingActivity.this, String.valueOf(getResources().getIdentifier("ic_category_" + 0, "drawable", getPackageName())), Toast.LENGTH_SHORT).show();
-                                    goods.setSales_price(goodsPrice[0]);
-                                    goods.save();
-                                } catch (IllegalStateException e) {
-                                    ToastFactory.makeText(SalesSettingActivity.this, "已经存在这种商品了", Toast.LENGTH_SHORT).show();
-                                }
-                                DataSupport.findAllAsync(Goods.class).listen(new FindMultiCallback() {
-                                    @Override
-                                    public <T> void onFinish(List<T> t) {
-                                        List<Goods> allGoods = (List<Goods>) t;
-                                        salesSettingAdapter.notifyDataSetChanged();
-                                        //recyclerView显示适配器内容
-                                        recyclerViewSalesSetting.setAdapter(salesSettingAdapter);
-                                    }
-                                });
-                            }
-                        })
-                        .setNegativeButton(R.string.label_cancel, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                // User cancelled the dialog
-                            }
-                        });
-                // Create the AlertDialog object and return it
-                builder.setCancelable(false);
-                builder.create().show();
-            }
-        });
-        Button buttonSalesSettingDel = (Button) findViewById(R.id.btn_sales_setting_del);
-        buttonSalesSettingDel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ToastFactory.makeText(SalesSettingActivity.this, "按下删除", Toast.LENGTH_SHORT).show();
-                Goods toChangeGoods = new Goods();
-                toChangeGoods.setToDefault("quanlity");
-                toChangeGoods.updateAll();
-                DataSupport.findAllAsync(Goods.class).listen(new FindMultiCallback() {
-                    @Override
-                    public <T> void onFinish(List<T> t) {
-                        List<Goods> allGoods = (List<Goods>) t;
-                        salesSettingAdapter = new SalesSettingAdapter(allGoods, SalesSettingActivity.this);
-                        //recyclerView显示适配器内容
-                        recyclerViewSalesSetting.setAdapter(salesSettingAdapter);
-                    }
-                });
+//                Goods toChangeGoods = new Goods();
+//                toChangeGoods.setToDefault("quanlity");
+//                toChangeGoods.updateAll();
+//                DataSupport.findAllAsync(Goods.class).listen(new FindMultiCallback() {
+//                    @Override
+//                    public <T> void onFinish(List<T> t) {
+//                        List<Goods> allGoods = (List<Goods>) t;
+//                        salesSettingAdapter = new SalesSettingAdapter(allGoods, SalesSettingActivity.this);
+//                        //recyclerView显示适配器内容
+//                        recyclerViewSalesSetting.setAdapter(salesSettingAdapter);
+//                    }
+//                });
             }
         });
         Button buttonSalesSettingFix = (Button) findViewById(R.id.btn_sales_setting_fix);
