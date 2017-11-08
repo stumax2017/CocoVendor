@@ -1,4 +1,4 @@
-package cn.edu.stu.max.cocovendor.javaClass;
+package cn.edu.stu.max.cocovendor.adapters;
 
 
 import android.content.Context;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import cn.edu.stu.max.cocovendor.R;
+import cn.edu.stu.max.cocovendor.javaClass.Model;
 
 /**
  * Created by lijuan on 2016/9/12.

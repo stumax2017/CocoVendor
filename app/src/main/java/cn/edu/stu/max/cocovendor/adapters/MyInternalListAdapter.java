@@ -1,10 +1,12 @@
-package cn.edu.stu.max.cocovendor.javaClass;
+package cn.edu.stu.max.cocovendor.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,12 +15,13 @@ import java.util.List;
 import java.util.Map;
 
 import cn.edu.stu.max.cocovendor.R;
+import cn.edu.stu.max.cocovendor.javaClass.ViewHolder;
 
 /**
- * Created by 0 on 2017/10/6.
+ * Created by 0 on 2017/10/4.
  */
 
-public class MyInternalSettingListAdapter extends BaseAdapter {
+public class MyInternalListAdapter extends BaseAdapter {
 
     private static List<Map<String, Object>> list;   // 填充数据的List
 
@@ -29,9 +32,9 @@ public class MyInternalSettingListAdapter extends BaseAdapter {
 
     private LayoutInflater inflater = null;   // 用来导入布局
 
-    public MyInternalSettingListAdapter(Context context, List<Map<String, Object>> list) {
+    public MyInternalListAdapter(Context context, List<Map<String, Object>> list) {
         this.context = context;
-        MyInternalSettingListAdapter.list = list;
+        MyInternalListAdapter.list = list;
         inflater = LayoutInflater.from(context);
         isSelected = new HashMap<Integer, Boolean>();
         isFileAdded = new boolean[list.size()];
@@ -52,12 +55,12 @@ public class MyInternalSettingListAdapter extends BaseAdapter {
             tempIsSelected.put(i, false);
             tempIsFileAdded[i] = false;
         }
-        MyInternalSettingListAdapter.isSelected = tempIsSelected;
-        MyInternalSettingListAdapter.isFileAdded = tempIsFileAdded;
+        MyInternalListAdapter.isSelected = tempIsSelected;
+        MyInternalListAdapter.isFileAdded = tempIsFileAdded;
     }
 
     public static void setList(List<Map<String, Object>> list) {
-        MyInternalSettingListAdapter.list = list;
+        MyInternalListAdapter.list = list;
     }
 
     public static HashMap<Integer, Boolean> getIsSelected() { return isSelected; }
@@ -84,9 +87,10 @@ public class MyInternalSettingListAdapter extends BaseAdapter {
             // 获得ViewHolder对象
             holder = new ViewHolder();
             // 导入布局并赋值给convertView
-            convertView = inflater.inflate(R.layout.ad_setting_display_no_cb_item, null);
-            holder.img = (ImageView) convertView.findViewById(R.id.ad_setting_display_no_cb_item_img);
-            holder.title = (TextView) convertView.findViewById(R.id.ad_setting_display_no_cb_item_title);
+            convertView = inflater.inflate(R.layout.ad_setting_display_item, null);
+            holder.img = (ImageView) convertView.findViewById(R.id.ad_setting_display_item_img);
+            holder.title = (TextView) convertView.findViewById(R.id.ad_setting_display_item_title);
+            holder.cb = (CheckBox) convertView.findViewById(R.id.ad_setting_display_item_cb);
             // 为view设置标签
             convertView.setTag(holder);
         } else {
@@ -96,6 +100,21 @@ public class MyInternalSettingListAdapter extends BaseAdapter {
 
         holder.img.setBackgroundResource((Integer)list.get(position).get("img"));
         holder.title.setText((String)list.get(position).get("title"));
+
+        holder.cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+                if (checked) {
+                    isSelected.put(position, true);
+                    isFileAdded[position] = true;
+                } else {
+                    isSelected.put(position, false);
+                    isFileAdded[position] = false;
+                }
+            }
+        });
+
+        holder.cb.setChecked(getIsSelected().get(position));
 
         return convertView;
     }

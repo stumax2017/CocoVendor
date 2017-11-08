@@ -1,7 +1,5 @@
 package cn.edu.stu.max.cocovendor.activities;
 
-import android.app.Activity;
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,17 +7,13 @@ import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -35,24 +29,21 @@ import com.amap.api.location.AMapLocationListener;
 import org.litepal.crud.DataSupport;
 
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 
 import java.io.File;
 import java.util.List;
 
 import cn.edu.stu.max.cocovendor.javaClass.FileService;
-import cn.edu.stu.max.cocovendor.javaClass.GridViewAdapter;
+import cn.edu.stu.max.cocovendor.adapters.GridViewAdapter;
 import cn.edu.stu.max.cocovendor.javaClass.Model;
 import cn.edu.stu.max.cocovendor.javaClass.ToastFactory;
 import cn.edu.stu.max.cocovendor.R;
 import cn.edu.stu.max.cocovendor.databaseClass.Goods;
 import cn.edu.stu.max.cocovendor.databaseClass.Sales;
 import cn.edu.stu.max.cocovendor.javaClass.ViewHolder;
-import cn.edu.stu.max.cocovendor.javaClass.ViewPagerAdapter;
-import cn.edu.stu.max.cocovendor.services.VideoService;
+import cn.edu.stu.max.cocovendor.adapters.ViewPagerAdapter;
 
 public class HomePageActivity extends SerialPortActivity {
 

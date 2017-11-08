@@ -1,4 +1,4 @@
-package cn.edu.stu.max.cocovendor.javaClass;
+package cn.edu.stu.max.cocovendor.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import cn.edu.stu.max.cocovendor.R;
+import cn.edu.stu.max.cocovendor.javaClass.ViewHolder;
 
 /**
  * Created by 0 on 2017/10/5.
