@@ -15,6 +15,7 @@ import java.util.List;
 
 import cn.edu.stu.max.cocovendor.R;
 import cn.edu.stu.max.cocovendor.activities.DailySalesActivity;
+import cn.edu.stu.max.cocovendor.activities.MonthlySalesActivity;
 import cn.edu.stu.max.cocovendor.activities.SingleProductSalesAnalyzeActivity;
 import cn.edu.stu.max.cocovendor.databaseClass.Goods;
 
@@ -47,6 +48,7 @@ public class SingleProductSalesAnalyzeAdapter extends RecyclerView.Adapter {
 
         }
         vh.getTv_sheetRow2().setOnClickListener(new CustomClickListener(position));
+        vh.getTv_sheetRow3().setOnClickListener(new CustomClickListener(position));
     }
 
     @Override
@@ -101,7 +103,9 @@ public class SingleProductSalesAnalyzeAdapter extends RecyclerView.Adapter {
 //                list.get(position).put("tv_frequency", "" + (curCount + 1));
 //                saveMap.put(position, (String)list.get(position).get("tv_frequency"));
 //                notifyDataSetChanged();
-            } else if (view.getId() == R.id.ad_setting_setting_item_btn_minus) {
+            } else if (view.getId() == R.id.btn_monthly_sales) {
+                Intent intent = new Intent(context, MonthlySalesActivity.class);
+                context.startActivity(intent);
 //                if (curCount > 1) {
 //                    list.get(position).put("tv_frequency", "" + (curCount - 1));
 //                    saveMap.put(position, (String)list.get(position).get("tv_frequency"));
