@@ -830,7 +830,8 @@ public class HomePageActivity extends SerialPortActivity {
      */
     private void initDatas() {
         mDatas = new ArrayList<Model>();
-        for (int i = 0; i < DataSupport.count(Goods.class); i++) {
+//        for (int i = 0; i < DataSupport.count(Goods.class); i++)
+            for (int i = 0; i < 34; i++){
             //动态获取资源ID，第一个参数是资源名，第二个参数是资源类型例如drawable，string等，第三个参数包名
             int imageId = getResources().getIdentifier("ic_category_" + i, "drawable", getPackageName());
             mDatas.add(new Model(prices[i], titles[i], imageId));

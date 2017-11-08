@@ -181,7 +181,7 @@ public class SalesSettingActivity extends AppCompatActivity {
                 final ArrayList<Long> goodsSelectedItems = new ArrayList<>();
                 AlertDialog.Builder builder = new AlertDialog.Builder(SalesSettingActivity.this);
                 builder.setTitle("补充商品库存")
-                        .setMultiChoiceItems(R.array.goods_array, null, new DialogInterface.OnMultiChoiceClickListener() {
+                        .setMultiChoiceItems(R.array.goods_name_array, null, new DialogInterface.OnMultiChoiceClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                                 if (isChecked) {
