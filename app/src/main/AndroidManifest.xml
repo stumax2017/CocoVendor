@@ -139,7 +139,11 @@
             android:label="支付页" />
         <activity
             android:name=".activities.SheetActivity"
-            android:label="信息表"></activity>
+            android:label="信息表" />
+        <activity android:name=".activities.SingleProductSalesPandectActivity" />
+        <activity android:name=".activities.SingleProductSalesAnalyzeActivity" />
+        <activity android:name=".activities.DailySalesActivity" />
+        <activity android:name=".activities.MonthlySalesActivity"></activity>
     </application>
 
 </manifest>
