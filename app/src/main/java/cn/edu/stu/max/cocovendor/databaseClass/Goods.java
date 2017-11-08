@@ -19,8 +19,6 @@ public class Goods extends DataSupport{
     private int image_path;
     //商品库存数量
     private int quanlity;
-    //商品条形码
-    private String barcode;
     //销售记录id
     private List<Sales> sales_id;
     //是否在售
@@ -73,14 +71,6 @@ public class Goods extends DataSupport{
 
     public void setQuanlity(int quanlity) {
         this.quanlity = quanlity;
-    }
-
-    public String getBarcode() {
-        return barcode;
-    }
-
-    public void setBarcode(String barcode) {
-        this.barcode = barcode;
     }
 
     public List<Sales> getSales_id() {

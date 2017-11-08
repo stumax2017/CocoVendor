@@ -150,7 +150,6 @@ public class SalesSettingActivity extends AppCompatActivity {
                     goods.setCost_price(getResources().getIntArray(R.array.goods_price_array)[i] / 10);
                     goods.setImage_path(getResources().getIdentifier("ic_category_" + i, "drawable", getPackageName()));
                     goods.setQuanlity(5);
-                    goods.setBarcode("000000" + i);
                     goods.setOnSale(false);
                     goods.save();
                 }
