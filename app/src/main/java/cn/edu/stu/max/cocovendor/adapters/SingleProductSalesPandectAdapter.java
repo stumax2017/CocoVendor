@@ -1,4 +1,4 @@
-package cn.edu.stu.max.cocovendor.javaClass;
+package cn.edu.stu.max.cocovendor.adapters;
 
 
 import android.content.Context;

@@ -13,7 +13,7 @@ import org.litepal.crud.DataSupport;
 
 import java.util.List;
 
-import cn.edu.stu.max.cocovendor.javaClass.SalesSettingAdapter;
+import cn.edu.stu.max.cocovendor.adapters.SalesSettingAdapter;
 import cn.edu.stu.max.cocovendor.R;
 import cn.edu.stu.max.cocovendor.databaseClass.Goods;
 

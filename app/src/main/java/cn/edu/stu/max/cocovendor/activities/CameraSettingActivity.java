@@ -3,24 +3,14 @@ package cn.edu.stu.max.cocovendor.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
-import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.preference.SwitchPreference;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import cn.edu.stu.max.cocovendor.R;
-import cn.edu.stu.max.cocovendor.javaClass.FileService;
-import cn.edu.stu.max.cocovendor.javaClass.MyInternalListAdapter;
-import cn.edu.stu.max.cocovendor.javaClass.MyUSBListAdapter;
-import cn.edu.stu.max.cocovendor.javaClass.ViewHolder;
 
 public class CameraSettingActivity extends AppCompatPreferenceActivity {
 

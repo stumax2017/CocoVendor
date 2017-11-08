@@ -13,9 +13,7 @@ import java.util.List;
 
 import cn.edu.stu.max.cocovendor.R;
 import cn.edu.stu.max.cocovendor.databaseClass.Goods;
-import cn.edu.stu.max.cocovendor.javaClass.DailySalesAdapter;
-import cn.edu.stu.max.cocovendor.javaClass.SingleProductSalesAnalyzeAdapter;
-import cn.edu.stu.max.cocovendor.javaClass.SingleProductSalesPandectAdapter;
+import cn.edu.stu.max.cocovendor.adapters.DailySalesAdapter;
 
 public class DailySalesActivity extends AppCompatActivity {
 

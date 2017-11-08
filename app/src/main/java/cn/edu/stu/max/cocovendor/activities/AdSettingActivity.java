@@ -1,9 +1,7 @@
 package cn.edu.stu.max.cocovendor.activities;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -25,10 +23,10 @@ import java.util.List;
 import java.util.Map;
 
 import cn.edu.stu.max.cocovendor.javaClass.FileService;
-import cn.edu.stu.max.cocovendor.javaClass.MyInternalListAdapter;
-import cn.edu.stu.max.cocovendor.javaClass.MyInternalSettingListAdapter;
-import cn.edu.stu.max.cocovendor.javaClass.MyUSBSettingListAdapter;
-import cn.edu.stu.max.cocovendor.javaClass.MyUSBListAdapter;
+import cn.edu.stu.max.cocovendor.adapters.MyInternalListAdapter;
+import cn.edu.stu.max.cocovendor.adapters.MyInternalSettingListAdapter;
+import cn.edu.stu.max.cocovendor.adapters.MyUSBSettingListAdapter;
+import cn.edu.stu.max.cocovendor.adapters.MyUSBListAdapter;
 import cn.edu.stu.max.cocovendor.R;
 
 

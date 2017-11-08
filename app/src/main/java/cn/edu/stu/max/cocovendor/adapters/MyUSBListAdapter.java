@@ -1,4 +1,4 @@
-package cn.edu.stu.max.cocovendor.javaClass;
+package cn.edu.stu.max.cocovendor.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -15,12 +15,13 @@ import java.util.List;
 import java.util.Map;
 
 import cn.edu.stu.max.cocovendor.R;
+import cn.edu.stu.max.cocovendor.javaClass.ViewHolder;
 
 /**
  * Created by 0 on 2017/10/4.
  */
 
-public class MyInternalListAdapter extends BaseAdapter {
+public class MyUSBListAdapter extends BaseAdapter {
 
     private static List<Map<String, Object>> list;   // 填充数据的List
 
@@ -31,16 +32,16 @@ public class MyInternalListAdapter extends BaseAdapter {
 
     private LayoutInflater inflater = null;   // 用来导入布局
 
-    public MyInternalListAdapter(Context context, List<Map<String, Object>> list) {
+    public MyUSBListAdapter(Context context, List<Map<String, Object>> list) {
         this.context = context;
-        MyInternalListAdapter.list = list;
+        MyUSBListAdapter.list = list;
         inflater = LayoutInflater.from(context);
         isSelected = new HashMap<Integer, Boolean>();
         isFileAdded = new boolean[list.size()];
         initIsSelectedAndIsFileAdded();
     }
 
-    public void initIsSelectedAndIsFileAdded() {
+    public static void initIsSelectedAndIsFileAdded() {
         for (int i = 0; i < list.size(); i++) {
             getIsSelected().put(i, false);
             isFileAdded[i] = false;
@@ -54,12 +55,12 @@ public class MyInternalListAdapter extends BaseAdapter {
             tempIsSelected.put(i, false);
             tempIsFileAdded[i] = false;
         }
-        MyInternalListAdapter.isSelected = tempIsSelected;
-        MyInternalListAdapter.isFileAdded = tempIsFileAdded;
+        MyUSBListAdapter.isSelected = tempIsSelected;
+        MyUSBListAdapter.isFileAdded = tempIsFileAdded;
     }
 
     public static void setList(List<Map<String, Object>> list) {
-        MyInternalListAdapter.list = list;
+        MyUSBListAdapter.list = list;
     }
 
     public static HashMap<Integer, Boolean> getIsSelected() { return isSelected; }
