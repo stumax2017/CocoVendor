@@ -11,14 +11,24 @@ public class Goods extends DataSupport{
     //商品名称
     @Column(unique = true)
     private String name;
+    //商品销售数量
+    private int selling_num;
     //商品成本价
     private float cost_price;
     //商品销售价
     private float sales_price;
+    //现金支付笔数
+    private int cashTimes;
+    //支付宝支付笔数
+    private int alipayTimes;
+    //微信支付笔数
+    private int wechatTimes;
+    //销售总额
+    private float totalSales;
     //商品图片存放路径
     private int image_path;
     //商品库存数量
-    private int quanlity;
+    private int num;
     //商品条形码
     private String barcode;
     //销售记录id
@@ -43,6 +53,14 @@ public class Goods extends DataSupport{
         this.name = name;
     }
 
+    public int getSellingNum() {
+        return selling_num;
+    }
+
+    public void setSellingNum(int selling_num) {
+        this.selling_num = selling_num;
+    }
+
     public float getCost_price() {
         return cost_price;
     }
@@ -59,6 +77,38 @@ public class Goods extends DataSupport{
         this.sales_price = sales_price;
     }
 
+    public int getCashTimes() {
+        return cashTimes;
+    }
+
+    public void setCashTimes(int cashTimes) {
+        this.cashTimes = cashTimes;
+    }
+
+    public int getAlipayTimes() {
+        return alipayTimes;
+    }
+
+    public void setAlipayTimes(int alipayTimes) {
+        this.alipayTimes = alipayTimes;
+    }
+
+    public int getWechatTimes() {
+        return wechatTimes;
+    }
+
+    public void setWechatTimes(int wechatTimes) {
+        this.wechatTimes = wechatTimes;
+    }
+
+    public float getTotalSales() {
+        return totalSales;
+    }
+
+    public void setTotalSales(float totalSales) {
+        this.totalSales = totalSales;
+    }
+
     public int getImage_path() {
         return image_path;
     }
@@ -68,11 +118,11 @@ public class Goods extends DataSupport{
     }
 
     public int getQuanlity() {
-        return quanlity;
+        return num;
     }
 
-    public void setQuanlity(int quanlity) {
-        this.quanlity = quanlity;
+    public void setQuanlity(int num) {
+        this.num = num;
     }
 
     public String getBarcode() {
