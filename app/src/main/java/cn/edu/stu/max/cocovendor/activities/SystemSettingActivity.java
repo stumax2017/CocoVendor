@@ -2,7 +2,10 @@ package cn.edu.stu.max.cocovendor.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.audiofx.BassBoost;
+import android.media.audiofx.EnvironmentalReverb;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -55,10 +58,18 @@ public class SystemSettingActivity extends AppCompatActivity {
                 case R.id.btn_sys_parm_setting:
                     break;
                 case R.id.btn_network_setting:
-                    break;
-                case R.id.btn_sheet_setting:
+                    Intent intentWifi = new Intent(Settings.ACTION_WIFI_SETTINGS);
+                    intentWifi.putExtra("extra_prefs_show_button_bar", true);
+                    intentWifi.putExtra("extra_prefs_set_back_text","返回");
+                    intentWifi.putExtra("extra_prefs_set_next_text","");
+                    startActivity(intentWifi);
                     break;
                 case R.id.btn_update_goods:
+                    Intent intentData =  new Intent(Settings.ACTION_DATA_ROAMING_SETTINGS);//WIFI网络
+                    intentData.putExtra("extra_prefs_show_button_bar", true);
+                    intentData.putExtra("extra_prefs_set_back_text","返回");
+                    intentData.putExtra("extra_prefs_set_next_text","");
+                    startActivity(intentData);
                     break;
                 case R.id.btn_change_pswd:
                     Intent intentChangePswd = new Intent(SystemSettingActivity.this, LoginActivity.class);

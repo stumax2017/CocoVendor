@@ -15,12 +15,13 @@ import java.util.List;
 
 import cn.edu.stu.max.cocovendor.adapters.SalesSettingAdapter;
 import cn.edu.stu.max.cocovendor.R;
+import cn.edu.stu.max.cocovendor.adapters.SheetGoodsAdapter;
 import cn.edu.stu.max.cocovendor.databaseClass.Goods;
 
 public class SheetGoodsActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewSalesSetting;
-    private SalesSettingAdapter salesSettingAdapter;
+    private SheetGoodsAdapter sheetGoodsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +40,9 @@ public class SheetGoodsActivity extends AppCompatActivity {
         //设置recyclerView每个item间的分割线
         recyclerViewSalesSetting.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         //创建recyclerView的实例，并将数据传输到适配器
-        salesSettingAdapter = new SalesSettingAdapter(allGoods, SheetGoodsActivity.this);
+        sheetGoodsAdapter = new SheetGoodsAdapter(allGoods, SheetGoodsActivity.this);
         //recyclerView显示适配器内容
-        recyclerViewSalesSetting.setAdapter(salesSettingAdapter);
+        recyclerViewSalesSetting.setAdapter(sheetGoodsAdapter);
 
         Button buttonSalesSettingReturn = (Button) findViewById(R.id.btn_sales_setting_return);
         buttonSalesSettingReturn.setOnClickListener(new View.OnClickListener() {

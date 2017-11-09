@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -135,9 +136,10 @@ public class SalesSettingActivity extends AppCompatActivity {
                 for (int i = 0; i < 34; i ++) {
                     Goods goods = new Goods();
                     goods.setName(getResources().getStringArray(R.array.goods_name_array)[i]);
-                    goods.setCost_price(getResources().getIntArray(R.array.goods_price_array)[i] / 10);
+                    goods.setCost_price((float) getResources().getIntArray(R.array.goods_price_array)[i] / 10.0f);
+                    goods.setSales_price(goods.getCost_price());
                     goods.setImage_path(getResources().getIdentifier("ic_category_" + i, "drawable", getPackageName()));
-                    goods.setQuanlity(5);
+                    goods.setNum(5);
                     goods.setOnSale(false);
                     goods.save();
                 }
@@ -188,7 +190,7 @@ public class SalesSettingActivity extends AppCompatActivity {
                                 for (int i = 0; i < goodsSelectedItems.size(); i ++) {
                                     try {
                                         Goods toChangeGoods = DataSupport.find(Goods.class, goodsSelectedItems.get(i).longValue() + 1);
-                                        toChangeGoods.setQuanlity(10);
+                                        toChangeGoods.setNum(10);
                                         toChangeGoods.save();
                                     } catch (NullPointerException e) {
                                         ToastFactory.makeText(SalesSettingActivity.this, "所需商品并未上架", Toast.LENGTH_SHORT).show();

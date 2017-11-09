@@ -12,7 +12,7 @@ public class Goods extends DataSupport{
     @Column(unique = true)
     private String name;
     //商品销售数量
-    private int selling_num;
+    private int sellingNum;
     //商品成本价
     private float cost_price;
     //商品销售价
@@ -52,11 +52,11 @@ public class Goods extends DataSupport{
     }
 
     public int getSellingNum() {
-        return selling_num;
+        return sellingNum;
     }
 
     public void setSellingNum(int selling_num) {
-        this.selling_num = selling_num;
+        this.sellingNum = selling_num;
     }
 
     public float getCost_price() {
@@ -115,11 +115,11 @@ public class Goods extends DataSupport{
         this.image_path = image_path;
     }
 
-    public int getQuanlity() {
+    public int getNum() {
         return num;
     }
 
-    public void setQuanlity(int num) {
+    public void setNum(int num) {
         this.num = num;
     }
 
