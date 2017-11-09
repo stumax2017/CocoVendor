@@ -16,8 +16,10 @@ public class SettingMenuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getSupportActionBar().hide();
+
         setContentView(R.layout.activity_setting_menu);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Button buttonSystemSetting = (Button) findViewById(R.id.btn_system_setting);
         buttonSystemSetting.setOnClickListener(buttonListener);
@@ -79,15 +81,5 @@ public class SettingMenuActivity extends AppCompatActivity {
                     break;
             }
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

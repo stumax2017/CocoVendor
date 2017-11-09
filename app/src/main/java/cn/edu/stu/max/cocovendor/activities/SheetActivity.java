@@ -14,8 +14,10 @@ public class SheetActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getSupportActionBar().hide();
+
         setContentView(R.layout.activity_sheet);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Button buttonSheetSales = (Button) findViewById(R.id.btn_sheet_sales);
         buttonSheetSales.setOnClickListener(new View.OnClickListener() {
@@ -51,15 +53,5 @@ public class SheetActivity extends AppCompatActivity {
                 finish();
             }
         });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

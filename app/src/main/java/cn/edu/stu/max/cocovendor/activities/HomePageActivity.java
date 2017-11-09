@@ -211,21 +211,23 @@ public class HomePageActivity extends SerialPortActivity {
         a.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//
+//
+//                String test = "It is a test message!!!";
+//                        try {
+//                            mOutputStream.write(test.getBytes());
+//                            mOutputStream.write('\n');
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
 
-//                stopService(new Intent(HomePageActivity.this, VideoService.class));
-//}
-//               finish();
-//                android.os.Process.killProcess(android.os.Process.myPid());
-//                System.exit(0);
-//                startActivity(new Intent(HomePageActivity.this, StartActivity.class));
-//                ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-//                manager.killBackgroundProcesses(getPackageName());
-//                Intent i = getBaseContext().getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName());
-//                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                startActivity(i);
-//                ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-//                manager.restartPackage(getPackageName());
-                ToastFactory.makeText(HomePageActivity.this, "good job", Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent("android.net.wifi.PICK_WIFI_NETWORK");
+////                intent.putExtra("extra_prefs_set_back_text", "返回");
+//                intent.putExtra("extra_prefs_show_button_bar", true);
+//                startActivity(intent);
+
+                ToastFactory.makeText(HomePageActivity.this, "" + DataSupport.findFirst(Goods.class), Toast.LENGTH_LONG).show();
+                               // textViewCoinMoney.setText("" + DataSupport.findFirst(Goods.class));
             }
         });
 
@@ -600,6 +602,32 @@ public class HomePageActivity extends SerialPortActivity {
 //                }
 //            }
 //        });
+
+        SendThread sendThread = new SendThread();
+        sendThread.start();
+
+    }
+
+    private class SendThread extends Thread {
+
+        @Override
+        public void run() {
+            super.run();
+            while (!isInterrupted()) {
+                String text = "It is a test message!!";
+                try {
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    mOutputStream.write(text.getBytes());
+                    mOutputStream.write('\n');
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     private AMapLocationListener mLocationListener = new AMapLocationListener() {
@@ -793,6 +821,7 @@ public class HomePageActivity extends SerialPortActivity {
     };
 
 
+
     // 串口接收函数
     @Override
     protected void onDataReceived(final byte[] buffer, final int size) {
@@ -810,7 +839,14 @@ public class HomePageActivity extends SerialPortActivity {
 //                        break;
 //                }
 ////                ToastFactory.makeText(HomePageActivity.this, new String (buffer, 0, size), Toast.LENGTH_SHORT).show();
-////                ToastFactory.makeText(HomePageActivity.this, new String (buffer, 0, size) + "hh", Toast.LENGTH_SHORT).show();
+                ToastFactory.makeText(HomePageActivity.this, new String (buffer, 0, size) + "hh", Toast.LENGTH_SHORT).show();
+//                                        String test = "It is a test message!!!";
+//                        try {
+//                            mOutputStream.write(test.getBytes());
+//                            mOutputStream.write('\n');
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
 //                textViewCoinMoney.setText(new String (buffer, 0, size));
             }
         });

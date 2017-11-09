@@ -84,8 +84,10 @@ public class AdSettingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getSupportActionBar().hide();
+
         setContentView(R.layout.activity_ad_setting);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         SharedPreferences share = super.getSharedPreferences(adSettingDataFileName, MODE_PRIVATE);  // 实例化
         final SharedPreferences.Editor editor = share.edit();   // 使处于可编辑状态
@@ -602,16 +604,5 @@ public class AdSettingActivity extends AppCompatActivity {
 
     public String[] getAdSettingList() {
         return usbFileNameList;
-    }
-
-    //实现返回功能
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

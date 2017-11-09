@@ -26,6 +26,9 @@ public class DailySalesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getSupportActionBar().hide();
+
         setContentView(R.layout.activity_daily_sales);
 
         List<Goods> allGoods = DataSupport.findAll(Goods.class);

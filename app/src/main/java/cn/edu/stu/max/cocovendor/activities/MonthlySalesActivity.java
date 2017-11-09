@@ -27,7 +27,10 @@ public class MonthlySalesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_daily_sales);
+
+        getSupportActionBar().hide();
+
+        setContentView(R.layout.activity_monthly_sales);
 
         List<Goods> allGoods = DataSupport.findAll(Goods.class);
         for (int i = 0; i < 22; i ++) {

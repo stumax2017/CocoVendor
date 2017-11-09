@@ -34,9 +34,10 @@ public class SalesSettingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getSupportActionBar().hide();
+
         setContentView(R.layout.activity_sales_setting);
-        //设置标题栏返回箭头
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //查找数据库中全部货物
         List<Goods> onSaleGoods = DataSupport.where("isOnSale = ?", "true").find(Goods.class);
         for (int i = 0; i < 10; i ++) {
@@ -231,15 +232,5 @@ public class SalesSettingActivity extends AppCompatActivity {
                 finish();
             }
         });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

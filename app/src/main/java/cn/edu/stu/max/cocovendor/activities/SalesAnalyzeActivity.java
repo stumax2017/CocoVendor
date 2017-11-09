@@ -15,6 +15,9 @@ public class SalesAnalyzeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getSupportActionBar().hide();
+
         setContentView(R.layout.activity_sales_analyze);
 
         Button btn1 = (Button) findViewById(R.id.btn_1);
