@@ -81,12 +81,6 @@
             android:name=".activities.SalesSettingActivity"
             android:label="销售设置" />
         <activity
-            android:name=".activities.NetworkSettingActivity"
-            android:label="网络设置" />
-        <activity
-            android:name=".activities.WlanItemActivity"
-            android:label="WLAN设置" />
-        <activity
             android:name=".activities.SettingMenuActivity"
             android:label="设置" />
         <activity android:name=".activities.StartActivity">
