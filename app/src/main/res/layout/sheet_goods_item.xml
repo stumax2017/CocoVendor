@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_sheet_goods"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
@@ -32,7 +33,7 @@
             android:id="@+id/iv_sheetRow2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"/>
 
         <TextView
             android:id="@+id/tv_sheetRow2"
@@ -83,8 +84,8 @@
         android:layout_height="match_parent"
         android:background="@color/colorBlack" />
 
-    <Button
-        android:id="@+id/btn_set_goods"
+    <TextView
+        android:id="@+id/tv_sheetRow5"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -92,6 +93,5 @@
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
         android:textColor="@color/colorBlack"
-        android:text="设置商品"
         android:textSize="15sp" />
 </LinearLayout>

@@ -76,7 +76,7 @@ public class SingleProductSalesAnalyzeAdapter extends RecyclerView.Adapter {
             return tv_sheetRow1;
         }
 
-        public ImageView getIv_sheetRow2() {
+        private ImageView getIv_sheetRow2() {
             return iv_sheetRow2;
         }
 
@@ -89,10 +89,10 @@ public class SingleProductSalesAnalyzeAdapter extends RecyclerView.Adapter {
         }
     }
 
-    class CustomClickListener implements View.OnClickListener {
-        int position;
-        public CustomClickListener(int pos) {
-            position = pos;
+    private class CustomClickListener implements View.OnClickListener {
+        private int position;
+        public CustomClickListener(int position) {
+            this.position = position;
         }
         @Override
         public void onClick(View view) {

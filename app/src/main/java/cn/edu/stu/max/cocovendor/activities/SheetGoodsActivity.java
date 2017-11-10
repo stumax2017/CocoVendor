@@ -1,13 +1,21 @@
 package cn.edu.stu.max.cocovendor.activities;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import org.litepal.crud.DataSupport;
 
@@ -15,33 +23,83 @@ import java.util.List;
 
 import cn.edu.stu.max.cocovendor.adapters.SalesSettingAdapter;
 import cn.edu.stu.max.cocovendor.R;
+import cn.edu.stu.max.cocovendor.adapters.SheetGoodsAdapter;
 import cn.edu.stu.max.cocovendor.databaseClass.Goods;
+import cn.edu.stu.max.cocovendor.javaClass.ToastFactory;
 
 public class SheetGoodsActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewSalesSetting;
-    private SalesSettingAdapter salesSettingAdapter;
+    private SheetGoodsAdapter sheetGoodsAdapter;
+    private int fromWhich;
+    private boolean isSelGoods;
+    private TextView tv_sheetRow1_sel;
+    private ImageView iv_sheetRow2_sel;
+    private TextView tv_sheetRow2_sel;
+    private TextView tv_sheetRow3_sel;
+    private TextView tv_sheetRow4_sel;
+    private TextView tv_sheetRow5_sel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sheet_goods);
-
         //加入返回箭头
         //noinspection ConstantConditions
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        LinearLayout linearLayoutGoodsSel = (LinearLayout) findViewById(R.id.ll_goods_sel);
+        Intent intent = getIntent();
+        fromWhich = intent.getIntExtra("cabinetNum", 0);
+        isSelGoods = intent.getBooleanExtra("isSelGoods", false);
+        linearLayoutGoodsSel.setVisibility(isSelGoods ? View.VISIBLE : View.GONE);
         List<Goods> allGoods = DataSupport.findAll(Goods.class);
-
+        if (isSelGoods) {
+            tv_sheetRow1_sel = (TextView) findViewById(R.id.tv_sheetRow1_sel);
+            iv_sheetRow2_sel = (ImageView) findViewById(R.id.iv_sheetRow2_sel);
+            tv_sheetRow2_sel = (TextView) findViewById(R.id.tv_sheetRow2_sel);
+            tv_sheetRow3_sel = (TextView) findViewById(R.id.tv_sheetRow3_sel);
+            tv_sheetRow4_sel = (TextView) findViewById(R.id.tv_sheetRow4_sel);
+            tv_sheetRow5_sel = (TextView) findViewById(R.id.tv_sheetRow5_sel);
+        }
         recyclerViewSalesSetting = (RecyclerView) findViewById(R.id.rv_sales_setting);
         //设置线性布局 Creates a vertical LinearLayoutManager
         recyclerViewSalesSetting.setLayoutManager(new LinearLayoutManager(this));
         //设置recyclerView每个item间的分割线
         recyclerViewSalesSetting.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         //创建recyclerView的实例，并将数据传输到适配器
-        salesSettingAdapter = new SalesSettingAdapter(allGoods, SheetGoodsActivity.this);
+        sheetGoodsAdapter = new SheetGoodsAdapter(allGoods, SheetGoodsActivity.this);
+        sheetGoodsAdapter.setOnItemClickListener(new SheetGoodsAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, final int position) {
+                ToastFactory.makeText(SheetGoodsActivity.this, "点击了item" + position, Toast.LENGTH_SHORT).show();
+                if (isSelGoods) {
+                    tv_sheetRow1_sel.setText(String.valueOf(sheetGoodsAdapter.getItem(position).getId()));
+                    iv_sheetRow2_sel.setImageResource(sheetGoodsAdapter.getItem(position).getImage_path());
+                    tv_sheetRow2_sel.setText(sheetGoodsAdapter.getItem(position).getName());
+                    tv_sheetRow3_sel.setText(String.valueOf(sheetGoodsAdapter.getItem(position).getSales_price()));
+                    tv_sheetRow4_sel.setText(String.valueOf(sheetGoodsAdapter.getItem(position).getNum()));
+                    if (!sheetGoodsAdapter.getItem(position).isOnSale()) {
+                        tv_sheetRow5_sel.setText("未上架");
+                        tv_sheetRow5_sel.setTextColor(Color.RED);
+                    } else {
+                        tv_sheetRow5_sel.setText("在售中");
+                        tv_sheetRow5_sel.setTextColor(Color.GREEN);
+                    }
+                    Button buttonSelGoodsOk = (Button) findViewById(R.id.btn_sel_goods_ok);
+                    buttonSelGoodsOk.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Goods toSelGoods = sheetGoodsAdapter.getItem(position);
+                            toSelGoods.setOnSale(true);
+                            toSelGoods.save();
+                            finish();
+                        }
+                    });
+                }
+            }
+        });
         //recyclerView显示适配器内容
-        recyclerViewSalesSetting.setAdapter(salesSettingAdapter);
+        recyclerViewSalesSetting.setAdapter(sheetGoodsAdapter);
 
         Button buttonSalesSettingReturn = (Button) findViewById(R.id.btn_sales_setting_return);
         buttonSalesSettingReturn.setOnClickListener(new View.OnClickListener() {
