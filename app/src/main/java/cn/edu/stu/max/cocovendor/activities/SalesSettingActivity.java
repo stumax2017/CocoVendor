@@ -1,6 +1,7 @@
 package cn.edu.stu.max.cocovendor.activities;
 
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -42,9 +43,15 @@ public class SalesSettingActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //查找数据库中全部货物
-        List<Goods> onSaleGoods = DataSupport.where("isOnSale = ?", "true").find(Goods.class);
+//        List<Goods> onSaleGoods = DataSupport.where("isOnSale = ?", "true").find(Goods.class);
         for (int i = 0; i < CABINET_SIZE; i ++) {
-            list.add(new Goods());
+            SharedPreferences preferences = getSharedPreferences("cabinet_floor", MODE_PRIVATE);
+            int whichGoods =  preferences.getInt("cabinet_floor_" + i, 0);
+            if (whichGoods == 0) {
+                list.add(new Goods());
+            } else {
+                list.add(DataSupport.find(Goods.class, whichGoods));
+            }
         }
         //找到UI控件
         recyclerViewSalesSetting = (RecyclerView) findViewById(R.id.rv_sales_setting);
@@ -236,6 +243,23 @@ public class SalesSettingActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        list.remove()
+        list.clear();
+        for (int i = 0; i < CABINET_SIZE; i ++) {
+            SharedPreferences preferences = getSharedPreferences("cabinet_floor", MODE_PRIVATE);
+            int whichGoods =  preferences.getInt("cabinet_floor_" + i, 0);
+            if (whichGoods == 0) {
+                list.add(new Goods());
+            } else {
+                list.add(DataSupport.find(Goods.class, whichGoods));
+            }
+        }
+        salesSettingAdapter.notifyDataSetChanged();
     }
 
     //实现返回功能

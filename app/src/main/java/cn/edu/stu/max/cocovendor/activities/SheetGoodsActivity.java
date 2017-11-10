@@ -1,6 +1,7 @@
 package cn.edu.stu.max.cocovendor.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -49,7 +50,7 @@ public class SheetGoodsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         LinearLayout linearLayoutGoodsSel = (LinearLayout) findViewById(R.id.ll_goods_sel);
         Intent intent = getIntent();
-        fromWhich = intent.getIntExtra("cabinetNum", 0);
+        fromWhich = intent.getIntExtra("cabinetNum", 0);//下标从0开始
         isSelGoods = intent.getBooleanExtra("isSelGoods", false);
         linearLayoutGoodsSel.setVisibility(isSelGoods ? View.VISIBLE : View.GONE);
         List<Goods> allGoods = DataSupport.findAll(Goods.class);
@@ -85,13 +86,17 @@ public class SheetGoodsActivity extends AppCompatActivity {
                         tv_sheetRow5_sel.setText("在售中");
                         tv_sheetRow5_sel.setTextColor(Color.GREEN);
                     }
+                    //确定按钮功能
                     Button buttonSelGoodsOk = (Button) findViewById(R.id.btn_sel_goods_ok);
                     buttonSelGoodsOk.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            SharedPreferences.Editor editor = getSharedPreferences("cabinet_floor", MODE_PRIVATE).edit();
                             Goods toSelGoods = sheetGoodsAdapter.getItem(position);
                             toSelGoods.setOnSale(true);
                             toSelGoods.save();
+                            editor.putInt("cabinet_floor_" + fromWhich, toSelGoods.getId());
+                            editor.apply();
                             finish();
                         }
                     });
