@@ -615,17 +615,17 @@ public class HomePageActivity extends SerialPortActivity {
             super.run();
             while (!isInterrupted()) {
                 String text = "It is a test message!!";
-                try {
+//                try {
                     try {
                         Thread.sleep(200);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    mOutputStream.write(text.getBytes());
-                    mOutputStream.write('\n');
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+//                    mOutputStream.write(text.getBytes());
+//                    mOutputStream.write('\n');
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
             }
         }
     }
