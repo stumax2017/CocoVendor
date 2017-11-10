@@ -2,6 +2,7 @@ package cn.edu.stu.max.cocovendor.adapters;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +14,10 @@ import android.widget.TextView;
 import java.util.List;
 
 import cn.edu.stu.max.cocovendor.R;
+import cn.edu.stu.max.cocovendor.activities.SheetGoodsActivity;
 import cn.edu.stu.max.cocovendor.databaseClass.Goods;
 
-public class SalesSettingAdapter extends RecyclerView.Adapter {
+public class SalesSettingAdapter extends RecyclerView.Adapter<SalesSettingAdapter.ViewHolder> {
     private List<Goods> list;
     private Context context;
 
@@ -25,25 +27,24 @@ public class SalesSettingAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.sales_setting_item, parent, false);
-        return new sheetViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        sheetViewHolder vh = (sheetViewHolder) holder;
+    public void onBindViewHolder(ViewHolder holder, int position) {
 
-        vh.getTv_sheetRow1().setText(String.valueOf(position + 1));
+        holder.tv_sheetRow1.setText(String.valueOf(position + 1));
         if (list.get(position).getName() == null) {
-            vh.getIv_sheetRow2().setImageResource(R.color.colorTransparency);
+            holder.iv_sheetRow2.setImageResource(R.color.colorTransparency);
         } else {
-            vh.getIv_sheetRow2().setImageResource(list.get(position).getImage_path());
-            vh.getTv_sheetRow2().setText(list.get(position).getName());
-            vh.getTv_sheetRow3().setText(String.valueOf(list.get(position)));
-            vh.getTv_sheetRow4().setText(String.valueOf(list.get(position).getImage_path()));
-            vh.getBtn_sheetRow5().setText(String.valueOf(list.get(position).getSales_price()));
+            holder.iv_sheetRow2.setImageResource(list.get(position).getImage_path());
+            holder.tv_sheetRow2.setText(list.get(position).getName());
+            holder.tv_sheetRow3.setText(String.valueOf(list.get(position)));
+            holder.tv_sheetRow4.setText(String.valueOf(list.get(position).getImage_path()));
         }
+        holder.btn_setGoods.setOnClickListener(new GoodsSettingClickListener(position));
     }
 
     @Override
@@ -51,48 +52,42 @@ public class SalesSettingAdapter extends RecyclerView.Adapter {
         return list.size();
     }
 
-    private class sheetViewHolder extends RecyclerView.ViewHolder{
-        private final View mView;
-        private final TextView tv_sheetRow1;
-        private final ImageView iv_sheetRow2;
-        private final TextView tv_sheetRow2;
-        private final TextView tv_sheetRow3;
-        private final TextView tv_sheetRow4;
-        private final Button btn_sheetRow5;
+    static class ViewHolder extends RecyclerView.ViewHolder{
+        final TextView tv_sheetRow1;
+        final ImageView iv_sheetRow2;
+        final TextView tv_sheetRow2;
+        final TextView tv_sheetRow3;
+        final TextView tv_sheetRow4;
+        final Button btn_setGoods;
 
-        private sheetViewHolder(View itemView) {
+        private ViewHolder(View itemView) {
             super(itemView);
-            mView = itemView;
             tv_sheetRow1 = (TextView) itemView.findViewById(R.id.tv_sheetRow1);
             iv_sheetRow2 = (ImageView) itemView.findViewById(R.id.iv_sheetRow2);
             tv_sheetRow2 = (TextView) itemView.findViewById(R.id.tv_sheetRow2);
             tv_sheetRow3 = (TextView) itemView.findViewById(R.id.tv_sheetRow3);
             tv_sheetRow4 = (TextView) itemView.findViewById(R.id.tv_sheetRow4);
-            btn_sheetRow5 = (Button) itemView.findViewById(R.id.btn_sheetRow5);
+            btn_setGoods = (Button) itemView.findViewById(R.id.btn_set_goods);
+        }
+    }
+
+    private class GoodsSettingClickListener implements View.OnClickListener {
+        private int postion;
+
+        GoodsSettingClickListener(int postion) {
+            this.postion = postion;
         }
 
-        private TextView getTv_sheetRow1() {
-            return tv_sheetRow1;
-        }
-
-        public ImageView getIv_sheetRow2() {
-            return iv_sheetRow2;
-        }
-
-        private TextView getTv_sheetRow2() {
-            return tv_sheetRow2;
-        }
-
-        private TextView getTv_sheetRow3() {
-            return tv_sheetRow3;
-        }
-
-        private TextView getTv_sheetRow4() {
-            return tv_sheetRow4;
-        }
-
-        public Button getBtn_sheetRow5() {
-            return btn_sheetRow5;
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.btn_set_goods:
+                    Intent intent = new Intent(context, SheetGoodsActivity.class);
+                    intent.putExtra("cabinetNum", postion + 1);
+                    intent.putExtra("isSelGoods", true);
+                    context.startActivity(intent);
+                    break;
+            }
         }
     }
 }

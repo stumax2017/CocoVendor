@@ -31,17 +31,19 @@ public class SalesSettingActivity extends AppCompatActivity {
     private int pageOffset = 0;
     private int listRows = 10;
     private List<Goods> list = new ArrayList<Goods>();
+    private static int CABINET_SIZE = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        getSupportActionBar().hide();
-
         setContentView(R.layout.activity_sales_setting);
+        //加入返回箭头
+        //noinspection ConstantConditions
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         //查找数据库中全部货物
         List<Goods> onSaleGoods = DataSupport.where("isOnSale = ?", "true").find(Goods.class);
-        for (int i = 0; i < 10; i ++) {
+        for (int i = 0; i < CABINET_SIZE; i ++) {
             list.add(new Goods());
         }
         //找到UI控件
@@ -51,7 +53,7 @@ public class SalesSettingActivity extends AppCompatActivity {
         //设置recyclerView每个item间的分割线
         recyclerViewSalesSetting.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         //创建recyclerView的实例，并将数据传输到适配器
-        salesSettingAdapter = new SalesSettingAdapter(list, this);
+        salesSettingAdapter = new SalesSettingAdapter(list, SalesSettingActivity.this);
         //recyclerView显示适配器内容
         recyclerViewSalesSetting.setAdapter(salesSettingAdapter);
         //找到按钮UI控件并设置添加按钮监听事件
@@ -234,5 +236,16 @@ public class SalesSettingActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    //实现返回功能
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
