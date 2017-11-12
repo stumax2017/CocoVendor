@@ -79,6 +79,7 @@
             android:label="设置" />
         <activity
             android:name=".activities.SalesSettingActivity"
+            android:launchMode="singleTask"
             android:label="销售设置" />
         <activity
             android:name=".activities.SettingMenuActivity"

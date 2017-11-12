@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -857,11 +858,14 @@ public class HomePageActivity extends SerialPortActivity {
      */
     private void initDatas() {
         mDatas = new ArrayList<Model>();
+        List<Goods> list = DataSupport.where("isOnSale = ?", "1").find(Goods.class);
 //        for (int i = 0; i < DataSupport.count(Goods.class); i++)
-            for (int i = 0; i < 34; i++){
+        for (int i = 0; i < list.size(); i++) {
             //动态获取资源ID，第一个参数是资源名，第二个参数是资源类型例如drawable，string等，第三个参数包名
-            int imageId = getResources().getIdentifier("ic_category_" + i, "drawable", getPackageName());
-            mDatas.add(new Model(prices[i], titles[i], imageId));
+//            int imageId = getResources().getIdentifier("ic_category_" + i, "drawable", getPackageName());
+//            mDatas.add(new Model(prices[i], titles[i], imageId));
+            Goods goods = list.get(i);
+            mDatas.add(new Model(String.valueOf(goods.getSales_price()), goods.getName(), goods.getImage_path()));
         }
     }
 

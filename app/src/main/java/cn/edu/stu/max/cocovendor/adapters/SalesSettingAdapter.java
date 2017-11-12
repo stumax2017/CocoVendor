@@ -41,8 +41,8 @@ public class SalesSettingAdapter extends RecyclerView.Adapter<SalesSettingAdapte
         } else {
             holder.iv_sheetRow2.setImageResource(list.get(position).getImage_path());
             holder.tv_sheetRow2.setText(list.get(position).getName());
-            holder.tv_sheetRow3.setText(String.valueOf(list.get(position)));
-            holder.tv_sheetRow4.setText(String.valueOf(list.get(position).getImage_path()));
+            holder.tv_sheetRow3.setText(String.valueOf(list.get(position).getSales_price()));
+            holder.tv_sheetRow4.setText(String.valueOf(list.get(position).getNum()));
         }
         holder.btn_setGoods.setOnClickListener(new GoodsSettingClickListener(position));
     }
@@ -83,7 +83,7 @@ public class SalesSettingAdapter extends RecyclerView.Adapter<SalesSettingAdapte
             switch (v.getId()) {
                 case R.id.btn_set_goods:
                     Intent intent = new Intent(context, SheetGoodsActivity.class);
-                    intent.putExtra("cabinetNum", postion + 1);
+                    intent.putExtra("cabinetNum", postion);
                     intent.putExtra("isSelGoods", true);
                     context.startActivity(intent);
                     break;
