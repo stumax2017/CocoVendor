@@ -7,18 +7,34 @@
 
     <Button
         android:id="@+id/btn_1"
-        android:layout_width="500dp"
-        android:layout_height="250dp"
+        android:layout_width="400dp"
+        android:layout_height="150dp"
         android:layout_margin="10dp"
         android:text="单品销售总览"
-        android:textSize="50sp" />
+        android:textSize="30sp" />
 
     <Button
         android:id="@+id/btn_2"
-        android:layout_width="500dp"
-        android:layout_height="250dp"
+        android:layout_width="400dp"
+        android:layout_height="150dp"
         android:layout_margin="10dp"
         android:text="单品销售统计"
-        android:textSize="50sp" />
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/btn_3"
+        android:layout_width="400dp"
+        android:layout_height="150dp"
+        android:layout_margin="10dp"
+        android:text="机柜日销售统计"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/btn_4"
+        android:layout_width="400dp"
+        android:layout_height="150dp"
+        android:layout_margin="10dp"
+        android:text="机柜月销售统计"
+        android:textSize="30sp" />
 
 </LinearLayout>

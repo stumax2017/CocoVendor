@@ -137,7 +137,9 @@
         <activity android:name=".activities.SingleProductSalesPandectActivity" />
         <activity android:name=".activities.SingleProductSalesAnalyzeActivity" />
         <activity android:name=".activities.DailySalesActivity" />
-        <activity android:name=".activities.MonthlySalesActivity"></activity>
+        <activity android:name=".activities.MonthlySalesActivity" />
+        <activity android:name=".activities.CabinetDailySalesAnalyzeActivity" />
+        <activity android:name=".activities.CabinetMonthlySalesAnalyzeActivity"></activity>
     </application>
 
 </manifest>

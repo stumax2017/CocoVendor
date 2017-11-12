@@ -12,13 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.edu.stu.max.cocovendor.R;
+import cn.edu.stu.max.cocovendor.adapters.CabinetDailySalesAnalyzeAdapter;
+import cn.edu.stu.max.cocovendor.adapters.CabinetMonthlySalesAnalyzeAdapter;
 import cn.edu.stu.max.cocovendor.databaseClass.Goods;
 import cn.edu.stu.max.cocovendor.adapters.DailySalesAdapter;
 
-public class DailySalesActivity extends AppCompatActivity {
+public class CabinetMonthlySalesAnalyzeActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewSalesAnalyze;
-    private DailySalesAdapter dailySalesAdapter;
+    private CabinetMonthlySalesAnalyzeAdapter cabinetMonthlySalesAnalyzeAdapter;
     private int pageOffset = 0;
     private int listRows = 10;
     private List<Goods> list = new ArrayList<Goods>();
@@ -29,7 +31,7 @@ public class DailySalesActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-        setContentView(R.layout.activity_daily_sales);
+        setContentView(R.layout.activity_monthly_sales);
 
         List<Goods> allGoods = DataSupport.findAll(Goods.class);
         for (int i = 0; i < 22; i ++) {
@@ -42,8 +44,8 @@ public class DailySalesActivity extends AppCompatActivity {
         //设置recyclerView每个item间的分割线
         recyclerViewSalesAnalyze.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         //创建recyclerView的实例，并将数据传输到适配器
-        dailySalesAdapter = new DailySalesAdapter(list, this);
+        cabinetMonthlySalesAnalyzeAdapter = new CabinetMonthlySalesAnalyzeAdapter(list, this);
         //recyclerView显示适配器内容
-        recyclerViewSalesAnalyze.setAdapter(dailySalesAdapter);
+        recyclerViewSalesAnalyze.setAdapter(cabinetMonthlySalesAnalyzeAdapter);
     }
 }

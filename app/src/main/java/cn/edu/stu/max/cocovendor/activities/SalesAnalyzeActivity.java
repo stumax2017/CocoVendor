@@ -22,6 +22,8 @@ public class SalesAnalyzeActivity extends AppCompatActivity {
 
         Button btn1 = (Button) findViewById(R.id.btn_1);
         Button btn2 = (Button) findViewById(R.id.btn_2);
+        Button btn3 = (Button) findViewById(R.id.btn_3);
+        Button btn4 = (Button) findViewById(R.id.btn_4);
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +37,22 @@ public class SalesAnalyzeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SalesAnalyzeActivity.this, SingleProductSalesAnalyzeActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SalesAnalyzeActivity.this, CabinetDailySalesAnalyzeActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SalesAnalyzeActivity.this, CabinetMonthlySalesAnalyzeActivity.class);
                 startActivity(intent);
             }
         });
