@@ -1,6 +1,7 @@
 package cn.edu.stu.max.cocovendor.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.media.Image;
 import android.os.Bundle;
@@ -14,7 +15,10 @@ import android.widget.Toast;
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
+import org.litepal.crud.DataSupport;
+
 import cn.edu.stu.max.cocovendor.R;
+import cn.edu.stu.max.cocovendor.databaseClass.Goods;
 import cn.edu.stu.max.cocovendor.javaClass.QRCode;
 
 public class PayActivity extends AppCompatActivity {
@@ -80,7 +84,7 @@ public class PayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pay);
 
         Intent intent = getIntent();
-        int pos = intent.getIntExtra("goods_id", 0);
+        int whichFloor = intent.getIntExtra("which_floor", 0);
 
         goodsImageView = (ImageView) findViewById(R.id.imageView_goods);
         goodsTextView = (TextView) findViewById(R.id.textView_goods);
@@ -98,14 +102,11 @@ public class PayActivity extends AppCompatActivity {
         logoView = (ImageView) findViewById(R.id.logo_view);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        switch (pos) {
-            case 0:
-                goodsImageView.setImageResource(R.drawable.ic_category_0);
-                //goodsTextView.setText();
-                break;
-            case 1:
-                goodsImageView.setImageResource(R.drawable.ic_category_1);
-                break;
-        }
+        SharedPreferences preferences = getSharedPreferences("cabinet_floor", MODE_PRIVATE);
+        int whichGoods =  preferences.getInt("cabinet_floor_" + whichFloor, 0);
+        Goods goods = DataSupport.find(Goods.class, whichGoods);
+        goodsImageView.setImageResource(goods.getImage_path());
+        goodsTextView.setText(goods.getName());
+        priceTextView.setText("¥ " + String.valueOf(goods.getSales_price()));
     }
 }
