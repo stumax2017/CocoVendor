@@ -29,8 +29,6 @@ public class SalesSettingActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewSalesSetting;
     private SalesSettingAdapter salesSettingAdapter;
-    private int pageOffset = 0;
-    private int listRows = 10;
     private List<Goods> list = new ArrayList<Goods>();
     private static int CABINET_SIZE = 10;
 
@@ -42,8 +40,6 @@ public class SalesSettingActivity extends AppCompatActivity {
         //noinspection ConstantConditions
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //查找数据库中全部货物
-//        List<Goods> onSaleGoods = DataSupport.where("isOnSale = ?", "true").find(Goods.class);
         for (int i = 0; i < CABINET_SIZE; i ++) {
             SharedPreferences preferences = getSharedPreferences("cabinet_floor", MODE_PRIVATE);
             int whichGoods =  preferences.getInt("cabinet_floor_" + i, 0);

@@ -169,7 +169,7 @@ public class HomePageActivity extends SerialPortActivity {
                         ToastFactory.makeText(HomePageActivity.this, mDatas.get(pos).getName(), Toast.LENGTH_SHORT).show();
                         ToastFactory.makeText(HomePageActivity.this, "good" + pos, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(HomePageActivity.this, PayActivity.class);
-                        intent.putExtra("goods_id", pos);
+                        intent.putExtra("which_floor", pos);
                         startActivityForResult(intent, 1);
                     }
                 });
@@ -189,9 +189,9 @@ public class HomePageActivity extends SerialPortActivity {
         // String packageName = "cn.edu.stu.max.cocovendor";
         // SharedPreferences sp = getSharedPreferences(packageName + "_preferences", MODE_PRIVATE);
         if (sw) {
-            Toast.makeText(HomePageActivity.this, "hhh" + packageName, Toast.LENGTH_SHORT).show();
+            ToastFactory.makeText(HomePageActivity.this, "hhh" + packageName, Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(HomePageActivity.this, "xxxxxxxxxxxx" + packageName, Toast.LENGTH_SHORT).show();
+            ToastFactory.makeText(HomePageActivity.this, "xxxxxxxxxxxx" + packageName, Toast.LENGTH_SHORT).show();
         }
 
 
@@ -371,7 +371,7 @@ public class HomePageActivity extends SerialPortActivity {
 
         share = super.getSharedPreferences(adSettingDataFileName, MODE_PRIVATE);
         if (share.getBoolean("isAdSettingChanged", false)) {
-            Toast.makeText(HomePageActivity.this, "good" + share.getString("Frequency_" + 0, "null"), Toast.LENGTH_LONG).show();
+            ToastFactory.makeText(HomePageActivity.this, "good" + share.getString("Frequency_" + 0, "null"), Toast.LENGTH_LONG).show();
         }
 
         initVideoPath();
@@ -753,7 +753,7 @@ public class HomePageActivity extends SerialPortActivity {
                 break;
             case REQUEST_PAY_RESULT_CODE:
                 if (resultCode == RESULT_OK) {
-                    int goods_id = data.getIntExtra("goods_id", 0);
+                    int goods_id = data.getIntExtra("which_floor", 0);
                     String text = "You clicked on item" + String.valueOf(goods_id);
                     try {
                         mOutputStream.write(text.getBytes());
@@ -858,14 +858,18 @@ public class HomePageActivity extends SerialPortActivity {
      */
     private void initDatas() {
         mDatas = new ArrayList<Model>();
-        List<Goods> list = DataSupport.where("isOnSale = ?", "1").find(Goods.class);
-//        for (int i = 0; i < DataSupport.count(Goods.class); i++)
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < 10; i++) {
             //动态获取资源ID，第一个参数是资源名，第二个参数是资源类型例如drawable，string等，第三个参数包名
 //            int imageId = getResources().getIdentifier("ic_category_" + i, "drawable", getPackageName());
 //            mDatas.add(new Model(prices[i], titles[i], imageId));
-            Goods goods = list.get(i);
-            mDatas.add(new Model(String.valueOf(goods.getSales_price()), goods.getName(), goods.getImage_path()));
+            SharedPreferences preferences = getSharedPreferences("cabinet_floor", MODE_PRIVATE);
+            int whichGoods =  preferences.getInt("cabinet_floor_" + i, 0);
+            Goods goods = DataSupport.find(Goods.class, whichGoods);
+            if (whichGoods == 0) {
+                mDatas.add(new Model("", "", R.color.colorTransparency));
+            } else {
+                mDatas.add(new Model("¥ " + String.valueOf(goods.getSales_price()), goods.getName(), goods.getImage_path()));
+            }
         }
     }
 
