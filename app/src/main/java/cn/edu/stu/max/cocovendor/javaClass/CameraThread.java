@@ -150,13 +150,6 @@ public class CameraThread extends Thread {
 
 
                 try {
-//                stopRecord();
-//                this.cancel();
-//                numOfVideo = numOfVideo + 1;
-//                if (numOfVideo > 3) {
-//                    stopRecord();
-//                    this.cancel();
-//                } else {
                     if (ViewHolder.sw) {
                         if (ViewHolder.spyTime.equals("24hours")) {
                             startRecord();
@@ -272,10 +265,6 @@ public class CameraThread extends Thread {
             });
             files[0].delete();
         }
-//        if ((fileService.getSDAvailableSize()).compareTo("2.00GB") > 0) {
-//
-//        }
-
 
         return mediaFile;
     }

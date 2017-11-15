@@ -25,6 +25,8 @@ public class Sales extends DataSupport{
     private long sales_machine_id;
     //交易编号
     private String trade_id;
+    //售价
+    private float sales_price;
 
     public int getId() {
         return id;
@@ -105,5 +107,13 @@ public class Sales extends DataSupport{
 
     public void setTrade_id(String trade_id) {
         this.trade_id = trade_id;
+    }
+
+    public float getSales_price() {
+        return sales_price;
+    }
+
+    public void setSales_price(float sales_price) {
+        this.sales_price = sales_price;
     }
 }

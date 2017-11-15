@@ -13,15 +13,15 @@ import android.widget.TextView;
 import java.util.List;
 
 import cn.edu.stu.max.cocovendor.R;
+import cn.edu.stu.max.cocovendor.databaseClass.CabinetMonthlySales;
 import cn.edu.stu.max.cocovendor.databaseClass.Goods;
+import cn.edu.stu.max.cocovendor.databaseClass.Sales;
 
 public class CabinetMonthlySalesAnalyzeAdapter extends RecyclerView.Adapter {
-    private List<Goods> list;
-    private Context context;
+    private List<CabinetMonthlySales> list;
 
-    public CabinetMonthlySalesAnalyzeAdapter(List<Goods> list, Context context) {
+    public CabinetMonthlySalesAnalyzeAdapter(List<CabinetMonthlySales> list) {
         this.list = list;
-        this.context = context;
     }
 
     @Override
@@ -33,13 +33,9 @@ public class CabinetMonthlySalesAnalyzeAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         sheetViewHolder vh = (sheetViewHolder) holder;
-
-        if (list.get(position).getName() == null) {
-        } else {
-            vh.getTv_sheetRow3().setText(String.valueOf(list.get(position)));
-            vh.getTv_sheetRow4().setText(String.valueOf(list.get(position).getImage_path()));
-            vh.getBtn_sheetRow5().setText(String.valueOf(list.get(position).getSales_price()));
-        }
+        vh.getTvSalesDate().setText(String.valueOf(list.get(position).getCabinetMonthlySalesDate()));
+        vh.getTvSalesNum().setText(String.valueOf(list.get(position).getCabinetMonthlySalesNum()));
+        vh.getTvSalesTotalMoney().setText(String.valueOf(list.get(position).getCabinetMonthlySalesTotalMoney()));
     }
 
     @Override
@@ -47,33 +43,33 @@ public class CabinetMonthlySalesAnalyzeAdapter extends RecyclerView.Adapter {
         return list.size();
     }
 
-    private class sheetViewHolder extends RecyclerView.ViewHolder{
+    private class sheetViewHolder extends RecyclerView.ViewHolder {
         private final View mView;
-        private final TextView tv_sheetRow3;
-        private final TextView tv_sheetRow4;
-        private final TextView btn_sheetRow5;
+        private final TextView tv_sales_month;
+        private final TextView tv_monthly_sales_num;
+        private final TextView tv_monthly_sales_total_money;
 
         private sheetViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
 
-            tv_sheetRow3 = (TextView) itemView.findViewById(R.id.text_selling_price);
-            tv_sheetRow4 = (TextView) itemView.findViewById(R.id.text_cash_times);
-            btn_sheetRow5 = (TextView) itemView.findViewById(R.id.text_wechat_times);
+            tv_sales_month = (TextView) itemView.findViewById(R.id.text_sales_month);
+            tv_monthly_sales_num = (TextView) itemView.findViewById(R.id.text_monthly_sales_num);
+            tv_monthly_sales_total_money = (TextView) itemView.findViewById(R.id.text_monthly_sales_total_money);
         }
 
 
 
-        private TextView getTv_sheetRow3() {
-            return tv_sheetRow3;
+        private TextView getTvSalesDate() {
+            return tv_sales_month;
         }
 
-        private TextView getTv_sheetRow4() {
-            return tv_sheetRow4;
+        private TextView getTvSalesNum() {
+            return tv_monthly_sales_num;
         }
 
-        public TextView getBtn_sheetRow5() {
-            return btn_sheetRow5;
+        public TextView getTvSalesTotalMoney() {
+            return tv_monthly_sales_total_money;
         }
 
     }

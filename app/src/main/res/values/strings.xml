@@ -29,7 +29,7 @@
     <string name="label_sheet">三张信息表</string>
     <string name="label_goods_test">货道测试</string>
     <string name="label_ad_setting">广告设置</string>
-    <string name="label_money_setting">找零设置</string>
+    <string name="label_serialport_setting">串口设置</string>
     <string name="label_help">帮助工具</string>
     <string name="label_return_sales">返回销售</string>
     <string name="label_reboot">重新启动</string>

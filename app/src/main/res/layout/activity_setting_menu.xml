@@ -71,13 +71,13 @@
                     android:textSize="30sp"/>
 
                 <Button
-                    android:id="@+id/btn_money_setting"
+                    android:id="@+id/btn_serialport_setting"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
                     android:background="@color/colorBlue"
                     android:gravity="center"
-                    android:text="@string/label_money_setting"
+                    android:text="@string/label_serialport_setting"
                     android:textColor="@color/colorWhite"
                     android:textSize="30sp"/>
             </TableRow>

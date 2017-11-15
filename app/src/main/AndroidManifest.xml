@@ -79,8 +79,8 @@
             android:label="设置" />
         <activity
             android:name=".activities.SalesSettingActivity"
-            android:launchMode="singleTask"
-            android:label="销售设置" />
+            android:label="销售设置"
+            android:launchMode="singleTask" />
         <activity
             android:name=".activities.SettingMenuActivity"
             android:label="设置" />
@@ -140,7 +140,8 @@
         <activity android:name=".activities.DailySalesActivity" />
         <activity android:name=".activities.MonthlySalesActivity" />
         <activity android:name=".activities.CabinetDailySalesAnalyzeActivity" />
-        <activity android:name=".activities.CabinetMonthlySalesAnalyzeActivity"></activity>
+        <activity android:name=".activities.CabinetMonthlySalesAnalyzeActivity" />
+        <activity android:name=".activities.CargoLaneTestActivity"></activity>
     </application>
 
 </manifest>

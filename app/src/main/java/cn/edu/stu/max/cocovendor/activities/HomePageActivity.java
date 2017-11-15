@@ -37,6 +37,8 @@ import java.util.Date;
 import java.io.File;
 import java.util.List;
 
+import cn.edu.stu.max.cocovendor.databaseClass.CabinetDailySales;
+import cn.edu.stu.max.cocovendor.databaseClass.CabinetMonthlySales;
 import cn.edu.stu.max.cocovendor.javaClass.FileService;
 import cn.edu.stu.max.cocovendor.adapters.GridViewAdapter;
 import cn.edu.stu.max.cocovendor.javaClass.Model;
@@ -48,6 +50,9 @@ import cn.edu.stu.max.cocovendor.javaClass.ViewHolder;
 import cn.edu.stu.max.cocovendor.adapters.ViewPagerAdapter;
 
 public class HomePageActivity extends SerialPortActivity {
+
+    SharedPreferences cabinetDailySalesSharedPreference;
+    SharedPreferences.Editor editor;
 
     private static final int SECONDS_OF_AD = 60;    // 60秒无操作后自动进入全屏广告播放模式
 
@@ -69,22 +74,12 @@ public class HomePageActivity extends SerialPortActivity {
     private static final String adSettingDataFileName = "sharedfile";     // 定义保存的文件的名称
 
     private Context context;
-    private Toast toast;
-    private int i = 0;
-    Handler handler = new Handler();
 
-    private ImageView imageViewGoods1;
-    private ImageView imageViewGoods2;
-    private ImageView imageViewGoods3;
-    private ImageView imageViewGoods4;
-    private ImageView imageViewGoods5;
-    private ImageView imageViewGoods6;
+    Handler handler = new Handler();
 
     private TextView textViewCoinMoney;
 
     private static final byte[] coinMoney = {0, 0, 0, '.', 0, 0};
-
-
 
     private ViewPager mPager;
     private List<View> mPagerList;
@@ -112,7 +107,6 @@ public class HomePageActivity extends SerialPortActivity {
         super.onCreate(savedInstanceState);
 
         getSupportActionBar().hide();
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_home_page);
 
@@ -173,12 +167,13 @@ public class HomePageActivity extends SerialPortActivity {
             ToastFactory.makeText(HomePageActivity.this, "当前没有商品", Toast.LENGTH_SHORT).show();
         }
 
+        cabinetDailySalesSharedPreference = getSharedPreferences("cabinet_daily_sales_file", MODE_PRIVATE);
+        editor = cabinetDailySalesSharedPreference.edit();   // 使处于可编辑状态
+
         final String packageName = getPackageName();
         SharedPreferences settings = getSharedPreferences(packageName + "_preferences", MODE_PRIVATE);
         boolean sw = settings.getBoolean("SwitchPreference", false);
         ViewHolder.sw = sw;
-        // String packageName = "cn.edu.stu.max.cocovendor";
-        // SharedPreferences sp = getSharedPreferences(packageName + "_preferences", MODE_PRIVATE);
         if (sw) {
             ToastFactory.makeText(HomePageActivity.this, "hhh" + packageName, Toast.LENGTH_SHORT).show();
         } else {
@@ -199,162 +194,28 @@ public class HomePageActivity extends SerialPortActivity {
         context = this;
 
         textViewCoinMoney = (TextView) findViewById(R.id.coin_money);
+
+        textViewCoinMoney.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences share = getSharedPreferences("serial_mode_file", MODE_PRIVATE);  // 实例化
+                SharedPreferences.Editor editor = share.edit();   // 使处于可编辑状态
+                editor.putString("serial_mode", "A");
+                editor.apply();
+            }
+        });
+
         Button a = (Button) findViewById(R.id.a);
         a.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//
-//
-//                String test = "It is a test message!!!";
-//                        try {
-//                            mOutputStream.write(test.getBytes());
-//                            mOutputStream.write('\n');
-//                        } catch (IOException e) {
-//                            e.printStackTrace();
-//                        }
-
-//                Intent intent = new Intent("android.net.wifi.PICK_WIFI_NETWORK");
-////                intent.putExtra("extra_prefs_set_back_text", "返回");
-//                intent.putExtra("extra_prefs_show_button_bar", true);
-//                startActivity(intent);
-
-                ToastFactory.makeText(HomePageActivity.this, "" + DataSupport.findFirst(Goods.class), Toast.LENGTH_LONG).show();
-                               // textViewCoinMoney.setText("" + DataSupport.findFirst(Goods.class));
+                SharedPreferences share = getSharedPreferences("serial_mode_file", MODE_PRIVATE);  // 实例化
+                SharedPreferences.Editor editor = share.edit();   // 使处于可编辑状态
+                editor.putString("serial_mode", "D");
+                editor.apply();
+                ToastFactory.makeText(HomePageActivity.this, "D", Toast.LENGTH_SHORT).show();
             }
         });
-
-//        imageViewGoods1 = (ImageView) findViewById(R.id.iv_goods_1);
-//        imageViewGoods2 = (ImageView) findViewById(R.id.iv_goods_2);
-//        imageViewGoods3 = (ImageView) findViewById(R.id.iv_goods_3);
-//        imageViewGoods4 = (ImageView) findViewById(R.id.iv_goods_4);
-//        imageViewGoods5 = (ImageView) findViewById(R.id.iv_goods_5);
-//        imageViewGoods6 = (ImageView) findViewById(R.id.iv_goods_6);
-
-//        imageViewGoods1.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                switch (motionEvent.getAction()) {
-//                    case MotionEvent.ACTION_DOWN: { // 手指下来的时候,取消之前绑定的Runnable
-//
-//                        handler.removeCallbacks(runnable);
-//
-//                        break;
-//                    }
-//                    case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
-//
-//                        handler.postDelayed(runnable, 1000 * 20);
-//
-//                        break;
-//                    }
-//                }
-//                return false;
-//            }
-//        });
-//
-//        imageViewGoods2.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                switch (motionEvent.getAction()) {
-//                    case MotionEvent.ACTION_DOWN: { // 手指下来的时候,取消之前绑定的Runnable
-//
-//                        handler.removeCallbacks(runnable);
-//
-//                        break;
-//                    }
-//                    case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
-//
-//                        handler.postDelayed(runnable, 1000 * 20);
-//
-//                        break;
-//                    }
-//                }
-//                return false;
-//            }
-//        });
-//
-//        imageViewGoods3.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                switch (motionEvent.getAction()) {
-//                    case MotionEvent.ACTION_DOWN: { // 手指下来的时候,取消之前绑定的Runnable
-//
-//                        handler.removeCallbacks(runnable);
-//
-//                        break;
-//                    }
-//                    case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
-//
-//                        handler.postDelayed(runnable, 1000 * 20);
-//
-//                        break;
-//                    }
-//                }
-//                return false;
-//            }
-//        });
-//
-//        imageViewGoods4.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                switch (motionEvent.getAction()) {
-//                    case MotionEvent.ACTION_DOWN: { // 手指下来的时候,取消之前绑定的Runnable
-//
-//                        handler.removeCallbacks(runnable);
-//
-//                        break;
-//                    }
-//                    case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
-//
-//                        handler.postDelayed(runnable, 1000 * 20);
-//
-//                        break;
-//                    }
-//                }
-//                return false;
-//            }
-//        });
-//
-//        imageViewGoods5.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                switch (motionEvent.getAction()) {
-//                    case MotionEvent.ACTION_DOWN: { // 手指下来的时候,取消之前绑定的Runnable
-//
-//                        handler.removeCallbacks(runnable);
-//
-//                        break;
-//                    }
-//                    case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
-//
-//                        handler.postDelayed(runnable, 1000 * 20);
-//
-//                        break;
-//                    }
-//                }
-//                return false;
-//            }
-//        });
-//
-//        imageViewGoods6.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                switch (motionEvent.getAction()) {
-//                    case MotionEvent.ACTION_DOWN: { // 手指下来的时候,取消之前绑定的Runnable
-//
-//                        handler.removeCallbacks(runnable);
-//
-//                        break;
-//                    }
-//                    case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
-//
-//                        handler.postDelayed(runnable, 1000 * 20);
-//
-//                        break;
-//                    }
-//                }
-//                return false;
-//            }
-//        });
 
         videoViewHomePageAd = (VideoView) findViewById(R.id.vv_hp_ad);
         imageViewHomePageAd = (ImageView) findViewById(R.id.iv_hp_ad);
@@ -408,14 +269,6 @@ public class HomePageActivity extends SerialPortActivity {
             }
         });
 
-
-//        name.setText(share.getString("name", "no"));
-//        sex.setText(share.getString("sex", "ren"));
-//        age.setText("hh" + share.getInt("age", 0));
-
-//        Toast.makeText(HomePageActivity.this, "good" + share.getInt("age", 123), Toast.LENGTH_LONG).show();
-
-
         TextView textViewHomepageTestlogin = (TextView) findViewById(R.id.tv_homepage_testlogin);
         textViewHomepageTestlogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -425,175 +278,6 @@ public class HomePageActivity extends SerialPortActivity {
                 startActivity(intent);
             }
         });
-
-//        ImageView imageViewGoods1 = (ImageView) findViewById(R.id.iv_goods_1);
-//        imageViewGoods1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                String text = "You clicked on item 1";
-//                try {
-//                    mOutputStream.write(text.getBytes());
-//                    mOutputStream.write('\n');
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//
-//                try {
-//                    mOutputStream.write(text.getBytes());
-//                    mOutputStream.write('\n');
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//
-//                try {
-////                    Sales sales = new Sales();
-////                    sales.setSales_date(new Date());
-////                    sales.setGoods_id(DataSupport.find(Goods.class,1).getId());
-////                    sales.setGoods_name(DataSupport.find(Goods.class,1).getName());
-////                    sales.setMachine_floor(1);
-////                    sales.setPay_way("支付宝");
-////                    sales.save();
-//                } catch (NullPointerException e) {
-//                    ToastFactory.makeText(HomePageActivity.this, "目前没有商品1", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-//        ImageView imageViewGoods2 = (ImageView) findViewById(R.id.iv_goods_2);
-//        imageViewGoods2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                String text = "You clicked on item 2";
-//                try {
-//                    mOutputStream.write(text.getBytes());
-//                    mOutputStream.write('\n');
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//
-//
-//                try {
-//                    Sales sales = new Sales();
-//                    sales.setSales_date(new Date());
-//                    sales.setGoods_id(DataSupport.find(Goods.class,2).getId());
-//                    sales.setGoods_name(DataSupport.find(Goods.class,2).getName());
-//                    sales.setMachine_floor(2);
-//                    sales.setPay_way("支付宝");
-//                    sales.save();
-//                } catch (NullPointerException e) {
-//                    ToastFactory.makeText(HomePageActivity.this, "目前没有商品2", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-//        ImageView imageViewGoods3 = (ImageView) findViewById(R.id.iv_goods_3);
-//        imageViewGoods3.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                String text = "You clicked on item 3";
-//                try {
-//                    mOutputStream.write(text.getBytes());
-//                    mOutputStream.write('\n');
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//
-//
-//                try {
-//                    Sales sales = new Sales();
-//                    sales.setSales_date(new Date());
-//                    sales.setGoods_id(DataSupport.find(Goods.class, 3).getId());
-//                    sales.setGoods_name(DataSupport.find(Goods.class, 3).getName());
-//                    sales.setMachine_floor(3);
-//                    sales.setPay_way("微信");
-//                    sales.save();
-//                } catch (NullPointerException e) {
-//                    ToastFactory.makeText(HomePageActivity.this, "目前没有商品3", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-//        ImageView imageViewGoods4 = (ImageView) findViewById(R.id.iv_goods_4);
-//        imageViewGoods4.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                String text = "You clicked on item 4";
-//                try {
-//                    mOutputStream.write(text.getBytes());
-//                    mOutputStream.write('\n');
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//
-//
-//                try {
-//                    Sales sales = new Sales();
-//                    sales.setSales_date(new Date());
-//                    sales.setGoods_id(DataSupport.find(Goods.class,4).getId());
-//                    sales.setGoods_name(DataSupport.find(Goods.class,4).getName());
-//                    sales.setMachine_floor(4);
-//                    sales.setPay_way("微信");
-//                    sales.save();
-//                } catch (NullPointerException e) {
-//                    ToastFactory.makeText(HomePageActivity.this, "目前没有商品4", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-//        ImageView imageViewGoods5 = (ImageView) findViewById(R.id.iv_goods_5);
-//        imageViewGoods5.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                String text = "You clicked on item 5";
-//                try {
-//                    mOutputStream.write(text.getBytes());
-//                    mOutputStream.write('\n');
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//
-//
-//                try {
-//                    Sales sales = new Sales();
-//                    sales.setSales_date(new Date());
-//                    sales.setGoods_id(DataSupport.find(Goods.class,5).getId());
-//                    sales.setGoods_name(DataSupport.find(Goods.class,5).getName());
-//                    sales.setMachine_floor(5);
-//                    sales.setPay_way("现金");
-//                    sales.save();
-//                } catch (NullPointerException e) {
-//                    ToastFactory.makeText(HomePageActivity.this, "目前没有商品5", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-//        ImageView imageViewGoods6 = (ImageView) findViewById(R.id.iv_goods_6);
-//        imageViewGoods6.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                String text = "You clicked on item 6";
-//                try {
-//                    mOutputStream.write(text.getBytes());
-//                    mOutputStream.write('\n');
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//
-//
-//                try {
-//                    Sales sales = new Sales();
-//                    sales.setSales_date(new Date());
-//                    sales.setGoods_id(DataSupport.find(Goods.class,6).getId());
-//                    sales.setGoods_name(DataSupport.find(Goods.class,6).getName());
-//                    sales.setMachine_floor(6);
-//                    sales.setPay_way("现金");
-//                    sales.save();
-//                } catch (NullPointerException e) {
-//                    ToastFactory.makeText(HomePageActivity.this, "目前没有商品6", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
 
         SendThread sendThread = new SendThread();
         sendThread.start();
@@ -606,15 +290,31 @@ public class HomePageActivity extends SerialPortActivity {
         public void run() {
             super.run();
             while (!isInterrupted()) {
-                String text = "It is a test message!!";
+
+//                SharedPreferences preferences = getSharedPreferences("serial_mode_file", MODE_PRIVATE);
+//                String serialMode =  preferences.getString("serial_mode", "A");
+//                //serialMode = "D";
+//                //int whichSerialMode = Integer.parseInt(serialMode);
+//                String text = "It is a test message!!";
 //                try {
-                    try {
-                        Thread.sleep(200);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+//                    try {
+//                        Thread.sleep(200);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                    switch (serialMode) {
+//                        case "A":
+//                            text = "A";
+//                            break;
+//                        case "D":
+//                            text = "D";
+//                            break;
+//                    }
+//
 //                    mOutputStream.write(text.getBytes());
 //                    mOutputStream.write('\n');
+//
 //                } catch (IOException e) {
 //                    e.printStackTrace();
 //                }
@@ -633,29 +333,6 @@ public class HomePageActivity extends SerialPortActivity {
             }
         }
     };
-    //活动转换之间都调用沉浸模式全屏
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus && Build.VERSION.SDK_INT >= 19) {
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-        }
-    }
-
-    //重写返回按键内容
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        startActivity(intent);
-    }
-
 
     private void initVideoPath() {
         videoFileIndex = 0;
@@ -743,8 +420,8 @@ public class HomePageActivity extends SerialPortActivity {
                 break;
             case REQUEST_PAY_RESULT_CODE:
                 if (resultCode == RESULT_OK) {
-                    int whichFloor = data.getIntExtra("which_floor", 0);
-                    int whichGoods = data.getIntExtra("which_goods", 0);
+                    final int whichFloor = data.getIntExtra("which_floor", 0);
+                    final int whichGoods = data.getIntExtra("which_goods", 0);
                     String text = "You clicked on item" + whichGoods;
                     try {
                         mOutputStream.write(text.getBytes());
@@ -754,6 +431,7 @@ public class HomePageActivity extends SerialPortActivity {
                     }
 
                     try {
+                        // 销售信息表记录
                         Sales sales = new Sales();
                         sales.setSales_date(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
                         sales.setGoods_id(DataSupport.find(Goods.class, whichGoods).getId());
@@ -762,6 +440,77 @@ public class HomePageActivity extends SerialPortActivity {
                         sales.setTrade_id("5846516");
                         sales.setPay_way("现金");
                         sales.save();
+
+                        // 机柜日销售统计表记录
+                        CabinetDailySales cabinetDailySales = new CabinetDailySales();
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        String cabinetDailySalesDate = sdf.format(new java.util.Date());
+                        String date =  cabinetDailySalesSharedPreference.getString(
+                                "cabinet_daily_sales_date", "2017-11-14");
+                        int num = cabinetDailySalesSharedPreference.getInt(
+                                "cabinet_daily_sales_num", 0);
+                        float totalMoney = cabinetDailySalesSharedPreference.getFloat("cabinet_daily_sales_total_money", 0);
+                        if (cabinetDailySalesDate.equals(date)) {
+                            num = num + 1;
+                            totalMoney = totalMoney + DataSupport.find(Goods.class, whichGoods).getSales_price();
+                            editor.putInt("cabinet_daily_sales_num", num);
+                            editor.putFloat("cabinet_daily_sales_total_money", totalMoney);
+                            editor.apply();
+                            cabinetDailySales.setCabinetDailySalesNum(num);
+                            cabinetDailySales.setCabinetDailySalesTotalMoney(totalMoney);
+                            cabinetDailySales.updateAll("cabinetDailySalesDate = ?", date);
+                        } else {
+                            date = cabinetDailySalesDate;
+                            num = 1;
+                            totalMoney = DataSupport.find(Goods.class, whichGoods).getSales_price();
+                            editor.putString("cabinet_daily_sales_date", date);
+                            editor.putInt("cabinet_daily_sales_num", num);
+                            editor.putFloat("cabinet_daily_sales_total_money", totalMoney);
+                            editor.apply();
+                            cabinetDailySales.setCabinetDailySalesDate(sdf);
+                            cabinetDailySales.setCabinetDailySalesNum(num);
+                            cabinetDailySales.setCabinetDailySalesTotalMoney(totalMoney);
+                            cabinetDailySales.save();
+                        }
+
+                        // 机柜月销售统计表记录
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                CabinetMonthlySales cabinetMonthlySales = new CabinetMonthlySales();
+                                SimpleDateFormat mSdf = new SimpleDateFormat("yyyy-MM");
+                                String cabinetMonthlySalesDate = mSdf.format(new java.util.Date());
+                                String mDate =  cabinetDailySalesSharedPreference.getString(
+                                        "cabinet_monthly_sales_date", "2017-11");
+                                int mNum = cabinetDailySalesSharedPreference.getInt(
+                                        "cabinet_monthly_sales_num", 0);
+                                float mTotalMoney = cabinetDailySalesSharedPreference.getFloat(
+                                        "cabinet_monthly_sales_total_money", 0);
+                                if (cabinetMonthlySalesDate.equals(mDate)) {
+                                    mNum = mNum + 1;
+                                    mTotalMoney = mTotalMoney + DataSupport.find(Goods.class, whichGoods).getSales_price();
+                                    editor.putInt("cabinet_monthly_sales_num", mNum);
+                                    editor.putFloat("cabinet_monthly_sales_total_money", mTotalMoney);
+                                    editor.apply();
+                                    cabinetMonthlySales.setCabinetMonthlySalesNum(mNum);
+                                    cabinetMonthlySales.setCabinetMonthlySalesTotalMoney(mTotalMoney);
+                                    cabinetMonthlySales.updateAll("cabinetMonthlySalesDate = ?", mDate);
+                                } else {
+                                    mDate = cabinetMonthlySalesDate;
+                                    mNum = 1;
+                                    mTotalMoney = DataSupport.find(Goods.class, whichGoods).getSales_price();
+                                    editor.putString("cabinet_monthly_sales_date", mDate);
+                                    editor.putInt("cabinet_monthly_sales_num", mNum);
+                                    editor.putFloat("cabinet_monthly_sales_total_money", mTotalMoney);
+                                    editor.apply();
+                                    cabinetMonthlySales.setCabinetMonthlySalesDate(mSdf);
+                                    cabinetMonthlySales.setCabinetMonthlySalesNum(mNum);
+                                    cabinetMonthlySales.setCabinetMonthlySalesTotalMoney(mTotalMoney);
+                                    cabinetMonthlySales.save();
+                                }
+                            }
+                        }).start();
+
                     } catch (NullPointerException e) {
                         ToastFactory.makeText(HomePageActivity.this, "目前没有商品" + whichGoods, Toast.LENGTH_SHORT).show();
                     }
@@ -803,7 +552,7 @@ public class HomePageActivity extends SerialPortActivity {
                 handler.removeCallbacks(runnable);
                 break;
             }
-            case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
+            case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，SECONDS_OF_AD秒后执行
 
                 handler.postDelayed(runnable, 1000 * SECONDS_OF_AD);
 
@@ -820,27 +569,7 @@ public class HomePageActivity extends SerialPortActivity {
     protected void onDataReceived(final byte[] buffer, final int size) {
         runOnUiThread(new Runnable() {
             public void run() {
-//                switch (new String (buffer, 0, size)) {
-//                    case "10000011":
-//                        coinMoney[0] = buffer[6];
-//                        coinMoney[1] = buffer[7];
-//                        coinMoney[2] = '.';
-//                        coinMoney[3] = 0;
-//                        coinMoney[4] = 0;
-//                        coinMoney[5] = 0;
-//                        textViewCoinMoney.setText(new String(coinMoney, 0, 6));
-//                        break;
-//                }
-////                ToastFactory.makeText(HomePageActivity.this, new String (buffer, 0, size), Toast.LENGTH_SHORT).show();
-                ToastFactory.makeText(HomePageActivity.this, new String (buffer, 0, size) + "hh", Toast.LENGTH_SHORT).show();
-//                                        String test = "It is a test message!!!";
-//                        try {
-//                            mOutputStream.write(test.getBytes());
-//                            mOutputStream.write('\n');
-//                        } catch (IOException e) {
-//                            e.printStackTrace();
-//                        }
-//                textViewCoinMoney.setText(new String (buffer, 0, size));
+                ToastFactory.makeText(HomePageActivity.this, new String(buffer, 0, size), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -852,9 +581,6 @@ public class HomePageActivity extends SerialPortActivity {
         mDatas = new ArrayList<Model>();
         //暂时初始化10个空货物的时候有两个点
         for (int i = 0; i < 10; i++) {
-            //动态获取资源ID，第一个参数是资源名，第二个参数是资源类型例如drawable，string等，第三个参数包名
-//            int imageId = getResources().getIdentifier("ic_category_" + i, "drawable", getPackageName());
-//            mDatas.add(new Model(prices[i], titles[i], imageId));
             SharedPreferences preferences = getSharedPreferences("cabinet_floor", MODE_PRIVATE);
             int whichGoods =  preferences.getInt("cabinet_floor_" + i, 0);
             Goods goods = DataSupport.find(Goods.class, whichGoods);
@@ -895,5 +621,13 @@ public class HomePageActivity extends SerialPortActivity {
             public void onPageScrollStateChanged(int arg0) {
             }
         });
+    }
+
+    @Override
+    protected void onStop() {
+        // TODO Auto-generated method stub
+        super.onStop();
+        //finish();
+        //handler.postDelayed(runnable, 1000 * SECONDS_OF_AD);
     }
 }
