@@ -2,6 +2,7 @@ package cn.edu.stu.max.cocovendor.databaseClass;
 
 import org.litepal.crud.DataSupport;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Sales extends DataSupport{
@@ -11,7 +12,7 @@ public class Sales extends DataSupport{
     //销售物品名字
     private String goods_name;
     //销售日期
-    private Date sales_date;
+    private String sales_date;
     //销售货物的层数
     private int machine_floor;
     //是否开孔
@@ -47,11 +48,12 @@ public class Sales extends DataSupport{
         this.goods_name = goods_name;
     }
 
-    public Date getSales_date() {
+    public String getSales_date() {
         return sales_date;
     }
 
-    public void setSales_date(Date sales_date) {
+    public void setSales_date(SimpleDateFormat sdf) {
+        String sales_date = sdf.format(new java.util.Date());
         this.sales_date = sales_date;
     }
 

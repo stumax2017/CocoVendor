@@ -30,6 +30,7 @@ import com.amap.api.location.AMapLocationListener;
 import org.litepal.crud.DataSupport;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -84,16 +85,6 @@ public class HomePageActivity extends SerialPortActivity {
     private static final byte[] coinMoney = {0, 0, 0, '.', 0, 0};
 
 
-
-    private String[] titles = {"蜗牛一号", "蜗牛二号", "蜗牛三号", "蜗牛四号", "蜗牛五号", "蜗牛六号", "ipad(白)", "ipad(黑)", "可口可乐", "百事可乐",
-            "青苹果", "红苹果", "猕猴桃", "哈密瓜", "柠檬", "橙子", "辣椒", "南瓜", "番茄", "运动健身", "健身", "超市", "买菜",
-            "今日新单", "小吃快餐", "面膜", "洗浴/汗蒸", "母婴亲子", "生活服务", "婚纱摄影", "学习培训", "家装", "结婚", "全部分配"};
-
-    private String[] prices = {"¥15.0", "¥25.0", "¥10.0", "¥12.0", "¥35.0", "¥50.0", "¥42.0",
-            "¥65.0", "¥85.0", "¥9.0", "¥2.0", "¥25.5", "¥13.0", "¥999.0",
-            "¥105.0", "¥215.0", "¥12.0", "¥12.0", "¥35.0", "¥1.0", "¥42.0",
-            "¥15.0", "¥25.0", "¥10.0", "¥12.0", "¥35.0", "¥50.0", "¥42.0",
-            "¥15.0", "¥25.0", "¥10.0", "¥12.0", "¥35.0", "¥50.0"};
 
     private ViewPager mPager;
     private List<View> mPagerList;
@@ -764,7 +755,7 @@ public class HomePageActivity extends SerialPortActivity {
 
                     try {
                         Sales sales = new Sales();
-                        sales.setSales_date(new Date());
+                        sales.setSales_date(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
                         sales.setGoods_id(DataSupport.find(Goods.class, whichGoods).getId());
                         sales.setGoods_name(DataSupport.find(Goods.class, whichGoods).getName());
                         sales.setMachine_floor(whichFloor + 1);//货物层下标0开始，需要加一
