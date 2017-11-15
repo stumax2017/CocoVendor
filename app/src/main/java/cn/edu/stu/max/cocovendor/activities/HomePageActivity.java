@@ -768,6 +768,7 @@ public class HomePageActivity extends SerialPortActivity {
                         sales.setGoods_id(DataSupport.find(Goods.class, whichGoods).getId());
                         sales.setGoods_name(DataSupport.find(Goods.class, whichGoods).getName());
                         sales.setMachine_floor(whichFloor + 1);//货物层下标0开始，需要加一
+                        sales.setTrade_id("5846516");
                         sales.setPay_way("现金");
                         sales.save();
                     } catch (NullPointerException e) {
