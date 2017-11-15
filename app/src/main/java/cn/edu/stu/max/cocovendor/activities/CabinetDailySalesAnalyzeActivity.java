@@ -24,7 +24,6 @@ public class CabinetDailySalesAnalyzeActivity extends AppCompatActivity {
     private int pageOffset = 0;
     private int listRows = 10;
     private List<Goods> list = new ArrayList<Goods>();
-    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +32,6 @@ public class CabinetDailySalesAnalyzeActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         setContentView(R.layout.activity_cabinet_daily_sales_analyze);
-
-        searchView = (SearchView) findViewById(R.id.searchView);
 
         List<Goods> allGoods = DataSupport.findAll(Goods.class);
 //        for (int i = 0; i < 22; i ++) {
@@ -57,20 +54,8 @@ public class CabinetDailySalesAnalyzeActivity extends AppCompatActivity {
         //设置recyclerView每个item间的分割线
         recyclerViewSalesAnalyze.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         //创建recyclerView的实例，并将数据传输到适配器
-        cabinetDailySalesAnalyzeAdapter = new CabinetDailySalesAnalyzeAdapter(allGoods, this);
+        cabinetDailySalesAnalyzeAdapter = new CabinetDailySalesAnalyzeAdapter(list, this);
         //recyclerView显示适配器内容
         recyclerViewSalesAnalyze.setAdapter(cabinetDailySalesAnalyzeAdapter);
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
     }
 }
