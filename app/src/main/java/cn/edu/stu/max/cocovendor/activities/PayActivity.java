@@ -66,8 +66,7 @@ public class PayActivity extends AppCompatActivity {
                 case R.id.navigation_cash:
                     return true;
                 case R.id.navigation_return:
-                    Intent intent = new Intent(PayActivity.this, HomePageActivity.class);
-                    startActivity(intent);
+                    finish();
                     return true;
             }
             return false;
