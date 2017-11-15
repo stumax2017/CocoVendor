@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 
 import org.litepal.crud.DataSupport;
 
@@ -43,14 +45,12 @@ public class SingleProductSalesAnalyzeActivity extends AppCompatActivity {
         //recyclerView显示适配器内容
         recyclerViewSalesAnalyze.setAdapter(singleProductSalesAnalyzeAdapter);
 
-//        Button btnDailySales = (Button) findViewById(R.id.btn_daily_sales);
-//        btnDailySales.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(SingleProductSalesAnalyzeActivity.this, DailySalesActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-
+        Button buttonSingleProductSalesAnalyzeReturn = (Button) findViewById(R.id.btn_single_product_sales_analyze_return);
+        buttonSingleProductSalesAnalyzeReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }

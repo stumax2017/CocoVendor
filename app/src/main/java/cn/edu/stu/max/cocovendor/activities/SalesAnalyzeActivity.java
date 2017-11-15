@@ -10,8 +10,6 @@ import cn.edu.stu.max.cocovendor.R;
 
 public class SalesAnalyzeActivity extends AppCompatActivity {
 
-//    private int result = 0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,27 +54,13 @@ public class SalesAnalyzeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//
-//        TextView textViewAnalyze = (TextView) findViewById(R.id.tv_analyze);
-//        textViewAnalyze.setText(Integer.valueOf(DataSupport.sum(Sales.class, "machine_floor", int.class)));
-//        try {
-//            result = DataSupport.sum(Sales.class, "machine_floor", int.class);
-//            textViewAnalyze.setText(String.valueOf(result));
-//        } catch (NullPointerException e) {
-//            e.printStackTrace();
-//        } finally {
-//            Log.d("SalesAnalyzeActivity", String.valueOf(result));
-//        }
-    }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = item.getItemId();
-//        if (id == android.R.id.home) {
-//            finish();
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
+        Button buttonSalesAnalyzeReturn = (Button) findViewById(R.id.btn_sales_analyze_return);
+        buttonSalesAnalyzeReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
 }

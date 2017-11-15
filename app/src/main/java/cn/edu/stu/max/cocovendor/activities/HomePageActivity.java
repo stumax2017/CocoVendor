@@ -474,43 +474,37 @@ public class HomePageActivity extends SerialPortActivity {
                         }
 
                         // 机柜月销售统计表记录
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                CabinetMonthlySales cabinetMonthlySales = new CabinetMonthlySales();
-                                SimpleDateFormat mSdf = new SimpleDateFormat("yyyy-MM");
-                                String cabinetMonthlySalesDate = mSdf.format(new java.util.Date());
-                                String mDate =  cabinetDailySalesSharedPreference.getString(
-                                        "cabinet_monthly_sales_date", "2017-11");
-                                int mNum = cabinetDailySalesSharedPreference.getInt(
-                                        "cabinet_monthly_sales_num", 0);
-                                float mTotalMoney = cabinetDailySalesSharedPreference.getFloat(
-                                        "cabinet_monthly_sales_total_money", 0);
-                                if (cabinetMonthlySalesDate.equals(mDate)) {
-                                    mNum = mNum + 1;
-                                    mTotalMoney = mTotalMoney + DataSupport.find(Goods.class, whichGoods).getSales_price();
-                                    editor.putInt("cabinet_monthly_sales_num", mNum);
-                                    editor.putFloat("cabinet_monthly_sales_total_money", mTotalMoney);
-                                    editor.apply();
-                                    cabinetMonthlySales.setCabinetMonthlySalesNum(mNum);
-                                    cabinetMonthlySales.setCabinetMonthlySalesTotalMoney(mTotalMoney);
-                                    cabinetMonthlySales.updateAll("cabinetMonthlySalesDate = ?", mDate);
-                                } else {
-                                    mDate = cabinetMonthlySalesDate;
-                                    mNum = 1;
-                                    mTotalMoney = DataSupport.find(Goods.class, whichGoods).getSales_price();
-                                    editor.putString("cabinet_monthly_sales_date", mDate);
-                                    editor.putInt("cabinet_monthly_sales_num", mNum);
-                                    editor.putFloat("cabinet_monthly_sales_total_money", mTotalMoney);
-                                    editor.apply();
-                                    cabinetMonthlySales.setCabinetMonthlySalesDate(mSdf);
-                                    cabinetMonthlySales.setCabinetMonthlySalesNum(mNum);
-                                    cabinetMonthlySales.setCabinetMonthlySalesTotalMoney(mTotalMoney);
-                                    cabinetMonthlySales.save();
-                                }
-                            }
-                        }).start();
-
+                        CabinetMonthlySales cabinetMonthlySales = new CabinetMonthlySales();
+                        SimpleDateFormat mSdf = new SimpleDateFormat("yyyy-MM");
+                        String cabinetMonthlySalesDate = mSdf.format(new java.util.Date());
+                        String mDate =  cabinetDailySalesSharedPreference.getString(
+                                "cabinet_monthly_sales_date", "2017-10");
+                        int mNum = cabinetDailySalesSharedPreference.getInt(
+                                "cabinet_monthly_sales_num", 0);
+                        float mTotalMoney = cabinetDailySalesSharedPreference.getFloat(
+                                "cabinet_monthly_sales_total_money", 0);
+                        if (cabinetMonthlySalesDate.equals(mDate)) {
+                            mNum = mNum + 1;
+                            mTotalMoney = mTotalMoney + DataSupport.find(Goods.class, whichGoods).getSales_price();
+                            editor.putInt("cabinet_monthly_sales_num", mNum);
+                            editor.putFloat("cabinet_monthly_sales_total_money", mTotalMoney);
+                            editor.apply();
+                            cabinetMonthlySales.setCabinetMonthlySalesNum(mNum);
+                            cabinetMonthlySales.setCabinetMonthlySalesTotalMoney(mTotalMoney);
+                            cabinetMonthlySales.updateAll("cabinetMonthlySalesDate = ?", mDate);
+                        } else {
+                            mDate = cabinetMonthlySalesDate;
+                            mNum = 1;
+                            mTotalMoney = DataSupport.find(Goods.class, whichGoods).getSales_price();
+                            editor.putString("cabinet_monthly_sales_date", mDate);
+                            editor.putInt("cabinet_monthly_sales_num", mNum);
+                            editor.putFloat("cabinet_monthly_sales_total_money", mTotalMoney);
+                            editor.apply();
+                            cabinetMonthlySales.setCabinetMonthlySalesDate(mSdf);
+                            cabinetMonthlySales.setCabinetMonthlySalesNum(mNum);
+                            cabinetMonthlySales.setCabinetMonthlySalesTotalMoney(mTotalMoney);
+                            cabinetMonthlySales.save();
+                        }
                     } catch (NullPointerException e) {
                         ToastFactory.makeText(HomePageActivity.this, "目前没有商品" + whichGoods, Toast.LENGTH_SHORT).show();
                     }

@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 
 import org.litepal.crud.DataSupport;
 
@@ -42,6 +44,14 @@ public class SingleProductSalesPandectActivity extends AppCompatActivity {
         singleProductSalesPandectAdapter = new SingleProductSalesPandectAdapter(list, this);
         //recyclerView显示适配器内容
         recyclerViewSalesAnalyze.setAdapter(singleProductSalesPandectAdapter);
+
+        Button buttonSingleProductSalesPandectReturn = (Button) findViewById(R.id.btn_single_product_sales_pandect_return);
+        buttonSingleProductSalesPandectReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
 }

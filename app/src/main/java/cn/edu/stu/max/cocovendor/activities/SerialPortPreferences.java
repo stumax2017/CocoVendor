@@ -60,6 +60,7 @@ public class SerialPortPreferences extends PreferenceActivity {
         baudrates.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 preference.setSummary((String) newValue);
+                finish();
                 return true;
             }
         });

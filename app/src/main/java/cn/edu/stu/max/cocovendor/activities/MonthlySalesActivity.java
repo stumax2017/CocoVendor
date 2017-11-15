@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 
 import org.litepal.crud.DataSupport;
 
@@ -46,6 +48,14 @@ public class MonthlySalesActivity extends AppCompatActivity {
         monthlySalesAdapter = new MonthlySalesAdapter(list, this);
         //recyclerView显示适配器内容
         recyclerViewSalesAnalyze.setAdapter(monthlySalesAdapter);
+
+        Button buttonMonthlySalesReturn = (Button) findViewById(R.id.btn_monthly_sales_return);
+        buttonMonthlySalesReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
 }
