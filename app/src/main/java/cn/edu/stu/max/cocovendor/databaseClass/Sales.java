@@ -23,6 +23,8 @@ public class Sales extends DataSupport{
     private String pay_way;
     //销售机器编号
     private long sales_machine_id;
+    //交易编号
+    private String trade_id;
 
     public int getId() {
         return id;
@@ -95,5 +97,13 @@ public class Sales extends DataSupport{
 
     public void setSales_machine_id(long sales_machine_id) {
         this.sales_machine_id = sales_machine_id;
+    }
+
+    public String getTrade_id() {
+        return trade_id;
+    }
+
+    public void setTrade_id(String trade_id) {
+        this.trade_id = trade_id;
     }
 }
