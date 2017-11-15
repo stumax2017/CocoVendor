@@ -170,7 +170,7 @@ public class HomePageActivity extends SerialPortActivity {
                         ToastFactory.makeText(HomePageActivity.this, "good" + pos, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(HomePageActivity.this, PayActivity.class);
                         intent.putExtra("which_floor", pos);
-                        startActivityForResult(intent, 1);
+                        startActivityForResult(intent, 2);
                     }
                 });
             }
@@ -638,7 +638,6 @@ public class HomePageActivity extends SerialPortActivity {
                 if (aMapLocation.getErrorCode() == 0) {
                     TextView textView = (TextView) findViewById(R.id.tv_homepage_testlogin);
                     textView.setText(aMapLocation.getAddress());
-                } else {
                 }
             }
         }
@@ -753,8 +752,9 @@ public class HomePageActivity extends SerialPortActivity {
                 break;
             case REQUEST_PAY_RESULT_CODE:
                 if (resultCode == RESULT_OK) {
-                    int goods_id = data.getIntExtra("which_floor", 0);
-                    String text = "You clicked on item" + String.valueOf(goods_id);
+                    int whichFloor = data.getIntExtra("which_floor", 0);
+                    int whichGoods = data.getIntExtra("which_goods", 0);
+                    String text = "You clicked on item" + whichGoods;
                     try {
                         mOutputStream.write(text.getBytes());
                         mOutputStream.write('\n');
@@ -765,13 +765,13 @@ public class HomePageActivity extends SerialPortActivity {
                     try {
                         Sales sales = new Sales();
                         sales.setSales_date(new Date());
-                        sales.setGoods_id(DataSupport.find(Goods.class, goods_id).getId());
-                        sales.setGoods_name(DataSupport.find(Goods.class, goods_id).getName());
-                        sales.setMachine_floor(goods_id);
+                        sales.setGoods_id(DataSupport.find(Goods.class, whichGoods).getId());
+                        sales.setGoods_name(DataSupport.find(Goods.class, whichGoods).getName());
+                        sales.setMachine_floor(whichFloor + 1);//货物层下标0开始，需要加一
                         sales.setPay_way("现金");
                         sales.save();
                     } catch (NullPointerException e) {
-                        ToastFactory.makeText(HomePageActivity.this, "目前没有商品" + String.valueOf(goods_id), Toast.LENGTH_SHORT).show();
+                        ToastFactory.makeText(HomePageActivity.this, "目前没有商品" + whichGoods, Toast.LENGTH_SHORT).show();
                     }
                 }
         }
@@ -858,6 +858,7 @@ public class HomePageActivity extends SerialPortActivity {
      */
     private void initDatas() {
         mDatas = new ArrayList<Model>();
+        //暂时初始化10个空货物的时候有两个点
         for (int i = 0; i < 10; i++) {
             //动态获取资源ID，第一个参数是资源名，第二个参数是资源类型例如drawable，string等，第三个参数包名
 //            int imageId = getResources().getIdentifier("ic_category_" + i, "drawable", getPackageName());
@@ -866,7 +867,7 @@ public class HomePageActivity extends SerialPortActivity {
             int whichGoods =  preferences.getInt("cabinet_floor_" + i, 0);
             Goods goods = DataSupport.find(Goods.class, whichGoods);
             if (whichGoods == 0) {
-                mDatas.add(new Model("", "", R.color.colorTransparency));
+                mDatas.add(new Model("", "", R.drawable.ic_category_null));
             } else {
                 mDatas.add(new Model("¥ " + String.valueOf(goods.getSales_price()), goods.getName(), goods.getImage_path()));
             }

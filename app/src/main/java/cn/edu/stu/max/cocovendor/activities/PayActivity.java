@@ -20,6 +20,7 @@ import org.litepal.crud.DataSupport;
 import cn.edu.stu.max.cocovendor.R;
 import cn.edu.stu.max.cocovendor.databaseClass.Goods;
 import cn.edu.stu.max.cocovendor.javaClass.QRCode;
+import cn.edu.stu.max.cocovendor.javaClass.ToastFactory;
 
 public class PayActivity extends AppCompatActivity {
 
@@ -30,6 +31,9 @@ public class PayActivity extends AppCompatActivity {
     private ImageView goodsImageView;
     private TextView goodsTextView;
     private TextView priceTextView;
+
+    private int whichFloor;
+    private int whichGoods;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -66,6 +70,12 @@ public class PayActivity extends AppCompatActivity {
                 case R.id.navigation_cash:
                     return true;
                 case R.id.navigation_return:
+//                    Intent intent = new Intent(PayActivity.this, HomePageActivity.class);
+//                    startActivity(intent);
+                    Intent intent = new Intent();
+                    intent.putExtra("which_floor", whichFloor);
+                    intent.putExtra("which_goods", whichGoods);
+                    setResult(RESULT_OK, intent);
                     finish();
                     return true;
             }
@@ -83,7 +93,7 @@ public class PayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pay);
 
         Intent intent = getIntent();
-        int whichFloor = intent.getIntExtra("which_floor", 0);
+        whichFloor = intent.getIntExtra("which_floor", 0);
 
         goodsImageView = (ImageView) findViewById(R.id.imageView_goods);
         goodsTextView = (TextView) findViewById(R.id.textView_goods);
@@ -102,10 +112,15 @@ public class PayActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         SharedPreferences preferences = getSharedPreferences("cabinet_floor", MODE_PRIVATE);
-        int whichGoods =  preferences.getInt("cabinet_floor_" + whichFloor, 0);
-        Goods goods = DataSupport.find(Goods.class, whichGoods);
-        goodsImageView.setImageResource(goods.getImage_path());
-        goodsTextView.setText(goods.getName());
-        priceTextView.setText("¥ " + String.valueOf(goods.getSales_price()));
+        whichGoods =  preferences.getInt("cabinet_floor_" + whichFloor, 0);
+        try {
+            Goods goods = DataSupport.find(Goods.class, whichGoods);
+            goodsImageView.setImageResource(goods.getImage_path());
+            goodsTextView.setText(goods.getName());
+            priceTextView.setText("¥ " + String.valueOf(goods.getSales_price()));
+        } catch (NullPointerException e) {
+            ToastFactory.makeText(PayActivity.this, "当前没有商品", Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 }
