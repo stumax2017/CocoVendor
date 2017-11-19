@@ -48,8 +48,8 @@
     <string name="label_cancel">取消</string>
     <string name="title_activity_base">BaseActivity</string>
     <string name="lable_system_parm_setting">系统参数设置</string>
-    <string name="label_network_setting">网络设置</string>
-    <string name="label_update_goods">更新商品数据</string>
+    <string name="label_wifi_setting">WIFI设置</string>
+    <string name="label_mobile_network_settings">移动网络设置</string>
     <string name="label_change_pswd">修改后台密码</string>
     <string name="label_download_pic">下载产品图片</string>
     <string name="label_change_tel">修改电话号码</string>

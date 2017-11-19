@@ -189,39 +189,36 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn_ad_clear"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:text="清空播放顺序列表" />
-
-            <Button
                 android:id="@+id/btn_ad_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-                android:text="添加" />
+                android:text="将U盘中所选广告添加至本机"
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/btn_ad_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-                android:text="删除" />
+                android:text="删除所选广告"
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/btn_ad_fetch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-                android:text="取回" />
+                android:text="将本机中所选广告取回至U盘"
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/btn_ad_setting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-                android:text="设置" />
+                android:text="广告播放顺序、次数设置"
+                android:textSize="15sp" />
         </LinearLayout>
 
 

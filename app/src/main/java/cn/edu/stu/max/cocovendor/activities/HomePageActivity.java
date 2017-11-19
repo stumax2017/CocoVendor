@@ -563,7 +563,7 @@ public class HomePageActivity extends SerialPortActivity {
     protected void onDataReceived(final byte[] buffer, final int size) {
         runOnUiThread(new Runnable() {
             public void run() {
-                ToastFactory.makeText(HomePageActivity.this, new String(buffer, 0, size), Toast.LENGTH_SHORT).show();
+                //ToastFactory.makeText(HomePageActivity.this, new String(buffer, 0, size), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -621,7 +621,5 @@ public class HomePageActivity extends SerialPortActivity {
     protected void onStop() {
         // TODO Auto-generated method stub
         super.onStop();
-        //finish();
-        //handler.postDelayed(runnable, 1000 * SECONDS_OF_AD);
     }
 }

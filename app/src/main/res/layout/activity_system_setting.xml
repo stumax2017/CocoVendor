@@ -39,23 +39,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
-                    android:background="@color/colorBlue"
+                    android:background="@android:color/holo_green_light"
                     android:gravity="center"
-                    android:text="@string/label_network_setting"
+                    android:text="@string/label_wifi_setting"
                     android:textColor="@color/colorWhite"
                     android:textSize="30sp" />
             </TableRow>
 
             <TableRow
                 android:layout_weight="1">
+
                 <Button
                     android:id="@+id/btn_update_goods"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
-                    android:background="@color/colorBlue"
+                    android:background="@android:color/holo_green_light"
                     android:gravity="center"
-                    android:text="@string/label_update_goods"
+                    android:text="@string/label_mobile_network_settings"
                     android:textColor="@color/colorWhite"
                     android:textSize="30sp" />
 
@@ -64,7 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
-                    android:background="@color/colorBlue"
+                    android:background="@android:color/holo_green_light"
                     android:gravity="center"
                     android:text="@string/label_change_pswd"
                     android:textColor="@color/colorWhite"
@@ -112,12 +113,13 @@
                     android:textSize="30sp" />
 
                 <Button
+                    android:id="@+id/btn_serialport_setting"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
-                    android:background="@color/colorBlue"
+                    android:background="@android:color/holo_green_light"
                     android:gravity="center"
-                    android:text="@string/label_null"
+                    android:text="@string/label_serialport_setting"
                     android:textColor="@color/colorWhite"
                     android:textSize="30sp" />
             </TableRow>
@@ -141,7 +143,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
-                    android:background="@color/colorBlue"
+                    android:background="@android:color/holo_green_light"
                     android:gravity="center"
                     android:text="监控设置"
                     android:textColor="@color/colorWhite"

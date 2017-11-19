@@ -49,6 +49,8 @@ public class SystemSettingActivity extends AppCompatActivity {
         buttonSysSettingBack.setOnClickListener(buttonListener);
         Button buttonCameraSpy = (Button) findViewById(R.id.btn_camera_spy);
         buttonCameraSpy.setOnClickListener(buttonListener);
+        Button buttonSerialPortSetting = (Button) findViewById(R.id.btn_serialport_setting);
+        buttonSerialPortSetting.setOnClickListener(buttonListener);
     }
 
     private class ButtonListener implements View.OnClickListener {
@@ -87,12 +89,12 @@ public class SystemSettingActivity extends AppCompatActivity {
                 case R.id.btn_download_ad:
                     break;
                 case R.id.btn_camera_spy:
-                    boolean data = share.getBoolean("isOpen", false);
-                    //String data = "true";
                     Intent intent_camera_setting = new Intent(SystemSettingActivity.this, CameraSettingActivity.class);
-                    intent_camera_setting.putExtra("isOpen", data);
                     startActivity(intent_camera_setting);
                     break;
+                case R.id.btn_serialport_setting:
+                    Intent intent_serialport_setting = new Intent(SystemSettingActivity.this, SerialPortSettingMainMenu.class);
+                    startActivity(intent_serialport_setting);
                 case R.id.btn_sys_setting_back:
                     finish();
                     break;

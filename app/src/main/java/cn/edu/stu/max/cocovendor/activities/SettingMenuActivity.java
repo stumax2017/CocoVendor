@@ -29,10 +29,6 @@ public class SettingMenuActivity extends AppCompatActivity {
         buttonGoodsTest.setOnClickListener(buttonListener);
         Button buttonAdSetting = (Button) findViewById(R.id.btn_ad_setting);
         buttonAdSetting.setOnClickListener(buttonListener);
-        Button buttonSerialPortSetting = (Button) findViewById(R.id.btn_serialport_setting);
-        buttonSerialPortSetting.setOnClickListener(buttonListener);
-        Button buttonHelp = (Button) findViewById(R.id.btn_help);
-        buttonHelp.setOnClickListener(buttonListener);
         Button buttonSalesSetting = (Button) findViewById(R.id.btn_sales_setting);
         buttonSalesSetting.setOnClickListener(buttonListener);
         Button buttonSalesAnalyze = (Button) findViewById(R.id.btn_sales_analyze);
@@ -62,12 +58,6 @@ public class SettingMenuActivity extends AppCompatActivity {
                 case R.id.btn_ad_setting:
                     Intent intent_ad_setting = new Intent(SettingMenuActivity.this, AdSettingActivity.class);
                     startActivity(intent_ad_setting);
-                    break;
-                case R.id.btn_serialport_setting:
-                    Intent intent_serialport_setting = new Intent(SettingMenuActivity.this, SerialPortSettingMainMenu.class);
-                    startActivity(intent_serialport_setting);
-                    break;
-                case R.id.btn_help:
                     break;
                 case R.id.btn_sales_setting:
                     Intent intent_sales_setting = new Intent(SettingMenuActivity.this, SalesSettingActivity.class);
