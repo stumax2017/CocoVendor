@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
     <dbname value="coco_vender" />
-    <version value="12" />
+    <version value="13" />
     <list>
         <mapping class="cn.edu.stu.max.cocovendor.databaseClass.CabinetDailySales" />
         <mapping class="cn.edu.stu.max.cocovendor.databaseClass.CabinetMonthlySales" />
         <mapping class="cn.edu.stu.max.cocovendor.databaseClass.Goods" />
         <mapping class="cn.edu.stu.max.cocovendor.databaseClass.LocalInfo" />
         <mapping class="cn.edu.stu.max.cocovendor.databaseClass.Sales" />
+        <mapping class="cn.edu.stu.max.cocovendor.databaseClass.SingleProductSalesPandect" />
     </list>
 </litepal>

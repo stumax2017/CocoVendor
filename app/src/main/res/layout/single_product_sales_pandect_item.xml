@@ -7,7 +7,7 @@
     android:orientation="horizontal">
 
     <TextView
-        android:id="@+id/text_id"
+        android:id="@+id/text_single_product_sales_pandect_goods_id"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.5"
@@ -29,14 +29,14 @@
         android:gravity="center">
 
         <ImageView
-            android:id="@+id/text_goods_picture"
+            android:id="@+id/img_single_product_sales_pandect_goods_picture"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/ic_category_0" />
 
         <TextView
-            android:id="@+id/text_goods_name"
+            android:id="@+id/text_single_product_sales_pandect_goods_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -53,7 +53,7 @@
         android:background="@color/colorBlack" />
 
     <TextView
-        android:id="@+id/text_num"
+        android:id="@+id/text_single_product_sales_pandect_goods_sales_num"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -69,7 +69,7 @@
         android:background="@color/colorBlack" />
 
     <TextView
-        android:id="@+id/text_costPrice"
+        android:id="@+id/text_single_product_sales_pandect_goods_cost_price"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -85,7 +85,7 @@
         android:background="@color/colorBlack" />
 
     <TextView
-        android:id="@+id/text_selling_price"
+        android:id="@+id/text_single_product_sales_pandect_goods_sales_price"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -101,7 +101,7 @@
         android:background="@color/colorBlack" />
 
     <TextView
-        android:id="@+id/text_cash_times"
+        android:id="@+id/text_single_product_sales_pandect_goods_cash_times"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -117,7 +117,7 @@
         android:background="@color/colorBlack" />
 
     <TextView
-        android:id="@+id/text_wechat_times"
+        android:id="@+id/text_single_product_sales_pandect_goods_wechat_times"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -133,7 +133,7 @@
         android:background="@color/colorBlack" />
 
     <TextView
-        android:id="@+id/text_alipay_times"
+        android:id="@+id/text_single_product_sales_pandect_goods_alipay_times"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -149,7 +149,7 @@
         android:background="@color/colorBlack" />
 
     <TextView
-        android:id="@+id/text_total_sales"
+        android:id="@+id/text_single_product_sales_pandect_goods_sales_all"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"

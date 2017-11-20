@@ -39,6 +39,7 @@ import java.util.List;
 
 import cn.edu.stu.max.cocovendor.databaseClass.CabinetDailySales;
 import cn.edu.stu.max.cocovendor.databaseClass.CabinetMonthlySales;
+import cn.edu.stu.max.cocovendor.databaseClass.SingleProductSalesPandect;
 import cn.edu.stu.max.cocovendor.javaClass.FileService;
 import cn.edu.stu.max.cocovendor.adapters.GridViewAdapter;
 import cn.edu.stu.max.cocovendor.javaClass.Model;
@@ -504,6 +505,73 @@ public class HomePageActivity extends SerialPortActivity {
                             cabinetMonthlySales.setCabinetMonthlySalesNum(mNum);
                             cabinetMonthlySales.setCabinetMonthlySalesTotalMoney(mTotalMoney);
                             cabinetMonthlySales.save();
+                        }
+
+                        // 单一商品销售总览表记录
+                        SingleProductSalesPandect singleProductSalesPandect = new SingleProductSalesPandect();
+                        String singleProductSalesPandectGoodsName = "";
+                        int singleProductSalesPandectGoodsSalesNum = 0;
+                        int singleProductSalesPandectGoodsSalesCashTimes = 0;
+                        int singleProductSalesPandectGoodsSalesWechatTimes = 0;
+                        int singleProductSalesPandectGoodsSalesAlipayTimes = 0;
+                        int singleProductSalesPandectGoodsImagePath = 0;
+                        float singleProductSalesPandectGoodsCostPrice = 0;
+                        float singleProductSalesPandectGoodsSalesPrice = 0;
+                        float singleProductSalesPandectGoodsSalesAll = 0;
+                        if (DataSupport.where("goodsName = ?", DataSupport.find(Goods.class, whichGoods).getName()).find(SingleProductSalesPandect.class) != null &&
+                                !DataSupport.where("goodsName = ?", DataSupport.find(Goods.class, whichGoods).getName()).find(SingleProductSalesPandect.class).isEmpty()) {
+                            singleProductSalesPandectGoodsSalesNum = DataSupport.where("goodsName = ?", DataSupport.find(Goods.class, whichGoods).getName())
+                                    .find(SingleProductSalesPandect.class).get(0).getGoodsSalesNum() + 1;
+                            switch (sales.getPay_way()) {
+                                case "现金": singleProductSalesPandectGoodsSalesCashTimes = DataSupport.where("goodsName = ?", DataSupport.find(Goods.class, whichGoods).getName())
+                                        .find(SingleProductSalesPandect.class).get(0).getCashTimes() + 1;
+                                    break;
+                                case "微信": singleProductSalesPandectGoodsSalesWechatTimes = DataSupport.where("goodsName = ?", DataSupport.find(Goods.class, whichGoods).getName())
+                                        .find(SingleProductSalesPandect.class).get(0).getWechatTimes() + 1;
+                                    break;
+                                case "支付宝": singleProductSalesPandectGoodsSalesAlipayTimes = DataSupport.where("goodsName = ?", DataSupport.find(Goods.class, whichGoods).getName())
+                                        .find(SingleProductSalesPandect.class).get(0).getAlipayTimes() + 1;
+                                    break;
+                            }
+                            singleProductSalesPandectGoodsImagePath = DataSupport.find(Goods.class, whichGoods).getImage_path();
+                            singleProductSalesPandectGoodsSalesAll = singleProductSalesPandectGoodsSalesNum * DataSupport.find(Goods.class, whichGoods).getSales_price();
+                            singleProductSalesPandectGoodsCostPrice = DataSupport.find(Goods.class, whichGoods).getCost_price();
+                            singleProductSalesPandectGoodsSalesPrice = DataSupport.find(Goods.class, whichGoods).getSales_price();
+                            singleProductSalesPandectGoodsName = DataSupport.find(Goods.class, whichGoods).getName();
+                            singleProductSalesPandect.setGoodsSalesNum(singleProductSalesPandectGoodsSalesNum);
+                            singleProductSalesPandect.setCashTimes(singleProductSalesPandectGoodsSalesCashTimes);
+                            singleProductSalesPandect.setWechatTimes(singleProductSalesPandectGoodsSalesWechatTimes);
+                            singleProductSalesPandect.setAlipayTimes(singleProductSalesPandectGoodsSalesAlipayTimes);
+                            singleProductSalesPandect.setSalesAll(singleProductSalesPandectGoodsSalesAll);
+                            singleProductSalesPandect.setGoodsCostPrice(singleProductSalesPandectGoodsCostPrice);
+                            singleProductSalesPandect.setGoodsSalesPrice(singleProductSalesPandectGoodsSalesPrice);
+                            singleProductSalesPandect.setImagePath(singleProductSalesPandectGoodsImagePath);
+                            singleProductSalesPandect.updateAll("goodsName = ?", singleProductSalesPandectGoodsName);
+                        } else {
+                            singleProductSalesPandectGoodsSalesNum = 1;
+                            switch (sales.getPay_way()) {
+                                case "现金": singleProductSalesPandectGoodsSalesCashTimes = 1;
+                                    break;
+                                case "微信": singleProductSalesPandectGoodsSalesWechatTimes = 1;
+                                    break;
+                                case "支付宝": singleProductSalesPandectGoodsSalesAlipayTimes = 1;
+                                    break;
+                            }
+                            singleProductSalesPandectGoodsImagePath = DataSupport.find(Goods.class, whichGoods).getImage_path();
+                            singleProductSalesPandectGoodsSalesAll = DataSupport.find(Goods.class, whichGoods).getSales_price();
+                            singleProductSalesPandectGoodsCostPrice = DataSupport.find(Goods.class, whichGoods).getCost_price();
+                            singleProductSalesPandectGoodsSalesPrice = DataSupport.find(Goods.class, whichGoods).getSales_price();
+                            singleProductSalesPandectGoodsName = DataSupport.find(Goods.class, whichGoods).getName();
+                            singleProductSalesPandect.setGoodsName(singleProductSalesPandectGoodsName);
+                            singleProductSalesPandect.setGoodsSalesNum(singleProductSalesPandectGoodsSalesNum);
+                            singleProductSalesPandect.setCashTimes(singleProductSalesPandectGoodsSalesCashTimes);
+                            singleProductSalesPandect.setWechatTimes(singleProductSalesPandectGoodsSalesWechatTimes);
+                            singleProductSalesPandect.setAlipayTimes(singleProductSalesPandectGoodsSalesAlipayTimes);
+                            singleProductSalesPandect.setSalesAll(singleProductSalesPandectGoodsSalesAll);
+                            singleProductSalesPandect.setGoodsCostPrice(singleProductSalesPandectGoodsCostPrice);
+                            singleProductSalesPandect.setGoodsSalesPrice(singleProductSalesPandectGoodsSalesPrice);
+                            singleProductSalesPandect.setImagePath(singleProductSalesPandectGoodsImagePath);
+                            singleProductSalesPandect.save();
                         }
                     } catch (NullPointerException e) {
                         ToastFactory.makeText(HomePageActivity.this, "目前没有商品" + whichGoods, Toast.LENGTH_SHORT).show();
