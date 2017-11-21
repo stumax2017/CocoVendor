@@ -17,7 +17,6 @@
 package cn.edu.stu.max.cocovendor.activities;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -31,12 +30,16 @@ public class SerialPortSettingMainMenu extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.activity_serial_port_main_menu);
 
         final Button buttonSetup = (Button) findViewById(R.id.ButtonSetup);
         buttonSetup.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(SerialPortSettingMainMenu.this, SerialPortPreferences.class));
+                Intent intent = new Intent(SerialPortSettingMainMenu.this, SerialPortPreferences.class);
+                intent.putExtra("extra_prefs_show_button_bar", true);
+                intent.putExtra("extra_prefs_set_back_text","返回");
+                intent.putExtra("extra_prefs_set_next_text","");
+                startActivity(intent);
             }
         });
 
