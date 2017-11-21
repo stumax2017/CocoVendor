@@ -2,18 +2,15 @@ package cn.edu.stu.max.cocovendor.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.audiofx.BassBoost;
-import android.media.audiofx.EnvironmentalReverb;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 import cn.edu.stu.max.cocovendor.R;
 
-public class SystemSettingActivity extends AppCompatActivity {
+public class OthersSettingActivity extends AppCompatActivity {
 
     private static final String cameraSettingDataFileName = "cameraSettingDataFile";     // 定义保存的文件的名称
     private SharedPreferences share;
@@ -25,7 +22,7 @@ public class SystemSettingActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-        setContentView(R.layout.activity_system_setting);
+        setContentView(R.layout.activity_others_setting);
 
         share = super.getSharedPreferences(cameraSettingDataFileName, MODE_PRIVATE);  // 实例化
 
@@ -74,7 +71,7 @@ public class SystemSettingActivity extends AppCompatActivity {
                     startActivity(intentData);
                     break;
                 case R.id.btn_change_pswd:
-                    Intent intentChangePswd = new Intent(SystemSettingActivity.this, LoginActivity.class);
+                    Intent intentChangePswd = new Intent(OthersSettingActivity.this, LoginActivity.class);
                     intentChangePswd.putExtra("IsLogin", false);
                     startActivity(intentChangePswd);
                     break;
@@ -89,11 +86,11 @@ public class SystemSettingActivity extends AppCompatActivity {
                 case R.id.btn_download_ad:
                     break;
                 case R.id.btn_camera_spy:
-                    Intent intent_camera_setting = new Intent(SystemSettingActivity.this, CameraSettingActivity.class);
+                    Intent intent_camera_setting = new Intent(OthersSettingActivity.this, CameraSettingActivity.class);
                     startActivity(intent_camera_setting);
                     break;
                 case R.id.btn_serialport_setting:
-                    Intent intent_serialport_setting = new Intent(SystemSettingActivity.this, SerialPortSettingMainMenu.class);
+                    Intent intent_serialport_setting = new Intent(OthersSettingActivity.this, SerialPortSettingMainMenu.class);
                     startActivity(intent_serialport_setting);
                 case R.id.btn_sys_setting_back:
                     finish();

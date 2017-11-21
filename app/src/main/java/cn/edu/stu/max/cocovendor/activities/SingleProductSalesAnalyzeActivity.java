@@ -16,24 +16,20 @@ import java.util.List;
 import cn.edu.stu.max.cocovendor.R;
 import cn.edu.stu.max.cocovendor.databaseClass.Goods;
 import cn.edu.stu.max.cocovendor.adapters.SingleProductSalesAnalyzeAdapter;
+import cn.edu.stu.max.cocovendor.databaseClass.SingleProductSalesAnalyze;
+import cn.edu.stu.max.cocovendor.databaseClass.SingleProductSalesPandect;
 
 public class SingleProductSalesAnalyzeActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewSalesAnalyze;
     private SingleProductSalesAnalyzeAdapter singleProductSalesAnalyzeAdapter;
-    private int pageOffset = 0;
-    private int listRows = 10;
-    private List<Goods> list = new ArrayList<Goods>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_product_sales_analyze);
 
-        List<Goods> allGoods = DataSupport.findAll(Goods.class);
-        for (int i = 0; i < 22; i ++) {
-            list.add(new Goods());
-        }
+        List<SingleProductSalesAnalyze> allGoods = DataSupport.findAll(SingleProductSalesAnalyze.class);
         //找到UI控件
         recyclerViewSalesAnalyze = (RecyclerView) findViewById(R.id.rv_sales_setting);
         //设置线性布局 Creates a vertical LinearLayoutManager
@@ -41,7 +37,7 @@ public class SingleProductSalesAnalyzeActivity extends AppCompatActivity {
         //设置recyclerView每个item间的分割线
         recyclerViewSalesAnalyze.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         //创建recyclerView的实例，并将数据传输到适配器
-        singleProductSalesAnalyzeAdapter = new SingleProductSalesAnalyzeAdapter(list, this);
+        singleProductSalesAnalyzeAdapter = new SingleProductSalesAnalyzeAdapter(allGoods, this);
         //recyclerView显示适配器内容
         recyclerViewSalesAnalyze.setAdapter(singleProductSalesAnalyzeAdapter);
 

@@ -57,9 +57,9 @@ public class DailySalesAdapter extends RecyclerView.Adapter {
             super(itemView);
             mView = itemView;
 
-            tv_sheetRow3 = (TextView) itemView.findViewById(R.id.text_selling_price);
-            tv_sheetRow4 = (TextView) itemView.findViewById(R.id.text_cash_times);
-            btn_sheetRow5 = (TextView) itemView.findViewById(R.id.text_wechat_times);
+            tv_sheetRow3 = (TextView) itemView.findViewById(R.id.text_sales_date);
+            tv_sheetRow4 = (TextView) itemView.findViewById(R.id.text_sales_num);
+            btn_sheetRow5 = (TextView) itemView.findViewById(R.id.text_sales_total_money);
         }
 
 

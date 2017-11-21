@@ -11,6 +11,8 @@
         android:layout_height="200dp"
         android:layout_margin="14dp"
         android:text="单品销售总览"
+        android:textColor="@color/colorWhite"
+        android:background="@android:color/holo_green_light"
         android:textSize="42sp" />
 
     <Button
@@ -19,6 +21,8 @@
         android:layout_height="200dp"
         android:layout_margin="14dp"
         android:text="单品销售统计"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorBlue"
         android:textSize="42sp" />
 
     <Button
@@ -27,6 +31,8 @@
         android:layout_height="200dp"
         android:layout_margin="14dp"
         android:text="机柜日销售统计"
+        android:textColor="@color/colorWhite"
+        android:background="@android:color/holo_green_light"
         android:textSize="42sp" />
 
     <Button
@@ -35,6 +41,8 @@
         android:layout_height="200dp"
         android:layout_margin="14dp"
         android:text="机柜月销售统计"
+        android:textColor="@color/colorWhite"
+        android:background="@android:color/holo_green_light"
         android:textSize="42sp" />
 
 
