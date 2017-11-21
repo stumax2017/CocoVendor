@@ -33,7 +33,7 @@ public class LocalInfo extends DataSupport{
     //客服电话
     private String tel_number;
     //广告规则
-    private int ad_rules;
+    private String ad_rules;
 
     public int getId() {
         return id;
@@ -123,11 +123,11 @@ public class LocalInfo extends DataSupport{
         this.tel_number = tel_number;
     }
 
-    public int getAd_rules() {
+    public String getAd_rules() {
         return ad_rules;
     }
 
-    public void setAd_rules(int ad_rules) {
+    public void setAd_rules(String ad_rules) {
         this.ad_rules = ad_rules;
     }
 }

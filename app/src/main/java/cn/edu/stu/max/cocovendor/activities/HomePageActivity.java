@@ -39,6 +39,7 @@ import java.util.List;
 
 import cn.edu.stu.max.cocovendor.databaseClass.CabinetDailySales;
 import cn.edu.stu.max.cocovendor.databaseClass.CabinetMonthlySales;
+import cn.edu.stu.max.cocovendor.databaseClass.LocalInfo;
 import cn.edu.stu.max.cocovendor.javaClass.FileService;
 import cn.edu.stu.max.cocovendor.adapters.GridViewAdapter;
 import cn.edu.stu.max.cocovendor.javaClass.Model;
@@ -187,7 +188,7 @@ public class HomePageActivity extends SerialPortActivity {
         AMapLocationClientOption mLocationOption = new AMapLocationClientOption();
         mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
         mLocationOption.setOnceLocation(false);
-        mLocationOption.setInterval(3000);
+        mLocationOption.setInterval(10000);
         mLocationClient.setLocationOption(mLocationOption);
         mLocationClient.startLocation();
 
@@ -322,13 +323,18 @@ public class HomePageActivity extends SerialPortActivity {
         }
     }
 
+    //定位返回的信息
     private AMapLocationListener mLocationListener = new AMapLocationListener() {
         @Override
         public void onLocationChanged(AMapLocation aMapLocation) {
             if (aMapLocation != null) {
                 if (aMapLocation.getErrorCode() == 0) {
                     TextView textView = (TextView) findViewById(R.id.tv_homepage_testlogin);
-                    textView.setText(aMapLocation.getAddress());
+                    String address = aMapLocation.getAddress();
+                    textView.setText(address);
+                    LocalInfo localInfo = DataSupport.findFirst(LocalInfo.class);
+                    localInfo.setLocal_address(address);
+                    localInfo.save();
                 }
             }
         }

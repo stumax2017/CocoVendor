@@ -106,7 +106,7 @@ public class StartActivity extends AppCompatActivity {
         localInfo.setLogin_password("123");
         localInfo.setVersion(1);
         localInfo.setTel_number("0750-1234567");
-        localInfo.setAd_rules(1);
+        localInfo.setAd_rules("a1b1c1d1e1");
         localInfo.save();
     }
 }

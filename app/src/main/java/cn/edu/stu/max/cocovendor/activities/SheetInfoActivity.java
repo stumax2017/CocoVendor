@@ -5,11 +5,14 @@ import android.preference.PreferenceFragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import org.litepal.crud.DataSupport;
+
 import cn.edu.stu.max.cocovendor.R;
+import cn.edu.stu.max.cocovendor.databaseClass.LocalInfo;
 
 public class SheetInfoActivity extends AppCompatPreferenceActivity {
     static Preference prefMachineId, prefIp, prefMacAddress, prefServerIp, prefLanguage, prefLocalAddress, prefVersion, prefTelNumber, prefAdRules;
-
+    private static LocalInfo localInfo = DataSupport.findFirst(LocalInfo.class);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,15 +36,15 @@ public class SheetInfoActivity extends AppCompatPreferenceActivity {
             prefTelNumber = findPreference("key_tel_number");
             prefAdRules = findPreference("key_ad_rules");
 
-            prefMachineId.setSummary("0000001");
-            prefIp.setSummary("10.28.34.6");
-            prefMacAddress.setSummary("64-00-6A-76-46-60");
-            prefServerIp.setSummary("127.0.0.1");
-            prefLanguage.setSummary("简体中文");
-            prefLocalAddress.setSummary("汕头大学");
-            prefVersion.setSummary("v0.2.0");
-            prefTelNumber.setSummary("0750-1234567");
-            prefAdRules.setSummary("a1b1c1d1e1");
+            prefMachineId.setSummary(String.valueOf(localInfo.getMachine_id()));
+            prefIp.setSummary(localInfo.getIp());
+            prefMacAddress.setSummary(localInfo.getMac_address());
+            prefServerIp.setSummary(localInfo.getServer_ip());
+            prefLanguage.setSummary(localInfo.getLanguage());
+            prefLocalAddress.setSummary(localInfo.getLocal_address());
+            prefVersion.setSummary("v" + localInfo.getVersion() + ".0");
+            prefTelNumber.setSummary(localInfo.getTel_number());
+            prefAdRules.setSummary(localInfo.getAd_rules());
         }
     }
 
