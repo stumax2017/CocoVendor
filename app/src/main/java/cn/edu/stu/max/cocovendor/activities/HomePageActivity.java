@@ -39,6 +39,8 @@ import java.util.List;
 
 import cn.edu.stu.max.cocovendor.databaseClass.CabinetDailySales;
 import cn.edu.stu.max.cocovendor.databaseClass.CabinetMonthlySales;
+import cn.edu.stu.max.cocovendor.databaseClass.SingleProductDailySales;
+import cn.edu.stu.max.cocovendor.databaseClass.SingleProductSalesAnalyze;
 import cn.edu.stu.max.cocovendor.databaseClass.SingleProductSalesPandect;
 import cn.edu.stu.max.cocovendor.javaClass.FileService;
 import cn.edu.stu.max.cocovendor.adapters.GridViewAdapter;
@@ -99,9 +101,6 @@ public class HomePageActivity extends SerialPortActivity {
      * 当前显示的是第几页
      */
     private int curIndex = 0;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -442,137 +441,18 @@ public class HomePageActivity extends SerialPortActivity {
                         sales.setPay_way("现金");
                         sales.save();
 
-                        // 机柜日销售统计表记录
-                        CabinetDailySales cabinetDailySales = new CabinetDailySales();
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                        String cabinetDailySalesDate = sdf.format(new java.util.Date());
-                        String date =  cabinetDailySalesSharedPreference.getString(
-                                "cabinet_daily_sales_date", "2017-11-14");
-                        int num = cabinetDailySalesSharedPreference.getInt(
-                                "cabinet_daily_sales_num", 0);
-                        float totalMoney = cabinetDailySalesSharedPreference.getFloat("cabinet_daily_sales_total_money", 0);
-                        if (cabinetDailySalesDate.equals(date)) {
-                            num = num + 1;
-                            totalMoney = totalMoney + DataSupport.find(Goods.class, whichGoods).getSales_price();
-                            editor.putInt("cabinet_daily_sales_num", num);
-                            editor.putFloat("cabinet_daily_sales_total_money", totalMoney);
-                            editor.apply();
-                            cabinetDailySales.setCabinetDailySalesNum(num);
-                            cabinetDailySales.setCabinetDailySalesTotalMoney(totalMoney);
-                            cabinetDailySales.updateAll("cabinetDailySalesDate = ?", date);
-                        } else {
-                            date = cabinetDailySalesDate;
-                            num = 1;
-                            totalMoney = DataSupport.find(Goods.class, whichGoods).getSales_price();
-                            editor.putString("cabinet_daily_sales_date", date);
-                            editor.putInt("cabinet_daily_sales_num", num);
-                            editor.putFloat("cabinet_daily_sales_total_money", totalMoney);
-                            editor.apply();
-                            cabinetDailySales.setCabinetDailySalesDate(sdf);
-                            cabinetDailySales.setCabinetDailySalesNum(num);
-                            cabinetDailySales.setCabinetDailySalesTotalMoney(totalMoney);
-                            cabinetDailySales.save();
-                        }
+                        // 设置机柜日销售统计信息表
+                        setCabinetDailySalesAnalyzeSheet(whichGoods);
 
-                        // 机柜月销售统计表记录
-                        CabinetMonthlySales cabinetMonthlySales = new CabinetMonthlySales();
-                        SimpleDateFormat mSdf = new SimpleDateFormat("yyyy-MM");
-                        String cabinetMonthlySalesDate = mSdf.format(new java.util.Date());
-                        String mDate =  cabinetDailySalesSharedPreference.getString(
-                                "cabinet_monthly_sales_date", "2017-10");
-                        int mNum = cabinetDailySalesSharedPreference.getInt(
-                                "cabinet_monthly_sales_num", 0);
-                        float mTotalMoney = cabinetDailySalesSharedPreference.getFloat(
-                                "cabinet_monthly_sales_total_money", 0);
-                        if (cabinetMonthlySalesDate.equals(mDate)) {
-                            mNum = mNum + 1;
-                            mTotalMoney = mTotalMoney + DataSupport.find(Goods.class, whichGoods).getSales_price();
-                            editor.putInt("cabinet_monthly_sales_num", mNum);
-                            editor.putFloat("cabinet_monthly_sales_total_money", mTotalMoney);
-                            editor.apply();
-                            cabinetMonthlySales.setCabinetMonthlySalesNum(mNum);
-                            cabinetMonthlySales.setCabinetMonthlySalesTotalMoney(mTotalMoney);
-                            cabinetMonthlySales.updateAll("cabinetMonthlySalesDate = ?", mDate);
-                        } else {
-                            mDate = cabinetMonthlySalesDate;
-                            mNum = 1;
-                            mTotalMoney = DataSupport.find(Goods.class, whichGoods).getSales_price();
-                            editor.putString("cabinet_monthly_sales_date", mDate);
-                            editor.putInt("cabinet_monthly_sales_num", mNum);
-                            editor.putFloat("cabinet_monthly_sales_total_money", mTotalMoney);
-                            editor.apply();
-                            cabinetMonthlySales.setCabinetMonthlySalesDate(mSdf);
-                            cabinetMonthlySales.setCabinetMonthlySalesNum(mNum);
-                            cabinetMonthlySales.setCabinetMonthlySalesTotalMoney(mTotalMoney);
-                            cabinetMonthlySales.save();
-                        }
+                        // 设置机柜月销售统计信息表
+                        setCabinetMonthlySalesAnalyzeSheet(whichGoods);
 
-                        // 单一商品销售总览表记录
-                        SingleProductSalesPandect singleProductSalesPandect = new SingleProductSalesPandect();
-                        String singleProductSalesPandectGoodsName = "";
-                        int singleProductSalesPandectGoodsSalesNum = 0;
-                        int singleProductSalesPandectGoodsSalesCashTimes = 0;
-                        int singleProductSalesPandectGoodsSalesWechatTimes = 0;
-                        int singleProductSalesPandectGoodsSalesAlipayTimes = 0;
-                        int singleProductSalesPandectGoodsImagePath = 0;
-                        float singleProductSalesPandectGoodsCostPrice = 0;
-                        float singleProductSalesPandectGoodsSalesPrice = 0;
-                        float singleProductSalesPandectGoodsSalesAll = 0;
-                        if (DataSupport.where("goodsName = ?", DataSupport.find(Goods.class, whichGoods).getName()).find(SingleProductSalesPandect.class) != null &&
-                                !DataSupport.where("goodsName = ?", DataSupport.find(Goods.class, whichGoods).getName()).find(SingleProductSalesPandect.class).isEmpty()) {
-                            singleProductSalesPandectGoodsSalesNum = DataSupport.where("goodsName = ?", DataSupport.find(Goods.class, whichGoods).getName())
-                                    .find(SingleProductSalesPandect.class).get(0).getGoodsSalesNum() + 1;
-                            switch (sales.getPay_way()) {
-                                case "现金": singleProductSalesPandectGoodsSalesCashTimes = DataSupport.where("goodsName = ?", DataSupport.find(Goods.class, whichGoods).getName())
-                                        .find(SingleProductSalesPandect.class).get(0).getCashTimes() + 1;
-                                    break;
-                                case "微信": singleProductSalesPandectGoodsSalesWechatTimes = DataSupport.where("goodsName = ?", DataSupport.find(Goods.class, whichGoods).getName())
-                                        .find(SingleProductSalesPandect.class).get(0).getWechatTimes() + 1;
-                                    break;
-                                case "支付宝": singleProductSalesPandectGoodsSalesAlipayTimes = DataSupport.where("goodsName = ?", DataSupport.find(Goods.class, whichGoods).getName())
-                                        .find(SingleProductSalesPandect.class).get(0).getAlipayTimes() + 1;
-                                    break;
-                            }
-                            singleProductSalesPandectGoodsImagePath = DataSupport.find(Goods.class, whichGoods).getImage_path();
-                            singleProductSalesPandectGoodsSalesAll = singleProductSalesPandectGoodsSalesNum * DataSupport.find(Goods.class, whichGoods).getSales_price();
-                            singleProductSalesPandectGoodsCostPrice = DataSupport.find(Goods.class, whichGoods).getCost_price();
-                            singleProductSalesPandectGoodsSalesPrice = DataSupport.find(Goods.class, whichGoods).getSales_price();
-                            singleProductSalesPandectGoodsName = DataSupport.find(Goods.class, whichGoods).getName();
-                            singleProductSalesPandect.setGoodsSalesNum(singleProductSalesPandectGoodsSalesNum);
-                            singleProductSalesPandect.setCashTimes(singleProductSalesPandectGoodsSalesCashTimes);
-                            singleProductSalesPandect.setWechatTimes(singleProductSalesPandectGoodsSalesWechatTimes);
-                            singleProductSalesPandect.setAlipayTimes(singleProductSalesPandectGoodsSalesAlipayTimes);
-                            singleProductSalesPandect.setSalesAll(singleProductSalesPandectGoodsSalesAll);
-                            singleProductSalesPandect.setGoodsCostPrice(singleProductSalesPandectGoodsCostPrice);
-                            singleProductSalesPandect.setGoodsSalesPrice(singleProductSalesPandectGoodsSalesPrice);
-                            singleProductSalesPandect.setImagePath(singleProductSalesPandectGoodsImagePath);
-                            singleProductSalesPandect.updateAll("goodsName = ?", singleProductSalesPandectGoodsName);
-                        } else {
-                            singleProductSalesPandectGoodsSalesNum = 1;
-                            switch (sales.getPay_way()) {
-                                case "现金": singleProductSalesPandectGoodsSalesCashTimes = 1;
-                                    break;
-                                case "微信": singleProductSalesPandectGoodsSalesWechatTimes = 1;
-                                    break;
-                                case "支付宝": singleProductSalesPandectGoodsSalesAlipayTimes = 1;
-                                    break;
-                            }
-                            singleProductSalesPandectGoodsImagePath = DataSupport.find(Goods.class, whichGoods).getImage_path();
-                            singleProductSalesPandectGoodsSalesAll = DataSupport.find(Goods.class, whichGoods).getSales_price();
-                            singleProductSalesPandectGoodsCostPrice = DataSupport.find(Goods.class, whichGoods).getCost_price();
-                            singleProductSalesPandectGoodsSalesPrice = DataSupport.find(Goods.class, whichGoods).getSales_price();
-                            singleProductSalesPandectGoodsName = DataSupport.find(Goods.class, whichGoods).getName();
-                            singleProductSalesPandect.setGoodsName(singleProductSalesPandectGoodsName);
-                            singleProductSalesPandect.setGoodsSalesNum(singleProductSalesPandectGoodsSalesNum);
-                            singleProductSalesPandect.setCashTimes(singleProductSalesPandectGoodsSalesCashTimes);
-                            singleProductSalesPandect.setWechatTimes(singleProductSalesPandectGoodsSalesWechatTimes);
-                            singleProductSalesPandect.setAlipayTimes(singleProductSalesPandectGoodsSalesAlipayTimes);
-                            singleProductSalesPandect.setSalesAll(singleProductSalesPandectGoodsSalesAll);
-                            singleProductSalesPandect.setGoodsCostPrice(singleProductSalesPandectGoodsCostPrice);
-                            singleProductSalesPandect.setGoodsSalesPrice(singleProductSalesPandectGoodsSalesPrice);
-                            singleProductSalesPandect.setImagePath(singleProductSalesPandectGoodsImagePath);
-                            singleProductSalesPandect.save();
-                        }
+                        // 设置单一商品销售总览信息表
+                        setSingleProductSalesPandectSheet(sales, whichGoods);
+
+                        // 设置单品销售统计信息表
+                        setSingleProductSalesAnalyzeSheet(whichGoods);
+
                     } catch (NullPointerException e) {
                         ToastFactory.makeText(HomePageActivity.this, "目前没有商品" + whichGoods, Toast.LENGTH_SHORT).show();
                     }
@@ -689,5 +569,162 @@ public class HomePageActivity extends SerialPortActivity {
     protected void onStop() {
         // TODO Auto-generated method stub
         super.onStop();
+    }
+
+    // 设置机柜日销售统计信息表
+    public void setCabinetDailySalesAnalyzeSheet(int whichGoods) {
+        CabinetDailySales cabinetDailySales = new CabinetDailySales();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String cabinetDailySalesDate = sdf.format(new java.util.Date());
+        String date =  cabinetDailySalesSharedPreference.getString(
+                "cabinet_daily_sales_date", "2017-11-14");
+        int num = cabinetDailySalesSharedPreference.getInt(
+                "cabinet_daily_sales_num", 0);
+        float totalMoney = cabinetDailySalesSharedPreference.getFloat("cabinet_daily_sales_total_money", 0);
+        if (cabinetDailySalesDate.equals(date)) {
+            num = num + 1;
+            totalMoney = totalMoney + DataSupport.find(Goods.class, whichGoods).getSales_price();
+            editor.putInt("cabinet_daily_sales_num", num);
+            editor.putFloat("cabinet_daily_sales_total_money", totalMoney);
+            editor.apply();
+            cabinetDailySales.setCabinetDailySalesNum(num);
+            cabinetDailySales.setCabinetDailySalesTotalMoney(totalMoney);
+            cabinetDailySales.updateAll("cabinetDailySalesDate = ?", date);
+        } else {
+            date = cabinetDailySalesDate;
+            num = 1;
+            totalMoney = DataSupport.find(Goods.class, whichGoods).getSales_price();
+            editor.putString("cabinet_daily_sales_date", date);
+            editor.putInt("cabinet_daily_sales_num", num);
+            editor.putFloat("cabinet_daily_sales_total_money", totalMoney);
+            editor.apply();
+            cabinetDailySales.setCabinetDailySalesDate(sdf);
+            cabinetDailySales.setCabinetDailySalesNum(num);
+            cabinetDailySales.setCabinetDailySalesTotalMoney(totalMoney);
+            cabinetDailySales.save();
+        }
+    }
+
+    // 设置机柜月销售统计信息表
+    public void setCabinetMonthlySalesAnalyzeSheet(int whichGoods) {
+        CabinetMonthlySales cabinetMonthlySales = new CabinetMonthlySales();
+        SimpleDateFormat mSdf = new SimpleDateFormat("yyyy-MM");
+        String cabinetMonthlySalesDate = mSdf.format(new java.util.Date());
+        String mDate =  cabinetDailySalesSharedPreference.getString(
+                "cabinet_monthly_sales_date", "2017-10");
+        int mNum = cabinetDailySalesSharedPreference.getInt(
+                "cabinet_monthly_sales_num", 0);
+        float mTotalMoney = cabinetDailySalesSharedPreference.getFloat(
+                "cabinet_monthly_sales_total_money", 0);
+        if (cabinetMonthlySalesDate.equals(mDate)) {
+            mNum = mNum + 1;
+            mTotalMoney = mTotalMoney + DataSupport.find(Goods.class, whichGoods).getSales_price();
+            editor.putInt("cabinet_monthly_sales_num", mNum);
+            editor.putFloat("cabinet_monthly_sales_total_money", mTotalMoney);
+            editor.apply();
+            cabinetMonthlySales.setCabinetMonthlySalesNum(mNum);
+            cabinetMonthlySales.setCabinetMonthlySalesTotalMoney(mTotalMoney);
+            cabinetMonthlySales.updateAll("cabinetMonthlySalesDate = ?", mDate);
+        } else {
+            mDate = cabinetMonthlySalesDate;
+            mNum = 1;
+            mTotalMoney = DataSupport.find(Goods.class, whichGoods).getSales_price();
+            editor.putString("cabinet_monthly_sales_date", mDate);
+            editor.putInt("cabinet_monthly_sales_num", mNum);
+            editor.putFloat("cabinet_monthly_sales_total_money", mTotalMoney);
+            editor.apply();
+            cabinetMonthlySales.setCabinetMonthlySalesDate(mSdf);
+            cabinetMonthlySales.setCabinetMonthlySalesNum(mNum);
+            cabinetMonthlySales.setCabinetMonthlySalesTotalMoney(mTotalMoney);
+            cabinetMonthlySales.save();
+        }
+    }
+
+    // 设置单一商品销售总览信息表
+    public void setSingleProductSalesPandectSheet(Sales sales, int whichGoods) {
+        SingleProductSalesPandect singleProductSalesPandect = new SingleProductSalesPandect();
+        String singleProductSalesPandectGoodsName = "";
+        int singleProductSalesPandectGoodsSalesNum = 0;
+        int singleProductSalesPandectGoodsSalesCashTimes = 0;
+        int singleProductSalesPandectGoodsSalesWechatTimes = 0;
+        int singleProductSalesPandectGoodsSalesAlipayTimes = 0;
+        int singleProductSalesPandectGoodsImagePath = 0;
+        float singleProductSalesPandectGoodsCostPrice = 0;
+        float singleProductSalesPandectGoodsSalesPrice = 0;
+        float singleProductSalesPandectGoodsSalesAll = 0;
+        if (DataSupport.where("goodsName = ?", DataSupport.find(Goods.class, whichGoods).getName()).find(SingleProductSalesPandect.class) != null &&
+                !DataSupport.where("goodsName = ?", DataSupport.find(Goods.class, whichGoods).getName()).find(SingleProductSalesPandect.class).isEmpty()) {
+            singleProductSalesPandectGoodsSalesNum = DataSupport.where("goodsName = ?", DataSupport.find(Goods.class, whichGoods).getName())
+                    .find(SingleProductSalesPandect.class).get(0).getGoodsSalesNum() + 1;
+            switch (sales.getPay_way()) {
+                case "现金": singleProductSalesPandectGoodsSalesCashTimes = DataSupport.where("goodsName = ?", DataSupport.find(Goods.class, whichGoods).getName())
+                        .find(SingleProductSalesPandect.class).get(0).getCashTimes() + 1;
+                    break;
+                case "微信": singleProductSalesPandectGoodsSalesWechatTimes = DataSupport.where("goodsName = ?", DataSupport.find(Goods.class, whichGoods).getName())
+                        .find(SingleProductSalesPandect.class).get(0).getWechatTimes() + 1;
+                    break;
+                case "支付宝": singleProductSalesPandectGoodsSalesAlipayTimes = DataSupport.where("goodsName = ?", DataSupport.find(Goods.class, whichGoods).getName())
+                        .find(SingleProductSalesPandect.class).get(0).getAlipayTimes() + 1;
+                    break;
+            }
+            singleProductSalesPandectGoodsImagePath = DataSupport.find(Goods.class, whichGoods).getImage_path();
+            singleProductSalesPandectGoodsSalesAll = singleProductSalesPandectGoodsSalesNum * DataSupport.find(Goods.class, whichGoods).getSales_price();
+            singleProductSalesPandectGoodsCostPrice = DataSupport.find(Goods.class, whichGoods).getCost_price();
+            singleProductSalesPandectGoodsSalesPrice = DataSupport.find(Goods.class, whichGoods).getSales_price();
+            singleProductSalesPandectGoodsName = DataSupport.find(Goods.class, whichGoods).getName();
+            singleProductSalesPandect.setGoodsSalesNum(singleProductSalesPandectGoodsSalesNum);
+            singleProductSalesPandect.setCashTimes(singleProductSalesPandectGoodsSalesCashTimes);
+            singleProductSalesPandect.setWechatTimes(singleProductSalesPandectGoodsSalesWechatTimes);
+            singleProductSalesPandect.setAlipayTimes(singleProductSalesPandectGoodsSalesAlipayTimes);
+            singleProductSalesPandect.setSalesAll(singleProductSalesPandectGoodsSalesAll);
+            singleProductSalesPandect.setGoodsCostPrice(singleProductSalesPandectGoodsCostPrice);
+            singleProductSalesPandect.setGoodsSalesPrice(singleProductSalesPandectGoodsSalesPrice);
+            singleProductSalesPandect.setImagePath(singleProductSalesPandectGoodsImagePath);
+            singleProductSalesPandect.updateAll("goodsName = ?", singleProductSalesPandectGoodsName);
+        } else {
+            singleProductSalesPandectGoodsSalesNum = 1;
+            switch (sales.getPay_way()) {
+                case "现金": singleProductSalesPandectGoodsSalesCashTimes = 1;
+                    break;
+                case "微信": singleProductSalesPandectGoodsSalesWechatTimes = 1;
+                    break;
+                case "支付宝": singleProductSalesPandectGoodsSalesAlipayTimes = 1;
+                    break;
+            }
+            singleProductSalesPandectGoodsImagePath = DataSupport.find(Goods.class, whichGoods).getImage_path();
+            singleProductSalesPandectGoodsSalesAll = DataSupport.find(Goods.class, whichGoods).getSales_price();
+            singleProductSalesPandectGoodsCostPrice = DataSupport.find(Goods.class, whichGoods).getCost_price();
+            singleProductSalesPandectGoodsSalesPrice = DataSupport.find(Goods.class, whichGoods).getSales_price();
+            singleProductSalesPandectGoodsName = DataSupport.find(Goods.class, whichGoods).getName();
+            singleProductSalesPandect.setGoodsName(singleProductSalesPandectGoodsName);
+            singleProductSalesPandect.setGoodsSalesNum(singleProductSalesPandectGoodsSalesNum);
+            singleProductSalesPandect.setCashTimes(singleProductSalesPandectGoodsSalesCashTimes);
+            singleProductSalesPandect.setWechatTimes(singleProductSalesPandectGoodsSalesWechatTimes);
+            singleProductSalesPandect.setAlipayTimes(singleProductSalesPandectGoodsSalesAlipayTimes);
+            singleProductSalesPandect.setSalesAll(singleProductSalesPandectGoodsSalesAll);
+            singleProductSalesPandect.setGoodsCostPrice(singleProductSalesPandectGoodsCostPrice);
+            singleProductSalesPandect.setGoodsSalesPrice(singleProductSalesPandectGoodsSalesPrice);
+            singleProductSalesPandect.setImagePath(singleProductSalesPandectGoodsImagePath);
+            singleProductSalesPandect.save();
+        }
+    }
+
+    public void setSingleProductSalesAnalyzeSheet(int whichGoods) {
+        SingleProductSalesAnalyze singleProductSalesAnalyze = new SingleProductSalesAnalyze();
+        String singleProductSalesPandectGoodsName = "";
+        int singleProductSalesPandectGoodsImagePath = 0;
+        if (DataSupport.where("goodsName = ?", DataSupport.find(Goods.class, whichGoods).getName()).find(SingleProductSalesAnalyze.class) != null &&
+                !DataSupport.where("goodsName = ?", DataSupport.find(Goods.class, whichGoods).getName()).find(SingleProductSalesAnalyze.class).isEmpty()) {
+            singleProductSalesPandectGoodsImagePath = DataSupport.find(Goods.class, whichGoods).getImage_path();
+            singleProductSalesPandectGoodsName = DataSupport.find(Goods.class, whichGoods).getName();
+            singleProductSalesAnalyze.setImagePath(singleProductSalesPandectGoodsImagePath);
+            singleProductSalesAnalyze.updateAll("goodsName = ?", singleProductSalesPandectGoodsName);
+        } else {
+            singleProductSalesPandectGoodsImagePath = DataSupport.find(Goods.class, whichGoods).getImage_path();
+            singleProductSalesPandectGoodsName = DataSupport.find(Goods.class, whichGoods).getName();
+            singleProductSalesAnalyze.setGoodsName(singleProductSalesPandectGoodsName);
+            singleProductSalesAnalyze.setImagePath(singleProductSalesPandectGoodsImagePath);
+            singleProductSalesAnalyze.save();
+        }
     }
 }
