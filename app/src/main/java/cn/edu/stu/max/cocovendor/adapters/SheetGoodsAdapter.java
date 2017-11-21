@@ -53,6 +53,7 @@ public class SheetGoodsAdapter extends RecyclerView.Adapter<SheetGoodsAdapter.Vi
             holder.tv_sheetRow2.setText(list.get(position).getName());
             holder.tv_sheetRow3.setText(String.valueOf(list.get(position).getSales_price()));
             holder.tv_sheetRow4.setText(String.valueOf(list.get(position).getNum()));
+            holder.tv_sheetRow6.setText(list.get(position).getOnSaleLocal());
             //判断如果商品在售状态为假，设置为未上架
             if (!list.get(position).isOnSale()) {
                 holder.tv_sheetRow5.setText("未上架");
@@ -61,6 +62,7 @@ public class SheetGoodsAdapter extends RecyclerView.Adapter<SheetGoodsAdapter.Vi
                 holder.tv_sheetRow5.setText("在售中");
                 holder.tv_sheetRow5.setTextColor(Color.GREEN);
             }
+
         }
         //判断如果监听有设置，则设置点击事件
         if (onItemClickListener != null) {
@@ -89,6 +91,7 @@ public class SheetGoodsAdapter extends RecyclerView.Adapter<SheetGoodsAdapter.Vi
         final TextView tv_sheetRow3;
         final TextView tv_sheetRow4;
         final TextView tv_sheetRow5;
+        final TextView tv_sheetRow6;
 
         private ViewHolder(View itemView) {
             super(itemView);
@@ -98,6 +101,7 @@ public class SheetGoodsAdapter extends RecyclerView.Adapter<SheetGoodsAdapter.Vi
             tv_sheetRow3 = (TextView) itemView.findViewById(R.id.tv_sheetRow3);
             tv_sheetRow4 = (TextView) itemView.findViewById(R.id.tv_sheetRow4);
             tv_sheetRow5 = (TextView) itemView.findViewById(R.id.tv_sheetRow5);
+            tv_sheetRow6 = (TextView) itemView.findViewById(R.id.tv_sheetRow6);
         }
     }
 }

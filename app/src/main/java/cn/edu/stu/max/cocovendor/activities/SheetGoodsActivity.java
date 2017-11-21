@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -40,6 +41,7 @@ public class SheetGoodsActivity extends AppCompatActivity {
     private TextView tv_sheetRow3_sel;
     private TextView tv_sheetRow4_sel;
     private TextView tv_sheetRow5_sel;
+    private TextView tv_sheetRow6_sel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,7 @@ public class SheetGoodsActivity extends AppCompatActivity {
             tv_sheetRow3_sel = (TextView) findViewById(R.id.tv_sheetRow3_sel);
             tv_sheetRow4_sel = (TextView) findViewById(R.id.tv_sheetRow4_sel);
             tv_sheetRow5_sel = (TextView) findViewById(R.id.tv_sheetRow5_sel);
+            tv_sheetRow6_sel = (TextView) findViewById(R.id.tv_sheetRow6_sel);
         }
         recyclerViewSalesSetting = (RecyclerView) findViewById(R.id.rv_sales_setting);
         //设置线性布局 Creates a vertical LinearLayoutManager
@@ -86,14 +89,42 @@ public class SheetGoodsActivity extends AppCompatActivity {
                         tv_sheetRow5_sel.setText("在售中");
                         tv_sheetRow5_sel.setTextColor(Color.GREEN);
                     }
+                    tv_sheetRow6_sel.setText(sheetGoodsAdapter.getItem(position).getName());
                     //确定按钮功能
                     Button buttonSelGoodsOk = (Button) findViewById(R.id.btn_sel_goods_ok);
                     buttonSelGoodsOk.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            SharedPreferences.Editor editor = getSharedPreferences("cabinet_floor", MODE_PRIVATE).edit();
+                            SharedPreferences preferences = getSharedPreferences("cabinet_floor", MODE_PRIVATE);
+                            int preGoodsIndex =  preferences.getInt("cabinet_floor_" + fromWhich, 0);
+                            SharedPreferences.Editor editor = preferences.edit();
+                            Goods preGoods = null;
+                            if (preGoodsIndex != 0) {
+                                preGoods = sheetGoodsAdapter.getItem(preGoodsIndex - 1);//货物编号是从1开始，Item从0开始，所以减1
+                                Log.d("SheetGoods", "onClick: " + preGoods.getName());
+                                String preGoodsOnSaleLocal = preGoods.getOnSaleLocal();
+                                Log.d("SheetGoods", preGoodsOnSaleLocal);
+                                if (preGoodsOnSaleLocal != null) {
+                                    preGoodsOnSaleLocal = preGoodsOnSaleLocal.replace("-" + fromWhich + ":", "");
+                                    preGoods.setOnSaleLocal(preGoodsOnSaleLocal);
+                                }
+                                if (preGoodsOnSaleLocal != null) {
+                                    preGoods.setOnSale(false);
+                                }
+                                preGoods.save();
+                            }
+
                             Goods toSelGoods = sheetGoodsAdapter.getItem(position);
+                            String toSelGoodsOnSaleLocal = toSelGoods.getOnSaleLocal();
+                            if (toSelGoodsOnSaleLocal == null) {
+                                toSelGoodsOnSaleLocal = "";
+                            }
                             toSelGoods.setOnSale(true);
+                            if (preGoodsIndex == 0) {
+                                toSelGoods.setOnSaleLocal(toSelGoodsOnSaleLocal + "-" + fromWhich + ":");
+                            } else if (preGoods.getId() != toSelGoods.getId()) {
+                                toSelGoods.setOnSaleLocal(toSelGoodsOnSaleLocal + "-" + fromWhich + ":");
+                            }
                             toSelGoods.save();
                             editor.putInt("cabinet_floor_" + fromWhich, toSelGoods.getId());
                             editor.apply();

@@ -91,6 +91,23 @@
             android:text="@string/label_sale_status"
             android:textColor="#000000"
             android:textSize="15sp" />
+
+        <View
+            android:layout_width="1.5dp"
+            android:layout_height="match_parent"
+            android:background="#000000" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dip"
+            android:maxLines="1"
+            android:text="销售机柜位"
+            android:textColor="#000000"
+            android:textSize="15sp" />
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
@@ -194,6 +211,23 @@
                 android:text="@string/label_sale_status"
                 android:textColor="#000000"
                 android:textSize="15sp" />
+
+            <View
+                android:layout_width="1.5dp"
+                android:layout_height="match_parent"
+                android:background="#000000" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dip"
+                android:maxLines="1"
+                android:text="销售机柜位"
+                android:textColor="#000000"
+                android:textSize="15sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -282,6 +316,21 @@
 
             <TextView
                 android:id="@+id/tv_sheetRow5_sel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:textColor="@color/colorBlack"
+                android:textSize="15sp" />
+            <View
+                android:layout_width="1.5dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorBlack" />
+
+            <TextView
+                android:id="@+id/tv_sheetRow6_sel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

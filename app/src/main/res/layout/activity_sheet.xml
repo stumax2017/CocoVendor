@@ -34,6 +34,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_margin="20dp"
+            android:background="@android:color/holo_green_light"
             android:text="销售信息表"
             android:textSize="50sp"/>
     </LinearLayout>

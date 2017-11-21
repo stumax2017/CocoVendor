@@ -34,6 +34,8 @@ public class Goods extends DataSupport{
     //是否在售
     @Column(defaultValue = "false")
     private boolean isOnSale;
+    //在售位置
+    private String onSaleLocal;
 
     public int getId() {
         return id;
@@ -137,5 +139,13 @@ public class Goods extends DataSupport{
 
     public void setOnSale(boolean onSale) {
         isOnSale = onSale;
+    }
+
+    public String getOnSaleLocal() {
+        return onSaleLocal;
+    }
+
+    public void setOnSaleLocal(String onSaleLocal) {
+        this.onSaleLocal = onSaleLocal;
     }
 }
