@@ -54,6 +54,8 @@ import cn.edu.stu.max.cocovendor.adapters.ViewPagerAdapter;
 
 public class HomePageActivity extends SerialPortActivity {
 
+    String text = "It is a test message!!";
+
     SharedPreferences cabinetDailySalesSharedPreference;
     SharedPreferences.Editor editor;
 
@@ -213,7 +215,6 @@ public class HomePageActivity extends SerialPortActivity {
                 SharedPreferences.Editor editor = share.edit();   // 使处于可编辑状态
                 editor.putString("serial_mode", "D");
                 editor.apply();
-                ToastFactory.makeText(HomePageActivity.this, "D", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -281,45 +282,72 @@ public class HomePageActivity extends SerialPortActivity {
 
         SendThread sendThread = new SendThread();
         sendThread.start();
-
     }
 
     private class SendThread extends Thread {
-
         @Override
         public void run() {
             super.run();
             while (!isInterrupted()) {
 
-//                SharedPreferences preferences = getSharedPreferences("serial_mode_file", MODE_PRIVATE);
-//                String serialMode =  preferences.getString("serial_mode", "A");
-//                //serialMode = "D";
-//                //int whichSerialMode = Integer.parseInt(serialMode);
-//                String text = "It is a test message!!";
+                SharedPreferences preferences = getSharedPreferences("serial_mode_file", MODE_PRIVATE);
+                String serialMode =  preferences.getString("serial_mode", "A");
+
 //                try {
-//                    try {
-//                        Thread.sleep(200);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    switch (serialMode) {
+                        case "A":
+                            text = "A";
+                            SharedPreferences share = getSharedPreferences("cargo_lane_test_file", MODE_PRIVATE);  // 实例化
+                            SharedPreferences.Editor editor = share.edit();   // 使处于可编辑状态
+                            editor.putString("cargo_lane_status", "bad");
+                            editor.apply();
+                            break;
+                        case "D":
+                            text = "D";
+                            SharedPreferences share1 = getSharedPreferences("cargo_lane_test_file", MODE_PRIVATE);  // 实例化
+                            SharedPreferences.Editor editor1 = share1.edit();   // 使处于可编辑状态
+                            editor1.putString("cargo_lane_status", "bad");
+                            editor1.apply();
+                            break;
+                        case "C":
+                            text = "C";
+                            SharedPreferences share2 = getSharedPreferences("cargo_lane_test_file", MODE_PRIVATE);  // 实例化
+                            SharedPreferences.Editor editor2 = share2.edit();   // 使处于可编辑状态
+                            editor2.putString("cargo_lane_status", "good");
+                            editor2.apply();
+                            break;
+                    }
+
+//                    runOnUiThread(new Runnable() {
+//                        public void run() {
+//                           ToastFactory.makeText(HomePageActivity.this, text, Toast.LENGTH_SHORT).show();
 //
-//                    switch (serialMode) {
-//                        case "A":
-//                            text = "A";
-//                            break;
-//                        case "D":
-//                            text = "D";
-//                            break;
-//                    }
-//
+//                        }
+//                    });
 //                    mOutputStream.write(text.getBytes());
 //                    mOutputStream.write('\n');
-//
+
 //                } catch (IOException e) {
 //                    e.printStackTrace();
 //                }
             }
         }
+    }
+
+    // 串口接收函数
+    @Override
+    protected void onDataReceived(final byte[] buffer, final int size) {
+        runOnUiThread(new Runnable() {
+            public void run() {
+                //ToastFactory.makeText(HomePageActivity.this, new String(buffer, 0, size), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private AMapLocationListener mLocationListener = new AMapLocationListener() {
@@ -503,18 +531,6 @@ public class HomePageActivity extends SerialPortActivity {
         }
         return super.onTouchEvent(event);
     };
-
-
-
-    // 串口接收函数
-    @Override
-    protected void onDataReceived(final byte[] buffer, final int size) {
-        runOnUiThread(new Runnable() {
-            public void run() {
-                //ToastFactory.makeText(HomePageActivity.this, new String(buffer, 0, size), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 
     /**
      * 初始化数据源

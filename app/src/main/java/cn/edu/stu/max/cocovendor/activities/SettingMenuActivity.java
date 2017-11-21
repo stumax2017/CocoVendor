@@ -1,10 +1,8 @@
 package cn.edu.stu.max.cocovendor.activities;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -44,7 +42,7 @@ public class SettingMenuActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.btn_system_setting:
-                    Intent intent_sys_setting = new Intent(SettingMenuActivity.this, SystemSettingActivity.class);
+                    Intent intent_sys_setting = new Intent(SettingMenuActivity.this, OthersSettingActivity.class);
                     startActivity(intent_sys_setting);
                     break;
                 case R.id.btn_sheet_setting:

@@ -95,7 +95,7 @@
             android:name=".activities.AdSettingActivity"
             android:label="广告设置" />
         <activity
-            android:name=".activities.SystemSettingActivity"
+            android:name=".activities.OthersSettingActivity"
             android:label="系统设置" />
         <activity
             android:name=".activities.CameraSettingActivity"

@@ -25,7 +25,7 @@
     <string name="btn_login_enter">确定</string>
     <string name="btn_login_look">可见</string>
     <string name="label_welcome">程序启动中</string>
-    <string name="label_system_setting">系统设置</string>
+    <string name="label_others_setting">其它设置</string>
     <string name="label_sheet">三张信息表</string>
     <string name="label_goods_test">货道测试</string>
     <string name="label_ad_setting">广告设置</string>

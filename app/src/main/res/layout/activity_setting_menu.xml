@@ -28,7 +28,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
                     android:background="@color/colorBlue"
-                    android:text="@string/label_system_setting"
+                    android:text="@string/label_others_setting"
                     android:gravity="center"
                     android:textColor="@color/colorWhite"
                     android:textSize="30sp"/>
@@ -48,16 +48,17 @@
 
             <TableRow
                 android:layout_weight="1">
+
                 <Button
                     android:id="@+id/btn_goods_test"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
-                    android:background="@color/colorBlue"
-                    android:text="@string/label_goods_test"
+                    android:background="@android:color/holo_green_light"
                     android:gravity="center"
+                    android:text="@string/label_goods_test"
                     android:textColor="@color/colorWhite"
-                    android:textSize="30sp"/>
+                    android:textSize="30sp" />
 
                 <Button
                     android:id="@+id/btn_ad_setting"
