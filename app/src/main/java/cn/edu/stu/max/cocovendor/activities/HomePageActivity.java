@@ -454,8 +454,9 @@ public class HomePageActivity extends SerialPortActivity {
                 break;
             case REQUEST_PAY_RESULT_CODE:
                 if (resultCode == RESULT_OK) {
-                    final int whichFloor = data.getIntExtra("which_floor", 0);
-                    final int whichGoods = data.getIntExtra("which_goods", 0);
+                    int whichFloor = data.getIntExtra("which_floor", 0);
+                    int whichGoods = data.getIntExtra("which_goods", 0);
+                    String whichWay = data.getStringExtra("which_way");
                     String text = "You clicked on item" + whichGoods;
                     try {
                         mOutputStream.write(text.getBytes());
@@ -471,8 +472,8 @@ public class HomePageActivity extends SerialPortActivity {
                         sales.setGoods_id(DataSupport.find(Goods.class, whichGoods).getId());
                         sales.setGoods_name(DataSupport.find(Goods.class, whichGoods).getName());
                         sales.setMachine_floor(whichFloor + 1);//货物层下标0开始，需要加一
-                        sales.setTrade_id("5846516");
-                        sales.setPay_way("现金");
+                        sales.setTrade_id("5846516");//还不知道用什么编号格式比较好
+                        sales.setPay_way(whichWay);
                         sales.save();
 
                         // 设置机柜日销售统计信息表

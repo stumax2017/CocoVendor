@@ -34,6 +34,7 @@ public class PayActivity extends AppCompatActivity {
 
     private int whichFloor;
     private int whichGoods;
+    private String whichWay;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -46,6 +47,7 @@ public class PayActivity extends AppCompatActivity {
                     logoView.setImageResource(R.drawable.wepay_logo);
                     numberView.setText("004565671035");
                     moneyView.setText(String.valueOf(2.55f));
+                    whichWay = "微信支付";
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -59,6 +61,7 @@ public class PayActivity extends AppCompatActivity {
                     logoView.setImageResource(R.drawable.alipay_logo);
                     numberView.setText("001123771035");
                     moneyView.setText(String.valueOf(3.15f));
+                    whichWay = "支付宝支付";
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -68,6 +71,7 @@ public class PayActivity extends AppCompatActivity {
                     });
                     return true;
                 case R.id.navigation_cash:
+                    whichWay = "现金";
                     return true;
                 case R.id.navigation_return:
 //                    Intent intent = new Intent(PayActivity.this, HomePageActivity.class);
@@ -75,6 +79,7 @@ public class PayActivity extends AppCompatActivity {
                     Intent intent = new Intent();
                     intent.putExtra("which_floor", whichFloor);
                     intent.putExtra("which_goods", whichGoods);
+                    intent.putExtra("which_way", whichWay);
                     setResult(RESULT_OK, intent);
                     finish();
                     return true;
