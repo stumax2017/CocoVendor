@@ -34,7 +34,7 @@ public class PayActivity extends AppCompatActivity {
 
     private int whichFloor;
     private int whichGoods;
-    private String whichWay;
+    private String whichWay = null;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
