@@ -5,14 +5,16 @@ package cn.edu.stu.max.cocovendor.javaClass;
  */
 
 public class Model {
-    public String price;
-    public String name;
-    public int iconRes;
+    private String price;
+    private String name;
+    private int iconRes;
+    private boolean isSaleOut;
 
-    public Model(String price, String name, int iconRes) {
+    public Model(String price, String name, int iconRes, boolean isSaleOut) {
         this.price = price;
         this.name = name;
         this.iconRes = iconRes;
+        this.isSaleOut = isSaleOut;
     }
 
     public String getPrice() {
@@ -37,5 +39,13 @@ public class Model {
 
     public void setIconRes(int iconRes) {
         this.iconRes = iconRes;
+    }
+
+    public boolean isSaleOut() {
+        return isSaleOut;
+    }
+
+    public void setSaleOut(boolean saleOut) {
+        isSaleOut = saleOut;
     }
 }

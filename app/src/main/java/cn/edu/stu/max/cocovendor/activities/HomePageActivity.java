@@ -104,7 +104,7 @@ public class HomePageActivity extends SerialPortActivity {
      * 当前显示的是第几页
      */
     private int curIndex = 0;
-
+    private ViewPagerAdapter viewPagerAdapter = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -155,15 +155,15 @@ public class HomePageActivity extends SerialPortActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         int pos = position + curIndex * pageSize;
                         ToastFactory.makeText(HomePageActivity.this, mDatas.get(pos).getName(), Toast.LENGTH_SHORT).show();
-                        ToastFactory.makeText(HomePageActivity.this, "good" + pos, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(HomePageActivity.this, PayActivity.class);
                         intent.putExtra("which_floor", pos);
                         startActivityForResult(intent, 2);
                     }
                 });
             }
+            viewPagerAdapter = new ViewPagerAdapter(mPagerList);
             //设置适配器
-            mPager.setAdapter(new ViewPagerAdapter(mPagerList));
+            mPager.setAdapter(viewPagerAdapter);
             //设置圆点
             setOvalLayout();
         } catch (NullPointerException e) {
@@ -496,6 +496,8 @@ public class HomePageActivity extends SerialPortActivity {
                         } catch (NullPointerException e) {
                             ToastFactory.makeText(HomePageActivity.this, "目前没有商品" + whichGoods, Toast.LENGTH_SHORT).show();
                         }
+                        viewPagerAdapter.notifyDataSetChanged();
+                        Log.d("HomePage", "onActivityResult: I'm here!");
                     }
                 }
         }
@@ -505,7 +507,6 @@ public class HomePageActivity extends SerialPortActivity {
     protected void onResume() {
         // TODO Auto-generated method stub
         super.onResume();
-
         handler.postDelayed(runnable, 1000 * SECONDS_OF_AD);
     }
 
@@ -549,16 +550,17 @@ public class HomePageActivity extends SerialPortActivity {
      * 初始化数据源
      */
     private void initDatas() {
-        mDatas = new ArrayList<Model>();
+        mDatas = new ArrayList<>();
         //暂时初始化10个空货物的时候有两个点
         for (int i = 0; i < 10; i++) {
             SharedPreferences preferences = getSharedPreferences("cabinet_floor", MODE_PRIVATE);
             int whichGoods =  preferences.getInt("cabinet_floor_" + i, 0);
             Goods goods = DataSupport.find(Goods.class, whichGoods);
             if (whichGoods == 0) {
-                mDatas.add(new Model("", "", R.drawable.ic_category_null));
+                //Model内参数分别为价格，名字，图片，是否显示售空
+                mDatas.add(new Model("", "", R.drawable.ic_category_null, false));
             } else {
-                mDatas.add(new Model("¥ " + String.valueOf(goods.getSales_price()), goods.getName(), goods.getImage_path()));
+                mDatas.add(new Model("¥ " + String.valueOf(goods.getSales_price()), goods.getName(), goods.getImage_path(), goods.getNum() == 0));//最后一个参数，库存等于0为真时显示售空
             }
         }
     }

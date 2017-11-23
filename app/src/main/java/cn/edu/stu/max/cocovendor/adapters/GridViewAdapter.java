@@ -44,7 +44,6 @@ public class GridViewAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         return mDatas.size() > (curIndex + 1) * pageSize ? pageSize : (mDatas.size() - curIndex * pageSize);
-
     }
 
     @Override
@@ -66,6 +65,7 @@ public class GridViewAdapter extends BaseAdapter {
             viewHolder.tv_price = (TextView) convertView.findViewById(R.id.textView_price);
             viewHolder.tv = (TextView) convertView.findViewById(R.id.textView);
             viewHolder.iv = (ImageView) convertView.findViewById(R.id.imageView);
+            viewHolder.iv_mask = (ImageView) convertView.findViewById(R.id.imageViewMask);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -74,16 +74,17 @@ public class GridViewAdapter extends BaseAdapter {
          * 在给View绑定显示的数据时，计算正确的position = position + curIndex * pageSize，
          */
         int pos = position + curIndex * pageSize;
-        viewHolder.tv_price.setText(mDatas.get(pos).price);
-        viewHolder.tv.setText(mDatas.get(pos).name);
-        viewHolder.iv.setImageResource(mDatas.get(pos).iconRes);
+        viewHolder.tv_price.setText(mDatas.get(pos).getPrice());
+        viewHolder.tv.setText(mDatas.get(pos).getName());
+        viewHolder.iv.setImageResource(mDatas.get(pos).getIconRes());
+        viewHolder.iv_mask.setVisibility(mDatas.get(pos).isSaleOut()? View.VISIBLE : View.INVISIBLE);
         return convertView;
     }
 
-
     class ViewHolder {
-        public TextView tv_price;
-        public TextView tv;
-        public ImageView iv;
+        private TextView tv_price;
+        private TextView tv;
+        private ImageView iv;
+        private ImageView iv_mask;
     }
 }

@@ -3,8 +3,10 @@ package cn.edu.stu.max.cocovendor.adapters;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by lijuan on 2016/9/12.
@@ -37,5 +39,9 @@ public class ViewPagerAdapter extends PagerAdapter {
     @Override
     public boolean isViewFromObject(View view, Object object) {
         return view == object;
+    }
+
+    public View getItem(int index) {
+        return mViewList.get(index);
     }
 }

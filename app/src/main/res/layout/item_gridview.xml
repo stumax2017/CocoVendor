@@ -7,10 +7,21 @@
     android:paddingBottom="10dp"
     android:paddingTop="10dp">
 
-    <ImageView
-        android:id="@+id/imageView"
+    <FrameLayout
         android:layout_width="170dp"
-        android:layout_height="200dp" />
+        android:layout_height="200dp">
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/imageViewMask"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            android:background="@drawable/ic_category_mask"/>
+    </FrameLayout>
 
     <TextView
         android:id="@+id/textView"
