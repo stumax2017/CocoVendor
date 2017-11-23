@@ -89,7 +89,7 @@ public class SheetGoodsActivity extends AppCompatActivity {
                         tv_sheetRow5_sel.setText("在售中");
                         tv_sheetRow5_sel.setTextColor(Color.GREEN);
                     }
-                    tv_sheetRow6_sel.setText(sheetGoodsAdapter.getItem(position).getName());
+                    tv_sheetRow6_sel.setText(sheetGoodsAdapter.getItem(position).getOnSaleLocal());
                     //确定按钮功能
                     Button buttonSelGoodsOk = (Button) findViewById(R.id.btn_sel_goods_ok);
                     buttonSelGoodsOk.setOnClickListener(new View.OnClickListener() {

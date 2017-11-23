@@ -345,8 +345,9 @@
             android:id="@+id/btn_sel_goods_ok"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/btn_login_enter"
-            android:textSize="50sp"/>
+            android:layout_gravity="center"
+            android:text="确定上架货物"
+            android:textSize="30sp"/>
     </LinearLayout>
 
     <Button
