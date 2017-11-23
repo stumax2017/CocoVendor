@@ -202,11 +202,6 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp">
         <Button
-            android:id="@+id/btn_sales_setting_addfloor"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="添加货物层"/>
-        <Button
             android:id="@+id/btn_sales_setting_init"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -221,11 +216,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/label_fix_goods"/>
-        <Button
-            android:id="@+id/btn_sales_setting_save"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/label_save"/>
+        <!--<Button-->
+            <!--android:id="@+id/btn_sales_setting_save"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:text="@string/label_save"/>-->
     </LinearLayout>
 
     <Button

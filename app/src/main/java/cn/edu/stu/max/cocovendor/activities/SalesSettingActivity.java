@@ -155,18 +155,13 @@ public class SalesSettingActivity extends AppCompatActivity {
         buttonSalesSettingAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Goods toChangeGoods = new Goods();
-//                toChangeGoods.setToDefault("quanlity");
-//                toChangeGoods.updateAll();
-//                DataSupport.findAllAsync(Goods.class).listen(new FindMultiCallback() {
-//                    @Override
-//                    public <T> void onFinish(List<T> t) {
-//                        List<Goods> allGoods = (List<Goods>) t;
-//                        salesSettingAdapter = new SalesSettingAdapter(allGoods, SalesSettingActivity.this);
-//                        //recyclerView显示适配器内容
-//                        recyclerViewSalesSetting.setAdapter(salesSettingAdapter);
-//                    }
-//                });
+//                List<Goods> toFullGoods = DataSupport.where("isOnSale = ?", "1").find(Goods.class);
+                List<Goods> toFullGoods = salesSettingAdapter.getList();
+                for (Goods i : toFullGoods) {
+                    i.setNum(5);
+                    i.save();
+                }
+                salesSettingAdapter.notifyDataSetChanged();
             }
         });
         Button buttonSalesSettingFix = (Button) findViewById(R.id.btn_sales_setting_fix);
@@ -221,15 +216,6 @@ public class SalesSettingActivity extends AppCompatActivity {
                 // Create the AlertDialog object and return it
                 builder.setCancelable(false);
                 builder.create().show();
-            }
-        });
-        Button buttonAddFloor = (Button) findViewById(R.id.btn_sales_setting_addfloor);
-        buttonAddFloor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                list.add(new Goods());
-                salesSettingAdapter.notifyDataSetChanged();
-                recyclerViewSalesSetting.smoothScrollToPosition(salesSettingAdapter.getItemCount() - 1);
             }
         });
         Button buttonSalesSettingReturn = (Button) findViewById(R.id.btn_sales_setting_return);

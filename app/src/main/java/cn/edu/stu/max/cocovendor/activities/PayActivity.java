@@ -47,7 +47,7 @@ public class PayActivity extends AppCompatActivity {
                     logoView.setImageResource(R.drawable.wepay_logo);
                     numberView.setText("004565671035");
                     moneyView.setText(String.valueOf(2.55f));
-                    whichWay = "微信支付";
+                    whichWay = "微信";
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -61,7 +61,7 @@ public class PayActivity extends AppCompatActivity {
                     logoView.setImageResource(R.drawable.alipay_logo);
                     numberView.setText("001123771035");
                     moneyView.setText(String.valueOf(3.15f));
-                    whichWay = "支付宝支付";
+                    whichWay = "支付宝";
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {

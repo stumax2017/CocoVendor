@@ -466,27 +466,32 @@ public class HomePageActivity extends SerialPortActivity {
                     }
                     if (whichWay != null) {
                         try {
-                                // 销售信息表记录
-                                Sales sales = new Sales();
-                                sales.setSales_date(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
-                                sales.setGoods_id(DataSupport.find(Goods.class, whichGoods).getId());
-                                sales.setGoods_name(DataSupport.find(Goods.class, whichGoods).getName());
-                                sales.setMachine_floor(whichFloor + 1);//货物层下标0开始，需要加一
-                                sales.setTrade_id("5846516");//还不知道用什么编号格式比较好
-                                sales.setPay_way(whichWay);
-                                sales.save();
+                            // 销售信息表记录
+                            Goods goods = DataSupport.find(Goods.class, whichGoods);
+                            Sales sales = new Sales();
+                            sales.setSales_date(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+                            sales.setGoods_id(goods.getId());
+                            sales.setGoods_name(goods.getName());
+                            sales.setMachine_floor(whichFloor + 1);//货物层下标0开始，需要加一
+                            sales.setTrade_id("5846516");//还不知道用什么编号格式比较好
+                            sales.setPay_way(whichWay);
+                            sales.save();
+                            if (goods.getNum() != 0) {
+                                goods.setNum(goods.getNum() - 1);
+                                goods.save();
+                            }
 
-                                // 设置机柜日销售统计信息表
-                                setCabinetDailySalesAnalyzeSheet(whichGoods);
+                            // 设置机柜日销售统计信息表
+                            setCabinetDailySalesAnalyzeSheet(whichGoods);
 
-                                // 设置机柜月销售统计信息表
-                                setCabinetMonthlySalesAnalyzeSheet(whichGoods);
+                            // 设置机柜月销售统计信息表
+                            setCabinetMonthlySalesAnalyzeSheet(whichGoods);
 
-                                // 设置单一商品销售总览信息表
-                                setSingleProductSalesPandectSheet(sales, whichGoods);
+                            // 设置单一商品销售总览信息表
+                            setSingleProductSalesPandectSheet(sales, whichGoods);
 
-                                // 设置单品销售统计信息表
-                                setSingleProductSalesAnalyzeSheet(whichGoods);
+                            // 设置单品销售统计信息表
+                            setSingleProductSalesAnalyzeSheet(whichGoods);
 
                         } catch (NullPointerException e) {
                             ToastFactory.makeText(HomePageActivity.this, "目前没有商品" + whichGoods, Toast.LENGTH_SHORT).show();

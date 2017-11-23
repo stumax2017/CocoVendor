@@ -52,6 +52,14 @@ public class SalesSettingAdapter extends RecyclerView.Adapter<SalesSettingAdapte
         return list.size();
     }
 
+    public Goods getItem(int index) {
+        return list.get(index);
+    }
+
+    public List<Goods> getList() {
+        return list;
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder{
         final TextView tv_sheetRow1;
         final ImageView iv_sheetRow2;

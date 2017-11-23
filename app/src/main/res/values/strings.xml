@@ -40,8 +40,8 @@
     <string name="label_goods_price">价格</string>
     <string name="label_goods_quanlity">库存</string>
     <string name="label_price_change">价格修改</string>
-    <string name="label_init_goods">初始化商品</string>
-    <string name="label_add_goods">添加商品</string>
+    <string name="label_init_goods">初始化商品-测试用</string>
+    <string name="label_add_goods">补满商品库存</string>
     <string name="label_fix_goods">修改商品</string>
     <string name="label_save">保存</string>
     <string name="label_fire">确定</string>

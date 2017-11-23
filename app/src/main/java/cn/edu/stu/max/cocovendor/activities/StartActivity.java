@@ -33,6 +33,7 @@ public class StartActivity extends AppCompatActivity {
         //初始化数据库
         LitePal.initialize(this);
         setContentView(R.layout.activity_start);
+        getSupportActionBar().hide();
 
         String packageName = getPackageName();
         SharedPreferences settings = getSharedPreferences(packageName + "_preferences", MODE_PRIVATE);
