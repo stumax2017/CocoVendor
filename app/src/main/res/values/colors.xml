@@ -8,6 +8,8 @@
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlue">#0078d7</color>
+    <color name="colorYellow">#d7d000</color>
+    <color name="colorGreen">#00d724</color>
     <color name="colorTransparency">#00000000</color>
     <color name="colorGray">#898a8c</color>
 </resources>
