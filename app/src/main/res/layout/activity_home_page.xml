@@ -7,9 +7,10 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_margin="25dp">
+        android:layout_height="513dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -50,7 +51,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="6"
-                android:text="@string/machine_id"
                 android:textSize="24sp"
                 android:textColor="@color/colorWhite" />
 
@@ -67,7 +67,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:text="@string/machine_version"
                 android:textSize="24sp"
                 android:textColor="@color/colorWhite" />
 
@@ -84,7 +83,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="10"
-                android:text="@string/ip"
                 android:textSize="24sp"
                 android:textColor="@color/colorWhite" />
         </LinearLayout>
@@ -93,7 +91,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="7"
         android:background="@color/colorTransparency">
 
         <android.support.v4.view.ViewPager
@@ -101,8 +99,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"/>
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"/>
 
         <LinearLayout
             android:id="@+id/ll_dot"
