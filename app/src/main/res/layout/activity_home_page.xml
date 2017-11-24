@@ -2,18 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/home">
+    android:orientation="vertical" >
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_margin="25dp">
+        android:layout_weight="0.5" >
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="433dp">
             <VideoView
                 android:id="@+id/vv_hp_ad"
                 android:layout_width="match_parent"
@@ -143,7 +141,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
-            android:background="@color/colorTransparency"
+            android:background="@drawable/ic_cashback"
             android:textSize="24sp" />
     </LinearLayout>
 
