@@ -38,6 +38,9 @@ public class SalesSettingAdapter extends RecyclerView.Adapter<SalesSettingAdapte
         holder.tv_sheetRow1.setText(String.valueOf(position + 1));
         if (list.get(position).getName() == null) {
             holder.iv_sheetRow2.setImageResource(R.color.colorTransparency);
+            holder.tv_sheetRow2.setText("");
+            holder.tv_sheetRow3.setText("");
+            holder.tv_sheetRow4.setText("");
         } else {
             holder.iv_sheetRow2.setImageResource(list.get(position).getImage_path());
             holder.tv_sheetRow2.setText(list.get(position).getName());

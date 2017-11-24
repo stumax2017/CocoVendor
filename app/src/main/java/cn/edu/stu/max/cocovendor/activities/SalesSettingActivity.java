@@ -30,7 +30,8 @@ public class SalesSettingActivity extends AppCompatActivity {
     private RecyclerView recyclerViewSalesSetting;
     private SalesSettingAdapter salesSettingAdapter;
     private List<Goods> list = new ArrayList<Goods>();
-    private static int CABINET_SIZE = 10;
+    //控制有多少个货柜道
+    private static int CABINET_SIZE = 24;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,54 +169,8 @@ public class SalesSettingActivity extends AppCompatActivity {
         buttonSalesSettingFix.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ArrayList<Long> goodsSelectedItems = new ArrayList<>();
-                AlertDialog.Builder builder = new AlertDialog.Builder(SalesSettingActivity.this);
-                builder.setTitle("补充商品库存")
-                        .setMultiChoiceItems(R.array.goods_name_array, null, new DialogInterface.OnMultiChoiceClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                                if (isChecked) {
-                                    // If the user checked the item, add it to the selected items
-                                    goodsSelectedItems.add((long)which);
-                                } else if (goodsSelectedItems.contains((long)which)) {
-                                    // Else, if the item is already in the array, remove it
-                                    goodsSelectedItems.remove(Long.valueOf((long)which));
-                                }
-                            }
-                        })
-                        .setPositiveButton(R.string.label_save, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                // FIRE ZE MISSILES!
-                                for (int i = 0; i < goodsSelectedItems.size(); i ++) {
-                                    try {
-                                        Goods toChangeGoods = DataSupport.find(Goods.class, goodsSelectedItems.get(i).longValue() + 1);
-                                        toChangeGoods.setNum(10);
-                                        toChangeGoods.save();
-                                    } catch (NullPointerException e) {
-                                        ToastFactory.makeText(SalesSettingActivity.this, "所需商品并未上架", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                                DataSupport.findAllAsync(Goods.class).listen(new FindMultiCallback() {
-                                    @Override
-                                    public <T> void onFinish(List<T> t) {
-                                        List<Goods> allGoods = (List<Goods>) t;
-                                        salesSettingAdapter = new SalesSettingAdapter(allGoods,  SalesSettingActivity.this);
-                                        //recyclerView显示适配器内容
-                                        recyclerViewSalesSetting.setAdapter(salesSettingAdapter);
-                                    }
-                                });
-                            }
-                        })
-                        .setNegativeButton(R.string.label_cancel, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                // User cancelled the dialog
-                            }
-                        });
-                // Create the AlertDialog object and return it
-                builder.setCancelable(false);
-                builder.create().show();
+                list.clear();
+                salesSettingAdapter.notifyDataSetChanged();
             }
         });
         Button buttonSalesSettingReturn = (Button) findViewById(R.id.btn_sales_setting_return);

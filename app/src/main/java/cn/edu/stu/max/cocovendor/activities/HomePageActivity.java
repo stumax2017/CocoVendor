@@ -558,7 +558,7 @@ public class HomePageActivity extends SerialPortActivity {
     private void initDatas() {
         mDatas = new ArrayList<>();
         //暂时初始化10个空货物的时候有两个点
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 24; i++) {
             SharedPreferences preferences = getSharedPreferences("cabinet_floor", MODE_PRIVATE);
             int whichGoods =  preferences.getInt("cabinet_floor_" + i, 0);
             Goods goods = DataSupport.find(Goods.class, whichGoods);
