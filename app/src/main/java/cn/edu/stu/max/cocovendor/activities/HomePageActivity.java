@@ -183,6 +183,12 @@ public class HomePageActivity extends SerialPortActivity {
             ToastFactory.makeText(HomePageActivity.this, "xxxxxxxxxxxx" + packageName, Toast.LENGTH_SHORT).show();
         }
 
+        TextView textViewMachineId = (TextView) findViewById(R.id.tv_machine_id);
+        TextView textViewMachineVersion = (TextView) findViewById(R.id.tv_machine_version);
+        TextView textViewIp = (TextView) findViewById(R.id.tv_ip);
+        textViewMachineId.setText(String.valueOf(DataSupport.findFirst(LocalInfo.class).getMachine_id()));
+        textViewMachineVersion.setText("v" + DataSupport.findFirst(LocalInfo.class).getVersion() + ".0");
+        textViewIp.setText(DataSupport.findFirst(LocalInfo.class).getIp());
 
         //尝试定位操作
         AMapLocationClient mLocationClient = new AMapLocationClient(this);
