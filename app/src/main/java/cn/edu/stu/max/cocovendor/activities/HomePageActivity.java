@@ -73,7 +73,6 @@ public class HomePageActivity extends SerialPortActivity {
     private static int videoFileIndex = 0;
     private static int[] videoListOrder;
     private static int[] videoListFrequency;
-    private static int tempFrequency = 0;
 
     private SharedPreferences share;
 
@@ -84,8 +83,6 @@ public class HomePageActivity extends SerialPortActivity {
     Handler handler = new Handler();
 
     private TextView textViewCoinMoney;
-
-    private static final byte[] coinMoney = {0, 0, 0, '.', 0, 0};
 
     private ViewPager mPager;
     private List<View> mPagerList;
@@ -116,26 +113,26 @@ public class HomePageActivity extends SerialPortActivity {
         mPager = (ViewPager) findViewById(R.id.viewpager);
         mLlDot = (LinearLayout) findViewById(R.id.ll_dot);
 
-        mPager.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                switch (motionEvent.getAction()) {
-                    case MotionEvent.ACTION_DOWN: { // 手指下来的时候,取消之前绑定的Runnable
-
-                        handler.removeCallbacks(runnable);
-
-                        break;
-                    }
-                    case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
-
-                        handler.postDelayed(runnable, 1000 * SECONDS_OF_AD);
-
-                        break;
-                    }
-                }
-                return false;
-            }
-        });
+//        mPager.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                switch (motionEvent.getAction()) {
+//                    case MotionEvent.ACTION_DOWN: { // 手指下来的时候,取消之前绑定的Runnable
+//
+//                        handler.removeCallbacks(runnable);
+//
+//                        break;
+//                    }
+//                    case MotionEvent.ACTION_UP: { // 手指离开屏幕，发送延迟消息 ，5秒后执行
+//
+//                        handler.postDelayed(runnable, 1000 * SECONDS_OF_AD);
+//
+//                        break;
+//                    }
+//                }
+//                return false;
+//            }
+//        });
 
         //初始化数据源
         initDatas();
@@ -419,9 +416,9 @@ public class HomePageActivity extends SerialPortActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (videoViewHomePageAd != null) {
-            videoViewHomePageAd.suspend();
-        }
+//        if (videoViewHomePageAd != null) {
+//            videoViewHomePageAd.suspend();
+//        }
     }
 
     @Override
@@ -513,7 +510,7 @@ public class HomePageActivity extends SerialPortActivity {
     protected void onResume() {
         // TODO Auto-generated method stub
         super.onResume();
-        handler.postDelayed(runnable, 1000 * SECONDS_OF_AD);
+//        handler.postDelayed(runnable, 1000 * SECONDS_OF_AD);
     }
 
     @Override
@@ -521,17 +518,17 @@ public class HomePageActivity extends SerialPortActivity {
         // TODO Auto-generated method stub
         super.onPause();
 
-        handler.removeCallbacks(runnable);
+//        handler.removeCallbacks(runnable);
     }
 
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
         // 用户SECONDS_OF_AD秒没操作了
-        Intent i = new Intent();
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        i.setClass(context, ScreenSaverActivity.class);
-        context.startActivity(i);
+//        Intent i = new Intent();
+//        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        i.setClass(context, ScreenSaverActivity.class);
+//        context.startActivity(i);
         }
     };
 
