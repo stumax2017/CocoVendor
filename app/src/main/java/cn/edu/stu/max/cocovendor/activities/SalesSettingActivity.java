@@ -32,6 +32,7 @@ public class SalesSettingActivity extends AppCompatActivity {
     private List<Goods> list = new ArrayList<Goods>();
     //控制有多少个货柜道
     private static int CABINET_SIZE = 24;
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +42,8 @@ public class SalesSettingActivity extends AppCompatActivity {
         //noinspection ConstantConditions
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        preferences = getSharedPreferences("cabinet_floor", MODE_PRIVATE);
         for (int i = 0; i < CABINET_SIZE; i ++) {
-            SharedPreferences preferences = getSharedPreferences("cabinet_floor", MODE_PRIVATE);
             int whichGoods =  preferences.getInt("cabinet_floor_" + i, 0);
             if (whichGoods == 0) {
                 list.add(new Goods());
@@ -152,11 +153,10 @@ public class SalesSettingActivity extends AppCompatActivity {
                 buttonSalesSettingInit.setVisibility(View.INVISIBLE);
             }
         });
-        Button buttonSalesSettingAdd = (Button) findViewById(R.id.btn_sales_setting_add);
-        buttonSalesSettingAdd.setOnClickListener(new View.OnClickListener() {
+        Button buttonSalesSettingFull = (Button) findViewById(R.id.btn_sales_setting_full);
+        buttonSalesSettingFull.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                List<Goods> toFullGoods = DataSupport.where("isOnSale = ?", "1").find(Goods.class);
                 List<Goods> toFullGoods = salesSettingAdapter.getList();
                 for (Goods i : toFullGoods) {
                     i.setNum(5);
@@ -165,11 +165,29 @@ public class SalesSettingActivity extends AppCompatActivity {
                 salesSettingAdapter.notifyDataSetChanged();
             }
         });
-        Button buttonSalesSettingFix = (Button) findViewById(R.id.btn_sales_setting_fix);
-        buttonSalesSettingFix.setOnClickListener(new View.OnClickListener() {
+        //下架所有商品
+        Button buttonSalesSettingClear = (Button) findViewById(R.id.btn_sales_setting_clear);
+        buttonSalesSettingClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 list.clear();
+                SharedPreferences.Editor editor = preferences.edit();
+                for (int i = 0; i < CABINET_SIZE; i ++) {
+                    int whichGoods =  preferences.getInt("cabinet_floor_" + i, 0);
+                    Goods goods = DataSupport.find(Goods.class, whichGoods);
+                    if (goods != null) {
+                        String GoodsOnSaleLocal = goods.getOnSaleLocal();
+                        GoodsOnSaleLocal = GoodsOnSaleLocal.replace("-" + i + ":", "");
+                        goods.setOnSaleLocal(GoodsOnSaleLocal);
+                        if (GoodsOnSaleLocal != null) {
+                            goods.setOnSale(false);
+                        }
+                        goods.save();
+                    }
+                    editor.putInt("cabinet_floor_" + i, 0);
+                    editor.apply();
+                    list.add(new Goods());
+                }
                 salesSettingAdapter.notifyDataSetChanged();
             }
         });
@@ -188,7 +206,6 @@ public class SalesSettingActivity extends AppCompatActivity {
 //        list.remove()
         list.clear();
         for (int i = 0; i < CABINET_SIZE; i ++) {
-            SharedPreferences preferences = getSharedPreferences("cabinet_floor", MODE_PRIVATE);
             int whichGoods =  preferences.getInt("cabinet_floor_" + i, 0);
             if (whichGoods == 0) {
                 list.add(new Goods());

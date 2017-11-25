@@ -207,15 +207,15 @@
             android:layout_height="match_parent"
             android:text="@string/label_init_goods"/>
         <Button
-            android:id="@+id/btn_sales_setting_add"
+            android:id="@+id/btn_sales_setting_full"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/label_add_goods"/>
+            android:text="@string/label_full_goods"/>
         <Button
-            android:id="@+id/btn_sales_setting_fix"
+            android:id="@+id/btn_sales_setting_clear"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/label_fix_goods"/>
+            android:text="@string/label_clear_goods"/>
         <!--<Button-->
             <!--android:id="@+id/btn_sales_setting_save"-->
             <!--android:layout_width="wrap_content"-->
