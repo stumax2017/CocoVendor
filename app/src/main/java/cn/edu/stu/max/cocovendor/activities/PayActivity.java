@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,8 +31,8 @@ public class PayActivity extends AppCompatActivity {
     private TextView tvGoodsName;
     private TextView tvGoodsPrice;
 
-    private Button buttonGoodsPunch;
-    private Button buttonGoodsBagAndStraw;
+    private ImageButton buttonGoodsPunch;
+    private ImageButton buttonGoodsBagAndStraw;
 
     private ImageView ivQRCodes;
 
@@ -44,10 +45,14 @@ public class PayActivity extends AppCompatActivity {
 //    private ImageView logoView;
 
 
+    private ImageView ivPayWay;
 
     private int whichFloor;
     private int whichGoods;
     private String whichWay = null;
+
+    private static boolean buttonGoodsPunchFlag = true;
+    private static boolean buttonGoodsBagAndStrawFlag = true;
 //
 //    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
 //            = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -118,22 +123,39 @@ public class PayActivity extends AppCompatActivity {
         tvGoodsName = (TextView) findViewById(R.id.tv_goods_name);
         tvGoodsPrice = (TextView) findViewById(R.id.tv_goods_price);
 
-        buttonGoodsPunch = (Button) findViewById(R.id.btn_goods_punch);
-        buttonGoodsBagAndStraw = (Button) findViewById(R.id.btn_goods_bag_and_straw);
+        buttonGoodsPunch = (ImageButton) findViewById(R.id.btn_goods_punch);
+        buttonGoodsBagAndStraw = (ImageButton) findViewById(R.id.btn_goods_bag_and_straw);
 
         ivQRCodes = (ImageView) findViewById(R.id.iv_qrcodes);
+        ivPayWay = (ImageView) findViewById(R.id.iv_pay_way);
+        ivPayWay.setImageResource(R.drawable.ic_alipay);
+
+        Bitmap alipayBitmap = QRCode.createQRCodeBitmap("http://www.baidu.com", 300, 300);
+        ivQRCodes.setImageBitmap(alipayBitmap);
 
         buttonGoodsPunch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ToastFactory.makeText(PayActivity.this, "buttonGoodsPunch", Toast.LENGTH_SHORT).show();
+                if (buttonGoodsPunchFlag) {
+                    buttonGoodsPunch.setImageResource(R.drawable.ic_punch_1);
+                    buttonGoodsPunchFlag = false;
+                } else {
+                    buttonGoodsPunch.setImageResource(R.drawable.ic_punch_0);
+                    buttonGoodsPunchFlag = true;
+                }
             }
         });
 
         buttonGoodsBagAndStraw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ToastFactory.makeText(PayActivity.this, "buttonGoodsBagAndStraw", Toast.LENGTH_SHORT).show();
+                if (buttonGoodsBagAndStrawFlag) {
+                    buttonGoodsBagAndStraw.setImageResource(R.drawable.ic_bag_and_straw_0);
+                    buttonGoodsBagAndStrawFlag = false;
+                } else {
+                    buttonGoodsBagAndStraw.setImageResource(R.drawable.ic_bag_and_straw_1);
+                    buttonGoodsBagAndStrawFlag = true;
+                }
             }
         });
 
@@ -158,6 +180,7 @@ public class PayActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 whichWay = "支付宝";
+                ivPayWay.setImageResource(R.drawable.ic_alipay);
                 Bitmap alipayBitmap = QRCode.createQRCodeBitmap("http://www.baidu.com", 300, 300);
                 ivQRCodes.setImageBitmap(alipayBitmap);
                 ToastFactory.makeText(PayActivity.this, "zhifubao", Toast.LENGTH_SHORT).show();
@@ -168,6 +191,7 @@ public class PayActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 whichWay = "微信";
+                ivPayWay.setImageResource(R.drawable.ic_wechatpay);
                 Bitmap wepayBitmap = QRCode.createQRCodeBitmap("http://www.bing.com", 300, 300);
                 ivQRCodes.setImageBitmap(wepayBitmap);
                 ToastFactory.makeText(PayActivity.this, "wechat", Toast.LENGTH_SHORT).show();
@@ -178,6 +202,7 @@ public class PayActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 whichWay = "现金";
+                ivPayWay.setImageResource(R.drawable.ic_cashpay);
                 ToastFactory.makeText(PayActivity.this, "cash", Toast.LENGTH_SHORT).show();
             }
         });

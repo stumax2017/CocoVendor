@@ -210,11 +210,6 @@ public class HomePageActivity extends SerialPortActivity {
         SharedPreferences settings = getSharedPreferences(packageName + "_preferences", MODE_PRIVATE);
         boolean sw = settings.getBoolean("SwitchPreference", false);
         ViewHolder.sw = sw;
-        if (sw) {
-            ToastFactory.makeText(HomePageActivity.this, "hhh" + packageName, Toast.LENGTH_SHORT).show();
-        } else {
-            ToastFactory.makeText(HomePageActivity.this, "xxxxxxxxxxxx" + packageName, Toast.LENGTH_SHORT).show();
-        }
 
         TextView textViewMachineId = (TextView) findViewById(R.id.tv_machine_id);
         TextView textViewMachineVersion = (TextView) findViewById(R.id.tv_machine_version);
