@@ -134,7 +134,7 @@ public class HomePageActivity extends SerialPortActivity {
 //            }
 //        });
 
-        //初始化数据源
+        //初始化数据源,函数后面得知是24
         initDatas();
         inflater = LayoutInflater.from(this);
         //总的页数=总数/每页数量，并取整
@@ -166,6 +166,42 @@ public class HomePageActivity extends SerialPortActivity {
         } catch (NullPointerException e) {
             ToastFactory.makeText(HomePageActivity.this, "当前没有商品", Toast.LENGTH_SHORT).show();
         }
+
+        Button buttonPageLeft = (Button) findViewById(R.id.btn_page_left);
+        Button buttonPageRight = (Button) findViewById(R.id.btn_page_right);
+        buttonPageLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (curIndex > 0) {
+                    // 取消圆点选中
+                    mLlDot.getChildAt(curIndex)
+                            .findViewById(R.id.v_dot)
+                            .setBackgroundResource(R.drawable.dot_normal);
+                    mPager.setCurrentItem(--curIndex);
+                    // 圆点选中
+                    mLlDot.getChildAt(curIndex)
+                            .findViewById(R.id.v_dot)
+                            .setBackgroundResource(R.drawable.dot_selected);
+                }
+            }
+        });
+        buttonPageRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //pageCount数量是从1开始，判断时需要减1
+                if (curIndex < pageCount - 1) {
+                    // 取消圆点选中
+                    mLlDot.getChildAt(curIndex)
+                            .findViewById(R.id.v_dot)
+                            .setBackgroundResource(R.drawable.dot_normal);
+                    mPager.setCurrentItem(++curIndex);
+                    // 圆点选中
+                    mLlDot.getChildAt(curIndex)
+                            .findViewById(R.id.v_dot)
+                            .setBackgroundResource(R.drawable.dot_selected);
+                }
+            }
+        });
 
         cabinetDailySalesSharedPreference = getSharedPreferences("cabinet_daily_sales_file", MODE_PRIVATE);
         editor = cabinetDailySalesSharedPreference.edit();   // 使处于可编辑状态
@@ -554,7 +590,7 @@ public class HomePageActivity extends SerialPortActivity {
      */
     private void initDatas() {
         mDatas = new ArrayList<>();
-        //暂时初始化10个空货物的时候有两个点
+        //暂时初始化24个空货物的时候有两个点
         for (int i = 0; i < 24; i++) {
             SharedPreferences preferences = getSharedPreferences("cabinet_floor", MODE_PRIVATE);
             int whichGoods =  preferences.getInt("cabinet_floor_" + i, 0);

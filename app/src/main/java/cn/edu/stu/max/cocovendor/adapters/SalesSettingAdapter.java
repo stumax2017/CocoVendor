@@ -48,6 +48,7 @@ public class SalesSettingAdapter extends RecyclerView.Adapter<SalesSettingAdapte
             holder.tv_sheetRow4.setText(String.valueOf(list.get(position).getNum()));
         }
         holder.btn_setGoods.setOnClickListener(new GoodsSettingClickListener(position));
+        holder.btn_delGoods.setOnClickListener(new GoodsSettingClickListener(position));
     }
 
     @Override
@@ -70,6 +71,7 @@ public class SalesSettingAdapter extends RecyclerView.Adapter<SalesSettingAdapte
         final TextView tv_sheetRow3;
         final TextView tv_sheetRow4;
         final Button btn_setGoods;
+        final Button btn_delGoods;
 
         private ViewHolder(View itemView) {
             super(itemView);
@@ -79,6 +81,7 @@ public class SalesSettingAdapter extends RecyclerView.Adapter<SalesSettingAdapte
             tv_sheetRow3 = (TextView) itemView.findViewById(R.id.tv_sheetRow3);
             tv_sheetRow4 = (TextView) itemView.findViewById(R.id.tv_sheetRow4);
             btn_setGoods = (Button) itemView.findViewById(R.id.btn_set_goods);
+            btn_delGoods = (Button) itemView.findViewById(R.id.btn_del_goods);
         }
     }
 
@@ -98,6 +101,7 @@ public class SalesSettingAdapter extends RecyclerView.Adapter<SalesSettingAdapte
                     intent.putExtra("isSelGoods", true);
                     context.startActivity(intent);
                     break;
+                case R.id.btn_del_goods:
             }
         }
     }
