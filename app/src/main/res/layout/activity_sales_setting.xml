@@ -167,7 +167,24 @@
             android:paddingBottom="10dp"
             android:paddingTop="10dip"
             android:maxLines="1"
-            android:text="@string/label_price_change"
+            android:text="@string/label_goods_change"
+            android:textColor="#000000"
+            android:textSize="15sp" />
+
+        <View
+            android:layout_width="1.5dp"
+            android:layout_height="match_parent"
+            android:background="#000000" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dip"
+            android:maxLines="1"
+            android:text="@string/label_goods_del"
             android:textColor="#000000"
             android:textSize="15sp" />
     </LinearLayout>
