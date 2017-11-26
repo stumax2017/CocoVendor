@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +27,15 @@ import cn.edu.stu.max.cocovendor.javaClass.ToastFactory;
 
 public class PayActivity extends AppCompatActivity {
 
+    private ImageView ivGoodsPicture;
+    private TextView tvGoodsName;
+    private TextView tvGoodsPrice;
+
+    private ImageButton buttonGoodsPunch;
+    private ImageButton buttonGoodsBagAndStraw;
+
+    private ImageView ivQRCodes;
+
     private Button buttonPayReturn;
     private Button buttonAlipay;
     private Button buttonWechat;
@@ -33,14 +43,16 @@ public class PayActivity extends AppCompatActivity {
 //    private TextView numberView;
 //    private TextView moneyView;
 //    private ImageView logoView;
-//
-//    private ImageView goodsImageView;
-//    private TextView goodsTextView;
-//    private TextView priceTextView;
-//
+
+
+    private ImageView ivPayWay;
+
     private int whichFloor;
     private int whichGoods;
     private String whichWay = null;
+
+    private static boolean buttonGoodsPunchFlag = true;
+    private static boolean buttonGoodsBagAndStrawFlag = true;
 //
 //    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
 //            = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -107,6 +119,46 @@ public class PayActivity extends AppCompatActivity {
 
         whichFloor = intent.getIntExtra("which_floor", 0);
 
+        ivGoodsPicture = (ImageView) findViewById(R.id.iv_goods_picture);
+        tvGoodsName = (TextView) findViewById(R.id.tv_goods_name);
+        tvGoodsPrice = (TextView) findViewById(R.id.tv_goods_price);
+
+        buttonGoodsPunch = (ImageButton) findViewById(R.id.btn_goods_punch);
+        buttonGoodsBagAndStraw = (ImageButton) findViewById(R.id.btn_goods_bag_and_straw);
+
+        ivQRCodes = (ImageView) findViewById(R.id.iv_qrcodes);
+        ivPayWay = (ImageView) findViewById(R.id.iv_pay_way);
+        ivPayWay.setImageResource(R.drawable.ic_alipay);
+
+        Bitmap alipayBitmap = QRCode.createQRCodeBitmap("http://www.baidu.com", 300, 300);
+        ivQRCodes.setImageBitmap(alipayBitmap);
+
+        buttonGoodsPunch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (buttonGoodsPunchFlag) {
+                    buttonGoodsPunch.setImageResource(R.drawable.ic_punch_1);
+                    buttonGoodsPunchFlag = false;
+                } else {
+                    buttonGoodsPunch.setImageResource(R.drawable.ic_punch_0);
+                    buttonGoodsPunchFlag = true;
+                }
+            }
+        });
+
+        buttonGoodsBagAndStraw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (buttonGoodsBagAndStrawFlag) {
+                    buttonGoodsBagAndStraw.setImageResource(R.drawable.ic_bag_and_straw_0);
+                    buttonGoodsBagAndStrawFlag = false;
+                } else {
+                    buttonGoodsBagAndStraw.setImageResource(R.drawable.ic_bag_and_straw_1);
+                    buttonGoodsBagAndStrawFlag = true;
+                }
+            }
+        });
+
         buttonPayReturn = (Button) findViewById(R.id.btn_pay_return);
         buttonAlipay = (Button) findViewById(R.id.btn_alipay);
         buttonWechat = (Button) findViewById(R.id.btn_wechat);
@@ -127,6 +179,10 @@ public class PayActivity extends AppCompatActivity {
         buttonAlipay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                whichWay = "支付宝";
+                ivPayWay.setImageResource(R.drawable.ic_alipay);
+                Bitmap alipayBitmap = QRCode.createQRCodeBitmap("http://www.baidu.com", 300, 300);
+                ivQRCodes.setImageBitmap(alipayBitmap);
                 ToastFactory.makeText(PayActivity.this, "zhifubao", Toast.LENGTH_SHORT).show();
             }
         });
@@ -134,6 +190,10 @@ public class PayActivity extends AppCompatActivity {
         buttonWechat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                whichWay = "微信";
+                ivPayWay.setImageResource(R.drawable.ic_wechatpay);
+                Bitmap wepayBitmap = QRCode.createQRCodeBitmap("http://www.bing.com", 300, 300);
+                ivQRCodes.setImageBitmap(wepayBitmap);
                 ToastFactory.makeText(PayActivity.this, "wechat", Toast.LENGTH_SHORT).show();
             }
         });
@@ -141,34 +201,19 @@ public class PayActivity extends AppCompatActivity {
         buttonCash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                whichWay = "现金";
+                ivPayWay.setImageResource(R.drawable.ic_cashpay);
                 ToastFactory.makeText(PayActivity.this, "cash", Toast.LENGTH_SHORT).show();
             }
         });
 
-//
-//        goodsImageView = (ImageView) findViewById(R.id.imageView_goods);
-//        goodsTextView = (TextView) findViewById(R.id.textView_goods);
-//        priceTextView = (TextView) findViewById(R.id.textView_price);
-//
-//        numberView = (TextView) findViewById(R.id.number);
-//        moneyView = (TextView) findViewById(R.id.moneyView);
-//        BottomNavigationViewEx navigation = (BottomNavigationViewEx) findViewById(R.id.navigation);
-//        navigation.enableAnimation(false);
-//        navigation.enableShiftingMode(false);
-//        navigation.enableItemShiftingMode(false);
-//        navigation.setItemHeight(100);
-//        navigation.setIconSize(50, 50);
-//        navigation.setTextSize(20);
-//        logoView = (ImageView) findViewById(R.id.logo_view);
-//        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-//
         SharedPreferences preferences = getSharedPreferences("cabinet_floor", MODE_PRIVATE);
         whichGoods =  preferences.getInt("cabinet_floor_" + whichFloor, 0);
         try {
             Goods goods = DataSupport.find(Goods.class, whichGoods);
-//            goodsImageView.setImageResource(goods.getImage_path());
-//            goodsTextView.setText(goods.getName());
-//            priceTextView.setText("¥ " + String.valueOf(goods.getSales_price()));
+            ivGoodsPicture.setImageResource(goods.getImage_path());
+            tvGoodsName.setText(goods.getName());
+            tvGoodsPrice.setText("¥ " + String.valueOf(goods.getSales_price()));
         } catch (NullPointerException e) {
             ToastFactory.makeText(PayActivity.this, "当前没有商品", Toast.LENGTH_SHORT).show();
             finish();

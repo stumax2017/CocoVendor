@@ -1,14 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/ic_pay">
+    android:background="@drawable/ic_pay_background" >
 
     <LinearLayout
-        android:layout_marginTop="1105dp"
+        android:layout_marginTop="215dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            <ImageView
+                android:layout_width="800dp"
+                android:layout_height="405dp"
+                android:background="@color/colorTransparency" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/iv_goods_picture"
+                        android:layout_width="150dp"
+                        android:layout_height="217dp"
+                        android:layout_marginLeft="93dp"
+                        android:layout_marginTop="51dp"
+                        android:background="@color/colorTransparency"/>
+                    <TextView
+                        android:id="@+id/tv_goods_name"
+                        android:layout_width="250dp"
+                        android:layout_height="50dp"
+                        android:background="@color/colorTransparency"
+                        android:layout_marginTop="51dp"
+                        android:layout_marginLeft="55dp"
+                        android:gravity="center"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_goods_price"
+                        android:layout_width="116dp"
+                        android:layout_height="34dp"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginLeft="110dp"
+                        android:gravity="center"
+                        android:textColor="@color/colorRed"
+                        android:background="@color/colorTransparency"
+                        android:textSize="20sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageButton
+                        android:id="@+id/btn_goods_punch"
+                        android:layout_width="91dp"
+                        android:layout_height="42dp"
+                        android:layout_marginLeft="359dp"
+                        android:src="@drawable/ic_punch_0"/>
+                    <ImageButton
+                        android:id="@+id/btn_goods_bag_and_straw"
+                        android:layout_width="145dp"
+                        android:layout_height="42dp"
+                        android:layout_marginLeft="10dp"
+                        android:src="@drawable/ic_bag_and_straw_0" />
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="49dp"
+        android:layout_marginLeft="92dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/iv_pay_way"
+                android:layout_width="717dp"
+                android:layout_height="375dp" />
+            <ImageView
+                android:id="@+id/iv_qrcodes"
+                android:layout_width="164dp"
+                android:layout_height="162dp"
+                android:layout_marginLeft="532dp"
+                android:layout_marginTop="107dp"
+                android:background="@color/colorTransparency" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="60dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -43,9 +140,8 @@
             android:layout_width="221dp"
             android:layout_height="135dp"
             android:layout_marginRight="13dp"
-            android:background="@color/colorTransparency" />
+            android:background="@drawable/ic_pay_return" />
     </LinearLayout>
-<!--<LinearLayout-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="0dp"-->
     <!--android:layout_weight="2"-->
@@ -158,19 +254,6 @@
             <!--app:layout_constraintRight_toRightOf="parent"-->
             <!--app:srcCompat="@drawable/wepay_instruction" />-->
 
-        <!--<ImageView-->
-            <!--android:id="@+id/qrcode_view"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="bottom"-->
-            <!--android:layout_marginBottom="16dp"-->
-            <!--android:layout_marginLeft="8dp"-->
-            <!--android:layout_marginRight="8dp"-->
-            <!--app:layout_constraintBottom_toTopOf="@+id/tips_view"-->
-            <!--app:layout_constraintLeft_toLeftOf="parent"-->
-            <!--app:layout_constraintRight_toRightOf="parent"-->
-            <!--app:srcCompat="@android:color/transparent" />-->
-
     <!--</android.support.constraint.ConstraintLayout>-->
     <!--</LinearLayout>-->
     <!--</LinearLayout>-->
@@ -220,6 +303,4 @@
     <!--android:layout_gravity="bottom"-->
     <!--android:background="?android:attr/windowBackground"-->
     <!--app:menu="@menu/navigation" />-->
-
-
 </LinearLayout>
