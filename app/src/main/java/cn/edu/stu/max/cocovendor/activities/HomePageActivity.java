@@ -315,10 +315,13 @@ public class HomePageActivity extends SerialPortActivity {
             }
         });
 
+        // 开启串口发送线程
         SendThread sendThread = new SendThread();
         sendThread.start();
     }
 
+
+    // 串口发送线程
     private class SendThread extends Thread {
         @Override
         public void run() {
@@ -402,6 +405,7 @@ public class HomePageActivity extends SerialPortActivity {
         }
     };
 
+    // 初始化广告视频路径
     private void initVideoPath() {
         videoFileIndex = 0;
         try {
@@ -433,6 +437,7 @@ public class HomePageActivity extends SerialPortActivity {
         }
     }
 
+    // 播放广告视频
     public void playVideo(String filePath) {
         File file = new File(filePath);
         if (file.exists()) {
@@ -455,37 +460,37 @@ public class HomePageActivity extends SerialPortActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
-            case REQUEST_CODE_1:
-                if (resultCode == RESULT_OK) {
-                    videoFileIndex = 0;
-                    File[] currentFiles = FileService.getFiles(TOPATH);
-                    if (currentFiles.length != 0) {
-                        //Toast.makeText(HomePageActivity.this, "good", Toast.LENGTH_LONG).show();
-                        imageViewHomePageAd.setVisibility(View.INVISIBLE);
-                        videoViewHomePageAd.setVisibility(View.VISIBLE);
-                        //videoViewHomePageAd.start();
-                        if (share.getBoolean("isAdSettingChanged", false)) {
-                            videoListFrequency = new int[currentFiles.length];
-                            videoListOrder = new int[currentFiles.length];
-                            for (int i = 0; i < currentFiles.length; i++) {
-                                videoListFrequency[i] = Integer.parseInt(share.getString("Frequency_" + i, "0"));
-                                for (int j = 0; j < currentFiles.length; j++) {
-                                    if (share.getString("Ad_" + i, "null").equals(currentFiles[j].getName())) {
-                                        videoListOrder[i] = j;
-                                        break;
-                                    }
-                                }
-                            }
-                            playVideo(currentFiles[videoListOrder[videoFileIndex]].getPath());
-                        } else {
-                            playVideo(currentFiles[videoFileIndex].getPath());
-                        }
-                    } else {
-                        imageViewHomePageAd.setVisibility(View.VISIBLE);
-                        videoViewHomePageAd.setVisibility(View.INVISIBLE);
-                    }
-                }
-                break;
+//            case REQUEST_CODE_1:
+//                if (resultCode == RESULT_OK) {
+//                    videoFileIndex = 0;
+//                    File[] currentFiles = FileService.getFiles(TOPATH);
+//                    if (currentFiles.length != 0) {
+//                        //Toast.makeText(HomePageActivity.this, "good", Toast.LENGTH_LONG).show();
+//                        imageViewHomePageAd.setVisibility(View.INVISIBLE);
+//                        videoViewHomePageAd.setVisibility(View.VISIBLE);
+//                        //videoViewHomePageAd.start();
+//                        if (share.getBoolean("isAdSettingChanged", false)) {
+//                            videoListFrequency = new int[currentFiles.length];
+//                            videoListOrder = new int[currentFiles.length];
+//                            for (int i = 0; i < currentFiles.length; i++) {
+//                                videoListFrequency[i] = Integer.parseInt(share.getString("Frequency_" + i, "0"));
+//                                for (int j = 0; j < currentFiles.length; j++) {
+//                                    if (share.getString("Ad_" + i, "null").equals(currentFiles[j].getName())) {
+//                                        videoListOrder[i] = j;
+//                                        break;
+//                                    }
+//                                }
+//                            }
+//                            playVideo(currentFiles[videoListOrder[videoFileIndex]].getPath());
+//                        } else {
+//                            playVideo(currentFiles[videoFileIndex].getPath());
+//                        }
+//                    } else {
+//                        imageViewHomePageAd.setVisibility(View.VISIBLE);
+//                        videoViewHomePageAd.setVisibility(View.INVISIBLE);
+//                    }
+//                }
+//                break;
             case REQUEST_PAY_RESULT_CODE:
                 if (resultCode == RESULT_OK) {
                     int whichFloor = data.getIntExtra("which_floor", 0);
